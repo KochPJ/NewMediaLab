@@ -25,13 +25,10 @@ public class Experiment {
     public void createFile(){
         try
         {
-            /// TO DO:  check if external storage is available (https://developer.android.com/reference/android/os/Environment.html#getExternalStorageState())
-            ///         if not, save to a different directory or output a warning to the user
-            File root = new File(Environment.getExternalStorageDirectory(), "Experiments");
+            /// TODO:  check if external storage is available (https://developer.android.com/reference/android/os/Environment.html#getExternalStorageState()) if not, save to a different directory or output a warning to the user
+            File root = new File(Environment.getExternalStorageDirectory(), "KineTest/Experiments");
             String FILE_NAME = (this.name+ ".txt");
-            if (!root.exists()) {
-                root.mkdirs();
-            }
+            if (!root.exists()) root.mkdirs();
             File gpxfile = new File(root, FILE_NAME);
             FileWriter writer = new FileWriter(gpxfile);
             writer.append(name);
