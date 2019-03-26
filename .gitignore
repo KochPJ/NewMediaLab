@@ -1,1 +1,7 @@
-
+AppDevelopment/.idea/*
+*/.idea/*
+*/venv/*
+*.pyc
+.idea/*
+Code/Project/.idea/*
+Code/Project/venv/*
