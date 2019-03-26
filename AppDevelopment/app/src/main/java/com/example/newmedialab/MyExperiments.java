@@ -1,8 +1,8 @@
 package com.example.newmedialab;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MyExperiments extends AppCompatActivity {
 
@@ -11,4 +11,5 @@ public class MyExperiments extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_experiments);
     }
+
 }
