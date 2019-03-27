@@ -33,8 +33,7 @@ public class NewExperiments extends AppCompatActivity {
         exp.setFunction(exp_function_EditText.getText().toString());
         exp.setRepeats(exp_repeats_EditText.getText().toString());
 
-        Log.d("get repeats : ", exp.getRepeats());
-
+        VelocityFunction vel_function = new VelocityFunction(exp_function_EditText.getText().toString());
 
         Intent intent = new Intent(this, NewExperimentSelectSymboles.class);
         Intent i = intent.putExtra("experiment", exp);
