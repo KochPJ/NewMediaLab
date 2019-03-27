@@ -13,10 +13,7 @@
         android:id="@+id/create_exp_button"
         android:layout_width="300dp"
         android:layout_height="125dp"
-
-
         android:layout_alignParentStart="true"
-
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="50dp"
@@ -33,9 +30,7 @@
         android:id="@+id/my_exp_button"
         android:layout_width="300dp"
         android:layout_height="125dp"
-
         android:layout_alignParentEnd="true"
-
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="50dp"

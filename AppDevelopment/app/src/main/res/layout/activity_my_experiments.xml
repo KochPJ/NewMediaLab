@@ -3,17 +3,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyExperiments">
+    tools:context=".MyExperiments"
+    android:background="@drawable/background">
+
+    <TextView
+    android:id="@+id/textView_spinner_title"
+    android:layout_width="300dp"
+    android:layout_height="30dp"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="10dp"
+    android:fontFamily="sans-serif-medium"
+    android:text="Select Experiment:"
+    android:textColor="#000000"
+    android:textSize="20dp"
+    android:textStyle="bold"
+    android:gravity="center"/>
 
     <Spinner
         android:id="@+id/experiment_names_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="105dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView_myExperiment_title"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Experiment Parameters:"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/textView_myExperiment"
+        android:layout_width="400dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Empty experiment"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:textStyle="italic"
+        android:gravity="center|top"/>
+
+    <Button
+        android:id="@+id/select_experiment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="54dp"
+        android:text="Select Experiment"
+        android:background="@drawable/mybutton"/>
+
+    <Button
+        android:id="@+id/delete_experiment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginLeft="31dp"
+        android:layout_marginBottom="56dp"
+        android:text="Delete Experiment"
+        android:background="@drawable/mybutton"
+        android:onClick="deleteExperiment"
+        />
 
 </RelativeLayout>
