@@ -85,7 +85,7 @@
         android:layout_marginTop="250dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="(2*exp(10*x))/((sin(x)+2)*2x)+10"
+        android:text="sin(x) + 2"
         android:gravity="center"
         android:textStyle="italic"/>
 

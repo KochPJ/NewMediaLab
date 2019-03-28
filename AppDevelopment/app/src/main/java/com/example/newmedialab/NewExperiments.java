@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import java.io.Serializable;
 
 import java.io.File;
@@ -35,11 +37,16 @@ public class NewExperiments extends AppCompatActivity {
 
         VelocityFunction vel_function = new VelocityFunction(exp_function_EditText.getText().toString());
 
-        Intent intent = new Intent(this, NewExperimentSelectSymboles.class);
-        Intent i = intent.putExtra("experiment", exp);
-        startActivity(i);
+        Boolean working = vel_function.testFunction(100);
 
-        //exp.createFile();
+        Log.d("Test vel func = ", Boolean.toString(working));
+        if(!working){
+            Toast.makeText(this, "Function not working value below 0.01", Toast.LENGTH_LONG).show();
+        }else{
+            Intent intent = new Intent(this, NewExperimentSelectSymboles.class);
+            Intent i = intent.putExtra("experiment", exp);
+            startActivity(i);
+        }
 
     }
 

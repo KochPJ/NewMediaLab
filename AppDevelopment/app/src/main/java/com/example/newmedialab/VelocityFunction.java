@@ -1,8 +1,11 @@
 package com.example.newmedialab;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class VelocityFunction {
@@ -17,14 +20,20 @@ public class VelocityFunction {
     int order_ys[];
     int parts[][];
     int who_inside_mat[][];
+    int y_length = 0;
     int max_order;
     String[] simple_y_functions;
+    double[] y_results;
+    String x_result;
+    double[] xd;
+    double[] x;
 
 
     public VelocityFunction(String velocity_function){
         vel_function = velocity_function;
         vel_function_char = vel_function.toCharArray();
         buildFunction();
+
     }
 
     public void buildFunction(){
@@ -219,22 +228,7 @@ public class VelocityFunction {
                 }
             }
         }
-
-        Log.d("function = ", vel_function);
-        for(int i = 0; i<order.length; i++){
-            Log.d("y"+i+" = ", simple_y_functions[i]);
-        }
-/*
-        String row;
-        for(int i = 0; i<order.length; i++){
-            row = "";
-            for(int ij = 0; ij< order.length; ij++){
-                row+= Integer.toString(who_inside_mat[i][ij]);
-                row+= ", ";
-            }
-            Log.d("row "+i+" = ", row);
-        }
-*/
+        y_length = simple_y_functions.length;
 
 
         int col;
@@ -281,21 +275,357 @@ public class VelocityFunction {
         for(int b = begin; b<last; b++){
             result+= vel_function_char[b];
         }
-        Log.d("result ", result);
+        x_result = result;
+    }
+
+    public double compute_xd(double x) {
+
+        //ini results array
+        y_results = new double[this.simple_y_functions.length];
+
+        //solve all y
+        for(int i = 0; i < this.simple_y_functions.length; i++){
+            //lifts all the math functions and returns a single value for the given y
+            String current_y = this.simple_y_functions[i];
+            List<String> operations_list = createOperationList(current_y);
+            y_results[i] = getCalcResult(operations_list, x);
+        }
+
+        List<String> operations_list = createOperationList(x_result);
+        double xd = getCalcResult(operations_list, x);
+        String a= "";
+        a+= Double.valueOf(xd);
+
+        String b= "";
+        b+= Double.valueOf(x);
+        //Log.d("Derivative","the derivative at x = "+b+" is  xd = "+a );
+        return xd;
+    }
+
+    @SuppressLint("LongLogTag")
+    public double getCalcResult(List<String> operations_list, double x){
+
+        Double[] calculations;
+        // ini the calculation array with 0.0
+        calculations = new Double[operations_list.size()];
+        for(int k = 0; k < calculations.length; k++){
+            calculations[k] = 0.0;
+        }
+
+        // fill the calculation array with the numbers we have. x,y,n
+        String op = "";
+        for(int k = 0; k < operations_list.size(); k++){
+            op = operations_list.get(k);
+            if(number(op.charAt(0))){
+                calculations[k] = Double.parseDouble(op);
+            }else if(x(op.charAt(0))){
+                calculations[k] = x;
+
+            }else if(y(op.charAt(0))){
+                String y_n = "";
+                char[] y_n_char = op.toCharArray();
+                for(int p = 1; p<y_n_char.length;p++){
+                    y_n += y_n_char[p];
+                }
+                int y_n_int = Integer.valueOf(y_n);
+                calculations[k] = y_results[y_n_int];
+            }
+        }
+
+        // first we lift the powers.
+        for(int k = 0; k < operations_list.size(); k++){
+            op = operations_list.get(k);
+            if(power(op.charAt(0))){
+                double value_left = 0.0;
+                double value_right = 0.0;
+                for(int l = k-1; l >-1; l--){
+                    double v = calculations[l];
+                    if(v != 0.0){
+                        value_left = v;
+                        calculations[l] = 0.0;
+                        l = -1;
+                    }
+                }
+                for(int r = k+1; r <calculations.length; r++){
+                    double v = calculations[r];
+                    if(v != 0.0){
+                        value_right = v;
+                        calculations[r] = 0.0;
+                        r = calculations.length;
+                    }
+                }
+                calculations[k] = power(value_left,value_right);
+            }
+        }
+
+        //lift the functions exp, log, sin, cos
+        for(int k = 0; k < operations_list.size(); k++){
+            op = operations_list.get(k);
+            if(func(op.charAt(0))){
+                double value_right = 0.0;
+                for(int r = k+1; r <calculations.length; r++){
+                    double v = calculations[r];
+                    if(v != 0.0){
+                        value_right = v;
+                        calculations[r] = 0.0;
+                        r = calculations.length;
+                    }
+                }
+                if(op.equals("e")){
+                    calculations[k] = exp(value_right);
+                }else if(op.equals("l")){
+                    calculations[k] = log(value_right);
+                }else if(op.equals("s")){
+                    calculations[k] = sin(value_right);
+                }else if(op.equals("c")){
+                    calculations[k] = cos(value_right);
+                }
+            }
+        }
+
+        // lift multiplications (include * and /)
+        for(int k = 0; k < operations_list.size(); k++){
+            op = operations_list.get(k);
+            if(multiplication(op.charAt(0))){
+                double value_left = 0.0;
+                double value_right = 0.0;
+                for(int l = k-1; l >-1; l--){
+                    double v = calculations[l];
+                    if(v != 0.0){
+                        value_left = v;
+                        calculations[l] = 0.0;
+                        l = -1;
+                    }
+                }
+                for(int r = k+1; r <calculations.length; r++){
+                    double v = calculations[r];
+                    if(v != 0.0){
+                        value_right = v;
+                        calculations[r] = 0.0;
+                        r = calculations.length;
+                    }
+                }
+                if(op.equals("*")){
+                    calculations[k] = multiply(value_left,value_right);
+                }else if(op.equals("/")){
+                    calculations[k] = devide(value_left, value_right);
+                }
+            }
+        }
 
 
+        // lift addition (include - and +)
+        for(int k = 0; k < operations_list.size(); k++){
+            op = operations_list.get(k);
+            if(addition(op.charAt(0))){
+                double value_left = 0.0;
+                double value_right = 0.0;
+                for(int l = k-1; l >-1; l--){
+                    double v = calculations[l];
+                    if(v != 0.0){
+                        value_left = v;
+                        calculations[l] = 0.0;
+                        l = -1;
+                    }
+                }
+                for(int r = k+1; r <calculations.length; r++){
+                    double v = calculations[r];
+                    if(v != 0.0){
+                        value_right = v;
+                        calculations[r] = 0.0;
+                        r = calculations.length;
+                    }
+                }
+                if(op.equals("+")){
+                    calculations[k] = plus(value_left,value_right);
+                }else if(op.equals("-")){
+                    calculations[k] = minus(value_left, value_right);
+                }
+            }
+        }
+
+        double calc_result = 0.0;
+        for(int k = 0; k < calculations.length; k++){
+            if (calculations[k] != 0.0){
+                calc_result = calculations[k];
+            }
+        }
+        String just_something = "";
+        just_something+= Double.valueOf(calc_result); // somehow this works and not if i put it directy in the log funciton...
 
 
-
-
-
+        return  calc_result;
     }
 
 
-    public Boolean testFunction() {
-        return true;
+    public Boolean number(char c){
+        char[] a = {'0','1','2','3','4','5','6','7','8','9','.'};
+        Boolean n = false;
+        for(int i = 0; i < a.length; i++){
+            if(a[i] == c){
+                n = true;
+            }
+        }
+        return n;
     }
 
+    public Boolean x(char c){
+        return ('x' == c);
+    }
+
+    public Boolean y(char c){
+        return ('y' == c);
+    }
+    public Boolean func(char c){
+        char[] a = {'e','l','s','c'};
+        Boolean n = false;
+        for(int i = 0; i < a.length; i++){
+            if(a[i] == c){
+                n = true;
+            }
+        }
+        return n;
+    }
+
+    public Boolean power(char c){
+        return ('^' == c);
+    }
+
+    public Boolean addition(char c){
+        char[] a = {'+','-'};
+        Boolean n = false;
+        for(int i = 0; i < a.length; i++){
+            if(a[i] == c){
+                n = true;
+            }
+        }
+        return n;
+    }
+
+    public Boolean multiplication(char c){
+        char[] a = {'*','/'};
+        Boolean n = false;
+        for(int i = 0; i < a.length; i++){
+            if(a[i] == c){
+                n = true;
+            }
+        }
+        return n;
+    }
+
+
+    public Boolean testFunction(int n) {
+        x = new double[n];
+        xd = new double[n];
+        Boolean working = true;
+        for(int i =0; i < n; i++){
+            x[i] = i*10.0/(n-1);
+            xd[i] = compute_xd(x[i]);
+            if(xd[i] < 0.01){
+                Log.d("derivative is to small", "at i = "+Integer.toString(i));
+                i = n;
+                working = false;
+            }
+        }
+
+        return working;
+    }
+
+    public double power(double a, double b){
+        return Math.pow(a, b);
+    }
+
+    public double sin(double a){
+        return Math.sin(a);
+    }
+
+    public double cos(double a){
+        return Math.cos(a);
+    }
+
+    public double log(double a){
+        return Math.log(a);
+    }
+
+    public double exp(double a){
+        return Math.exp(a);
+    }
+
+    public double plus(double a, double b){
+        return a+b;
+    }
+
+    public double minus(double a, double b){
+        return a-b;
+    }
+
+    public double devide(double a, double b){
+        return a/b;
+    }
+
+    public double multiply(double a, double b){
+        return a*b;
+    }
+
+    public List<String> createOperationList(String current_y) {
+        char[] current_y_char = current_y.toCharArray();;
+        String current_piece = "";
+        List<String> operations_list = new ArrayList<String>();
+
+        //get the current funciton y
+        //convert to char array
+        for (int j = 0; j < current_y_char.length; j++) {
+            char c = current_y_char[j];
+            if (number(c)) {
+                current_piece += c;
+                for (int k = j + 1; k < current_y_char.length; k++) {
+                    char c_k = current_y_char[k];
+                    if (number(c_k)) {
+                        current_piece += c_k;
+                        j++;
+                    } else {
+                        operations_list.add(current_piece);
+                        current_piece = "";
+                        k = current_y_char.length;
+                    }
+                }
+                if (j == current_y_char.length - 1) {
+                    operations_list.add(current_piece);
+                    current_piece = "";
+                }
+            } else if (x(c)) {
+                operations_list.add(String.valueOf(c));
+            } else if (y(c)) {
+                String c_y = "y";
+                for (int k = j + 1; k < current_y_char.length; k++) {
+                    char c_k = current_y_char[k];
+                    if (number(c_k)) {
+                        c_y += c_k;
+                        j++;
+                    } else {
+                        k = current_y_char.length;
+                        operations_list.add(c_y);
+                    }
+                    if (k == current_y_char.length - 1) {
+                        k = current_y_char.length;
+                        operations_list.add(c_y);
+                    }
+                }
+
+            } else if (func(c)) {
+                operations_list.add(String.valueOf(c));
+                j += 2;
+            } else if (power(c)) {
+                operations_list.add(String.valueOf(c));
+            } else if (addition(c)) {
+                operations_list.add(String.valueOf(c));
+            } else if (multiplication(c)) {
+                operations_list.add(String.valueOf(c));
+            }
+        }
+
+        return operations_list;
+    }
 
 }
 
