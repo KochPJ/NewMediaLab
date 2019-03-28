@@ -3,12 +3,13 @@ package com.example.newmedialab;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class VelocityFunction {
+public class VelocityFunction implements Serializable {
 
     String vel_function = "";
     char[] vel_function_char;
