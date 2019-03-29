@@ -69,6 +69,7 @@ public class newExpFunction extends AppCompatActivity {
             function_build = true;
             GraphView graph = (GraphView) findViewById(R.id.graph_view);
             series = new LineGraphSeries<DataPoint>();
+
             double xd_max = 0.0;
             for(int i = 0; i < vel_function.x.length; i++){
                 if(vel_function.xd[i] > xd_max){

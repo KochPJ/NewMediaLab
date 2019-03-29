@@ -306,11 +306,15 @@ public class VelocityFunction implements Serializable {
     @SuppressLint("LongLogTag")
     public double getCalcResult(List<String> operations_list, double x){
 
-        Double[] calculations;
+        Double[] calculations; // this one holds the calculations (the numbers)
+        Double[] calculations_index; // this one has 1 if the index is a number and 0 if the index is not a number.
+        // needed because we have to know which index of the calculation array is actually a number. since they can be 0 sometimes. e.g if x = 0 or y_i = 0.
         // ini the calculation array with 0.0
         calculations = new Double[operations_list.size()];
+        calculations_index = new Double[operations_list.size()];
         for(int k = 0; k < calculations.length; k++){
             calculations[k] = 0.0;
+            calculations_index[k]= 0.0;
         }
 
         // fill the calculation array with the numbers we have. x,y,n
@@ -318,11 +322,13 @@ public class VelocityFunction implements Serializable {
         for(int k = 0; k < operations_list.size(); k++){
             op = operations_list.get(k);
             if(number(op.charAt(0))){
-                calculations[k] = Double.parseDouble(op);
+                calculations[k] = Double.parseDouble(op); // put the real number
+                calculations_index[k] = 1.0; //but in the boolean so we know that at pos k there is a number
             }else if(x(op.charAt(0))){
                 calculations[k] = x;
-
+                calculations_index[k] = 1.0;
             }else if(y(op.charAt(0))){
+                // make a for loop to get the number behind the y. since it can be 1 or 2 even 3 digits i use a for loop
                 String y_n = "";
                 char[] y_n_char = op.toCharArray();
                 for(int p = 1; p<y_n_char.length;p++){
@@ -330,6 +336,7 @@ public class VelocityFunction implements Serializable {
                 }
                 int y_n_int = Integer.valueOf(y_n);
                 calculations[k] = y_results[y_n_int];
+                calculations_index[k] = 1.0;
             }
         }
 
@@ -341,21 +348,26 @@ public class VelocityFunction implements Serializable {
                 double value_right = 0.0;
                 for(int l = k-1; l >-1; l--){
                     double v = calculations[l];
-                    if(v != 0.0){
-                        value_left = v;
-                        calculations[l] = 0.0;
-                        l = -1;
+                    double v_i = calculations_index[l];
+                    //check for the next value to the left where my boolean array shows me a value
+                    if(v_i != 0.0){
+                        value_left = v; //but the left value to the current value or l
+                        calculations[l] = 0.0; //put the value to 0
+                        calculations_index[l] = 0.0; // put the index to 0
+                        l = -1; // break the for loop
                     }
                 }
                 for(int r = k+1; r <calculations.length; r++){
-                    double v = calculations[r];
-                    if(v != 0.0){
-                        value_right = v;
-                        calculations[r] = 0.0;
-                        r = calculations.length;
+                    //check for the next value to the right where my boolean array shows me a value
+                    if(calculations_index[r] != 0.0){
+                        value_right = calculations[r]; //but the right value to the current value or r
+                        calculations[r] = 0.0; //put the value to 0
+                        calculations_index[r] = 0.0; // put the index to 0
+                        r = calculations.length; // break the for loop
                     }
                 }
-                calculations[k] = power(value_left,value_right);
+                calculations_index[k] = 1.0; //but the boolean to true where i store my new result
+                calculations[k] = power(value_left,value_right); //put in the new result into the k positon
             }
         }
 
@@ -365,13 +377,16 @@ public class VelocityFunction implements Serializable {
             if(func(op.charAt(0))){
                 double value_right = 0.0;
                 for(int r = k+1; r <calculations.length; r++){
-                    double v = calculations[r];
-                    if(v != 0.0){
-                        value_right = v;
-                        calculations[r] = 0.0;
-                        r = calculations.length;
+                    //check for the next value to the right where my boolean array shows me a value
+                    if(calculations_index[r] != 0.0){
+                        value_right = calculations[r]; //but the right value to the current value or r
+                        calculations[r] = 0.0; //put the value to 0
+                        calculations_index[r] = 0.0; // put the index to 0
+                        r = calculations.length; // break the for loop
                     }
                 }
+                calculations_index[k] = 1.0; //but the boolean to true where i store my new result
+                //compute the result for position k
                 if(op.equals("e")){
                     calculations[k] = exp(value_right);
                 }else if(op.equals("l")){
@@ -392,20 +407,26 @@ public class VelocityFunction implements Serializable {
                 double value_right = 0.0;
                 for(int l = k-1; l >-1; l--){
                     double v = calculations[l];
-                    if(v != 0.0){
-                        value_left = v;
-                        calculations[l] = 0.0;
-                        l = -1;
+                    double v_i = calculations_index[l];
+                    //check for the next value to the left where my boolean array shows me a value
+                    if(v_i != 0.0){
+                        value_left = v; //but the left value to the current value or l
+                        calculations[l] = 0.0; //put the value to 0
+                        calculations_index[l] = 0.0; // put the index to 0
+                        l = -1; // break the for loop
                     }
                 }
                 for(int r = k+1; r <calculations.length; r++){
-                    double v = calculations[r];
-                    if(v != 0.0){
-                        value_right = v;
-                        calculations[r] = 0.0;
-                        r = calculations.length;
+                    //check for the next value to the right where my boolean array shows me a value
+                    if(calculations_index[r] != 0.0){
+                        value_right = calculations[r]; //but the right value to the current value or r
+                        calculations[r] = 0.0; //put the value to 0
+                        calculations_index[r] = 0.0; // put the index to 0
+                        r = calculations.length; // break the for loop
                     }
                 }
+                calculations_index[k] = 1.0; //but the boolean to true where i store my new result
+                //compute the result for position k
                 if(op.equals("*")){
                     calculations[k] = multiply(value_left,value_right);
                 }else if(op.equals("/")){
@@ -423,20 +444,26 @@ public class VelocityFunction implements Serializable {
                 double value_right = 0.0;
                 for(int l = k-1; l >-1; l--){
                     double v = calculations[l];
-                    if(v != 0.0){
-                        value_left = v;
-                        calculations[l] = 0.0;
-                        l = -1;
+                    double v_i = calculations_index[l];
+                    //check for the next value to the left where my boolean array shows me a value
+                    if(v_i != 0.0){
+                        value_left = v; //but the left value to the current value or l
+                        calculations[l] = 0.0; //put the value to 0
+                        calculations_index[l] = 0.0; // put the index to 0
+                        l = -1; // break the for loop
                     }
                 }
                 for(int r = k+1; r <calculations.length; r++){
-                    double v = calculations[r];
-                    if(v != 0.0){
-                        value_right = v;
-                        calculations[r] = 0.0;
-                        r = calculations.length;
+                    //check for the next value to the right where my boolean array shows me a value
+                    if(calculations_index[r] != 0.0){
+                        value_right = calculations[r]; //but the right value to the current value or r
+                        calculations[r] = 0.0; //put the value to 0
+                        calculations_index[r] = 0.0; // put the index to 0
+                        r = calculations.length; // break the for loop
                     }
                 }
+                calculations_index[k] = 1.0; //but the boolean to true where i store my new result
+                //compute the result for position k
                 if(op.equals("+")){
                     calculations[k] = plus(value_left,value_right);
                 }else if(op.equals("-")){
@@ -445,15 +472,13 @@ public class VelocityFunction implements Serializable {
             }
         }
 
+        // their can only be one value left int he array. Search it and return it
         double calc_result = 0.0;
         for(int k = 0; k < calculations.length; k++){
             if (calculations[k] != 0.0){
                 calc_result = calculations[k];
             }
         }
-        String just_something = "";
-        just_something+= Double.valueOf(calc_result); // somehow this works and not if i put it directy in the log funciton...
-
 
         return  calc_result;
     }
@@ -528,7 +553,7 @@ public class VelocityFunction implements Serializable {
                 working = false;
             }
         }
-
+        
         return working;
     }
 
