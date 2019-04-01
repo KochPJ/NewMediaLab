@@ -22,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(startShapes);
     }
 
+    public void openTestActivity(View view) {
+        Intent startShapes = new Intent(MainActivity.this, playVideo.class);
+        startActivity(startShapes);
+    }
+
 
     public class MyActivity extends Activity {
         protected void onCreate(Bundle savedInstanceState) {

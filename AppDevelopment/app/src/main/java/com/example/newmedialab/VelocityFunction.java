@@ -47,6 +47,7 @@ public class VelocityFunction implements Serializable {
                 n_cb++;
             }
         }
+
         // fill the array with the bracket index
         ob = new int[n_ob];
         cb = new int[n_cb];
@@ -553,7 +554,7 @@ public class VelocityFunction implements Serializable {
                 working = false;
             }
         }
-        
+
         return working;
     }
 

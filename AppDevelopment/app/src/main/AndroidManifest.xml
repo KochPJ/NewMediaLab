@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".newExpFunction"></activity>
+        <activity android:name=".playVideo"></activity>
+        <activity android:name=".newExpFunction" />
         <activity android:name=".NewExperimentSelectSymboles" />
         <activity
             android:name=".NewExperiments"
