@@ -22,8 +22,7 @@ public class MyExperiments extends AppCompatActivity {
     private String[] names;
     private Experiment[] experiment_list;
 
-
-    public void deleteExperiment(View view) {
+    public void navigation(View view) {
         Spinner spinner = (Spinner) findViewById(R.id.experiment_names_spinner);
         int pos = spinner.getSelectedItemPosition();
         Experiment exp = experiment_list[pos];
@@ -32,39 +31,42 @@ public class MyExperiments extends AppCompatActivity {
         String file_dir = folder.getPath() + "/KineTest/Experiments/"+FILE_NAME;
         Log.d("FileName", file_dir);
         File myFile = new File(file_dir);
-        if(myFile.exists()) {
-            myFile.delete();
-            Toast.makeText(this, "Deleted Experiment " +  FILE_NAME,
-                    Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(this,  FILE_NAME + " does not exist",
-                    Toast.LENGTH_LONG).show();
+        switch (view.getId()) {
+            case R.id.edit_experiment: // Go to edit experiment view
+                Intent intent = new Intent(this, newExpFunction.class);
+                intent = intent.putExtra("experiment", exp);
+                startActivity(intent);
+                break;
+            case R.id.edit_stimuli: // Go to edit stimuli view
+                //Intent intent = new Intent(this, editStimuli.class);
+                //intent = intent.putExtra("experiment", exp);
+                //startActivity(intent);
+                break;
+            case R.id.results: // Go to results view
+                //Intent intent = new Intent(this, results.class);
+                //intent = intent.putExtra("experiment", exp);
+                //startActivity(intent);
+                break;
+            case R.id.start_experiment: // Go to start experiment view
+                //Intent intent = new Intent(this, startExperiment.class);
+                //intent = intent.putExtra("experiment", exp);
+                //startActivity(intent);
+                break;
+            case R.id.delete_experiment: // Delete selected experiment
+                if(myFile.exists()) {
+                    myFile.delete();
+                    Toast.makeText(this, "Deleted Experiment " +  FILE_NAME,
+                        Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this,  FILE_NAME + " does not exist",
+                        Toast.LENGTH_LONG).show();
+                }
+                Intent startShapes = new Intent(MyExperiments.this, MyExperiments.class);
+                startActivity(startShapes);
+                break;
+             default:
+                throw new RuntimeException("Unknow button ID");
         }
-
-        Intent startShapes = new Intent(MyExperiments.this, MyExperiments.class);
-        startActivity(startShapes);
-    }
-
-    public void editExperiment(View view) {
-        Spinner spinner = (Spinner) findViewById(R.id.experiment_names_spinner);
-        int pos = spinner.getSelectedItemPosition();
-        Experiment exp = experiment_list[pos];
-        String FILE_NAME = exp.getFile_name();
-        File folder = Environment.getExternalStorageDirectory();
-        String file_dir = folder.getPath() + "/KineTest/Experiments/"+FILE_NAME;
-        Log.d("FileName", file_dir);
-        File myFile = new File(file_dir);
-        if(myFile.exists()) {
-            myFile.delete();
-            Toast.makeText(this, "Deleted Experiment " +  FILE_NAME,
-                    Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(this,  FILE_NAME + " does not exist",
-                    Toast.LENGTH_LONG).show();
-        }
-
-        Intent startShapes = new Intent(MyExperiments.this, MyExperiments.class);
-        startActivity(startShapes);
     }
 
     @Override
@@ -109,29 +111,29 @@ public class MyExperiments extends AppCompatActivity {
                 i++;
             }
 
-        Spinner spinner = (Spinner) findViewById(R.id.experiment_names_spinner);
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_item,
-                        this.names); //selected item will look like a spinner set from XML
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout
-                .simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerArrayAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            Spinner spinner = (Spinner) findViewById(R.id.experiment_names_spinner);
+            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
+                    (this, android.R.layout.simple_spinner_item,
+                            this.names); //selected item will look like a spinner set from XML
+            spinnerArrayAdapter.setDropDownViewResource(android.R.layout
+                    .simple_spinner_dropdown_item);
+            spinner.setAdapter(spinnerArrayAdapter);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                Experiment exp = experiment_list[position];
-                String name = exp.getName();
-                String repeats = exp.getRepeats();
-                String symboles = exp.getSymbols();
-                String function = exp.getFunction();
-                TextView textView = (TextView) findViewById(R.id.textView_myExperiment);
-                textView.setText("Name: "+name +"\n"+"Repeats: "+repeats+"\n"+"Symbols: "+symboles+"\n"+"Function: "+function); //set text for text view
-            }
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    Experiment exp = experiment_list[position];
+                    String name = exp.getName();
+                    String repeats = exp.getRepeats();
+                    String symboles = exp.getSymbols();
+                    String function = exp.getFunction();
+                    TextView textView = (TextView) findViewById(R.id.textView_myExperiment);
+                    textView.setText("Name: "+name +"\n"+"Repeats: "+repeats+"\n"+"Symbols: "+symboles+"\n"+"Function: "+function); //set text for text view
+                }
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    // your code here
+                }
 
-        });
+            });
 
         } else {
             // Handle the case where dir is not really a directory.

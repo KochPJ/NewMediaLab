@@ -15,7 +15,7 @@ public class NewExperimentSelectSymbols extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_experiment_select_symboles);
+        setContentView(R.layout.activity_new_experiment_select_symbols);
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
 
@@ -23,7 +23,7 @@ public class NewExperimentSelectSymbols extends AppCompatActivity {
 
     public void saveExperiment(View view) {
         //pointer to selected symbols
-        EditText exp_symbols_EditText = (EditText) findViewById(R.id.te_experiment_select_symboles);
+        EditText exp_symbols_EditText = (EditText) findViewById(R.id.te_experiment_select_symbols);
         //get experiment symbols
         String exp_symbols = exp_symbols_EditText.getText().toString();
         //set selected symbols
