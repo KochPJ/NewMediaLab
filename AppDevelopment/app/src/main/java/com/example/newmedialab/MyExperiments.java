@@ -11,8 +11,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -43,8 +41,27 @@ public class MyExperiments extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         }
 
+        Intent startShapes = new Intent(MyExperiments.this, MyExperiments.class);
+        startActivity(startShapes);
+    }
 
-
+    public void editExperiment(View view) {
+        Spinner spinner = (Spinner) findViewById(R.id.experiment_names_spinner);
+        int pos = spinner.getSelectedItemPosition();
+        Experiment exp = experiment_list[pos];
+        String FILE_NAME = exp.getFile_name();
+        File folder = Environment.getExternalStorageDirectory();
+        String file_dir = folder.getPath() + "/KineTest/Experiments/"+FILE_NAME;
+        Log.d("FileName", file_dir);
+        File myFile = new File(file_dir);
+        if(myFile.exists()) {
+            myFile.delete();
+            Toast.makeText(this, "Deleted Experiment " +  FILE_NAME,
+                    Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(this,  FILE_NAME + " does not exist",
+                    Toast.LENGTH_LONG).show();
+        }
 
         Intent startShapes = new Intent(MyExperiments.this, MyExperiments.class);
         startActivity(startShapes);
@@ -78,7 +95,7 @@ public class MyExperiments extends AppCompatActivity {
                         }else if(c == 1){
                             exp.setRepeats(line);
                         }else if(c == 2){
-                            exp.setSymboles(line);
+                            exp.setSymbols(line);
                         }else if(c == 3){
                             exp.setFunction(line);
                         }
@@ -105,10 +122,10 @@ public class MyExperiments extends AppCompatActivity {
                 Experiment exp = experiment_list[position];
                 String name = exp.getName();
                 String repeats = exp.getRepeats();
-                String symboles = exp.getSymboles();
+                String symboles = exp.getSymbols();
                 String function = exp.getFunction();
                 TextView textView = (TextView) findViewById(R.id.textView_myExperiment);
-                textView.setText("Name: "+name +"\n"+"Repeats: "+repeats+"\n"+"Symboles: "+symboles+"\n"+"Function: "+function); //set text for text view
+                textView.setText("Name: "+name +"\n"+"Repeats: "+repeats+"\n"+"Symbols: "+symboles+"\n"+"Function: "+function); //set text for text view
             }
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here

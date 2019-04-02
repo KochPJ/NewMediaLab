@@ -1,7 +1,5 @@
 package com.example.newmedialab;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +10,8 @@ import android.widget.Toast;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class newExpFunction extends AppCompatActivity {
 
@@ -43,7 +43,7 @@ public class newExpFunction extends AppCompatActivity {
             Log.d("name = ", name);
             Log.d("repeats = ", repeats);
 
-            Intent intent = new Intent(this, NewExperimentSelectSymboles.class);
+            Intent intent = new Intent(this, NewExperimentSelectSymbols.class);
             intent = intent.putExtra("experiment", exp);
             startActivity(intent);
             // need to reset bool to false because else people can press back in the next view and then use any function which was not tested yet.
