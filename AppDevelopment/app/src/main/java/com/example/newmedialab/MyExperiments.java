@@ -64,6 +64,16 @@ public class MyExperiments extends AppCompatActivity {
                 Intent startShapes = new Intent(MyExperiments.this, MyExperiments.class);
                 startActivity(startShapes);
                 break;
+            case R.id.add_stimuli: // Go to add stimuli view
+                //Intent intent = new Intent(this, addStimuli.class);
+                //intent = intent.putExtra("experiment", exp);
+                //startActivity(intent);
+                break;
+            case R.id.view_stimuli: // Go to view stimuli view
+                //Intent intent = new Intent(this, viewStimuli.class);
+                //intent = intent.putExtra("experiment", exp);
+                //startActivity(intent);
+                break;
              default:
                 throw new RuntimeException("Unknow button ID");
         }

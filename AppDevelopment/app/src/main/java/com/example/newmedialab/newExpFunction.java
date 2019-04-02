@@ -43,7 +43,7 @@ public class newExpFunction extends AppCompatActivity {
             Log.d("name = ", name);
             Log.d("repeats = ", repeats);
 
-            Intent intent = new Intent(this, NewExperimentSelectSymbols.class);
+            Intent intent = new Intent(this, NewExperimentSettings.class);
             intent = intent.putExtra("experiment", exp);
             startActivity(intent);
             // need to reset bool to false because else people can press back in the next view and then use any function which was not tested yet.

@@ -3,10 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewExperimentSelectSymbols"
+    tools:context=".NewExperimentSettings"
     android:background="@drawable/background"
     >
 
+
+    <EditText
+        android:id="@+id/te_experiment_repeats"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:text="0-inf"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/tw_experiment_repeats_title"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="Number of Repeats:"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tw_experiment_select_symbols_title"
