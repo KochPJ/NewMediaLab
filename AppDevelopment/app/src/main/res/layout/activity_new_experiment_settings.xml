@@ -18,7 +18,7 @@
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"
-        android:text="0-inf"
+        android:text="inf"
         android:textStyle="italic" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_marginTop="110dp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="Number of Repeats:"
+        android:text="Max. Number of Allowed Repeats"
         android:textColor="#000000"
         android:textSize="20dp"
         android:textStyle="bold" />

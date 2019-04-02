@@ -33,7 +33,7 @@ public class MyExperiments extends AppCompatActivity {
         File myFile = new File(file_dir);
         switch (view.getId()) {
             case R.id.edit_experiment: // Go to edit experiment view
-                Intent intent = new Intent(this, newExpFunction.class);
+                Intent intent = new Intent(this, NewExperimentFunction.class);
                 intent = intent.putExtra("experiment", exp);
                 startActivity(intent);
                 break;
@@ -134,10 +134,10 @@ public class MyExperiments extends AppCompatActivity {
                     Experiment exp = experiment_list[position];
                     String name = exp.getName();
                     String repeats = exp.getRepeats();
-                    String symboles = exp.getSymbols();
+                    String symbols = exp.getSymbols();
                     String function = exp.getFunction();
                     TextView textView = (TextView) findViewById(R.id.textView_myExperiment);
-                    textView.setText("Name: "+name +"\n"+"Repeats: "+repeats+"\n"+"Symbols: "+symboles+"\n"+"Function: "+function); //set text for text view
+                    textView.setText("Name: "+name +"\n"+"Allowed Repeats: "+repeats+"\n"+"Symbols: "+symbols+"\n"+"Function: "+function); //set text for text view
                 }
                 public void onNothingSelected(AdapterView<?> parentView) {
                     // your code here

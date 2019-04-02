@@ -13,7 +13,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class newExpFunction extends AppCompatActivity {
+public class NewExperimentFunction extends AppCompatActivity {
 
     public boolean function_build = false;
     public Experiment exp = new Experiment("");
@@ -22,7 +22,7 @@ public class newExpFunction extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_exp_function);
+        setContentView(R.layout.activity_new_experiment_function);
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
     }

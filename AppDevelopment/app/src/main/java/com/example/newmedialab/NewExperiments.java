@@ -25,7 +25,7 @@ public class NewExperiments extends AppCompatActivity {
         // create new experiment
         Experiment exp = new Experiment(exp_name);
 
-        Intent intent = new Intent(this, newExpFunction.class);
+        Intent intent = new Intent(this, NewExperimentFunction.class);
         intent = intent.putExtra("experiment", exp);
         startActivity(intent);
     }

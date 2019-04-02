@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".playVideo"></activity>
-        <activity android:name=".newExpFunction" />
+        <activity android:name=".NewExperimentFunction" />
         <activity android:name=".NewExperimentSettings" />
         <activity
             android:name=".NewExperiments"
