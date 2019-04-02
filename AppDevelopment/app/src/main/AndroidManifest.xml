@@ -11,11 +11,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".playVideo"></activity>
-        <activity android:name=".NewExperimentFunction" />
-        <activity android:name=".NewExperimentSettings" />
         <activity
-            android:name=".NewExperiments"
+            android:name=".MultipleChoiceExperiment"
+            android:label="@string/title_activity_multiple_choice_experiment"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".WritingExperiment"
+            android:label="@string/title_activity_writing_experiment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ExperimentType"
+            android:label="@string/title_activity_new_experiment_setup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".StartExperimentMain"
+            android:label="@string/title_activity_start_experiment_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Results"
+            android:label="@string/title_activity_results"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewStimuli"
+            android:label="@string/title_activity_view_stimuli"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddStimuli"
+            android:label="@string/title_activity_add_stimuli"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".playVideo" />
+        <activity android:name=".ExperimentFunction" />
+        <activity android:name=".ExperimentSettings" />
+        <activity
+            android:name=".NewExperiment"
             android:label="@string/app_name"
             android:parentActivityName=".MainActivity">
             <meta-data

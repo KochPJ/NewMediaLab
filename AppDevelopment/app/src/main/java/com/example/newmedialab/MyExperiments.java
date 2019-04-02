@@ -32,27 +32,31 @@ public class MyExperiments extends AppCompatActivity {
         Log.d("FileName", file_dir);
         File myFile = new File(file_dir);
         switch (view.getId()) {
-            case R.id.edit_experiment: // Go to edit experiment view
-                Intent intent = new Intent(this, NewExperimentFunction.class);
+            case R.id.edit_function: // Go to function view with edit param
+                Intent intent = new Intent(this, ExperimentFunction.class);
                 intent = intent.putExtra("experiment", exp);
+                intent = intent.putExtra("editing", true);
                 startActivity(intent);
                 break;
-            case R.id.edit_stimuli: // Go to edit stimuli view
-                //Intent intent = new Intent(this, editStimuli.class);
-                //intent = intent.putExtra("experiment", exp);
-                //startActivity(intent);
+            case R.id.edit_stimuli: // Go to stimuli view with edit param
+                Intent intent2 = new Intent(this, ExperimentSettings.class);
+                intent2 = intent2.putExtra("experiment", exp);
+                intent2 = intent2.putExtra("editing", true);
+                startActivity(intent2);
                 break;
             case R.id.results: // Go to results view
-                //Intent intent = new Intent(this, results.class);
-                //intent = intent.putExtra("experiment", exp);
-                //startActivity(intent);
+                // TODO: add export experimental setup
+                Intent intent3 = new Intent(this, Results.class);
+                intent3 = intent3.putExtra("experiment", exp);
+                startActivity(intent3);
                 break;
             case R.id.start_experiment: // Go to start experiment view
-                //Intent intent = new Intent(this, startExperiment.class);
-                //intent = intent.putExtra("experiment", exp);
-                //startActivity(intent);
+                Intent intent4 = new Intent(this, StartExperimentMain.class);
+                intent4 = intent4.putExtra("experiment", exp);
+                startActivity(intent4);
                 break;
             case R.id.delete_experiment: // Delete selected experiment
+                // TODO: check if no experiments in spinner (currently crashes)
                 if(myFile.exists()) {
                     myFile.delete();
                     Toast.makeText(this, "Deleted Experiment " +  FILE_NAME,
@@ -65,17 +69,23 @@ public class MyExperiments extends AppCompatActivity {
                 startActivity(startShapes);
                 break;
             case R.id.add_stimuli: // Go to add stimuli view
-                //Intent intent = new Intent(this, addStimuli.class);
-                //intent = intent.putExtra("experiment", exp);
-                //startActivity(intent);
+                Intent intent5 = new Intent(this, AddStimuli.class);
+                intent5 = intent5.putExtra("experiment", exp);
+                startActivity(intent5);
                 break;
             case R.id.view_stimuli: // Go to view stimuli view
-                //Intent intent = new Intent(this, viewStimuli.class);
-                //intent = intent.putExtra("experiment", exp);
-                //startActivity(intent);
+                Intent intent6 = new Intent(this, ViewStimuli.class);
+                intent6 = intent6.putExtra("experiment", exp);
+                startActivity(intent6);
+                break;
+            case R.id.edit_experiment: // Go to edit experiment view
+                Intent intent7 = new Intent(this, ExperimentType.class);
+                intent7 = intent7.putExtra("experiment", exp);
+                intent7 = intent7.putExtra("editing", true);
+                startActivity(intent7);
                 break;
              default:
-                throw new RuntimeException("Unknow button ID");
+                throw new RuntimeException("Unknown button ID");
         }
     }
 

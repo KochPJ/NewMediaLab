@@ -5,9 +5,7 @@ import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class VelocityFunction implements Serializable {
 
@@ -549,6 +547,8 @@ public class VelocityFunction implements Serializable {
             x[i] = i*10.0/(n-1);
             xd[i] = compute_xd(x[i]);
             if(xd[i] < 0.01){
+                // Print xd
+                //Log.d("xd", "at i = "+Double.toString(xd[i]));
                 Log.d("derivative is to small", "at i = "+Integer.toString(i));
                 i = n;
                 working = false;

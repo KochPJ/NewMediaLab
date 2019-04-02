@@ -13,18 +13,20 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class NewExperimentFunction extends AppCompatActivity {
+public class ExperimentFunction extends AppCompatActivity {
 
     public boolean function_build = false;
+    public boolean editing = false;
     public Experiment exp = new Experiment("");
     LineGraphSeries<DataPoint> series;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_experiment_function);
+        setContentView(R.layout.activity_experiment_function);
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
+        editing = getIntent().getExtras().getBoolean("editing");
     }
 
 
@@ -43,11 +45,22 @@ public class NewExperimentFunction extends AppCompatActivity {
             Log.d("name = ", name);
             Log.d("repeats = ", repeats);
 
-            Intent intent = new Intent(this, NewExperimentSettings.class);
-            intent = intent.putExtra("experiment", exp);
-            startActivity(intent);
+            //If editing return to my experiments
+            if (editing){
+                //Save results
+                exp.createFile();
+                Toast.makeText(this, "Saved Experiment to " +  exp.getFile_name(),
+                        Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this, MyExperiments.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(this, ExperimentSettings.class);
+                intent = intent.putExtra("experiment", exp);
+                startActivity(intent);
+            }
             // need to reset bool to false because else people can press back in the next view and then use any function which was not tested yet.
             function_build = false;
+            editing = false;
         }else{
             Toast.makeText(this, "Function not build yet", Toast.LENGTH_SHORT).show();
         }

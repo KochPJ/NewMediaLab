@@ -1,13 +1,12 @@
 package com.example.newmedialab;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.VideoView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class playVideo extends AppCompatActivity {
     VideoView videov;
@@ -15,7 +14,7 @@ public class playVideo extends AppCompatActivity {
 
     public void playVideo(View view) throws InterruptedException {
 
-        Log.d("Vidoe", "playing the video");
+        Log.d("Video", "playing the video");
         String videopath ="android.resource://" + getPackageName() + "/" + R.raw.test;
         Uri uri =  Uri.parse(videopath);
         videov = (VideoView) findViewById(R.id.videoView);

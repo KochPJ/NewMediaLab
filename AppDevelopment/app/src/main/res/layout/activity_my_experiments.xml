@@ -58,7 +58,7 @@
         android:gravity="center|top"/>
 
     <Button
-        android:id="@+id/edit_experiment"
+        android:id="@+id/edit_function"
         android:layout_width="129dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -69,7 +69,7 @@
         android:layout_marginBottom="91dp"
         android:background="@drawable/mybutton"
         android:onClick="navigation"
-        android:text="Edit Experiment" />
+        android:text="Edit Function" />
 
     <Button
         android:id="@+id/start_experiment"
@@ -92,12 +92,26 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginBottom="165dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginRight="37dp"
+        android:layout_marginBottom="156dp"
         android:background="@drawable/mybutton"
         android:onClick="navigation"
         android:text="Edit Stimuli" />
+
+    <Button
+        android:id="@+id/edit_experiment"
+        android:layout_width="126dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="39dp"
+        android:layout_marginRight="39dp"
+        android:layout_marginBottom="223dp"
+        android:background="@drawable/mybutton"
+        android:onClick="navigation"
+        android:text="Edit Experiment" />
 
     <Button
         android:id="@+id/view_stimuli"
@@ -139,7 +153,7 @@
         android:layout_marginBottom="91dp"
         android:background="@drawable/mybutton"
         android:onClick="navigation"
-        android:text="Show Results" />
+        android:text="Export Results" />
 
     <Button
         android:id="@+id/delete_experiment"
