@@ -22,6 +22,11 @@ public class MyExperiments extends AppCompatActivity {
     private String[] names;
     private Experiment[] experiment_list;
 
+    public void startExperiment(View view) {
+        Intent startShapes = new Intent(MyExperiments.this, playVideo.class);
+        startActivity(startShapes);
+    }
+
     public void navigation(View view) {
         Spinner spinner = (Spinner) findViewById(R.id.experiment_names_spinner);
         int pos = spinner.getSelectedItemPosition();
