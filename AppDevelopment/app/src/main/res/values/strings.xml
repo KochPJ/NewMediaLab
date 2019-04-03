@@ -5,4 +5,12 @@
     <string name="title_notifications">Notifications</string>
     <string name="button">Button</string>
     <string name="kinetest">KineTest</string>
+    <string name="title_activity_edit_stimuli">EditStimuli</string>
+    <string name="title_activity_add_stimuli">AddStimuli</string>
+    <string name="title_activity_view_stimuli">ViewStimuli</string>
+    <string name="title_activity_results">Results</string>
+    <string name="title_activity_start_experiment_main">StartExperimentMain</string>
+    <string name="title_activity_new_experiment_setup">NewExperimentSetup</string>
+    <string name="title_activity_writing_experiment">WritingExperiment</string>
+    <string name="title_activity_multiple_choice_experiment">MultipleChoiceExperiment</string>
 </resources>

@@ -3,47 +3,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewExperimentFunction"
+    tools:context=".ExperimentSettings"
     android:background="@drawable/background"
     >
 
 
+    <EditText
+        android:id="@+id/te_experiment_repeats"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:text="inf"
+        android:textStyle="italic" />
+
     <TextView
-        android:id="@+id/tw_experiment_function_title"
+        android:id="@+id/tw_experiment_repeats_title"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="Max. Number of Allowed Repeats"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tw_experiment_select_symbols_title"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Velocity function:"
+        android:gravity="center"
+        android:text="Select Symbols:"
         android:textColor="#000000"
         android:textSize="20dp"
-        android:textStyle="bold"
-        android:gravity="center"/>
+        android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/te_experiment_function"
+        android:id="@+id/te_experiment_select_symbols"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-
         android:layout_marginTop="50dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="exp(x)+2"
+        android:text="1,2,3,4,5,6,7"
         android:gravity="center"
         android:textStyle="italic"/>
-
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph_view"
-        android:layout_width="500dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/te_experiment_function"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
-
 
     <Button
         android:layout_width="200dp"
@@ -54,19 +71,8 @@
         android:layout_marginBottom="50dp"
         android:background="@drawable/mybutton"
         android:layout_centerHorizontal="true"
-        android:onClick="next"
-        android:text="next"
+        android:onClick="saveExperiment"
+        android:text="Save Experiment"
         />
 
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:id="@+id/build_function"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="120dp"
-        android:background="@drawable/mybutton"
-        android:layout_centerHorizontal="true"
-        android:onClick="build_function"
-        android:text="Build function"
-        />
 </RelativeLayout>

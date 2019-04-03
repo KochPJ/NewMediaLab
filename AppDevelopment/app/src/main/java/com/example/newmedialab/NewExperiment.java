@@ -7,14 +7,14 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class NewExperiments extends AppCompatActivity {
+public class NewExperiment extends AppCompatActivity {
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_experiments);
+        setContentView(R.layout.activity_new_experiment);
     }
 
     public void next(View view) {
@@ -25,7 +25,7 @@ public class NewExperiments extends AppCompatActivity {
         // create new experiment
         Experiment exp = new Experiment(exp_name);
 
-        Intent intent = new Intent(this, NewExperimentFunction.class);
+        Intent intent = new Intent(this, ExperimentType.class);
         intent = intent.putExtra("experiment", exp);
         startActivity(intent);
     }

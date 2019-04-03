@@ -8,17 +8,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class NewExperimentSettings extends AppCompatActivity {
+public class ExperimentSettings extends AppCompatActivity {
 
     public Experiment exp = new Experiment("");
+    public boolean editing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_experiment_settings);
+        setContentView(R.layout.activity_experiment_settings);
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
-
+        editing = getIntent().getExtras().getBoolean("editing");
     }
 
     public void saveExperiment(View view) {
@@ -36,8 +37,17 @@ public class NewExperimentSettings extends AppCompatActivity {
         Toast.makeText(this, "Saved Experiment to " +  exp.getFile_name(),
                 Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        //If editing return to my experiments
+        if (editing){
+            Intent intent = new Intent(this, MyExperiments.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        //Reset boolean for backnavigation
+        editing = false;
 
     }
+
 }
