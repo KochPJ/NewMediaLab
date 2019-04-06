@@ -1,0 +1,159 @@
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 > #backgroundBox {
+  background-color: transparent;
+  background-repeat: repeat;
+  background-position-x: left;
+  background-position-y: top;
+  background-attachment: scroll;
+  background-size: auto;
+  background-image: -moz-linear-gradient(top,rgba(40,154,197,0.7),rgba(255,255,255,0.7));
+  background-image: -webkit-linear-gradient(top,rgba(40,154,197,0.7),rgba(255,255,255,0.7));
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(40,154,197,0.7)), color-stop(100%,rgba(255,255,255,0.7)));
+  background-image: -o-linear-gradient(top,rgba(40,154,197,0.7),rgba(255,255,255,0.7));
+  background-image: linear-gradient(to bottom,rgba(40,154,197,0.7),rgba(255,255,255,0.7));
+  position: absolute;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 > #alignmentBox {
+  position: relative;
+  max-width: 1280px;
+  max-height: 800px;
+  width: 100%;
+  height: 100%;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Button_2 > .backgroundLayer {
+  height: calc(100% + 0px);
+  width: calc(100% + 0px);
+  background-color: rgba(253,153,39,0.35);
+  background-repeat: repeat;
+  background-position-x: left;
+  background-position-y: top;
+  background-attachment: scroll;
+  background-size: auto;
+  background-image: none;
+  border-top-width: 0px;
+  border-top-style: solid;
+  border-top-color: #FC663D;
+  border-right-width: 0px;
+  border-right-style: solid;
+  border-right-color: #FC663D;
+  border-bottom-width: 0px;
+  border-bottom-style: solid;
+  border-bottom-color: #FC663D;
+  border-left-width: 0px;
+  border-left-style: solid;
+  border-left-color: #FC663D;
+  border-radius: 16px 16px 16px 16px;
+  box-shadow: 0px 3px 4px 0px #A0A0A0;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Button_2 {
+  position: absolute;
+  width: 379px;
+  height: 164px;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  transform: rotate(0deg);
+  text-shadow: none;
+  padding-left: 0px;
+  padding-bottom: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  font-size: 20.0pt;
+  font-family: 'Roboto-Regular',Arial;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Button_2 > .clipping, #s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Button_2 > .paddingLayer {
+  height: 88px;
+  width: 303px;
+  padding-top: 38px;
+  padding-bottom: 38px;
+  padding-left: 38px;
+  padding-right: 38px;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Button_2 .valign {
+  vertical-align: middle;
+  text-align: center;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Button_2 span {
+  color: #FFFFFF;
+  text-align: center;
+  text-decoration: none;
+  font-family: 'Roboto-Regular',Arial;
+  font-size: 20.0pt;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Button_2 span#rtr-s-Button_2_0 {
+  color: #FFFFFF;
+  text-align: center;
+  text-decoration: none;
+  font-family: 'Roboto-Regular',Arial;
+  font-size: 20.0pt;
+  line-height: 0px;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Button_2 span#rtr-s-Button_2_1 {
+  color: #FFFFFF;
+  text-align: center;
+  text-decoration: none;
+  font-family: 'Roboto-Regular',Arial;
+  font-size: 20.0pt;
+  line-height: 0px;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Text_1 > .backgroundLayer {
+  height: calc(100% + 0px);
+  width: calc(100% + 0px);
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Text_1 {
+  position: absolute;
+  width: auto;
+  height: auto;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  transform: rotate(0deg);
+  text-shadow: none;
+  padding-left: 0px;
+  padding-bottom: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  font-size: 72.0pt;
+  font-family: 'Roboto-Light',Arial;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Text_1 > .clipping, #s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Text_1 > .paddingLayer {
+  height: calc(100% + 0px);
+  width: calc(100% + 0px);
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Text_1 .valign {
+  vertical-align: middle;
+  text-align: left;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Text_1 span {
+  color: #808080;
+  text-align: left;
+  text-decoration: none;
+  font-family: 'Roboto-Light',Arial;
+  font-size: 72.0pt;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 #s-Text_1 span#rtr-s-Text_1_0 {
+  color: #808080;
+  text-align: left;
+  text-decoration: none;
+  font-family: 'Roboto-Light',Arial;
+  font-size: 72.0pt;
+  line-height: 0px;
+}
+.devMobile #jim-container .ui-page {
+  overflow-x: hidden;
+}
+.non_jim_mobile #simulation {
+  overflow-x: hidden;
+}
+.web #simulation {
+  overflow-x: hidden;
+}
+#s-f94fcbe9-9976-4e59-89cf-52452ea7e145 > #loadMark {
+  width: 1px;
+  visibility: hidden;
+  display: none;
+}
