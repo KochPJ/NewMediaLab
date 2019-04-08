@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createNewExperiment(View view) {
-        Intent startShapes = new Intent(MainActivity.this, NewExperiment.class);
+        Intent startShapes = new Intent(MainActivity.this, ExperimentType.class);
+        startShapes = startShapes.putExtra("editing", false);
         startActivity(startShapes);
     }
 

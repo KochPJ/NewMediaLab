@@ -26,12 +26,15 @@ public class ExperimentSettings extends AppCompatActivity {
         //pointer to selected symbols
         EditText exp_symbols_EditText = (EditText) findViewById(R.id.te_experiment_select_symbols);
         EditText exp_repeats_EditText = (EditText) findViewById(R.id.te_experiment_repeats);
+        EditText exp_repeats2_EditText = (EditText) findViewById(R.id.te_experiment_repeats2);
         //get experiment symbols
         String exp_symbols = exp_symbols_EditText.getText().toString();
         //set selected symbols
         exp.setSymbols(exp_symbols);
         // set the other variables
-        exp.setRepeats(exp_repeats_EditText.getText().toString());
+        exp.setMaxRepeats(exp_repeats_EditText.getText().toString());
+        exp.setAutoRepeats(exp_repeats2_EditText.getText().toString());
+        // create and save experiment!
         exp.createFile();
 
         Toast.makeText(this, "Saved Experiment to " +  exp.getFile_name(),

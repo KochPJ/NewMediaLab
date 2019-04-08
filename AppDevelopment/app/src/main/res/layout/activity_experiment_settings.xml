@@ -21,6 +21,21 @@
         android:text="inf"
         android:textStyle="italic" />
 
+    <EditText
+        android:id="@+id/te_experiment_repeats2"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/te_experiment_repeats"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="277dp"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:text="inf"
+        android:textStyle="italic" />
+
     <TextView
         android:id="@+id/tw_experiment_repeats_title"
         android:layout_width="321dp"
@@ -30,7 +45,23 @@
         android:layout_marginTop="110dp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="Max. Number of Allowed Repeats"
+        android:text="Number of Allowed Repeats"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tw_experiment_repeats_title2"
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tw_experiment_select_symbols_title"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="229dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="Number of automatic loops"
         android:textColor="#000000"
         android:textSize="20dp"
         android:textStyle="bold" />
@@ -66,7 +97,6 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:id="@+id/create_exp_button"
-
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
         android:background="@drawable/mybutton"

@@ -119,12 +119,20 @@ public class MyExperiments extends AppCompatActivity {
                         if(c == 0){
                             this.names[i] = line;
                             exp = new Experiment(this.names[i]);
-                        }else if(c == 1){
-                            exp.setRepeats(line);
-                        }else if(c == 2){
+                        }else if(c == 1) {
+                            exp.setExperimentType(line);
+                        }else if(c == 2) {
+                            exp.setProgressbar(line);
+                        }else if(c == 3) {
+                            exp.setMaxRepeats(line);
+                        }else if (c == 4){
+                            exp.setAutoRepeats(line);
+                        }else if(c == 5){
                             exp.setSymbols(line);
-                        }else if(c == 3){
+                        }else if(c == 6){
                             exp.setFunction(line);
+                        } else if(c == 7){
+                            exp.setSpeedModifier(line);
                         }
                         this.experiment_list[i] = exp;
                         c++;
@@ -148,11 +156,15 @@ public class MyExperiments extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                     Experiment exp = experiment_list[position];
                     String name = exp.getName();
-                    String repeats = exp.getRepeats();
+                    String type = exp.getExperimentType();
+                    String pb = exp.getProgressbar();
+                    String max_repeats = exp.getMaxRepeats();
+                    String auto_repeats = exp.getAutoRepeats();
                     String symbols = exp.getSymbols();
                     String function = exp.getFunction();
+                    String speed_modifier = exp.getSpeed_modifier();
                     TextView textView = (TextView) findViewById(R.id.textView_myExperiment);
-                    textView.setText("Name: "+name +"\n"+"Allowed Repeats: "+repeats+"\n"+"Symbols: "+symbols+"\n"+"Function: "+function); //set text for text view
+                    textView.setText("Name: "+name +"\n"+"Experiment type: "+type +"\n"+"Progressbar: "+pb +"\n"+"Allowed Repeats: "+max_repeats+"\n"+"Automatic Repeats: "+auto_repeats+"\n"+"Symbols: "+symbols+"\n"+"Function: "+function+"\n"+"Playback speed: "+speed_modifier+"%"); //set text for text view
                 }
                 public void onNothingSelected(AdapterView<?> parentView) {
                     // your code here
