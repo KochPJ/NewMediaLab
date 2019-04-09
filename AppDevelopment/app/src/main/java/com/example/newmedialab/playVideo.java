@@ -88,9 +88,9 @@ public class playVideo extends AppCompatActivity {
         FFmpeg ffmpeg = FFmpeg.getInstance(this);
         try {
             // to execute "ffmpeg -version" command you just need to pass "-version"
-            //String[] cmd = {"-i", path+video_name+"%04d.png", resultpath+"test.mp4"};
 
             String[] cmd = {"-r", "25" ,"-f","image2", "-i",path+video_name+"%04d.png","-vcodec","libx264","-crf","25","-pix_fmt","yuv420p", resultpath+"test5.mp4"};
+
 
             ffmpeg.execute(cmd, new ExecuteBinaryResponseHandler() {
 
