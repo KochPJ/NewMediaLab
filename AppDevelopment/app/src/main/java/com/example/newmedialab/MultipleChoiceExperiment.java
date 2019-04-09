@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MultipleChoiceExperiment extends AppCompatActivity {
 
+    public boolean editing = false;
     public Experiment exp = new Experiment("");
 
     @Override
@@ -16,6 +17,7 @@ public class MultipleChoiceExperiment extends AppCompatActivity {
         setContentView(R.layout.activity_multiple_choice_experiment);
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
+        editing = getIntent().getExtras().getBoolean("editing");
     }
 
     public void navigation(View view) {
