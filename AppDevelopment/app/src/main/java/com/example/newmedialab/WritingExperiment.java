@@ -21,7 +21,7 @@ public class WritingExperiment extends AppCompatActivity {
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
         editing = getIntent().getExtras().getBoolean("editing");
-        if(exp.getName() != ""){
+        if(this.exp != null){
             EditText etExpName = findViewById(R.id.te_experiment_name);
             etExpName.setText(exp.getName());
             CheckBox cb = (CheckBox)findViewById(R.id.progress_bar);
