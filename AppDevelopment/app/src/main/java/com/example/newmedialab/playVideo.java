@@ -11,6 +11,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.MediaController;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.github.hiteshsondhi88.libffmpeg.ExecuteBinaryResponseHandler;
@@ -40,9 +42,10 @@ public class playVideo extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.P)
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void playVideo(View view) throws InterruptedException, IOException, JCodecException {
+    public void buildVideo(View view) throws InterruptedException, IOException, JCodecException {
 
         image = (ImageView) findViewById(R.id.imview);
+
 
 
         MediaMetadataRetriever m = new MediaMetadataRetriever();
@@ -51,7 +54,7 @@ public class playVideo extends AppCompatActivity {
 
         int max = (int) m.METADATA_KEY_DURATION;
         int fps = m.METADATA_KEY_CAPTURE_FRAMERATE;
-        int timestep = (int)(1000.0*(float)max/(float)fps);
+        int timestep = (int)(1000000.0*(1.0/(float)fps));
 
         //Create dir if not exists
         File root = new File(Environment.getExternalStorageDirectory(), "KineTest/videos");
@@ -85,7 +88,10 @@ public class playVideo extends AppCompatActivity {
         FFmpeg ffmpeg = FFmpeg.getInstance(this);
         try {
             // to execute "ffmpeg -version" command you just need to pass "-version"
-            String[] cmd = {"-i", path+video_name+"%04d.png", resultpath+"test.mp4"};
+            //String[] cmd = {"-i", path+video_name+"%04d.png", resultpath+"test.mp4"};
+
+            String[] cmd = {"-r", "25" ,"-f","image2", "-i",path+video_name+"%04d.png","-vcodec","libx264","-crf","25","-pix_fmt","yuv420p", resultpath+"test5.mp4"};
+
             ffmpeg.execute(cmd, new ExecuteBinaryResponseHandler() {
 
                 @Override
@@ -122,6 +128,8 @@ public class playVideo extends AppCompatActivity {
                     {
                         Log.d("Files", "FileName:" + files[i].getName());
                     }
+                    Toast.makeText(getApplicationContext(), "saved the video", Toast.LENGTH_LONG).show();
+
                 }
             });
         } catch (FFmpegCommandAlreadyRunningException e) {
@@ -129,12 +137,25 @@ public class playVideo extends AppCompatActivity {
         }
 
         Log.d("msg", "exited loop");
-
         }
+
+    public void playVideo(View view){
+        videov = (VideoView)findViewById(R.id.videoView);
+        String Path = (Environment.getExternalStorageDirectory()+"/KineTest/results/")+"test5.mp4";
+        Log.d("play Video", "Path = "+Path);
+
+        Uri uri = Uri.parse(Environment.getExternalStorageDirectory()+"/KineTest/results/test5.mp4");
+        videov.setVideoURI(uri);
+        videov.start();
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_video);
+
     }
 
 

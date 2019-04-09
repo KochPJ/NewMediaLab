@@ -21,22 +21,37 @@
         android:text="play"
         android:textSize="20dp"/>
 
+    <Button
+        android:id="@+id/buildVideo"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/imview"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="82dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/mybutton"
+        android:onClick="buildVideo"
+        android:text="Build"
+        android:textSize="20dp" />
+
     <ImageView
         android:id="@+id/imview"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="250dp" />
+        android:layout_marginEnd="86dp"
+        android:layout_marginBottom="155dp" />
 
 
     <VideoView
         android:id="@+id/videoView"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="233dp"
+        android:layout_height="190dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" />
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="68dp" />
 
 
 </RelativeLayout>
