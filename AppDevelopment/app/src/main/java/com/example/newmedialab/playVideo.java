@@ -2,6 +2,7 @@ package com.example.newmedialab;
 
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
@@ -11,7 +12,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -20,6 +20,11 @@ import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 
 import org.jcodec.api.JCodecException;
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+import org.opencv.core.Mat;
+import org.opencv.imgcodecs.Imgcodecs;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,6 +34,7 @@ import java.util.List;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
 
 
 public class playVideo extends AppCompatActivity {
@@ -42,18 +48,21 @@ public class playVideo extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.P)
     @RequiresApi(api = Build.VERSION_CODES.N)
+
+
     public void buildVideo(View view) throws InterruptedException, IOException, JCodecException {
 
         image = (ImageView) findViewById(R.id.imview);
-
-
-
         MediaMetadataRetriever m = new MediaMetadataRetriever();
-        String videopath ="android.resource://" + getPackageName()+ "/" + R.raw.test;
-        m.setDataSource(this, Uri.parse(videopath));
+        String videopath ="android.resource://" + getPackageName()+ "/" + R.raw.draw;
 
-        int max = (int) m.METADATA_KEY_DURATION;
-        int fps = m.METADATA_KEY_CAPTURE_FRAMERATE;
+
+        m.setDataSource(this, Uri.parse(videopath));
+        int max = 4;
+        int fps = 25;
+
+        Log.d("Video", "Duration = "+Integer.toString(max));
+        Log.d("Video", "fps = "+Integer.toString(fps));
         int timestep = (int)(1000000.0*(1.0/(float)fps));
 
         //Create dir if not exists
@@ -81,6 +90,7 @@ public class playVideo extends AppCompatActivity {
 
             FileOutputStream fileOutputStream = new FileOutputStream((Environment.getExternalStorageDirectory()+"/KineTest/videos/"+video_name+number+".png"));
             b.compress(Bitmap.CompressFormat.PNG, 1, fileOutputStream);
+
         }
 
         String path = (Environment.getExternalStorageDirectory()+"/KineTest/videos/");
@@ -150,11 +160,64 @@ public class playVideo extends AppCompatActivity {
 
     }
 
+    public void blobDetection(View view){
+        image = (ImageView)findViewById(R.id.imview);
+        String Path = Environment.getExternalStorageDirectory()+"/KineTest/videos/test0001.png";
+        Log.d("BlobDetection", "reading image");
+        Imgcodecs imageCodecs = new Imgcodecs();
+        Mat img = imageCodecs.imread(Path);
+        Log.d("BlobDetection", "image read");
+        ColorBlobDetector blobDet = new ColorBlobDetector();
+        blobDet.process(img);
+        Mat mask = blobDet.mDrawRect;
+        int x = blobDet.x;
+        int y = blobDet.y;
+        Log.d("BlobDetection", "found blob at x,y = ["+Integer.toString(x)+", "+ Integer.toString(y)+"]");
+        String dilatedPath = Environment.getExternalStorageDirectory()+"/KineTest/results/dilated.png";
+        imageCodecs.imwrite(dilatedPath, mask);
+
+        Drawable d = Drawable.createFromPath(dilatedPath);
+        image.setImageDrawable(d);
+
+
+    }
+
+    public void showImage(View view){
+        image = (ImageView)findViewById(R.id.imview);
+        String Path = Environment.getExternalStorageDirectory()+"/KineTest/videos/test0001.png";
+        Drawable d = Drawable.createFromPath(Path);
+        image.setImageDrawable(d);
+    }
+
+    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+        @Override
+        public void onManagerConnected(int status) {
+            switch (status) {
+                case LoaderCallbackInterface.SUCCESS:
+                {
+                    Log.i("OpenCV", "OpenCV loaded successfully");
+                    Mat imageMat=new Mat();
+                } break;
+                default:
+                {
+                    super.onManagerConnected(status);
+                } break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_video);
+
+        if (!OpenCVLoader.initDebug()) {
+            Log.d("OpenCV", "Internal OpenCV library not found. Using OpenCV Manager for initialization");
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
+        } else {
+            Log.d("OpenCV", "OpenCV library found inside package. Using it!");
+            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+        }
 
     }
 
