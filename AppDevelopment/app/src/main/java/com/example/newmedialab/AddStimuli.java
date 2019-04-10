@@ -15,6 +15,7 @@ import android.widget.VideoView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,9 +42,18 @@ public class AddStimuli extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_VIDEO) {
                 Uri videoPath = data.getData();
-                String Path = videoPath.getPath();
-                Log.d("addStimuli", "Path = "+Path);
-                videoView.setVideoURI(videoPath);
+                Video video = new Video(this, "loadedVideo", 25, 3, videoPath);
+
+                VelocityFunction velocityFunction= new VelocityFunction("1");
+
+                try {
+                    video.getImages(velocityFunction);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                Uri outputVideo = video.createVideo();
+                videoView.setVideoURI(outputVideo);
                 videoView.start();
             }
         }
