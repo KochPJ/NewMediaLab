@@ -138,7 +138,7 @@
         android:layout_marginRight="222dp"
         android:layout_marginBottom="246dp"
         android:background="@drawable/mybutton"
-        android:onClick="navigation"
+        android:onClick="addNewStimuli"
         android:text="Add New Stimuli" />
 
     <Button
