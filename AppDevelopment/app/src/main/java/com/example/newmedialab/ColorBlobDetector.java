@@ -42,6 +42,8 @@ public class ColorBlobDetector {
     Mat mDrawRect = new Mat();
     int x;
     int y;
+    int x_old = 0;
+    int y_old = 0;
 
     public void setColorRadius(Scalar radius) {
         mColorRadius = radius;
@@ -112,23 +114,48 @@ public class ColorBlobDetector {
         each = contours.iterator();
         Point pt1;
         Point pt2;
+        List<Integer> xpos = new ArrayList<Integer>();
+        List<Integer> ypos = new ArrayList<Integer>();
+        List<Rect> rects = new ArrayList<Rect>();
+
         while (each.hasNext()) {
             MatOfPoint contour = each.next();
             if (Imgproc.contourArea(contour) > mMinContourArea*maxArea) {
                 Core.multiply(contour, new Scalar(4,4), contour);
-
-
+                //get the center of all blobs
                 Rect rect = Imgproc.boundingRect(contour);
-                x = rect.x+ (int)(0.5*rect.width);
-                y = rect.y+ (int)(0.5*rect.height);
+                rects.add(rect);
+                xpos.add(rect.x+ (int)(0.5*rect.width));
+                ypos.add(rect.y+ (int)(0.5*rect.height));
                 mContours.add(contour);
+                }
+        }
 
-                pt1 = new Point(rect.x, rect.y);
-                pt2 = new Point(rect.x+rect.width, rect.y+rect.height);
-                Scalar s = new Scalar(0,0,255);
-                Imgproc.rectangle(mDrawRect, pt1, pt2, s, 5);
+
+        List<Double> distances = new ArrayList<Double>();
+        for(int i = 0; i < xpos.size(); i++){
+            distances.add(Math.sqrt(Math.pow(x_old-xpos.get(i),2) + Math.pow(y_old-ypos.get(i),2)));
+        }
+        int index = 0;
+         double smallestDist = distances.get(0);
+        for(int i = 0; i < distances.size(); i++){
+            if(distances.get(i)<smallestDist){
+                smallestDist = distances.get(i);
+                index = i;
             }
         }
+        x = xpos.get(index);
+        y = ypos.get(index);
+
+        x_old = x;
+        y_old = y;
+
+       Rect rect = rects.get(index);
+        pt1 = new Point(rect.x, rect.y);
+        pt2 = new Point(rect.x+rect.width, rect.y+rect.height);
+        Scalar s = new Scalar(0,0,255);
+        Imgproc.rectangle(mDrawRect, pt1, pt2, s, 5);
+
 
     }
 

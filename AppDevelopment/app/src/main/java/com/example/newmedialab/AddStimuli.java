@@ -35,14 +35,15 @@ public class AddStimuli extends AppCompatActivity {
     static final int REQUEST_VIDEO_CAPTURE = 1;
     private static final int SELECT_VIDEO = 2;
     VideoView videoView;
+    VideoView videoView2;
     Uri currentVideo = Uri.parse(Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideo/loadedVideo.mp4");
     Video videoloaded = new Video(this, "loadedVideo", 25,4,currentVideo);
 
     public void getVelocityProfile(View view){
+
         List<Double> vel_pro = videoloaded.getVelocityProfile();
         GraphView graph = (GraphView) findViewById(R.id.graph_view_new_stimuli);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>();
-
 
         double xd_max = 0.0;
         for(int i = 0; i < vel_pro.size(); i++){
@@ -72,6 +73,37 @@ public class AddStimuli extends AppCompatActivity {
         }
     }
 
+    public void playAnalysed(View view){
+        String loadedStimuliPath = (Environment.getExternalStorageDirectory()+"/KineTest/CurrentAnalysedVideo/");
+        File myDir = new File(loadedStimuliPath);
+        if (myDir.isDirectory()) {
+            String[] children = myDir.list();
+            Log.d("AddStimuli", "playAnalysed: path = "+loadedStimuliPath+children[0]);
+            Uri outputVideo =Uri.parse(loadedStimuliPath+children[0]);
+            videoView2.setVideoURI(outputVideo);
+            videoView2.start();
+        }else{
+            Log.d("AddStimuli", "playAnalysed: no video analysed");
+            Toast.makeText(this, "Video not analysed yet", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void playStimuli(View view){
+        String loadedStimuliPath = (Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideo/");
+        File myDir = new File(loadedStimuliPath);
+        if (myDir.isDirectory()) {
+            String[] children = myDir.list();
+            Log.d("AddStimuli", "playStimuli: path = "+loadedStimuliPath+children[0]);
+            Uri outputVideo =Uri.parse(loadedStimuliPath+children[0]);
+            videoView.setVideoURI(outputVideo);
+            videoView.start();
+        }else{
+        Log.d("AddStimuli", "playStimuli: no video");
+        Toast.makeText(this, "video not loaded yet", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
     public void loadStimuli(View view) {
         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, SELECT_VIDEO);
@@ -91,9 +123,7 @@ public class AddStimuli extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                Uri outputVideo = videoloaded.createVideo();
-                videoView.setVideoURI(outputVideo);
-                videoView.start();
+                Uri outputVideo = videoloaded.createVideo("KineTest/CurrentVideoImages", "KineTest/CurrentVideo");
             }
         }
     }
@@ -121,6 +151,8 @@ public class AddStimuli extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_stimuli);
         videoView = (VideoView)findViewById(R.id.videoViewNewStimuli);
+        videoView2 = (VideoView)findViewById(R.id.videoViewAnalysedStimuli);
+
 
         if (!OpenCVLoader.initDebug()) {
             Log.d("OpenCV", "Internal OpenCV library not found. Using OpenCV Manager for initialization");

@@ -85,11 +85,11 @@ public class Video {
         }
     }
 
-    public Uri createVideo(){
+    public Uri createVideo(String imagePath, String videoSavePath){
 
         //set paths for the images and where to store the video
-        String path = (Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideoImages/");
-        String resultpath = (Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideo/");
+        String path = (Environment.getExternalStorageDirectory()+"/"+imagePath+"/");
+        String resultpath = (Environment.getExternalStorageDirectory()+"/"+videoSavePath+"/");
 
 
         //clear the current video
@@ -97,7 +97,7 @@ public class Video {
         //create root if does not exist
         if (!root.exists()) root.mkdirs();
         //remove all files from root
-        deleteTempFolder("KineTest/CurrentVideo");
+        deleteTempFolder(resultpath);
 
 
         FFmpeg ffmpeg = FFmpeg.getInstance(context);
@@ -131,16 +131,7 @@ public class Video {
 
                 @Override
                 public void onFinish() {
-                    String path2 = Environment.getExternalStorageDirectory()+"/KineTest/results";
-                    Log.d("Files", "Path: " + path2);
-                    File directory = new File(path2);
-                    File[] files = directory.listFiles();
-                    Log.d("Files", "Size: "+ files.length);
-                    for (int i = 0; i < files.length; i++)
-                    {
-                        Log.d("Files", "FileName:" + files[i].getName());
-                    }
-                    Toast.makeText(context, "saved the video", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "video got created", Toast.LENGTH_LONG).show();
                 }
             });
         } catch (FFmpegCommandAlreadyRunningException e) {
@@ -160,8 +151,17 @@ public class Video {
 
     public List<Double> getVelocityProfile(){
         String root = Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideoImages/";
+        String savePath = Environment.getExternalStorageDirectory()+"/KineTest/CurrentAnalysedVideoImages/";
+
+        //clear "KineTest/CurrentAnalysedVideoImages" directory to store new images
+        File saveAt = new File(savePath);
+        if (!saveAt.exists()) saveAt.mkdirs();
+        deleteTempFolder("KineTest/CurrentAnalysedVideoImages");
+
+
         File picturesDir = new File(root);
         ColorBlobDetector blobDet = new ColorBlobDetector();
+
         Imgcodecs imageCodecs;
         Mat img;
         xCord = new ArrayList<Integer>();
@@ -173,11 +173,22 @@ public class Video {
                 Log.d("Video", "BlobDetection i = "+Integer.toString(i));
                 imageCodecs = new Imgcodecs();
                 img = imageCodecs.imread(root+picturePaths[i]);
+                //ini the search for the correct blob at the center of the image
+                if(i == 0){
+                    blobDet.x_old = (int)(img.width()/2);
+                    blobDet.y_old = (int)(img.height()/2);
+                }
+
                 blobDet.process(img);
                 Log.d("Video", "Blobdetection found blob at x,y = ["+Integer.toString(blobDet.x)+", "+ Integer.toString(blobDet.y)+"]");
                 xCord.add(blobDet.x);
                 yCord.add(blobDet.y);
+
+                //get analysed image and write to savePath
+                Mat mask = blobDet.mDrawRect;
+                imageCodecs.imwrite(savePath+picturePaths[i], mask);
             }
+            createVideo("KineTest/CurrentAnalysedVideoImages", "KineTest/CurrentAnalysedVideo");
 
             for(int i = 0; i < xCord.size()-1; i++){
                 veloctiyProfile.add(getvel(xCord.get(i),yCord.get(i), xCord.get(i+1),yCord.get(i+1)));
