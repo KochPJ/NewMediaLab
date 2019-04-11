@@ -3,15 +3,20 @@ package com.example.newmedialab;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.github.hiteshsondhi88.libffmpeg.ExecuteBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
+
+import org.opencv.core.Mat;
+import org.opencv.imgcodecs.Imgcodecs;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,7 +32,9 @@ public class Video {
     int duration;
     int fps;
     Context context;
-
+    List<Integer> xCord = new ArrayList<Integer>();
+    List<Integer> yCord = new ArrayList<Integer>();
+    List<Double> veloctiyProfile = new ArrayList<Double>();
 
     public Video(Context cont, String name, int video_fps, int video_duration, Uri uriPathToVideo){
         videoName = name;
@@ -84,7 +91,7 @@ public class Video {
         String path = (Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideoImages/");
         String resultpath = (Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideo/");
 
-        
+
         //clear the current video
         File root = new File(resultpath);
         //create root if does not exist
@@ -150,4 +157,40 @@ public class Video {
             }
         }
     }
+
+    public List<Double> getVelocityProfile(){
+        String root = Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideoImages/";
+        File picturesDir = new File(root);
+        ColorBlobDetector blobDet = new ColorBlobDetector();
+        Imgcodecs imageCodecs;
+        Mat img;
+        xCord = new ArrayList<Integer>();
+        yCord = new ArrayList<Integer>();
+        veloctiyProfile = new ArrayList<Double>();
+        if (picturesDir.isDirectory()){
+            String[] picturePaths = picturesDir.list();
+            for(int i = 0; i < picturePaths.length; i++){
+                Log.d("Video", "BlobDetection i = "+Integer.toString(i));
+                imageCodecs = new Imgcodecs();
+                img = imageCodecs.imread(root+picturePaths[i]);
+                blobDet.process(img);
+                Log.d("Video", "Blobdetection found blob at x,y = ["+Integer.toString(blobDet.x)+", "+ Integer.toString(blobDet.y)+"]");
+                xCord.add(blobDet.x);
+                yCord.add(blobDet.y);
+            }
+
+            for(int i = 0; i < xCord.size()-1; i++){
+                veloctiyProfile.add(getvel(xCord.get(i),yCord.get(i), xCord.get(i+1),yCord.get(i+1)));
+            }
+        }
+        return veloctiyProfile;
+
+
+    }
+
+    public double getvel(int x1, int y1, int x2, int y2){
+        double vel = Math.sqrt(Math.pow(x2-x1,2) + Math.pow(y2-y1,2));
+        return vel;
+    }
 }
+
