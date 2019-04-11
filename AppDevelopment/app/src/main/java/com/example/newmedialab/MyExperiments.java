@@ -27,6 +27,11 @@ public class MyExperiments extends AppCompatActivity {
         startActivity(startShapes);
     }
 
+    public void addNewStimuli(View view) {
+        Intent startShapes = new Intent(MyExperiments.this, AddStimuli.class);
+        startActivity(startShapes);
+    }
+
     public void navigation(View view) {
         Spinner spinner = (Spinner) findViewById(R.id.experiment_names_spinner);
         int pos = spinner.getSelectedItemPosition();
