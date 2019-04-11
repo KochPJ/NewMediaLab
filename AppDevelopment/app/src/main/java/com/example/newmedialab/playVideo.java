@@ -3,6 +3,7 @@ package com.example.newmedialab;
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,11 +43,8 @@ public class playVideo extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void playVideo(View view) throws InterruptedException, IOException, JCodecException {
 
-        image = (ImageView) findViewById(R.id.imview);
-
-
         MediaMetadataRetriever m = new MediaMetadataRetriever();
-        String videopath ="android.resource://" + getPackageName()+ "/" + R.raw.test;
+        final String videopath ="android.resource://" + getPackageName()+ "/" + R.raw.test;
         m.setDataSource(this, Uri.parse(videopath));
 
         int max = (int) m.METADATA_KEY_DURATION;
@@ -54,7 +52,7 @@ public class playVideo extends AppCompatActivity {
         int timestep = (int)(1000.0*(float)max/(float)fps);
 
         //Create dir if not exists
-        File root = new File(Environment.getExternalStorageDirectory(), "KineTest/videos");
+        File root = new File(Environment.getExternalStorageDirectory(), "KineTest/temp");
         if (!root.exists()) root.mkdirs();
         File root2 = new File(Environment.getExternalStorageDirectory(), "KineTest/results");
         if (!root2.exists()) root2.mkdirs();
@@ -76,16 +74,21 @@ public class playVideo extends AppCompatActivity {
             Log.i("i",String.valueOf(i));
             b = m.getFrameAtTime(i*timestep,MediaMetadataRetriever.OPTION_CLOSEST);
 
-            FileOutputStream fileOutputStream = new FileOutputStream((Environment.getExternalStorageDirectory()+"/KineTest/videos/"+video_name+number+".png"));
+            FileOutputStream fileOutputStream = new FileOutputStream((Environment.getExternalStorageDirectory()+"/KineTest/temp/"+video_name+number+".png"));
             b.compress(Bitmap.CompressFormat.PNG, 1, fileOutputStream);
         }
 
-        String path = (Environment.getExternalStorageDirectory()+"/KineTest/videos/");
+        String path = (Environment.getExternalStorageDirectory()+"/KineTest/temp/");
         String resultpath = (Environment.getExternalStorageDirectory()+"/KineTest/results/");
         FFmpeg ffmpeg = FFmpeg.getInstance(this);
         try {
-            // to execute "ffmpeg -version" command you just need to pass "-version"
-            String[] cmd = {"-f", "image2", "-i", path+video_name+"%04d.png", resultpath+"test.mp4"};
+            // Get number of existing files
+            File pathToResults = new File(Environment.getExternalStorageDirectory()+"/KineTest/results");
+            String[] existingResults = pathToResults.list();
+            if (pathToResults.isDirectory()) {
+                existingResults = pathToResults.list();
+            }
+            String[] cmd = {"-f", "image2", "-i", path+video_name+"%04d.png", resultpath+"test"+(existingResults.length+1)+".mp4"};
             ffmpeg.execute(cmd, new ExecuteBinaryResponseHandler() {
 
                 @Override
@@ -113,24 +116,54 @@ public class playVideo extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    String path2 = Environment.getExternalStorageDirectory()+"/KineTest/results";
-                    Log.d("Files", "Path: " + path2);
-                    File directory = new File(path2);
-                    File[] files = directory.listFiles();
-                    Log.d("Files", "Size: "+ files.length);
-                    for (int i = 0; i < files.length; i++)
+                    //empty temporary directory with images
+                    File dir = new File(Environment.getExternalStorageDirectory()+"/KineTest/temp");
+                    if (dir.isDirectory())
                     {
-                        Log.d("Files", "FileName:" + files[i].getName());
+                        String[] children = dir.list();
+                        for (int i = 0; i < children.length; i++)
+                        {
+                            new File(dir, children[i]).delete();
+                        }
                     }
+                    //Log storage information
+                    String path2 = Environment.getExternalStorageDirectory()+"/KineTest/temp";
+                    Log.d("Files", "Path: " + path2);
+                    File directory2 = new File(path2);
+                    File[] files2 = directory2.listFiles();
+                    Log.d("Files", "Size: "+ files2.length);
+                    for (int i = 0; i < files2.length; i++)
+                        Log.d("Files", "FileName:" + files2[i].getName());
+                    String path3 = Environment.getExternalStorageDirectory()+"/KineTest/results";
+                    Log.d("Files", "Path: " + path3);
+                    File directory3 = new File(path3);
+                    File[] files3 = directory3.listFiles();
+                    Log.d("Files", "Size: "+ files3.length);
+                    for (int i = 0; i < files3.length; i++)
+                        Log.d("Files", "FileName:" + files3[i].getName());
+
+                    Log.d("ffmpeg", "finished");
+
+                    //Play video
+                    VideoView vv = (VideoView)findViewById(R.id.videoView);
+                    vv.setVideoPath(path3+"/test1.mp4");
+                    Log.d("videopath", path3+"/test1.mp4");
+                    vv.requestFocus();
+                    vv.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        public void onPrepared(MediaPlayer mp) {
+                            mp.start();
+                            Log.d("videoplayer", "started");
+                        }
+                    });
+
                 }
             });
         } catch (FFmpegCommandAlreadyRunningException e) {
             // Handle if FFmpeg is already running
         }
 
-        Log.d("msg", "exited loop");
-
         }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
