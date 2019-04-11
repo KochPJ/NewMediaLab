@@ -114,11 +114,8 @@ public class AddStimuli extends AppCompatActivity {
             if (requestCode == SELECT_VIDEO) {
                 Uri videoPath = data.getData();
                 videoloaded = new Video(this, "loadedVideo", 25, 4, videoPath);
-
-                VelocityFunction velocityFunction= new VelocityFunction("1");
-
                 try {
-                    videoloaded.getImages(velocityFunction);
+                    videoloaded.getImages();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -45,7 +45,7 @@ public class Video {
         }
 
 
-    public void getImages(VelocityFunction velocityFunction) throws IOException {
+    public void getImages() throws IOException {
         //set root file
         File root = new File(Environment.getExternalStorageDirectory(), "KineTest/CurrentVideoImages");
 
@@ -199,9 +199,69 @@ public class Video {
 
     }
 
-    public double getvel(int x1, int y1, int x2, int y2){
+    private double getvel(int x1, int y1, int x2, int y2){
         double vel = Math.sqrt(Math.pow(x2-x1,2) + Math.pow(y2-y1,2));
         return vel;
     }
+
+    public void convertVideo(String ImagePath, String videoOutputPath, List<Double> velProfile ,VelocityFunction velocityFunction, String functionType, double speed){
+
+        double totalVel = 0;
+        double velStep = 0;
+        int n_steps = velProfile.size();
+        List<Integer> indecies = new ArrayList<Integer>();
+        List<Double> velPosition = new ArrayList<Double>();
+        List<Double> cumulative = velProfile;
+
+        for(int i = 0; i<n_steps;i++){
+            if (i ==0){
+                cumulative.set(0, 0.0);
+            }else{
+                cumulative.set(i, cumulative.get(i)+cumulative.get(i-1));
+            }
+        }
+
+        if (functionType == "normal"){
+
+        }else if(functionType == "linear"){
+            //get the constant speed
+            for(int i = 0; i<n_steps;i++){
+                totalVel+= velProfile.get(i);
+            }
+            velStep = totalVel/n_steps;
+
+            for(int i = 0; i<n_steps+1;i++){
+                velPosition.add(i*velStep);
+            }
+
+            for(int i = 0; i<velPosition.size();i++){
+                indecies.add(getClosestValue(velPosition.get(i), velProfile));
+            }
+
+
+        }else if(functionType == "function"){
+
+        }
+    }
+
+    private int getClosestValue(Double value, List<Double> value_list){
+        //gets the index of the value in the value_list which is closest to the given value
+        //substract the value and get the abs. meaning the minimum value is the closest
+        List<Double> abs_value_list = new ArrayList<Double>();
+        for(int i = 0; i < value_list.size(); i++){
+            abs_value_list.add( Math.abs(value_list.get(i)-value) );
+        }
+        int index = 0;
+        double minimumValue = abs_value_list.get(0);
+        for(int i = 1; i < abs_value_list.size(); i++){
+            if(abs_value_list.get(i)<minimumValue){
+                minimumValue = abs_value_list.get(i);
+                index = i;
+            }
+        }
+        return index;
+    }
+
+
 }
 

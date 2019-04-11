@@ -49,7 +49,7 @@ public class playVideo extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
 
         MediaMetadataRetriever m = new MediaMetadataRetriever();
-        final String videopath ="android.resource://" + getPackageName()+ "/" + R.raw.test;
+        final String videopath ="android.resource://" + getPackageName()+ "/" + R.raw.draw;
 
     public void buildVideo(View view) throws InterruptedException, IOException, JCodecException {
 
@@ -239,7 +239,7 @@ public class playVideo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play_video);
+        setContentView(R.layout.play_video);
 
         if (!OpenCVLoader.initDebug()) {
             Log.d("OpenCV", "Internal OpenCV library not found. Using OpenCV Manager for initialization");
