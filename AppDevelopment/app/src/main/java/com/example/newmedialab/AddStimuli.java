@@ -43,7 +43,8 @@ public class AddStimuli extends AppCompatActivity {
 
     public void getVelocityProfile(View view){
 
-        List<Double> vel_pro = videoloaded.getVelocityProfile();
+        String imageDir = "KineTest/CurrentVideoImages";
+        List<Double> vel_pro = videoloaded.getVelocityProfile(imageDir);
         GraphView graph = (GraphView) findViewById(R.id.graph_view_new_stimuli);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>();
 
@@ -56,6 +57,37 @@ public class AddStimuli extends AppCompatActivity {
         }
 
         videoloaded.saveVelocityProfile();
+
+        Log.d("getVelocityProfile", "Max vel = "+Double.toString(xd_max));
+        graph.removeAllSeries();
+        graph.addSeries(series);
+
+        graph.getViewport().setMinX(0);
+        graph.getViewport().setMaxX(vel_pro.size());
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setMaxY(xd_max);
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setXAxisBoundsManual(true);
+
+    }
+
+
+    public void getVelocityProfileConverted(View view){
+
+        String imageDir = "KineTest/CurrentConvertedVideoImages";
+        List<Double> vel_pro = videoloaded.getVelocityProfile(imageDir);
+        GraphView graph = (GraphView) findViewById(R.id.graph_view_new_stimuli);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>();
+
+        double xd_max = 0.0;
+        for(int i = 0; i < vel_pro.size(); i++){
+            if(vel_pro.get(i) > xd_max){
+                xd_max = vel_pro.get(i);
+            }
+            series.appendData(new DataPoint(i, vel_pro.get(i)) , true, vel_pro.size());
+        }
+
+        //videoloaded.saveVelocityProfile();
 
         Log.d("getVelocityProfile", "Max vel = "+Double.toString(xd_max));
         graph.removeAllSeries();
@@ -131,8 +163,8 @@ public class AddStimuli extends AppCompatActivity {
 
     public void convertStimuli(View view){
         List<Double> vel_pro = videoloaded.loadVelocityProfile();
-        VelocityFunction velfunc = new VelocityFunction("1");
-        videoloaded.convertVideo("KineTest/CurrentVideoImages", "KineTest/CurrentConvertedVideoImages", "KineTest/CurrentConvertedVideo", vel_pro, velfunc,"linear", 1);
+        VelocityFunction velfunc = new VelocityFunction("1-log(x)");
+        videoloaded.convertVideo("KineTest/CurrentVideoImages", "KineTest/CurrentConvertedVideoImages", "KineTest/CurrentConvertedVideo", vel_pro, velfunc,"function", 1);
     }
 
 

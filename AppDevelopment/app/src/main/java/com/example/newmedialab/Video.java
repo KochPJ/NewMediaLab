@@ -156,8 +156,8 @@ public class Video {
 
 
 
-    public List<Double> getVelocityProfile(){
-        String root = Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideoImages/";
+    public List<Double> getVelocityProfile(String imageDir){
+        String root = Environment.getExternalStorageDirectory()+"/"+imageDir+"/";
         String savePath = Environment.getExternalStorageDirectory()+"/KineTest/CurrentAnalysedVideoImages/";
 
         //clear "KineTest/CurrentAnalysedVideoImages" directory to store new images
@@ -256,9 +256,9 @@ public class Video {
 
                     while(sc.hasNextLine()){
                         String line = (sc.nextLine());
-
-                        Log.d("Video", "loadVelPro: line = "+line);
+                        Log.d("Video", "loadVelPro: line i, value = "+c+ ", "+line);
                         veloctiyProfile.add( Double.valueOf(line));
+                        c++;
                     }
 
                 } catch (FileNotFoundException e) {
@@ -296,7 +296,7 @@ public class Video {
         int n_steps = velProfile.size();
         Log.d("Video", "convertVideo: n_steps = " +n_steps);
 
-        //get the constant speed
+        //get the constant total distance
         for(int i = 0; i<n_steps;i++){
             totalVel+= velProfile.get(i);
         }
@@ -318,7 +318,7 @@ public class Video {
 
         }else if(functionType == "linear"){
 
-
+            //get constant speed
             velStep = totalVel/(n_steps);
             Log.d("Video", "convertVideo: velStep = " +velStep);
 
@@ -333,6 +333,42 @@ public class Video {
             }
 
         }else if(functionType == "function"){
+
+            //get the velocities of the function and get the constant total distance of the function
+            double[] xd = new double[n_steps];
+            double totalVel_function = 0.0;
+            for(int i = 0; i<n_steps;i++){
+                xd[i] = velocityFunction.compute_xd(i);
+                totalVel_function += xd[i];
+                Log.d("Video", "convertVideo: xd i, value = " +Integer.toString(i)+ ", "+ Double.toString(xd[i]));
+            }
+
+
+            Log.d("Video", "convertVideo: totalVel_function = " +totalVel_function);
+
+
+
+            List<Double> cumulative_function = new ArrayList<Double>();
+            cumulative_function.add(0, 0.0);
+            //Log.d("Video", "cumulative_function i, value = "+ Integer.toString(0)+ ", "+ Double.toString(cumulative_function.get(0)));
+            for(int i = 0; i<n_steps;i++){
+                //get the cumulative_function and normalize to fit the profile
+                cumulative_function.add( ( (xd[i]+cumulative_function.get(i)))) ;
+                //Log.d("Video", "cumulative_function i, value = "+ Integer.toString(i+1)+ ", "+ Double.toString(cumulative_function.get(i+1)));
+            }
+
+            //normalize the cumulative function to fit the velocity profile of the video
+            double norm = totalVel/totalVel_function;
+            Log.d("Video", "convertVideo: norm = " +norm);
+            List<Double> cumulative_function_norm = new ArrayList<Double>();
+            for(int i = 0; i<cumulative_function.size(); i++){
+                cumulative_function_norm.add(cumulative_function.get(i)*norm);
+                Log.d("Video", "cumulative_function_norm i, value = "+ Integer.toString(i)+ ", "+ Double.toString(cumulative_function_norm.get(i)));
+            }
+
+            for(int i = 0; i<cumulative_function_norm.size();i++){
+                indecies.add(getClosestValue(cumulative_function_norm.get(i), cumulative));
+            }
 
         }
 
@@ -361,7 +397,6 @@ public class Video {
                 n_set+=c_set[j];
             }
 
-
             imageCodecs = new Imgcodecs();
             //Log.d("Video", "Convert video: get path = " + pathImages+n_get+".png");
             //Log.d("Video", "Convert video: set path = " + pathConvert+n_set+".png");
@@ -371,8 +406,8 @@ public class Video {
         }
 
 
-        createVideo("KineTest/CurrentConvertedVideoImages", "KineTest/CurrentConvertedVideo");
-        //createVideo("KineTest/CurrentAnalysedVideoImages", "KineTest/CurrentAnalysedVideo");
+        createVideo(ConvertedImagePath, videoOutputPath);
+
     }
 
     private int getClosestValue(Double value, List<Double> value_list){

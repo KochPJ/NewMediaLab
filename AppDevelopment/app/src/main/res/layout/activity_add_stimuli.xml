@@ -19,6 +19,18 @@
         android:onClick="getVelocityProfile"
         android:text="Analyse Stimuli" />
 
+    <Button
+        android:id="@+id/getVelocityProfile2"
+        android:layout_width="89dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="277dp"
+        android:layout_marginBottom="19dp"
+        android:background="@drawable/mybutton"
+        android:onClick="getVelocityProfileConverted"
+        android:text="Analyse Converted" />
+
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph_view_new_stimuli"
         android:layout_width="230dp"
@@ -30,12 +42,12 @@
 
     <Button
         android:id="@+id/loadStimuli"
-        android:layout_width="112dp"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="163dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="166dp"
+        android:layout_marginBottom="13dp"
         android:background="@drawable/mybutton"
         android:onClick="loadStimuli"
         android:text="Load Stimuli" />

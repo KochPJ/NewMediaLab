@@ -293,11 +293,11 @@ public class VelocityFunction implements Serializable {
 
         List<String> operations_list = createOperationList(x_result);
         double xd = getCalcResult(operations_list, x);
-        String a= "";
-        a+= Double.valueOf(xd);
+        //String a= "";
+        //a+= Double.valueOf(xd);
 
-        String b= "";
-        b+= Double.valueOf(x);
+        //String b= "";
+        //b+= Double.valueOf(x);
         //Log.d("Derivative","the derivative at x = "+b+" is  xd = "+a );
         return xd;
     }
