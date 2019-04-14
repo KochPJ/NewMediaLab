@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +39,7 @@ public class AddStimuli extends AppCompatActivity {
     VideoView videoView2;
     Uri currentVideo = Uri.parse(Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideo/loadedVideo.mp4");
     Video videoloaded = new Video(this, "loadedVideo", 25,4,currentVideo);
+
 
     public void getVelocityProfile(View view){
 
@@ -52,6 +54,8 @@ public class AddStimuli extends AppCompatActivity {
             }
             series.appendData(new DataPoint(i, vel_pro.get(i)) , true, vel_pro.size());
         }
+
+        videoloaded.saveVelocityProfile();
 
         Log.d("getVelocityProfile", "Max vel = "+Double.toString(xd_max));
         graph.removeAllSeries();
@@ -108,6 +112,29 @@ public class AddStimuli extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, SELECT_VIDEO);
     }
+
+    public void playConverted(View view){
+        String loadedStimuliPath = (Environment.getExternalStorageDirectory()+"/KineTest/CurrentConvertedVideo/");
+        File myDir = new File(loadedStimuliPath);
+        if (myDir.isDirectory()) {
+            String[] children = myDir.list();
+            Log.d("AddStimuli", "playConverted: path = "+loadedStimuliPath+children[0]);
+            Uri outputVideo =Uri.parse(loadedStimuliPath+children[0]);
+            videoView.setVideoURI(outputVideo);
+            videoView.start();
+        }else{
+            Log.d("AddStimuli", "playConverted: no video");
+            Toast.makeText(this, "video not converted yet", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public void convertStimuli(View view){
+        List<Double> vel_pro = videoloaded.loadVelocityProfile();
+        VelocityFunction velfunc = new VelocityFunction("1");
+        videoloaded.convertVideo("KineTest/CurrentVideoImages", "KineTest/CurrentConvertedVideoImages", "KineTest/CurrentConvertedVideo", vel_pro, velfunc,"linear", 1);
+    }
+
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {

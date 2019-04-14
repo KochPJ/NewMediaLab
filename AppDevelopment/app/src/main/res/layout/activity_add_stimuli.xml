@@ -41,6 +41,30 @@
         android:text="Load Stimuli" />
 
     <Button
+        android:id="@+id/convertStimuli"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="156dp"
+        android:layout_marginBottom="19dp"
+        android:background="@drawable/mybutton"
+        android:onClick="convertStimuli"
+        android:text="Convert Stimuli" />
+
+    <Button
+        android:id="@+id/playConvertedVideo"
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="168dp"
+        android:layout_marginBottom="82dp"
+        android:background="@drawable/mybutton"
+        android:onClick="playConverted"
+        android:text="Play Converted" />
+
+    <Button
         android:id="@+id/playAnalysed"
         android:layout_width="76dp"
         android:layout_height="wrap_content"

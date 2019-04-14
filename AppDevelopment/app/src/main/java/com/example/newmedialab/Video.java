@@ -8,6 +8,7 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,9 +22,11 @@ import org.opencv.imgcodecs.Imgcodecs;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Video {
 
@@ -135,6 +138,7 @@ public class Video {
                 }
             });
         } catch (FFmpegCommandAlreadyRunningException e) {
+            Log.d("ffmpeg", "failed");
             // Handle if FFmpeg is already running
         }
         return Uri.parse(resultpath+videoName+".mp4");
@@ -148,6 +152,9 @@ public class Video {
             }
         }
     }
+
+
+
 
     public List<Double> getVelocityProfile(){
         String root = Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideoImages/";
@@ -199,49 +206,173 @@ public class Video {
 
     }
 
+
+    public void saveVelocityProfile(){
+        String savePath = Environment.getExternalStorageDirectory()+"/KineTest/VelocityProfiles/";
+        //clear "KineTest/VelocityProfiles" directory to store new images
+        File saveAt = new File(savePath);
+        if (!saveAt.exists()) saveAt.mkdirs();
+        deleteTempFolder("KineTest/VelocityProfiles");
+        // convert array of symboles to string
+        try
+        {
+            /// TODO:  check if external storage is available (https://developer.android.com/reference/android/os/Environment.html#getExternalStorageState()) if not, save to a different directory or output a warning to the user
+            String FILE_NAME = (this.videoName+ ".txt");
+            File gpxfile = new File(saveAt, FILE_NAME);
+            FileWriter writer = new FileWriter(gpxfile);
+            for(int i = 0; i < veloctiyProfile.size(); i++){
+                writer.append(Double.toString(veloctiyProfile.get(i))).append("\n");
+
+            }
+            writer.flush();
+            writer.close();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+
+        }
+    }
+
+    public List<Double> loadVelocityProfile(){
+        String savePath = Environment.getExternalStorageDirectory()+"/KineTest/VelocityProfiles/";
+        File loadFrom = new File(savePath);
+
+        veloctiyProfile = new ArrayList<Double>();
+        File[] directoryListing = loadFrom.listFiles();
+
+        if (directoryListing != null) {
+            int i = 0;
+
+            for (File child : directoryListing) {
+                // Do something with child
+                Scanner sc = null;
+                try {
+                    Log.d("Video", "loadVelPro: child path = "+child.getPath());
+                    Log.d("Video", "loadVelPro: child name = "+child.getName());
+                    sc = new Scanner(child);
+                    int c = 0;
+                    Experiment exp = new Experiment("");
+
+                    while(sc.hasNextLine()){
+                        String line = (sc.nextLine());
+
+                        Log.d("Video", "loadVelPro: line = "+line);
+                        veloctiyProfile.add( Double.valueOf(line));
+                    }
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                i++;
+            }
+
+        }else{
+            Log.d("Video", "loadVelocityProfile: no velocity profile to load");
+            Toast.makeText(context, "No saved velocity profile", Toast.LENGTH_SHORT).show();
+        }
+        return veloctiyProfile;
+    }
+
+
     private double getvel(int x1, int y1, int x2, int y2){
         double vel = Math.sqrt(Math.pow(x2-x1,2) + Math.pow(y2-y1,2));
         return vel;
     }
 
-    public void convertVideo(String ImagePath, String videoOutputPath, List<Double> velProfile ,VelocityFunction velocityFunction, String functionType, double speed){
+    public void convertVideo(String ImagePath, String ConvertedImagePath,String videoOutputPath, List<Double> velProfile ,VelocityFunction velocityFunction, String functionType, double speed){
+
+        String pathImages = (Environment.getExternalStorageDirectory()+"/"+ImagePath+"/");
+        String pathConvert = (Environment.getExternalStorageDirectory()+"/"+ConvertedImagePath+"/");
+        String pathOutput = (Environment.getExternalStorageDirectory()+"/"+videoOutputPath+"/");
+
+        //create and clear the converted image saving dir
+        File root = new File(Environment.getExternalStorageDirectory()+"/"+ConvertedImagePath );
+        if (!root.exists()) root.mkdirs();
+        deleteTempFolder(pathConvert);
 
         double totalVel = 0;
         double velStep = 0;
         int n_steps = velProfile.size();
+        Log.d("Video", "convertVideo: n_steps = " +n_steps);
+
+        //get the constant speed
+        for(int i = 0; i<n_steps;i++){
+            totalVel+= velProfile.get(i);
+        }
+        Log.d("Video", "convertVideo: totalVel = " +totalVel);
+
         List<Integer> indecies = new ArrayList<Integer>();
         List<Double> velPosition = new ArrayList<Double>();
-        List<Double> cumulative = velProfile;
+        List<Double> cumulative = new ArrayList<Double>();
+        cumulative.add(0, 0.0);
 
+        Log.d("Video", "cumulative i, value = "+ Integer.toString(0)+ ", "+ Double.toString(cumulative.get(0)));
         for(int i = 0; i<n_steps;i++){
-            if (i ==0){
-                cumulative.set(0, 0.0);
-            }else{
-                cumulative.set(i, cumulative.get(i)+cumulative.get(i-1));
-            }
+            cumulative.add(velProfile.get(i)+cumulative.get(i));
+            Log.d("Video", "cumulative i, value = "+ Integer.toString(i+1)+ ", "+ Double.toString(cumulative.get(i+1)));
         }
+
 
         if (functionType == "normal"){
 
         }else if(functionType == "linear"){
-            //get the constant speed
-            for(int i = 0; i<n_steps;i++){
-                totalVel+= velProfile.get(i);
-            }
-            velStep = totalVel/n_steps;
+
+
+            velStep = totalVel/(n_steps);
+            Log.d("Video", "convertVideo: velStep = " +velStep);
+
+
 
             for(int i = 0; i<n_steps+1;i++){
-                velPosition.add(i*velStep);
+                velPosition.add(velStep*i);
             }
 
             for(int i = 0; i<velPosition.size();i++){
-                indecies.add(getClosestValue(velPosition.get(i), velProfile));
+                indecies.add(getClosestValue(velPosition.get(i), cumulative));
             }
-
 
         }else if(functionType == "function"){
 
         }
+
+
+        Imgcodecs imageCodecs;
+        Mat img;
+        for(int i = 0; i < indecies.size(); i++){
+            Log.d("Video", "Convert video: i = "+Integer.toString(i)+ " and index = "+Integer.toString(indecies.get(i)));
+            //Add zero padding to i, needed to get the right image and copy into the correct dir
+            char[] c_get = Integer.toString(indecies.get(i)).toCharArray();
+            String n_get = "";
+            for(int j = 0; j < 6-c_get.length; j++){
+                n_get+="0";
+            }
+            for(int j = 0; j< c_get.length; j++){
+                n_get+=c_get[j];
+            }
+
+            //Add zero padding indecies.get(i), needed for storing new image
+            char[] c_set = Integer.toString(i).toCharArray();
+            String n_set = "";
+            for(int j = 0; j < 6-c_set.length; j++){
+                n_set+="0";
+            }
+            for(int j = 0; j< c_set.length; j++){
+                n_set+=c_set[j];
+            }
+
+
+            imageCodecs = new Imgcodecs();
+            //Log.d("Video", "Convert video: get path = " + pathImages+n_get+".png");
+            //Log.d("Video", "Convert video: set path = " + pathConvert+n_set+".png");
+            img = imageCodecs.imread(pathImages+n_get+".png"); //get image with index from found indecies
+            //Log.d("Video", "Convert video: w,h = " + Integer.toString(img.width())+", "+Integer.toString(img.height()));
+            imageCodecs.imwrite(pathConvert+n_set+".png", img); //set image with new name to dir
+        }
+
+
+        createVideo("KineTest/CurrentConvertedVideoImages", "KineTest/CurrentConvertedVideo");
+        //createVideo("KineTest/CurrentAnalysedVideoImages", "KineTest/CurrentAnalysedVideo");
     }
 
     private int getClosestValue(Double value, List<Double> value_list){
