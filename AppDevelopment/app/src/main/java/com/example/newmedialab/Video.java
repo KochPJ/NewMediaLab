@@ -99,8 +99,8 @@ public class Video {
         File root = new File(resultpath);
         //create root if does not exist
         if (!root.exists()) root.mkdirs();
-        //remove all files from root
-        deleteTempFolder(resultpath);
+        //remove the video file if it exsists
+        deleteFileInFolder(videoSavePath, videoName+".mp4");
 
 
         FFmpeg ffmpeg = FFmpeg.getInstance(context);
@@ -153,6 +153,19 @@ public class Video {
         }
     }
 
+    private void deleteFileInFolder(String dir, String name) {
+        File myDir = new File(Environment.getExternalStorageDirectory() + "/"+dir);
+        File[] directoryListing = myDir.listFiles();
+        if (directoryListing != null) {
+            for (File child : directoryListing) {
+                // Do something with child
+                String file_name = child.getName();
+                if(file_name.equals(name)){
+                    child.delete();
+                    }
+            }
+        }
+    }
 
 
 

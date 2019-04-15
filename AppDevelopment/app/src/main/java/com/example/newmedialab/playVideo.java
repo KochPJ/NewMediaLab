@@ -1,11 +1,9 @@
 package com.example.newmedialab;
 
-import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -31,7 +29,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -45,11 +42,8 @@ public class playVideo extends AppCompatActivity {
     String video_name = "test";
 
 
-    @TargetApi(Build.VERSION_CODES.P)
-    @RequiresApi(api = Build.VERSION_CODES.N)
-
-        MediaMetadataRetriever m = new MediaMetadataRetriever();
-        final String videopath ="android.resource://" + getPackageName()+ "/" + R.raw.draw;
+    MediaMetadataRetriever m = new MediaMetadataRetriever();
+    final String videopath ="android.resource://" + getPackageName()+ "/" + R.raw.draw;
 
     public void buildVideo(View view) throws InterruptedException, IOException, JCodecException {
 
