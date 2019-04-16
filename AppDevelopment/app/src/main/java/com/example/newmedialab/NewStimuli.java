@@ -3,6 +3,7 @@ package com.example.newmedialab;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,9 @@ import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,11 +52,28 @@ public class NewStimuli extends AppCompatActivity {
         // Get video name
         EditText et_video_name = (EditText) findViewById(R.id.et_video_name);
         this.video_name = et_video_name.getText().toString();
+
         if (lastAdd != -1) {
-            //TODO: set correct intent
+            Video videoloaded = new Video(this, video_name);
+            String copy_to_dir = Environment.getExternalStorageDirectory()+ "/KineTest/CurrentVideo/"+video_name+".mp4";
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(this.userSelectedVideoUriList.get(this.userSelectedVideoUriList.size() - 1));
+                videoloaded.copyVideoTo(inputStream, copy_to_dir);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            videoloaded.setVideoPath(copy_to_dir);
+            try {
+                videoloaded.getImages();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             Intent intent = new Intent(this, NewStimuliVelocityAnalyses.class);
-            intent = intent.putExtra("video_name", this.video_name);
-            intent = intent.putExtra("video_uri", this.userSelectedVideoUriList.get(this.userSelectedVideoUriList.size() - 1));
+            intent = intent.putExtra("video_object", videoloaded);
             startActivity(intent);
         }else{
             Log.d("NewStimuli", "playStimuli: no video");
@@ -77,6 +98,7 @@ public class NewStimuli extends AppCompatActivity {
         // Start the activity.
         startActivityForResult(openVideoIntent, SELECT_VIDEO);
     }
+
     /* When the action Intent.ACTION_GET_CONTENT invoked app return, this method will be executed. */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -85,7 +107,7 @@ public class NewStimuli extends AppCompatActivity {
             if(resultCode==RESULT_OK)
             {
                 if(userSelectedVideoUriList == null) {userSelectedVideoUriList = new ArrayList<Uri>(); }
-                //if(userSelectedVideoDirectoryList == null) {userSelectedVideoDirectoryList = new ArrayList<String>(); }
+
                 Uri fileUri = data.getData();
                 userSelectedVideoUriList.add(fileUri);
                 Log.d("NewStimuli: ", "video uri: "+fileUri.toString());
@@ -95,6 +117,7 @@ public class NewStimuli extends AppCompatActivity {
             }
         }
     }
+
     public void playVideo(View view){
         if(this.lastAdd == 1){
             Uri outputVideo = this.userSelectedVideoUriList.get(this.userSelectedVideoUriList.size() - 1);
@@ -105,6 +128,7 @@ public class NewStimuli extends AppCompatActivity {
             Toast.makeText(this, "video not loaded yet", Toast.LENGTH_SHORT).show();
         }
     }
+
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {

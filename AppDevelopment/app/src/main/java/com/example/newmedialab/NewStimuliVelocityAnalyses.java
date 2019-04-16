@@ -19,9 +19,6 @@ import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +31,7 @@ public class NewStimuliVelocityAnalyses extends AppCompatActivity {
     VideoView videoView2;
     Uri currentVideo = Uri.parse(Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideo/loadedVideo.mp4");
     Video videoloaded = new Video(this, "loadedVideo");
-    String video_name, video_uri;
+    Video video_object;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +40,7 @@ public class NewStimuliVelocityAnalyses extends AppCompatActivity {
         videoView = (VideoView)findViewById(R.id.videoViewNewStimuli);
         videoView2 = (VideoView)findViewById(R.id.videoViewAnalysedStimuli);
         Intent i = getIntent();
-        this.video_name = i.getSerializableExtra("video_name").toString();
-        this.video_uri = i.getSerializableExtra("video_uri").toString();
+        this.video_object = (Video)i.getSerializableExtra("video_object");
 
         if (!OpenCVLoader.initDebug()) {
             Log.d("OpenCV", "Internal OpenCV library not found. Using OpenCV Manager for initialization");
@@ -52,26 +48,6 @@ public class NewStimuliVelocityAnalyses extends AppCompatActivity {
         } else {
             Log.d("OpenCV", "OpenCV library found inside package. Using it!");
             mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
-        }
-
-        Uri videoPath = Uri.parse(video_uri);
-        videoloaded = new Video(this, "loadedVideo");
-
-        String copy_to_dir = Environment.getExternalStorageDirectory()+ "/KineTest/CurrentVideo/copied_video.mp4";
-        try {
-            InputStream inputStream = getContentResolver().openInputStream(videoPath);
-            videoloaded.copyVideoTo(inputStream, copy_to_dir);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        videoloaded.setVideoPath(copy_to_dir);
-        try {
-            videoloaded.getImages();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }
