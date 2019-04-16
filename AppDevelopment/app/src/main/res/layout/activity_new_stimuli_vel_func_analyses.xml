@@ -1,9 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".NewStimuliVelFuncAnalyses">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".NewStimuliVelFuncAnalyses"
+android:background="@drawable/background"
+    >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<Button
+    android:id="@+id/NewStimuli_getVelocityProfile"
+    android:layout_width="89dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginEnd="492dp"
+    android:layout_marginBottom="79dp"
+    android:background="@drawable/mybutton"
+    android:onClick="getVelocityProfile"
+    android:text="Analyse Stimuli" />
+
+<com.jjoe64.graphview.GraphView
+    android:id="@+id/NewStimuli_graph_view_new_stimuli"
+    android:layout_width="230dp"
+    android:layout_height="110dp"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginStart="103dp"
+    android:layout_marginTop="59dp" />
+
+<Button
+    android:id="@+id/NewStimuli_playAnalysed"
+    android:layout_width="76dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginEnd="197dp"
+    android:layout_marginBottom="65dp"
+    android:background="@drawable/mybutton"
+    android:onClick="playAnalysed"
+    android:text="Play Analysed" />
+
+<VideoView
+    android:id="@+id/NewStimuli_videoViewNewStimuli"
+    android:layout_width="206dp"
+    android:layout_height="116dp"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginStart="381dp"
+    android:layout_marginTop="61dp" />
+
+</RelativeLayout>

@@ -65,10 +65,10 @@ public class NewStimuli extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            videoloaded.setVideoPath(copy_to_dir+"/"+video_name+".mp4");
 
             Intent i = new Intent(this, NewStimuliVelFuncAnalyses.class);
-            i = i.putExtra("videoPath", videoloaded);
+            i = i.putExtra("videoPath", copy_to_dir+"/"+video_name+".mp4");
+            i = i.putExtra("videoName", video_name);
             startActivity(i);
 
         }else{
@@ -91,7 +91,6 @@ public class NewStimuli extends AppCompatActivity {
     /* When the action Intent.ACTION_GET_CONTENT invoked app return, this method will be executed. */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        UriParser urip = new UriParser();
         if(requestCode==SELECT_VIDEO) {
             if(resultCode==RESULT_OK)
             {

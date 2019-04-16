@@ -185,13 +185,15 @@ public class Video implements Serializable {
 
 
     public List<Double> getVelocityProfile(String imageDir){
+
+        String saveTo = "KineTest/Resources/Temp/temp_images_analysed";
         String root = Environment.getExternalStorageDirectory()+"/"+imageDir+"/";
-        String savePath = Environment.getExternalStorageDirectory()+"/KineTest/CurrentAnalysedVideoImages/";
+        String savePath = Environment.getExternalStorageDirectory()+"/"+saveTo+"/";
 
         //clear "KineTest/CurrentAnalysedVideoImages" directory to store new images
         File saveAt = new File(savePath);
         if (!saveAt.exists()) saveAt.mkdirs();
-        deleteTempFolder("KineTest/CurrentAnalysedVideoImages");
+        deleteTempFolder(saveTo);
 
 
         File picturesDir = new File(root);
@@ -223,7 +225,7 @@ public class Video implements Serializable {
                 Mat mask = blobDet.mDrawRect;
                 imageCodecs.imwrite(savePath+picturePaths[i], mask);
             }
-            createVideo("KineTest/CurrentAnalysedVideoImages", "KineTest/CurrentAnalysedVideo");
+            createVideo(imageDir, "KineTest/Resources/Temp/temp_loaded_video");
 
             for(int i = 0; i < xCord.size()-1; i++){
                 veloctiyProfile.add(getvel(xCord.get(i),yCord.get(i), xCord.get(i+1),yCord.get(i+1)));
@@ -236,7 +238,7 @@ public class Video implements Serializable {
 
 
     public void saveVelocityProfile(){
-        String savePath = Environment.getExternalStorageDirectory()+"/KineTest/VelocityProfiles/";
+        String savePath = Environment.getExternalStorageDirectory()+"/KineTest/Resources/";
         //clear "KineTest/VelocityProfiles" directory to store new images
         File saveAt = new File(savePath);
         if (!saveAt.exists()) saveAt.mkdirs();
