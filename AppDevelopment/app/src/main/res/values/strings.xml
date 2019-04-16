@@ -13,4 +13,5 @@
     <string name="title_activity_new_experiment_setup">NewExperimentSetup</string>
     <string name="title_activity_writing_experiment">WritingExperiment</string>
     <string name="title_activity_multiple_choice_experiment">MultipleChoiceExperiment</string>
+    <string name="title_activity_new_stimuli">NewStimuli</string>
 </resources>
