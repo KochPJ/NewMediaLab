@@ -25,13 +25,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import wseemann.media.FFmpegMediaMetadataRetriever;
 
-public class Video {
+public class Video implements Serializable {
 
     String videoName;
     double duration;
