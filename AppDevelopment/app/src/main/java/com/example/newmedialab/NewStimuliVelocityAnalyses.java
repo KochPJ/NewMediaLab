@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -36,6 +35,46 @@ public class NewStimuliVelocityAnalyses extends AppCompatActivity {
     Uri currentVideo = Uri.parse(Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideo/loadedVideo.mp4");
     Video videoloaded = new Video(this, "loadedVideo");
     String video_name, video_uri;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_stimuli);
+        videoView = (VideoView)findViewById(R.id.videoViewNewStimuli);
+        videoView2 = (VideoView)findViewById(R.id.videoViewAnalysedStimuli);
+        Intent i = getIntent();
+        this.video_name = i.getSerializableExtra("video_name").toString();
+        this.video_uri = i.getSerializableExtra("video_uri").toString();
+
+        if (!OpenCVLoader.initDebug()) {
+            Log.d("OpenCV", "Internal OpenCV library not found. Using OpenCV Manager for initialization");
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
+        } else {
+            Log.d("OpenCV", "OpenCV library found inside package. Using it!");
+            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+        }
+
+        Uri videoPath = Uri.parse(video_uri);
+        videoloaded = new Video(this, "loadedVideo");
+
+        String copy_to_dir = Environment.getExternalStorageDirectory()+ "/KineTest/CurrentVideo/copied_video.mp4";
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(videoPath);
+            videoloaded.copyVideoTo(inputStream, copy_to_dir);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        videoloaded.setVideoPath(copy_to_dir);
+        try {
+            videoloaded.getImages();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public void getVelocityProfile(View view){
 
@@ -98,13 +137,6 @@ public class NewStimuliVelocityAnalyses extends AppCompatActivity {
 
     }
 
-    public void captureVideo(View view) {
-        Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-        if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
-        }
-    }
-
     public void playAnalysed(View view){
         String loadedStimuliPath = (Environment.getExternalStorageDirectory()+"/KineTest/CurrentAnalysedVideo/");
         File myDir = new File(loadedStimuliPath);
@@ -130,15 +162,9 @@ public class NewStimuliVelocityAnalyses extends AppCompatActivity {
             videoView.setVideoURI(outputVideo);
             videoView.start();
         }else{
-        Log.d("AddStimuli", "playStimuli: no video");
-        Toast.makeText(this, "video not loaded yet", Toast.LENGTH_SHORT).show();
+            Log.d("AddStimuli", "playStimuli: no video");
+            Toast.makeText(this, "video not loaded yet", Toast.LENGTH_SHORT).show();
         }
-    }
-
-
-    public void loadStimuli(View view) {
-        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(i, SELECT_VIDEO);
     }
 
     public void playConverted(View view){
@@ -164,36 +190,6 @@ public class NewStimuliVelocityAnalyses extends AppCompatActivity {
         videoloaded.convertVideo("KineTest/CurrentVideoImages", "KineTest/CurrentConvertedVideoImages", "KineTest/CurrentConvertedVideo", vel_pro, velfunc,"linear", 1);
     }
 
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == SELECT_VIDEO) {
-                Uri videoPath = data.getData();
-                videoloaded = new Video(this, "loadedVideo");
-
-                String copy_to_dir = Environment.getExternalStorageDirectory()+ "/KineTest/CurrentVideo/copied_video.mp4";
-                try {
-                    InputStream inputStream = getContentResolver().openInputStream(videoPath);
-                    videoloaded.copyVideoTo(inputStream, copy_to_dir);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                videoloaded.setVideoPath(copy_to_dir);
-                try {
-                    videoloaded.getImages();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                //Uri outputVideo = videoloaded.createVideo("KineTest/CurrentVideoImages", "KineTest/CurrentVideo");
-
-            }
-        }
-    }
-
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
@@ -211,25 +207,5 @@ public class NewStimuliVelocityAnalyses extends AppCompatActivity {
         }
     };
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_stimuli);
-        videoView = (VideoView)findViewById(R.id.videoViewNewStimuli);
-        videoView2 = (VideoView)findViewById(R.id.videoViewAnalysedStimuli);
-        Intent i = getIntent();
-        this.video_name = i.getSerializableExtra("video_name").toString();
-        this.video_uri = i.getSerializableExtra("video_uri").toString();
-
-        if (!OpenCVLoader.initDebug()) {
-            Log.d("OpenCV", "Internal OpenCV library not found. Using OpenCV Manager for initialization");
-            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
-        } else {
-            Log.d("OpenCV", "OpenCV library found inside package. Using it!");
-            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
-        }
-
-    }
 
 }
