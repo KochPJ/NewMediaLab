@@ -50,7 +50,7 @@ public class NewStimuli extends AppCompatActivity {
         this.video_name = et_video_name.getText().toString();
         if (lastAdd != -1) {
             //TODO: set correct intent
-            Intent intent = new Intent(this, AddStimuli.class);
+            Intent intent = new Intent(this, NewStimuliVelocityAnalyses.class);
             intent = intent.putExtra("video_name", this.video_name);
             intent = intent.putExtra("video_uri", this.userSelectedVideoUriList.get(this.userSelectedVideoUriList.size() - 1));
             startActivity(intent);

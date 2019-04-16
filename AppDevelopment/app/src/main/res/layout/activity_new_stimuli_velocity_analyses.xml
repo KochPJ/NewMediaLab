@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddStimuli"
+    android:background="@drawable/background"
+    >
+
+    <Button
+        android:id="@+id/getVelocityProfile"
+        android:layout_width="89dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="19dp"
+        android:background="@drawable/mybutton"
+        android:onClick="getVelocityProfile"
+        android:text="Analyse Stimuli" />
+
+    <Button
+        android:id="@+id/getVelocityProfile2"
+        android:layout_width="89dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="277dp"
+        android:layout_marginBottom="19dp"
+        android:background="@drawable/mybutton"
+        android:onClick="getVelocityProfileConverted"
+        android:text="Analyse Converted" />
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph_view_new_stimuli"
+        android:layout_width="230dp"
+        android:layout_height="110dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="189dp"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/loadStimuli"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="166dp"
+        android:layout_marginBottom="13dp"
+        android:background="@drawable/mybutton"
+        android:onClick="loadStimuli"
+        android:text="Load Stimuli" />
+
+    <Button
+        android:id="@+id/convertStimuli"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="156dp"
+        android:layout_marginBottom="19dp"
+        android:background="@drawable/mybutton"
+        android:onClick="convertStimuli"
+        android:text="Convert Stimuli" />
+
+    <Button
+        android:id="@+id/playConvertedVideo"
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="168dp"
+        android:layout_marginBottom="82dp"
+        android:background="@drawable/mybutton"
+        android:onClick="playConverted"
+        android:text="Play Converted" />
+
+    <Button
+        android:id="@+id/playAnalysed"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="57dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/mybutton"
+        android:onClick="playAnalysed"
+        android:text="Play Analysed" />
+
+    <Button
+        android:id="@+id/playStimuli"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginBottom="91dp"
+        android:background="@drawable/mybutton"
+        android:onClick="playStimuli"
+        android:text="Play Stimuli" />
+
+    <Button
+        android:id="@+id/captureVideoButton"
+        android:layout_width="87dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="41dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/mybutton"
+        android:onClick="captureVideo"
+        android:text="Capture Video" />
+
+    <VideoView
+        android:id="@+id/videoViewNewStimuli"
+        android:layout_width="145dp"
+        android:layout_height="81dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="22dp" />
+
+    <VideoView
+        android:id="@+id/videoViewAnalysedStimuli"
+        android:layout_width="179dp"
+        android:layout_height="89dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="34dp" />
+
+</RelativeLayout>

@@ -27,7 +27,7 @@ import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AddStimuli extends AppCompatActivity {
+public class NewStimuliVelocityAnalyses extends AppCompatActivity {
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
     private static final int SELECT_VIDEO = 2;
@@ -35,6 +35,7 @@ public class AddStimuli extends AppCompatActivity {
     VideoView videoView2;
     Uri currentVideo = Uri.parse(Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideo/loadedVideo.mp4");
     Video videoloaded = new Video(this, "loadedVideo");
+    String video_name, video_uri;
 
     public void getVelocityProfile(View view){
 
@@ -136,7 +137,7 @@ public class AddStimuli extends AppCompatActivity {
 
 
     public void loadStimuli(View view) {
-        Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
+        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, SELECT_VIDEO);
     }
 
@@ -217,6 +218,9 @@ public class AddStimuli extends AppCompatActivity {
         setContentView(R.layout.activity_add_stimuli);
         videoView = (VideoView)findViewById(R.id.videoViewNewStimuli);
         videoView2 = (VideoView)findViewById(R.id.videoViewAnalysedStimuli);
+        Intent i = getIntent();
+        this.video_name = i.getSerializableExtra("video_name").toString();
+        this.video_uri = i.getSerializableExtra("video_uri").toString();
 
         if (!OpenCVLoader.initDebug()) {
             Log.d("OpenCV", "Internal OpenCV library not found. Using OpenCV Manager for initialization");
