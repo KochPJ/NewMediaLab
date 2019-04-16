@@ -17,19 +17,24 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     public void openMyExperiments(View view) {
-        Intent startShapes = new Intent(MainActivity.this, MyExperiments.class);
-        startActivity(startShapes);
+        Intent activity = new Intent(MainActivity.this, MyExperiments.class);
+        startActivity(activity);
     }
 
     public void createNewExperiment(View view) {
-        Intent startShapes = new Intent(MainActivity.this, ExperimentType.class);
-        startShapes = startShapes.putExtra("editing", false);
-        startActivity(startShapes);
+        Intent activity = new Intent(MainActivity.this, ExperimentType.class);
+        activity = activity.putExtra("editing", false);
+        startActivity(activity);
     }
 
     public void openTestActivity(View view) {
-        Intent startShapes = new Intent(MainActivity.this, playVideo.class);
-        startActivity(startShapes);
+        Intent activity = new Intent(MainActivity.this, playVideo.class);
+        startActivity(activity);
+    }
+
+    public void loadNewVideos(View view) {
+        Intent activity = new Intent(MainActivity.this, NewStimuli.class);
+        startActivity(activity);
     }
 
 
