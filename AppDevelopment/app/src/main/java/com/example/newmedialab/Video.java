@@ -13,10 +13,8 @@ import android.widget.Toast;
 import com.github.hiteshsondhi88.libffmpeg.ExecuteBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
-
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,7 +27,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 import wseemann.media.FFmpegMediaMetadataRetriever;
 
 public class Video implements Serializable {
@@ -459,9 +456,13 @@ public class Video implements Serializable {
         return index;
     }
 
-    public void copyVideoTo(InputStream video, String target_dir) throws IOException {
+    public void copyVideoTo(InputStream video, String target_dir, String name) throws IOException {
+
+        File saveAt = new File(target_dir);
+        if (!saveAt.exists()) saveAt.mkdirs();
+
         try {
-            OutputStream out = new FileOutputStream(target_dir);
+            OutputStream out = new FileOutputStream(target_dir+"/"+name);
             // Copy the bits from instream to outstream
             byte[] buf = new byte[1024];
             int len;

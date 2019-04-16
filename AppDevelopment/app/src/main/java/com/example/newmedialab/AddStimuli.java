@@ -170,10 +170,10 @@ public class AddStimuli extends AppCompatActivity {
                 Uri videoPath = data.getData();
                 videoloaded = new Video(this, "loadedVideo");
 
-                String copy_to_dir = Environment.getExternalStorageDirectory()+ "/KineTest/CurrentVideo/copied_video.mp4";
+                String copy_to_dir = Environment.getExternalStorageDirectory()+ "/KineTest/CurrentVideo";
                 try {
                     InputStream inputStream = getContentResolver().openInputStream(videoPath);
-                    videoloaded.copyVideoTo(inputStream, copy_to_dir);
+                    videoloaded.copyVideoTo(inputStream, copy_to_dir, "copied_video.mp4");
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

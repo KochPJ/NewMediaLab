@@ -26,10 +26,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".NewStimuliVelFuncAnalyses"></activity>
         <activity
             android:name=".NewStimuli"
             android:label="@string/title_activity_new_stimuli"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MultipleChoiceExperiment"
             android:label="@string/title_activity_multiple_choice_experiment"

@@ -47,6 +47,7 @@ public class NewStimuli extends AppCompatActivity {
             mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
         }
     }
+
     public void FinishAdding(View view) {
         //TODO: set correct in/out dirs, add name
         // Get video name
@@ -55,25 +56,27 @@ public class NewStimuli extends AppCompatActivity {
 
         if (lastAdd != -1) {
             Video videoloaded = new Video(this, video_name);
-            String copy_to_dir = Environment.getExternalStorageDirectory()+ "/KineTest/CurrentVideo/"+video_name+".mp4";
+            String copy_to_dir = Environment.getExternalStorageDirectory()+ "/KineTest/Resources/temp/temp_loaded_video";
             try {
                 InputStream inputStream = getContentResolver().openInputStream(this.userSelectedVideoUriList.get(this.userSelectedVideoUriList.size() - 1));
-                videoloaded.copyVideoTo(inputStream, copy_to_dir);
+                videoloaded.copyVideoTo(inputStream, copy_to_dir, video_name+".mp4");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            videoloaded.setVideoPath(copy_to_dir);
+            videoloaded.setVideoPath(copy_to_dir+"/"+video_name+".mp4");
 
-            Intent intent = new Intent(this, NewStimuliVelocityAnalyses.class);
-            intent = intent.putExtra("video_object", videoloaded);
-            startActivity(intent);
+            Intent i = new Intent(this, NewStimuliVelFuncAnalyses.class);
+            i = i.putExtra("videoPath", videoloaded);
+            startActivity(i);
+
         }else{
             Log.d("NewStimuli", "playStimuli: no video");
             Toast.makeText(this, "video not loaded yet", Toast.LENGTH_SHORT).show();
         }
     }
+
     public void filmVideo(View view) {
         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
