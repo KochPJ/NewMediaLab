@@ -64,13 +64,7 @@ public class NewStimuli extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             videoloaded.setVideoPath(copy_to_dir);
-            try {
-                videoloaded.getImages();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
             Intent intent = new Intent(this, NewStimuliVelocityAnalyses.class);
             intent = intent.putExtra("video_object", videoloaded);
@@ -87,16 +81,8 @@ public class NewStimuli extends AppCompatActivity {
     /* Invoke android os system file browser to select images. */
     public void loadVideo(View view)
     {
-        // Create an intent.
-        Intent openVideoIntent = new Intent();
-        // Only show images in the content chooser.
-        // If you want to select all type data then openAlbumIntent.setType("*/*");
-        // Must set type for the intent, otherwise there will throw android.content.ActivityNotFoundException: No Activity found to handle Intent { act=android.intent.action.GET_CONTENT }
-        openVideoIntent.setType("video/mp4");
-        // Set action, this action will invoke android os browse content app.
-        openVideoIntent.setAction(Intent.ACTION_GET_CONTENT);
-        // Start the activity.
-        startActivityForResult(openVideoIntent, SELECT_VIDEO);
+        Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(i, SELECT_VIDEO);
     }
 
     /* When the action Intent.ACTION_GET_CONTENT invoked app return, this method will be executed. */
