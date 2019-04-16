@@ -43,7 +43,7 @@ public class AddStimuli extends AppCompatActivity {
     VideoView videoView;
     VideoView videoView2;
     Uri currentVideo = Uri.parse(Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideo/loadedVideo.mp4");
-    Video videoloaded = new Video(this, "loadedVideo", 25,4,currentVideo);
+    Video videoloaded = new Video(this, "loadedVideo");
 
 
     public void getVelocityProfile(View view){
@@ -178,7 +178,7 @@ public class AddStimuli extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_VIDEO) {
                 Uri videoPath = data.getData();
-                videoloaded = new Video(this, "loadedVideo", 25, 4, videoPath);
+                videoloaded = new Video(this, "loadedVideo");
 
                 String copy_to_dir = Environment.getExternalStorageDirectory()+ "/KineTest/CurrentVideo/copied_video.mp4";
                 try {
@@ -189,27 +189,16 @@ public class AddStimuli extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                
-                FFmpegMediaMetadataRetriever mFFmpegMediaMetadataRetriever = new FFmpegMediaMetadataRetriever();
-                mFFmpegMediaMetadataRetriever.setDataSource(copy_to_dir);
-                String mVideoDuration =  mFFmpegMediaMetadataRetriever.extractMetadata(FFmpegMediaMetadataRetriever.METADATA_KEY_DURATION);
-                String mVideoFps = mFFmpegMediaMetadataRetriever.extractMetadata(FFmpegMediaMetadataRetriever.METADATA_KEY_FRAMERATE);
 
-                Log.d("AddStimuli","onActivityResult: mVideoFps =" +mVideoFps );
-                Log.d("AddStimuli","onActivityResult: mVideoDuration =" +mVideoDuration);
-
-
-
-/*
-                videoloaded = new Video(this, "loadedVideo", 25, 4, videoPath);
+                videoloaded.setVideoPath(copy_to_dir);
                 try {
                     videoloaded.getImages();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                Uri outputVideo = videoloaded.createVideo("KineTest/CurrentVideoImages", "KineTest/CurrentVideo");
-  */
+                //Uri outputVideo = videoloaded.createVideo("KineTest/CurrentVideoImages", "KineTest/CurrentVideo");
+
             }
         }
     }

@@ -29,47 +29,63 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import wseemann.media.FFmpegMediaMetadataRetriever;
+
 public class Video {
 
     String videoName;
-    Uri videoPath= Uri.parse("");
-    int duration;
-    int fps;
+    double duration;
+    double fps;
+    int n_frames;
+    String videoPath;
     Context context;
     List<Integer> xCord = new ArrayList<Integer>();
     List<Integer> yCord = new ArrayList<Integer>();
     List<Double> veloctiyProfile = new ArrayList<Double>();
 
-    public Video(Context cont, String name, int video_fps, int video_duration, Uri uriPathToVideo){
+    public Video(Context cont, String name){
         videoName = name;
         context = cont;
-        fps = video_fps;
-        duration = video_duration;
-        videoPath = uriPathToVideo;
         }
 
 
+    public void setVideoPath(String path){
+        videoPath = path;
+        getVideoData();
+    }
+
+    public void getVideoData(){
+        FFmpegMediaMetadataRetriever mFFmpegMediaMetadataRetriever = new FFmpegMediaMetadataRetriever();
+        mFFmpegMediaMetadataRetriever.setDataSource(videoPath);
+        String mVideoDuration =  mFFmpegMediaMetadataRetriever.extractMetadata(FFmpegMediaMetadataRetriever.METADATA_KEY_DURATION);
+        String mVideoFps = mFFmpegMediaMetadataRetriever.extractMetadata(FFmpegMediaMetadataRetriever.METADATA_KEY_FRAMERATE);
+        fps = Double.valueOf(mVideoFps); //frames per second
+        duration = Double.valueOf(mVideoDuration); // duration in miliseconds
+        n_frames = (int)(fps*(duration/1000)); // get duration in seconds and multiplay with fps to get n_images
+        Log.d("Video", "getVideoData: Duration = "+mVideoDuration);
+        Log.d("Video", "getVideoData: fps = "+mVideoFps);
+        Log.d("Video", "getVideoData: number of frames = "+Integer.valueOf(n_frames));
+    }
+
     public void getImages() throws IOException {
+        String save_to_folder = "KineTest/Resources/Temp/temp_images";
         //set root file
-        File root = new File(Environment.getExternalStorageDirectory(), "KineTest/CurrentVideoImages");
-
-
+        File root = new File(Environment.getExternalStorageDirectory(), save_to_folder);
         //create root if does not exist
         if (!root.exists()) root.mkdirs();
         //remove all files from root
-        deleteTempFolder("KineTest/CurrentVideoImages");
+        deleteTempFolder(save_to_folder);
 
         //create the mediaMetaDataRetriver object
-        MediaMetadataRetriever m = new MediaMetadataRetriever();
+        FFmpegMediaMetadataRetriever m = new FFmpegMediaMetadataRetriever();
         //set path
-        m.setDataSource(context, videoPath);
+        m.setDataSource(videoPath);
 
-        Log.d("Video", "Duration = "+Integer.toString(duration));
-        Log.d("Video", "fps = "+Integer.toString(fps));
-        int timestep = (int)(1000000.0*(1.0/(float)fps));
+        //get the timestep between images in microseconds
+        int timestep = (int)(1000000.0*(1.0/fps));
         Bitmap b;
         List<Bitmap> video = new ArrayList<Bitmap>();
-        for (int i=0;i<duration*fps;i++){
+        for (int i=0;i<n_frames;i++){
             //Add zero padding to filename
             String n = Integer.toString(i);
             char[] c = n.toCharArray();
@@ -82,9 +98,9 @@ public class Video {
             }
 
             Log.i("i",String.valueOf(i));
-            b = m.getFrameAtTime(i*timestep, MediaMetadataRetriever.OPTION_CLOSEST);
+            b = m.getFrameAtTime(i*timestep, FFmpegMediaMetadataRetriever.OPTION_CLOSEST);
 
-            FileOutputStream fileOutputStream = new FileOutputStream(Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideoImages/"+number+".png");
+            FileOutputStream fileOutputStream = new FileOutputStream(Environment.getExternalStorageDirectory()+"/"+save_to_folder+"/"+number+".png");
             b.compress(Bitmap.CompressFormat.PNG, 1, fileOutputStream);
         }
     }
