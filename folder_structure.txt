@@ -16,7 +16,14 @@ Kinetest
 			- velocityprofiles
 			- videos_artificial
 		
-		-temp_image_operation
+		-temp
+			-temp_image_operation
+			-temp_imgae_analysed
+
+			-temp_loaded_video
+				-video.mp4
+				-video_analysed
+			
 	
 	-experiments
 		-exp_files
@@ -33,6 +40,8 @@ Kinetest
 			
 
 	-export_results
+
+	
 
 
 
