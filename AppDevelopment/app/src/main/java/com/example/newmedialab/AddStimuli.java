@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,6 +14,9 @@ import android.view.View;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.github.hiteshsondhi88.libffmpeg.ExecuteBinaryResponseHandler;
+import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
+import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -30,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import wseemann.media.FFmpegMediaMetadataRetriever;
 
 public class AddStimuli extends AppCompatActivity {
 
@@ -174,6 +179,29 @@ public class AddStimuli extends AppCompatActivity {
             if (requestCode == SELECT_VIDEO) {
                 Uri videoPath = data.getData();
                 videoloaded = new Video(this, "loadedVideo", 25, 4, videoPath);
+
+                String copy_to_dir = Environment.getExternalStorageDirectory()+ "/KineTest/CurrentVideo/copied_video.mp4";
+                try {
+                    InputStream inputStream = getContentResolver().openInputStream(videoPath);
+                    videoloaded.copyVideoTo(inputStream, copy_to_dir);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                
+                FFmpegMediaMetadataRetriever mFFmpegMediaMetadataRetriever = new FFmpegMediaMetadataRetriever();
+                mFFmpegMediaMetadataRetriever.setDataSource(copy_to_dir);
+                String mVideoDuration =  mFFmpegMediaMetadataRetriever.extractMetadata(FFmpegMediaMetadataRetriever.METADATA_KEY_DURATION);
+                String mVideoFps = mFFmpegMediaMetadataRetriever.extractMetadata(FFmpegMediaMetadataRetriever.METADATA_KEY_FRAMERATE);
+
+                Log.d("AddStimuli","onActivityResult: mVideoFps =" +mVideoFps );
+                Log.d("AddStimuli","onActivityResult: mVideoDuration =" +mVideoDuration);
+
+
+
+/*
+                videoloaded = new Video(this, "loadedVideo", 25, 4, videoPath);
                 try {
                     videoloaded.getImages();
                 } catch (IOException e) {
@@ -181,6 +209,7 @@ public class AddStimuli extends AppCompatActivity {
                 }
 
                 Uri outputVideo = videoloaded.createVideo("KineTest/CurrentVideoImages", "KineTest/CurrentVideo");
+  */
             }
         }
     }

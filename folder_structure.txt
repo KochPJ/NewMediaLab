@@ -1,0 +1,51 @@
+Kinetest
+	-resources
+		-words
+			- videos_kinematic
+			- video_images
+				-video_name_n
+					-image_1.png
+					...
+					-image_n.png
+				...
+				-video_name_n
+			- velocityprofiles
+			- videos_artificial
+		-letter
+			- videos_kinematic
+			- velocityprofiles
+			- videos_artificial
+		
+		-temp
+			-temp_image_operation
+			-temp_imgae_analysed
+
+			-temp_loaded_video
+				-video.mp4
+				-video_analysed
+			
+	
+	-experiments
+		-exp_files
+		-videos_transformed
+			video_name_velfunction_type_....mp4
+		-results
+			-exp_name_1
+				-subject_1
+				...
+				-subject_n
+			...	
+
+			-exp_name_n
+			
+
+	-export_results
+
+	
+
+
+
+
+
+
+
