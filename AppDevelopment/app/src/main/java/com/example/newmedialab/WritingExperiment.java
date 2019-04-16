@@ -30,15 +30,18 @@ public class WritingExperiment extends AppCompatActivity {
     }
 
     public void navigation(View view) {
-        //TODO: save question parameters in experiment
         CheckBox cb = (CheckBox)findViewById(R.id.progress_bar);
         boolean progress = cb.isChecked();
         switch (view.getId()) {
             case R.id.save_button: // Go to function view with edit param
-                //pointer to the text edit
+                //pointer to the text edits
                 EditText exp_name_EditText = (EditText) findViewById(R.id.te_experiment_name);
+                EditText exp_task_EditText = (EditText) findViewById(R.id.task_description_message);
+                EditText exp_final_EditText = (EditText) findViewById(R.id.participation_message);
                 //get experiment name
                 String exp_name = exp_name_EditText.getText().toString();
+                String exp_task_msg = exp_task_EditText.getText().toString();
+                String exp_final_msg = exp_final_EditText.getText().toString();
 
                 //If editing return to my experiments
                 if (editing) {
@@ -46,6 +49,7 @@ public class WritingExperiment extends AppCompatActivity {
                     exp.setName(exp_name);
                     exp.setProgressbar(String.valueOf(progress));
                     exp.setExperimentType("writing");
+                    exp.setMessages(exp_task_msg, exp_final_msg);
 
                     //Save results
                     exp.createFile();
@@ -57,6 +61,7 @@ public class WritingExperiment extends AppCompatActivity {
                     exp = new Experiment(exp_name);
                     exp.setProgressbar(String.valueOf(progress));
                     exp.setExperimentType("writing");
+                    exp.setMessages(exp_task_msg, exp_final_msg);
                     Intent intent = new Intent(this, ExperimentFunction.class);
                     intent = intent.putExtra("experiment", exp);
                     intent = intent.putExtra("editing", editing);

@@ -18,6 +18,8 @@ public class Experiment implements Serializable{
     String file_name = "";
     String progressbar = "false";
     String experiment_type = "unknown";
+    String task_msg, final_msg = "";
+    String qnum = "";
 
 
     public Experiment(String name){
@@ -58,6 +60,10 @@ public class Experiment implements Serializable{
         this.speed_modifier = speed_modifier;
     }
 
+    public void setMessages(String exp_task_msg, String exp_final_msg) {this.task_msg = exp_task_msg; this.final_msg = exp_final_msg; }
+
+    public void setQnum(String exp_qnum) { this.qnum = exp_qnum; }
+
     public String getName(){
         return this.name;
     }
@@ -93,6 +99,12 @@ public class Experiment implements Serializable{
     public String getSpeed_modifier(){
         return this.speed_modifier;
     }
+
+    public String getTask_msg() {return this.task_msg; }
+
+    public String getFinal_msg() {return this.final_msg; }
+
+    public String getQnum() {return this.qnum; }
 
     public void createFile(){
 
