@@ -7,19 +7,31 @@ tools:context=".NewStimuliVelFuncAnalyses"
 android:background="@drawable/background"
     >
 
-<Button
-    android:id="@+id/NewStimuli_getVelocityProfile"
-    android:layout_width="89dp"
-    android:layout_height="wrap_content"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentBottom="true"
-    android:layout_marginEnd="492dp"
-    android:layout_marginBottom="79dp"
-    android:background="@drawable/mybutton"
-    android:onClick="getVelocityProfile"
-    android:text="Analyse Stimuli" />
+    <Button
+        android:id="@+id/NewStimuli_getVelocityProfile"
+        android:layout_width="89dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="421dp"
+        android:layout_marginBottom="81dp"
+        android:background="@drawable/mybutton"
+        android:onClick="getVelocityProfile"
+        android:text="Analyse Stimuli" />
 
-<com.jjoe64.graphview.GraphView
+    <Button
+        android:id="@+id/newStimuli_loadImages"
+        android:layout_width="89dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="549dp"
+        android:layout_marginBottom="81dp"
+        android:background="@drawable/mybutton"
+        android:onClick="loadVideoImages"
+        android:text="Load Video Images" />
+
+    <com.jjoe64.graphview.GraphView
     android:id="@+id/NewStimuli_graph_view_new_stimuli"
     android:layout_width="230dp"
     android:layout_height="110dp"

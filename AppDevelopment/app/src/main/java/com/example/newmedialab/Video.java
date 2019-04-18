@@ -4,6 +4,7 @@ package com.example.newmedialab;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Environment;
@@ -97,6 +98,11 @@ public class Video implements Serializable {
 
             Log.i("i",String.valueOf(i));
             b = m.getFrameAtTime(i*timestep, FFmpegMediaMetadataRetriever.OPTION_CLOSEST);
+
+            //rotate them by 180, FFmpegMediaMetadataRetriever somehow reads the images upside down
+            Matrix matrix = new Matrix();
+            matrix.postRotate(180);
+            b =  Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), matrix, true);
 
             FileOutputStream fileOutputStream = new FileOutputStream(Environment.getExternalStorageDirectory()+"/"+save_to_folder+"/"+number+".png");
             b.compress(Bitmap.CompressFormat.PNG, 1, fileOutputStream);
@@ -225,7 +231,7 @@ public class Video implements Serializable {
                 Mat mask = blobDet.mDrawRect;
                 imageCodecs.imwrite(savePath+picturePaths[i], mask);
             }
-            createVideo(imageDir, "KineTest/Resources/Temp/temp_loaded_video");
+            createVideo(saveTo, "KineTest/Resources/Temp/temp_loaded_video");
 
             for(int i = 0; i < xCord.size()-1; i++){
                 veloctiyProfile.add(getvel(xCord.get(i),yCord.get(i), xCord.get(i+1),yCord.get(i+1)));
