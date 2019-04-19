@@ -18,4 +18,5 @@
     <string name="title_activity_test_writing">TestWriting</string>
     <string name="title_activity_test_multiple_choice">TestMultipleChoice</string>
     <string name="title_activity_show_stimuli">ShowStimuli</string>
+    <string name="title_activity_participant_selection">ParticipantSelection</string>
 </resources>

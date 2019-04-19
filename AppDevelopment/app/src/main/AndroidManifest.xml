@@ -27,9 +27,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ParticipantSelection"
+            android:label="@string/title_activity_participant_selection"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ShowStimuli"
             android:label="@string/title_activity_show_stimuli"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TestMultipleChoice"
             android:label="@string/title_activity_test_multiple_choice"

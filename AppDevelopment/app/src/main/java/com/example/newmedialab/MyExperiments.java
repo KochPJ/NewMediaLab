@@ -1,5 +1,6 @@
 package com.example.newmedialab;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,17 +16,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MyExperiments extends AppCompatActivity {
 
     private String[] names;
     private Experiment[] experiment_list;
-
-    public void startExperiment(View view) {
-        Intent startShapes = new Intent(MyExperiments.this, playVideo.class);
-        startActivity(startShapes);
-    }
 
     public void addNewStimuli(View view) {
         Intent startShapes = new Intent(MyExperiments.this, AddStimuli.class);
@@ -61,9 +58,10 @@ public class MyExperiments extends AppCompatActivity {
                 startActivity(intent3);
                 break;
             case R.id.start_experiment: // Go to start experiment view
-                Intent intent4 = new Intent(this, StartExperimentMain.class);
-                intent4 = intent4.putExtra("experiment", exp);
-                startActivity(intent4);
+                //Intent intent4 = new Intent(this, StartExperimentMain.class);
+                //intent4 = intent4.putExtra("experiment", exp);
+                //startActivity(intent4);
+                startMyExperiment(exp);
                 break;
             case R.id.delete_experiment: // Delete selected experiment
                 // TODO: check if no experiments in spinner (currently crashes)
@@ -97,6 +95,33 @@ public class MyExperiments extends AppCompatActivity {
              default:
                 throw new RuntimeException("Unknown button ID");
         }
+    }
+
+    public void startMyExperiment(Experiment exp) {
+        final Experiment exp_final = exp;
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MyExperiments.this);
+        dialog.setCancelable(false);
+        dialog.setTitle("Start Experiment");
+        dialog.setMessage("Select Test Phase");
+        dialog.setPositiveButton("Pre Test", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                Intent intent4a = new Intent(MyExperiments.this, ParticipantInfo.class);
+                intent4a = intent4a.putExtra("experiment", exp_final);
+                startActivity(intent4a);
+            }
+        })
+        .setNegativeButton("Post Test", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent4b = new Intent(MyExperiments.this, ParticipantSelection.class);
+                intent4b = intent4b.putExtra("experiment", exp_final);
+                startActivity(intent4b);
+            }
+        });
+
+        final AlertDialog alert = dialog.create();
+        alert.show();
     }
 
     @Override
@@ -184,7 +209,5 @@ public class MyExperiments extends AppCompatActivity {
             // directories.
         }
     }
-
-
 
 }
