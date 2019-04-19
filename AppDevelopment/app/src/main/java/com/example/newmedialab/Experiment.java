@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Experiment implements Serializable{
 
@@ -21,7 +22,9 @@ public class Experiment implements Serializable{
     String experiment_type = "unknown";
     String task_msg, final_msg = "";
     String qnum = "";
+    String random = "true";
     ArrayList<String> IDs = new ArrayList<String>();
+    ArrayList<String> remainingSymbols = new ArrayList<String>();
     int currentID = 0;
 
     public Experiment(String name){
@@ -40,6 +43,10 @@ public class Experiment implements Serializable{
 
     public void setProgressbar(String progressbar){
         this.progressbar = progressbar;
+    }
+
+    public void setRandom(String random){
+        this.random = random;
     }
 
     public void setMaxRepeats(String max_repeats){
@@ -102,6 +109,8 @@ public class Experiment implements Serializable{
         return this.speed_modifier;
     }
 
+    public String getRandom() {return  this.random;}
+
     public String getTask_msg() {return this.task_msg; }
 
     public String getFinal_msg() {return this.final_msg; }
@@ -132,7 +141,7 @@ public class Experiment implements Serializable{
             if (!root.exists()) root.mkdirs();
             File gpxfile = new File(root, FILE_NAME);
             FileWriter writer = new FileWriter(gpxfile);
-            writer.append(name).append("\n").append(experiment_type).append("\n").append(progressbar).append("\n").append(max_repeats).append("\n").append(auto_repeats).append("\n").append(symbols).append("\n").append(function).append("\n").append(speed_modifier);
+            writer.append(name).append("\n").append(experiment_type).append("\n").append(progressbar).append("\n").append(max_repeats).append("\n").append(auto_repeats).append("\n").append(symbols).append("\n").append(function).append("\n").append(speed_modifier).append("\n").append(random);
 
             writer.flush();
             writer.close();
@@ -142,6 +151,26 @@ public class Experiment implements Serializable{
             e.printStackTrace();
 
         }
+    }
+
+    public String getNextStimuli() {
+        //Initialize
+        if(remainingSymbols.isEmpty()){
+            for (char ch : symbols.toCharArray()){
+                if(ch != ',' && ch != ' '){
+                    remainingSymbols.add(String.valueOf(ch));
+                }
+            }
+            //Shuffle stimuli if random order selected
+            if(Boolean.parseBoolean(random) == true){
+                Collections.shuffle(remainingSymbols);
+            }
+        }
+        //Get next stimuli
+        String symbol = remainingSymbols.get(0);
+        //Remove from list
+        remainingSymbols.remove(0);
+        return symbol;
     }
 
 }
