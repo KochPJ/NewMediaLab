@@ -38,22 +38,37 @@
         android:text="[Experiment Name]" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/clear_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="68dp"
         android:layout_marginBottom="52dp"
+        android:onClick="clearSketch"
         android:text="Clear" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/nextShowStim_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="67dp"
         android:layout_marginBottom="54dp"
+        android:onClick="showNextStimuli"
         android:text="Continue" />
+
+    <RelativeLayout
+        android:id="@+id/relativelayout1"
+        android:layout_width="match_parent"
+        android:layout_height="473dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="125dp"
+        android:layout_weight="90">
+
+    </RelativeLayout>
+
 </RelativeLayout>

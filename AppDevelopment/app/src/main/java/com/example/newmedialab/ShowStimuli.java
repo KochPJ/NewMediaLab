@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//TODO: implement progressbar
+
 public class ShowStimuli extends AppCompatActivity {
 
     public Experiment exp = new Experiment("");
@@ -47,7 +49,8 @@ public class ShowStimuli extends AppCompatActivity {
             remaining_repeats -= 1;
             repeats.setText("Remaining Replays: "+remaining_repeats);
         } else {
-            Toast.makeText(this, "No Replays Remaining", Toast.LENGTH_LONG);
+            Toast mToastToShow = Toast.makeText(this, "No Replays Remaining", Toast.LENGTH_LONG);
+            mToastToShow.show();
         }
 
     }

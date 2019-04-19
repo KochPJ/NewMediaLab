@@ -25,7 +25,9 @@ public class Experiment implements Serializable{
     String random = "true";
     ArrayList<String> IDs = new ArrayList<String>();
     ArrayList<String> remainingSymbols = new ArrayList<String>();
+    String currentSymbol = "unknown";
     int currentID = 0;
+    boolean finishedShowStimuli = false;
 
     public Experiment(String name){
         this.name = name;
@@ -117,6 +119,10 @@ public class Experiment implements Serializable{
 
     public String getQnum() {return this.qnum; }
 
+    public String getCurrentSymbol() {return  this.currentSymbol; }
+
+    public Boolean finishedShowingStimuli() {return  this.finishedShowStimuli; }
+
     public void addID(String id){
         this.IDs.add(id);
         this.currentID = this.IDs.size();
@@ -131,8 +137,7 @@ public class Experiment implements Serializable{
     }
 
     public void createFile(){
-
-        // convert array of symboles to string
+        //TODO: Save ID list in the .txt file
         try
         {
             /// TODO:  check if external storage is available (https://developer.android.com/reference/android/os/Environment.html#getExternalStorageState()) if not, save to a different directory or output a warning to the user
@@ -141,7 +146,9 @@ public class Experiment implements Serializable{
             if (!root.exists()) root.mkdirs();
             File gpxfile = new File(root, FILE_NAME);
             FileWriter writer = new FileWriter(gpxfile);
-            writer.append(name).append("\n").append(experiment_type).append("\n").append(progressbar).append("\n").append(max_repeats).append("\n").append(auto_repeats).append("\n").append(symbols).append("\n").append(function).append("\n").append(speed_modifier).append("\n").append(random);
+            writer.append(name).append("\n").append(experiment_type).append("\n").append(progressbar).append("\n").append(max_repeats)
+                    .append("\n").append(auto_repeats).append("\n").append(symbols).append("\n").append(function).append("\n").append(speed_modifier)
+                    .append("\n").append(random).append("\n").append(random);
 
             writer.flush();
             writer.close();
@@ -156,6 +163,7 @@ public class Experiment implements Serializable{
     public String getNextStimuli() {
         //Initialize
         if(remainingSymbols.isEmpty()){
+            finishedShowStimuli = false;
             for (char ch : symbols.toCharArray()){
                 if(ch != ',' && ch != ' '){
                     remainingSymbols.add(String.valueOf(ch));
@@ -167,10 +175,13 @@ public class Experiment implements Serializable{
             }
         }
         //Get next stimuli
-        String symbol = remainingSymbols.get(0);
+        currentSymbol = remainingSymbols.get(0);
         //Remove from list
         remainingSymbols.remove(0);
-        return symbol;
+        if(remainingSymbols.isEmpty()){
+            finishedShowStimuli = true;
+        }
+        return currentSymbol;
     }
 
 }
