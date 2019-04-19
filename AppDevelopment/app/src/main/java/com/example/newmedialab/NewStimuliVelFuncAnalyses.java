@@ -54,7 +54,9 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
     }
 
     public void cancel(View view){
-
+        videoloaded.clearTempFolders();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     public void LoadVelFuncFromFolder(View view){
