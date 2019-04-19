@@ -1,4 +1,6 @@
 AppDevelopment/.idea/*
+AppDevelopment/openCVLibrary343/build/*
+AppDevelopment/openCVLibrary343/*
 */.idea/*
 */venv/*
 *.pyc

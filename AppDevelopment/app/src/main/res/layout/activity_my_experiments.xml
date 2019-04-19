@@ -82,7 +82,7 @@
         android:layout_marginRight="34dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/mybutton"
-        android:onClick="startExperiment"
+        android:onClick="navigation"
         android:text="Start Experiment" />
 
     <Button
