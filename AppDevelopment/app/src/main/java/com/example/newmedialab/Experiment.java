@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Experiment implements Serializable{
 
@@ -20,7 +21,8 @@ public class Experiment implements Serializable{
     String experiment_type = "unknown";
     String task_msg, final_msg = "";
     String qnum = "";
-
+    ArrayList<String> IDs = new ArrayList<String>();
+    int currentID = 0;
 
     public Experiment(String name){
         this.name = name;
@@ -105,6 +107,19 @@ public class Experiment implements Serializable{
     public String getFinal_msg() {return this.final_msg; }
 
     public String getQnum() {return this.qnum; }
+
+    public void addID(String id){
+        this.IDs.add(id);
+        this.currentID = this.IDs.size();
+    }
+
+    public String getID(int num){
+        return this.IDs.get(num);
+    }
+
+    public int getCurrentID(){
+        return this.currentID;
+    }
 
     public void createFile(){
 

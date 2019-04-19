@@ -37,7 +37,7 @@
         android:text="Continue" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/tv_exp_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -47,7 +47,7 @@
         android:text="[Experiment Name]" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/tv_exp_message"
         android:layout_width="167dp"
         android:layout_height="31dp"
         android:layout_alignParentStart="true"
