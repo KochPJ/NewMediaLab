@@ -3,6 +3,7 @@ package com.example.newmedialab;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class ExperimentSettings extends AppCompatActivity {
         EditText exp_symbols_EditText = (EditText) findViewById(R.id.te_experiment_select_symbols);
         EditText exp_repeats_EditText = (EditText) findViewById(R.id.te_experiment_repeats);
         EditText exp_repeats2_EditText = (EditText) findViewById(R.id.te_experiment_repeats2);
+        CheckBox exp_random_CB = (CheckBox) findViewById(R.id.cb_stimuli_random);
         //get experiment symbols
         String exp_symbols = exp_symbols_EditText.getText().toString();
         //set selected symbols
@@ -34,6 +36,12 @@ public class ExperimentSettings extends AppCompatActivity {
         // set the other variables
         exp.setMaxRepeats(exp_repeats_EditText.getText().toString());
         exp.setAutoRepeats(exp_repeats2_EditText.getText().toString());
+        // set random?
+        if(exp_random_CB.isChecked()){
+            exp.setRandom("true");
+        } else {
+            exp.setRandom("false");
+        }
         // create and save experiment!
         exp.createFile();
 

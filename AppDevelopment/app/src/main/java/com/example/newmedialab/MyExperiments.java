@@ -163,6 +163,8 @@ public class MyExperiments extends AppCompatActivity {
                             exp.setFunction(line);
                         } else if(c == 7){
                             exp.setSpeedModifier(line);
+                        } else if(c == 8){
+                            exp.setRandom(line);
                         }
                         this.experiment_list[i] = exp;
                         c++;
@@ -193,8 +195,9 @@ public class MyExperiments extends AppCompatActivity {
                     String symbols = exp.getSymbols();
                     String function = exp.getFunction();
                     String speed_modifier = exp.getSpeed_modifier();
+                    String random = exp.getRandom();
                     TextView textView = (TextView) findViewById(R.id.textView_myExperiment);
-                    textView.setText("Name: "+name +"\n"+"Experiment type: "+type +"\n"+"Progressbar: "+pb +"\n"+"Allowed Repeats: "+max_repeats+"\n"+"Automatic Repeats: "+auto_repeats+"\n"+"Symbols: "+symbols+"\n"+"Function: "+function+"\n"+"Playback speed: "+speed_modifier+"%"); //set text for text view
+                    textView.setText("Name: "+name +"\n"+"Experiment type: "+type +"\n"+"Progressbar: "+pb +"\n"+"Allowed Repeats: "+max_repeats+"\n"+"Automatic Repeats: "+auto_repeats+"\n"+"Symbols: "+symbols+"\n"+"Function: "+function+"\n"+"Playback speed: "+speed_modifier+"%"+"\n"+"Random Stimuli Presentation: "+random); //set text for text view
                 }
                 public void onNothingSelected(AdapterView<?> parentView) {
                     // your code here
