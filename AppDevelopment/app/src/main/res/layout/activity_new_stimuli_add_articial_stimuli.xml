@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".NewStimuliAddArticialStimuli"
+android:background="@drawable/background"
+    >
+
+
+    <Button
+        android:id="@+id/film_video_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="329dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/mybutton"
+        android:onClick="filmVideo"
+        android:text="Film New Video" />
+
+    <Button
+        android:id="@+id/load_video_button2"
+        android:layout_width="106dp"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="334dp"
+        android:layout_marginTop="119dp"
+        android:background="@drawable/mybutton"
+        android:onClick="loadVideo"
+        android:text="Load Video From Device" />
+
+    <Button
+        android:id="@+id/newStimuli_artificialStimuli_playVideo"
+        android:layout_width="142dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="95dp"
+        android:background="@drawable/mybutton"
+        android:onClick="playVideo"
+        android:text="Play Loaded Video" />
+
+    <VideoView
+        android:id="@+id/newStimuli_artificialStimuli_videoView"
+        android:layout_width="162dp"
+        android:layout_height="94dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="56dp" />
+
+    <Button
+    android:id="@+id/NewStimuli_Vel_func_next"
+    android:layout_width="76dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginEnd="38dp"
+    android:layout_marginBottom="30dp"
+    android:background="@drawable/mybutton"
+    android:onClick="save"
+    android:text="Save" />
+
+<Button
+    android:id="@+id/NewStimuli_Vel_func_cancel"
+    android:layout_width="76dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginStart="20dp"
+    android:layout_marginBottom="27dp"
+    android:background="@drawable/mybutton"
+    android:onClick="cancel"
+    android:text="Cancel" />
+
+
+
+</RelativeLayout>

@@ -468,7 +468,6 @@ public class Video implements Serializable {
 
         File saveAt = new File(target_dir);
         if (!saveAt.exists()) saveAt.mkdirs();
-
         try {
             OutputStream out = new FileOutputStream(target_dir+"/"+name);
             // Copy the bits from instream to outstream
@@ -482,6 +481,10 @@ public class Video implements Serializable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void clearTempFolders(){
+
     }
 
 }

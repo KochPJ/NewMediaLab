@@ -12,10 +12,10 @@
         android:id="@+id/playStimuli2"
         android:layout_width="142dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="136dp"
-        android:layout_marginBottom="207dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="283dp"
+        android:layout_marginTop="118dp"
+        android:layout_toEndOf="@+id/vv_new_stimuli"
         android:background="@drawable/mybutton"
         android:onClick="playVideo"
         android:text="Play Loaded Video" />
@@ -25,9 +25,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="150dp"
-        android:layout_marginBottom="642dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="396dp"
+        android:layout_marginTop="46dp"
         android:onClick="filmVideo"
         android:text="Film New Video" />
 
@@ -35,10 +35,10 @@
         android:id="@+id/load_video_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="103dp"
-        android:layout_marginBottom="569dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="301dp"
+        android:layout_marginTop="127dp"
         android:onClick="loadVideo"
         android:text="Load Video From Device" />
 
@@ -48,8 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="562dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="236dp"
         android:text="Video Name" />
 
     <EditText
@@ -58,32 +58,30 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="146dp"
-        android:layout_marginTop="553dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="225dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="video_1" />
 
     <Button
         android:id="@+id/next_analyze_button"
-        android:layout_width="226dp"
+        android:layout_width="113dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/film_video_button"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="-41dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="20dp"
         android:onClick="FinishAdding"
         android:text="Next" />
 
     <VideoView
         android:id="@+id/vv_new_stimuli"
-        android:layout_width="374dp"
-        android:layout_height="261dp"
+        android:layout_width="225dp"
+        android:layout_height="131dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="195dp"
-        android:layout_marginEnd="23dp" />
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="56dp" />
 
 </RelativeLayout>

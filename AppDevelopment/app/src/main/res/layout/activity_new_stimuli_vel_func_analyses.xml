@@ -9,56 +9,92 @@ android:background="@drawable/background"
 
     <Button
         android:id="@+id/NewStimuli_getVelocityProfile"
-        android:layout_width="89dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="421dp"
-        android:layout_marginBottom="81dp"
+        android:layout_width="94dp"
+        android:layout_height="32dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="167dp"
+        android:layout_marginTop="138dp"
         android:background="@drawable/mybutton"
         android:onClick="getVelocityProfile"
         android:text="Analyse Stimuli" />
 
     <Button
         android:id="@+id/newStimuli_loadImages"
-        android:layout_width="89dp"
+        android:layout_width="93dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="549dp"
-        android:layout_marginBottom="81dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="133dp"
         android:background="@drawable/mybutton"
         android:onClick="loadVideoImages"
         android:text="Load Video Images" />
 
     <com.jjoe64.graphview.GraphView
-    android:id="@+id/NewStimuli_graph_view_new_stimuli"
-    android:layout_width="230dp"
-    android:layout_height="110dp"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true"
-    android:layout_marginStart="103dp"
-    android:layout_marginTop="59dp" />
+        android:id="@+id/NewStimuli_graph_view_new_stimuli"
+        android:layout_width="179dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="36dp" />
 
-<Button
-    android:id="@+id/NewStimuli_playAnalysed"
-    android:layout_width="76dp"
-    android:layout_height="wrap_content"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentBottom="true"
-    android:layout_marginEnd="197dp"
-    android:layout_marginBottom="65dp"
-    android:background="@drawable/mybutton"
-    android:onClick="playAnalysed"
-    android:text="Play Analysed" />
+    <Button
+        android:id="@+id/NewStimuli_Vel_func_next"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/mybutton"
+        android:onClick="next"
+        android:text="Next" />
 
-<VideoView
-    android:id="@+id/NewStimuli_videoViewNewStimuli"
-    android:layout_width="206dp"
-    android:layout_height="116dp"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true"
-    android:layout_marginStart="381dp"
-    android:layout_marginTop="61dp" />
+    <Button
+        android:id="@+id/NewStimuli_Vel_func_cancel"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="27dp"
+        android:background="@drawable/mybutton"
+        android:onClick="cancel"
+        android:text="Cancel" />
+
+    <Button
+        android:id="@+id/newStimuli_playAnalysed"
+        android:layout_width="84dp"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="178dp"
+        android:layout_marginTop="194dp"
+        android:background="@drawable/mybutton"
+        android:onClick="playAnalysed"
+        android:text="Play Analysed" />
+
+    <Button
+        android:id="@+id/NewStimuli_Vel_func_loadFromFolder"
+        android:layout_width="85dp"
+        android:layout_height="37dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="198dp"
+        android:background="@drawable/mybutton"
+        android:onClick="LoadVelFuncFromFolder"
+        android:text="Load From Folder" />
+
+    <VideoView
+        android:id="@+id/NewStimuli_videoViewNewStimuli"
+        android:layout_width="162dp"
+        android:layout_height="94dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="251dp"
+        android:layout_marginTop="28dp" />
 
 </RelativeLayout>

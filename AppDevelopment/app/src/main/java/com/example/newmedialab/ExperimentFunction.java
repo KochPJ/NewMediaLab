@@ -42,7 +42,7 @@ public class ExperimentFunction extends AppCompatActivity implements AdapterView
         spin.setOnItemSelectedListener(this);
 
         //Creating the ArrayAdapter instance having the bank name list
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,default_functions);
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item,default_functions);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         spin.setAdapter(aa);

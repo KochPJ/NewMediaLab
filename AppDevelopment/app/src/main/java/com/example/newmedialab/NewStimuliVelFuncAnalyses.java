@@ -17,6 +17,8 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
@@ -27,7 +29,7 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
     String video_name_analysed;
     Boolean got_video_images = true;
     Video videoloaded;
-
+    List<Double> vel_pro = new ArrayList<Double>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,20 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
 
     }
 
+    public void next(View view){
+        Intent i = new Intent(this, NewStimuliAddArticialStimuli.class);
+        i = i.putExtra("videoName", video_name);
+        i = i.putExtra("velocityProfile", (Serializable) vel_pro);
+        startActivity(i);
+    }
+
+    public void cancel(View view){
+
+    }
+
+    public void LoadVelFuncFromFolder(View view){
+
+    }
 
     public void loadVideoImages(View view){
         got_video_images = true;
@@ -59,7 +75,7 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
     public void getVelocityProfile(View view){
         if(got_video_images){
             String imageDir = "KineTest/Resources/Temp/temp_images";
-            List<Double> vel_pro = videoloaded.getVelocityProfile(imageDir);
+            vel_pro = videoloaded.getVelocityProfile(imageDir);
             GraphView graph = (GraphView) findViewById(R.id.NewStimuli_graph_view_new_stimuli);
             LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>();
 
