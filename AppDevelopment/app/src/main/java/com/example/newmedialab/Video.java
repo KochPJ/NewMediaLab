@@ -53,6 +53,10 @@ public class Video implements Serializable {
         getVideoData();
     }
 
+    public void setVeloctiyProfile(List<Double> veloctiy_profile){
+        veloctiyProfile = veloctiy_profile;
+    }
+
     public void getVideoData(){
         FFmpegMediaMetadataRetriever mFFmpegMediaMetadataRetriever = new FFmpegMediaMetadataRetriever();
         mFFmpegMediaMetadataRetriever.setDataSource(videoPath);
@@ -484,8 +488,26 @@ public class Video implements Serializable {
     }
 
     public void clearTempFolders(){
+        //clearing all temp data in the temp folders
+        String dir = "KineTest/Resources/Temp/temp_images";
+        File root = new File(Environment.getExternalStorageDirectory()+"/"+dir);
+        if (root.exists()){
+            deleteTempFolder(dir);
+        }
+        dir = "KineTest/Resources/Temp/temp_images_analysed";
+        root = new File(Environment.getExternalStorageDirectory()+"/"+dir);
+        if (root.exists()){
+            deleteTempFolder(dir);
+        }
+        dir = "KineTest/Resources/Temp/temp_loaded_video";
+        root = new File(Environment.getExternalStorageDirectory()+"/"+dir);
+        if (root.exists()){
+            deleteTempFolder(dir);
+        }
 
     }
+
+
 
 }
 

@@ -8,8 +8,40 @@
     >
 
 
+    <Spinner
+        android:id="@+id/newStimuli_language_spinner"
+        android:layout_width="214dp"
+        android:layout_height="34dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="128dp"
+        android:layout_marginBottom="60dp"
+        android:textSize="20dp" />
+
+    <Spinner
+        android:id="@+id/newStimuli_type_spinner"
+        android:layout_width="214dp"
+        android:layout_height="34dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="133dp"
+        android:layout_marginBottom="21dp"
+        android:textSize="20dp" />
+
     <Button
         android:id="@+id/playStimuli2"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="85dp"
+        android:layout_marginBottom="57dp"
+        android:layout_toEndOf="@+id/vv_new_stimuli"
+        android:background="@drawable/mybutton"
+        android:onClick="addLanguage"
+        android:text="Add Language" />
+
+    <Button
+        android:id="@+id/NewStimuli_AddLanguage"
         android:layout_width="142dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -43,23 +75,43 @@
         android:text="Load Video From Device" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/newStimuli_type_text_view"
+        android:layout_width="51dp"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="47dp"
+        android:layout_marginBottom="20dp"
+        android:text="Type" />
+
+    <TextView
+        android:id="@+id/newStimuli_language_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginBottom="70dp"
+        android:text="Language" />
+
+    <TextView
+        android:id="@+id/newStimuli_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="236dp"
-        android:text="Video Name" />
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="274dp"
+        android:text="Name" />
 
     <EditText
         android:id="@+id/et_video_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="225dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="125dp"
+        android:layout_marginBottom="103dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="video_1" />
@@ -70,8 +122,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="19dp"
         android:onClick="FinishAdding"
         android:text="Next" />
 

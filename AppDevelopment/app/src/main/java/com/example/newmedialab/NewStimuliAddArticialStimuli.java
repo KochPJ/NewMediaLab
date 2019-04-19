@@ -19,23 +19,30 @@ public class NewStimuliAddArticialStimuli extends AppCompatActivity {
     static final int SELECT_VIDEO = 2;
     ArrayList<Uri> userSelectedVideoUriList;
     Integer lastAdd = -1;
-
+    Video videoloaded;
     VideoView videoView;
+    String video_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_stimuli_add_articial_stimuli);
-
+        Intent i = getIntent();
+        video_name = (String) i.getSerializableExtra("videoName");
+        videoloaded = new Video(this, video_name);
         videoView = (VideoView)findViewById(R.id.newStimuli_artificialStimuli_videoView);
     }
 
     public void save(View view){
 
+
+
     }
 
     public void cancel(View view){
-
+        videoloaded.clearTempFolders();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     public void filmVideo(View view) {

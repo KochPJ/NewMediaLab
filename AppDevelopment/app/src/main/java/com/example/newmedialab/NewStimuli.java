@@ -7,7 +7,11 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -16,6 +20,7 @@ import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +28,7 @@ import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class NewStimuli extends AppCompatActivity {
+public class NewStimuli extends AppCompatActivity implements NewStimuliAddLanguageDialog.AddLanguageListener {
     static final int REQUEST_VIDEO_CAPTURE = 1;
     static final int SELECT_VIDEO = 2;
     ArrayList<Uri> userSelectedVideoUriList;
@@ -33,6 +38,23 @@ public class NewStimuli extends AppCompatActivity {
     String video_name = "video_1";
     VideoView videoView;
     Integer lastAdd = -1;
+    Spinner languageSpinner;
+    private String[] languages;
+    String language;
+    Spinner typeSpinner;
+    private String[] types = {"Word", "Letter"};
+    String type;
+
+    @Override
+    public void applyText(String language) {
+        String[] addNewLanguage = new String[languages.length +1];
+        addNewLanguage[0] = language;
+        for(int i = 0; i<languages.length; i++){
+            addNewLanguage[i+1] = languages[i];
+        }
+        languages = addNewLanguage;
+        updateSpinners();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +68,49 @@ public class NewStimuli extends AppCompatActivity {
             Log.d("OpenCV", "OpenCV library found inside package. Using it!");
             mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
         }
+
+        String languagesDir = Environment.getExternalStorageDirectory()+ "/KineTest/Resources/Languages";
+        File root = new File(languagesDir);
+        if(!root.exists()) root.mkdirs();
+        languages = root.list();
+
+        updateSpinners();
+
+    }
+
+
+    private void updateSpinners(){
+        languageSpinner = (Spinner) findViewById(R.id.newStimuli_language_spinner);
+        ArrayAdapter<String> spinnerArrayAdapterLanguage = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item,
+                        this.languages); //selected item will look like a spinner set from XML
+        spinnerArrayAdapterLanguage.setDropDownViewResource(android.R.layout
+                .simple_spinner_dropdown_item);
+        languageSpinner.setAdapter(spinnerArrayAdapterLanguage);
+        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                language = languages[position];
+            }
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+
+        typeSpinner = (Spinner) findViewById(R.id.newStimuli_type_spinner);
+        ArrayAdapter<String> spinnerArrayAdapterType = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item,
+                        this.types); //selected item will look like a spinner set from XML
+        spinnerArrayAdapterType.setDropDownViewResource(android.R.layout
+                .simple_spinner_dropdown_item);
+        typeSpinner.setAdapter(spinnerArrayAdapterType);
+        typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                type = types[position];
+            }
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
     }
 
     public void FinishAdding(View view) {
@@ -69,6 +134,8 @@ public class NewStimuli extends AppCompatActivity {
             Intent i = new Intent(this, NewStimuliVelFuncAnalyses.class);
             i = i.putExtra("videoPath", copy_to_dir+"/"+video_name+".mp4");
             i = i.putExtra("videoName", video_name);
+            i = i.putExtra("type", type);
+            i = i.putExtra("language", language);
             startActivity(i);
 
         }else{
@@ -76,6 +143,13 @@ public class NewStimuli extends AppCompatActivity {
             Toast.makeText(this, "video not loaded yet", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    public void addLanguage(View view){
+        NewStimuliAddLanguageDialog newStimuliAddLanguageDialog = new NewStimuliAddLanguageDialog();
+        newStimuliAddLanguageDialog.show(getSupportFragmentManager(), "newStimuliAddLanguageDialog");
+    }
+
 
     public void filmVideo(View view) {
         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);

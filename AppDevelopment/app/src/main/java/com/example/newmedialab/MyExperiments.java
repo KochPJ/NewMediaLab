@@ -184,7 +184,6 @@ public class MyExperiments extends AppCompatActivity {
                     .simple_spinner_dropdown_item);
             spinner.setAdapter(spinnerArrayAdapter);
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                     Experiment exp = experiment_list[position];
                     String name = exp.getName();
