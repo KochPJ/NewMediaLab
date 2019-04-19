@@ -1,20 +1,24 @@
 Kinetest
 	-resources
-		-words
-			- videos_kinematic
-			- video_images
-				-video_name_n
-					-image_1.png
-					...
-					-image_n.png
-				...
-				-video_name_n
-			- velocityprofiles
-			- videos_artificial
-		-letter
-			- videos_kinematic
-			- velocityprofiles
-			- videos_artificial
+		-languages
+			-language_1
+				-words
+					- videos_kinematic
+					- video_images
+						-video_name_n
+							-image_1.png
+							...
+							-image_n.png
+						...
+						-video_name_n
+					- velocityprofiles
+					- videos_artificial
+				-letter
+					- videos_kinematic
+					- velocityprofiles
+					- videos_artificial
+			...		
+			-language_n
 		
 		-temp
 			-temp_image_operation
