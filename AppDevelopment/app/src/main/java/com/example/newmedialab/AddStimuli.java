@@ -51,7 +51,7 @@ public class AddStimuli extends AppCompatActivity {
             series.appendData(new DataPoint(i, vel_pro.get(i)) , true, vel_pro.size());
         }
 
-        videoloaded.saveVelocityProfile();
+
 
         Log.d("getVelocityProfile", "Max vel = "+Double.toString(xd_max));
         graph.removeAllSeries();

@@ -25,6 +25,8 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
 
     VideoView videoView;
     String video_path;
+    String language;
+    String type;
     String video_name;
     String video_name_analysed;
     Boolean got_video_images = true;
@@ -39,6 +41,8 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
         Intent i = getIntent();
         video_path = (String) i.getSerializableExtra("videoPath");
         video_name = (String) i.getSerializableExtra("videoName");
+        language = (String) i.getSerializableExtra("language");
+        type = (String) i.getSerializableExtra("type");
         video_name_analysed = ((String) i.getSerializableExtra("videoName"))+"_analysed";
         videoloaded = new Video(this, video_name_analysed);
         videoloaded.setVideoPath(video_path);
@@ -50,6 +54,8 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
         Intent i = new Intent(this, NewStimuliAddArticialStimuli.class);
         i = i.putExtra("videoName", video_name);
         i = i.putExtra("velocityProfile", (Serializable) vel_pro);
+        i = i.putExtra("type", type);
+        i = i.putExtra("language", language);
         startActivity(i);
     }
 

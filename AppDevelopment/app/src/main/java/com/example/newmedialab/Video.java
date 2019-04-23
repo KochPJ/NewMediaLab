@@ -247,12 +247,11 @@ public class Video implements Serializable {
     }
 
 
-    public void saveVelocityProfile(){
-        String savePath = Environment.getExternalStorageDirectory()+"/KineTest/Resources/";
+    public void saveVelocityProfile(String Path){
+        String savePath = Environment.getExternalStorageDirectory()+"/"+ Path+"/";
         //clear "KineTest/VelocityProfiles" directory to store new images
         File saveAt = new File(savePath);
-        if (!saveAt.exists()) saveAt.mkdirs();
-        deleteTempFolder("KineTest/VelocityProfiles");
+        if(!saveAt.exists()) saveAt.mkdirs();
         // convert array of symboles to string
         try
         {
