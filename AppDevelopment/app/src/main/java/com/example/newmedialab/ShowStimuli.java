@@ -3,6 +3,7 @@ package com.example.newmedialab;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ public class ShowStimuli extends AppCompatActivity {
     private int remaining_repeats = 1;
     private int auto_repeats = 1;
     TextView repeats;
+    public String stimuli_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +38,23 @@ public class ShowStimuli extends AppCompatActivity {
 
         repeats = (TextView) findViewById(R.id.tv_remaining_repeats);
         repeats.setText("Remaining Replays: "+remaining_repeats);
+
+        stimuli_name = exp.getNextStimuli();
+        //Set progressbar with correct value
+        ProgressBar pb = findViewById(R.id.progressBar);
+        int maxSymbols = 0;
+        for (char ch : exp.getSymbols().toCharArray()){
+            if(ch != ',' && ch != ' '){
+                maxSymbols++;
+            }
+        }
+        pb.setMax(maxSymbols);
+        pb.setProgress(maxSymbols - exp.getRemainingSymbols().size());
+
     }
 
     public void replayStimuli(View view) {
-        String stimuli_name = exp.getNextStimuli();
+
         if(this.remaining_repeats > 0){
             //TODO: load correct video based on stimuli_name
             for(int i = 0; auto_repeats > i; i++){

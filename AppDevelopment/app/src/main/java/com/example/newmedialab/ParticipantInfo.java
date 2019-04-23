@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import org.jcodec.containers.mp4.boxes.Edit;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ParticipantInfo extends AppCompatActivity {
@@ -23,7 +21,8 @@ public class ParticipantInfo extends AppCompatActivity {
 
     public void addID(View view) {
        EditText etID = (EditText) findViewById(R.id.et_participantID);
-       String ID = etID.getText().toString();
+       String id = etID.getText().toString();
+       exp.setIDs(id);
        Intent intent = new Intent(this, ShowStimuli.class);
        intent = intent.putExtra("experiment", exp);
        startActivity(intent);

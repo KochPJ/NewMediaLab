@@ -10,7 +10,9 @@ import android.graphics.Path;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -47,6 +49,24 @@ public class TestWriting extends AppCompatActivity {
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStrokeWidth(5);
+
+        //Set progressbar with correct value
+        ProgressBar pb = findViewById(R.id.progressBar2);
+        int maxSymbols = 0;
+        for (char ch : exp.getSymbols().toCharArray()){
+            if(ch != ',' && ch != ' '){
+                maxSymbols++;
+            }
+        }
+        pb.setMax(maxSymbols);
+        pb.setProgress(maxSymbols - exp.getRemainingSymbols().size());
+
+        //Set messages
+        TextView expName = (TextView) findViewById(R.id.textView13);
+        expName.setText(exp.getName());
+        TextView expName2 = (TextView) findViewById(R.id.textView14);
+        expName2.setText(exp.getTask_msg());
+
     }
 
     public void clearSketch(View view) {

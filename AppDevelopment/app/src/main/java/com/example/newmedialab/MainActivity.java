@@ -14,6 +14,7 @@ import java.io.File;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//TODO: Stop app if not running with correct permissions
 public class MainActivity extends AppCompatActivity {
 
     public void openMyExperiments(View view) {
