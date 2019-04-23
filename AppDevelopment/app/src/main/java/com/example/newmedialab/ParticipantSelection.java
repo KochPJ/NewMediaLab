@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ParticipantSelection extends AppCompatActivity {
 
     public Experiment exp = new Experiment("");
+    public Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,16 +20,15 @@ public class ParticipantSelection extends AppCompatActivity {
         setContentView(R.layout.activity_participant_selection);
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
-    }
 
-    public void startMultipleChoiceTest(View view){
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_item,
-                        exp.IDs); //selected item will look like a spinner set from XML
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout
-                .simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerArrayAdapter);
+        // Fill spinner dynamically
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, exp.getIDs());
+
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setAdapter(adapter);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
@@ -38,7 +38,9 @@ public class ParticipantSelection extends AppCompatActivity {
             }
 
         });
+    }
 
+    public void startMultipleChoiceTest(View view){
         int pos = spinner.getSelectedItemPosition();
         exp.setCurrentID(pos);
 

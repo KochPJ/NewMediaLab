@@ -71,7 +71,7 @@ public class TestWriting extends AppCompatActivity {
     }
 
     public void clearSketch(View view) {
-        //TODO: fix reset not working untill drawing something else
+        //TODO: (low priority) fix reset not working untill drawing something else
         path2.reset();
     }
 
