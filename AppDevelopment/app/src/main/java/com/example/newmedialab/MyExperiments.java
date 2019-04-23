@@ -108,7 +108,7 @@ public class MyExperiments extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.setTitle("Start Experiment");
         dialog.setMessage("Select Test Phase");
-        dialog.setPositiveButton("Pre Test", new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("Pre Test", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 Intent intent4a = new Intent(MyExperiments.this, ParticipantInfo.class);
@@ -116,12 +116,17 @@ public class MyExperiments extends AppCompatActivity {
                 startActivity(intent4a);
             }
         })
-        .setNegativeButton("Post Test", new DialogInterface.OnClickListener() {
+        .setPositiveButton("Post Test", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent4b = new Intent(MyExperiments.this, ParticipantSelection.class);
-                intent4b = intent4b.putExtra("experiment", exp_final);
-                startActivity(intent4b);
+                if(exp_final.getIDs() == null || exp_final.getIDs().size() == 0){
+                    Toast.makeText(MyExperiments.this, "Please run a pre test first",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent4b = new Intent(MyExperiments.this, ParticipantSelection.class);
+                    intent4b = intent4b.putExtra("experiment", exp_final);
+                    startActivity(intent4b);
+                }
             }
         });
 
@@ -170,6 +175,11 @@ public class MyExperiments extends AppCompatActivity {
                             exp.setSpeedModifier(line);
                         } else if(c == 8){
                             exp.setRandom(line);
+                        }  else if(c == 9){
+                            String[] strParts = line.split(";");
+                            for(String str : strParts){
+                                exp.addID(str);
+                            }
                         }
                         this.experiment_list[i] = exp;
                         c++;

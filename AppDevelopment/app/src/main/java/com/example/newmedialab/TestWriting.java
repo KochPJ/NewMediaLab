@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -82,6 +83,8 @@ public class TestWriting extends AppCompatActivity {
         if(exp.finishedShowingStimuli()){
             // Save changes to experiment
             exp.createFile();
+            Toast.makeText(TestWriting.this, "Finished test, saved results",
+                    Toast.LENGTH_LONG).show();
             // Return to MyExperiments
             Intent intent = new Intent(this, MyExperiments.class);
             intent = intent.putExtra("experiment", exp);

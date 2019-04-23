@@ -54,8 +54,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="135dp"
-        android:layout_marginBottom="201dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginBottom="155dp"
         android:text="None of the above" />
 
     <TextView
@@ -94,8 +94,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="113dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="91dp"
+        android:onClick="nextQuestion"
         android:text="Continue" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="212dp" />
 
 </RelativeLayout>

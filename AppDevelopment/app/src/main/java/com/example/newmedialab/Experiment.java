@@ -75,7 +75,9 @@ public class Experiment implements Serializable{
 
     public void setQnum(String exp_qnum) { this.qnum = exp_qnum; }
 
-    public void setIDs(String id) {this.IDs.add(id); }
+    public void addID(String id) {this.IDs.add(id); }
+
+    public void setCurrentID(int id_num) {this.currentID = id_num; }
 
     public String getName(){
         return this.name;
@@ -129,11 +131,6 @@ public class Experiment implements Serializable{
 
     public Boolean finishedShowingStimuli() {return  this.finishedShowStimuli; }
 
-    public void addID(String id){
-        this.IDs.add(id);
-        this.currentID = this.IDs.size();
-    }
-
     public String getID(int num){return this.IDs.get(num); }
 
     public int getCurrentID(){
@@ -152,7 +149,13 @@ public class Experiment implements Serializable{
             FileWriter writer = new FileWriter(gpxfile);
             writer.append(name).append("\n").append(experiment_type).append("\n").append(progressbar).append("\n").append(max_repeats)
                     .append("\n").append(auto_repeats).append("\n").append(symbols).append("\n").append(function).append("\n").append(speed_modifier)
-                    .append("\n").append(random);
+                    .append("\n").append(random).append("\n");
+            //Add IDs using a dotcomma separated format
+            while(IDs.size() > 0){
+                String ID = IDs.get(0);
+                writer.append(ID+";");
+                IDs.remove(0);
+            }
 
             writer.flush();
             writer.close();
