@@ -15,13 +15,15 @@ public class Experiment implements Serializable{
     String max_repeats = "0";
     String auto_repeats = "1";
     String speed_modifier = "100";
-    String symbols = "0,1,2,3,4,5,6,7,8,9,10";
+    String symbols = "0,1,2";
+    String falseSymbols = "5,6,7,8,9,10,11,12,13";
     String function = "2x";
     String file_name = "";
-    String progressbar = "false";
+    String progressbar = "true";
     String experiment_type = "unknown";
-    String task_msg, final_msg = "";
-    String qnum = "";
+    String task_msg_wrt, final_msg_wrt = "";
+    String task_msg_mct, final_msg_mct = "";
+    String qnum = "4";
     String random = "true";
     ArrayList<String> IDs = new ArrayList<String>();
     ArrayList<String> remainingSymbols = new ArrayList<String>();
@@ -43,25 +45,17 @@ public class Experiment implements Serializable{
         this.experiment_type = experiment_type;
     }
 
-    public void setProgressbar(String progressbar){
-        this.progressbar = progressbar;
-    }
+    public void setProgressbar(String progressbar){this.progressbar = progressbar; }
 
-    public void setRandom(String random){
-        this.random = random;
-    }
+    public void setRandom(String random){this.random = random; }
 
-    public void setMaxRepeats(String max_repeats){
-        this.max_repeats = max_repeats;
-    }
+    public void setMaxRepeats(String max_repeats){ this.max_repeats = max_repeats; }
 
-    public void setAutoRepeats(String auto_repeats){
-        this.auto_repeats = auto_repeats;
-    }
+    public void setAutoRepeats(String auto_repeats){ this.auto_repeats = auto_repeats; }
 
-    public void setSymbols(String symbols){
-        this.symbols = symbols;
-    }
+    public void setSymbols(String symbols){ this.symbols = symbols; }
+
+    public void setFalseSymbols(String false_symbols) { this.falseSymbols = symbols;}
 
     public void setFunction(String function){
         this.function = function;
@@ -71,11 +65,15 @@ public class Experiment implements Serializable{
         this.speed_modifier = speed_modifier;
     }
 
-    public void setMessages(String exp_task_msg, String exp_final_msg) {this.task_msg = exp_task_msg; this.final_msg = exp_final_msg; }
+    public void setMessagesWRT(String exp_task_msg, String exp_final_msg) {this.task_msg_wrt = exp_task_msg; this.final_msg_wrt = exp_final_msg; }
+
+    public void setMessagesMCT(String exp_task_msg, String exp_final_msg) {this.task_msg_mct = exp_task_msg; this.final_msg_mct = exp_final_msg; }
 
     public void setQnum(String exp_qnum) { this.qnum = exp_qnum; }
 
-    public void setIDs(String id) {this.IDs.add(id); }
+    public void addID(String id) {this.IDs.add(id); }
+
+    public void setCurrentID(int id_num) {this.currentID = id_num; }
 
     public String getName(){
         return this.name;
@@ -115,9 +113,13 @@ public class Experiment implements Serializable{
 
     public String getRandom() {return  this.random;}
 
-    public String getTask_msg() {return this.task_msg; }
+    public String getTask_msg_mct() {return this.task_msg_mct; }
 
-    public String getFinal_msg() {return this.final_msg; }
+    public String getTask_msg_wrt() {return this.task_msg_mct; }
+
+    public String getFinal_msg_mct() {return this.final_msg_mct; }
+
+    public String getFinal_msg_wrt() {return this.final_msg_wrt; }
 
     public String getQnum() {return this.qnum; }
 
@@ -128,11 +130,6 @@ public class Experiment implements Serializable{
     public String getCurrentSymbol() {return  this.currentSymbol; }
 
     public Boolean finishedShowingStimuli() {return  this.finishedShowStimuli; }
-
-    public void addID(String id){
-        this.IDs.add(id);
-        this.currentID = this.IDs.size();
-    }
 
     public String getID(int num){return this.IDs.get(num); }
 
@@ -152,7 +149,13 @@ public class Experiment implements Serializable{
             FileWriter writer = new FileWriter(gpxfile);
             writer.append(name).append("\n").append(experiment_type).append("\n").append(progressbar).append("\n").append(max_repeats)
                     .append("\n").append(auto_repeats).append("\n").append(symbols).append("\n").append(function).append("\n").append(speed_modifier)
-                    .append("\n").append(random);
+                    .append("\n").append(random).append("\n");
+            //Add IDs using a dotcomma separated format
+            while(IDs.size() > 0){
+                String ID = IDs.get(0);
+                writer.append(ID+";");
+                IDs.remove(0);
+            }
 
             writer.flush();
             writer.close();

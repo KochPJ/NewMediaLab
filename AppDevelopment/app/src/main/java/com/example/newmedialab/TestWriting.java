@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class TestWriting extends AppCompatActivity {
 
     public Experiment exp = new Experiment("");
+    public String stimuli;
     RelativeLayout relativeLayout;
     Paint paint;
     View view;
@@ -52,25 +54,29 @@ public class TestWriting extends AppCompatActivity {
 
         //Set progressbar with correct value
         ProgressBar pb = findViewById(R.id.progressBar2);
-        int maxSymbols = 0;
-        for (char ch : exp.getSymbols().toCharArray()){
-            if(ch != ',' && ch != ' '){
-                maxSymbols++;
+        if(Boolean.parseBoolean(exp.getProgressbar())){
+            int maxSymbols = 0;
+            for (char ch : exp.getSymbols().toCharArray()){
+                if(ch != ',' && ch != ' '){
+                    maxSymbols++;
+                }
             }
+            pb.setMax(maxSymbols+1);
+            pb.setProgress(maxSymbols - exp.getRemainingSymbols().size());
+        } else {
+            pb.setAlpha(0);
         }
-        pb.setMax(maxSymbols);
-        pb.setProgress(maxSymbols - exp.getRemainingSymbols().size());
 
         //Set messages
         TextView expName = (TextView) findViewById(R.id.textView13);
         expName.setText(exp.getName());
         TextView expName2 = (TextView) findViewById(R.id.textView14);
-        expName2.setText(exp.getTask_msg());
+        expName2.setText(exp.getTask_msg_wrt());
 
     }
 
     public void clearSketch(View view) {
-        //TODO: fix reset not working untill drawing something else
+        //TODO: (low priority) fix reset not working until drawing something else
         path2.reset();
     }
 
@@ -82,6 +88,8 @@ public class TestWriting extends AppCompatActivity {
         if(exp.finishedShowingStimuli()){
             // Save changes to experiment
             exp.createFile();
+            Toast.makeText(TestWriting.this, "Finished test, saved results \n"+exp.getFinal_msg_mct(),
+                    Toast.LENGTH_LONG).show();
             // Return to MyExperiments
             Intent intent = new Intent(this, MyExperiments.class);
             intent = intent.putExtra("experiment", exp);

@@ -49,12 +49,6 @@ public class MyExperiments extends AppCompatActivity {
                     intent = intent.putExtra("editing", true);
                     startActivity(intent);
                     break;
-                case R.id.edit_stimuli: // Go to stimuli view with edit param
-                    Intent intent2 = new Intent(this, ExperimentSettings.class);
-                    intent2 = intent2.putExtra("experiment", exp);
-                    intent2 = intent2.putExtra("editing", true);
-                    startActivity(intent2);
-                    break;
                 case R.id.results: // Go to results view
                     // TODO: add export experimental setup
                     Intent intent3 = new Intent(this, Results.class);
@@ -91,7 +85,7 @@ public class MyExperiments extends AppCompatActivity {
                     startActivity(intent6);
                     break;
                 case R.id.edit_experiment: // Go to edit experiment view
-                    Intent intent7 = new Intent(this, ExperimentType.class);
+                    Intent intent7 = new Intent(this, WritingExperiment.class);
                     intent7 = intent7.putExtra("experiment", exp);
                     intent7 = intent7.putExtra("editing", true);
                     startActivity(intent7);
@@ -105,10 +99,9 @@ public class MyExperiments extends AppCompatActivity {
     public void startMyExperiment(Experiment exp) {
         final Experiment exp_final = exp;
         AlertDialog.Builder dialog = new AlertDialog.Builder(MyExperiments.this);
-        dialog.setCancelable(false);
         dialog.setTitle("Start Experiment");
         dialog.setMessage("Select Test Phase");
-        dialog.setPositiveButton("Pre Test", new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("Pre Test", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 Intent intent4a = new Intent(MyExperiments.this, ParticipantInfo.class);
@@ -116,12 +109,17 @@ public class MyExperiments extends AppCompatActivity {
                 startActivity(intent4a);
             }
         })
-        .setNegativeButton("Post Test", new DialogInterface.OnClickListener() {
+        .setPositiveButton("Post Test", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent4b = new Intent(MyExperiments.this, ParticipantSelection.class);
-                intent4b = intent4b.putExtra("experiment", exp_final);
-                startActivity(intent4b);
+                if(exp_final.getIDs() == null || exp_final.getIDs().size() == 0){
+                    Toast.makeText(MyExperiments.this, "Please run a pre test first",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent4b = new Intent(MyExperiments.this, ParticipantSelection.class);
+                    intent4b = intent4b.putExtra("experiment", exp_final);
+                    startActivity(intent4b);
+                }
             }
         });
 
@@ -137,7 +135,7 @@ public class MyExperiments extends AppCompatActivity {
         /// Read experiment files
         File dir = new File(Environment.getExternalStorageDirectory(), "KineTest/Experiments");
         File[] directoryListing = dir.listFiles();
-
+        //TODO: Save messages, Qnum
         if (directoryListing != null) {
             int i = 0;
             this.names = new String[directoryListing.length];
@@ -170,6 +168,11 @@ public class MyExperiments extends AppCompatActivity {
                             exp.setSpeedModifier(line);
                         } else if(c == 8){
                             exp.setRandom(line);
+                        }  else if(c == 9){
+                            String[] strParts = line.split(";");
+                            for(String str : strParts){
+                                exp.addID(str);
+                            }
                         }
                         this.experiment_list[i] = exp;
                         c++;
