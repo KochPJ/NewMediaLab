@@ -13,6 +13,15 @@ Kinetest
 						-video_name_n
 					- velocityprofiles
 					- videos_artificial
+					
+					- videos_artificial_lastImage
+						-videoname.png
+
+					- videos_artificial_lastImage
+						-videoname.png
+
+
+						
 				-letter
 					- videos_kinematic
 					- velocityprofiles
@@ -33,6 +42,7 @@ Kinetest
 		-exp_files
 		-videos_transformed
 			video_name_velfunction_type_....mp4
+
 		-results
 			-exp_name_1
 				-subject_1
