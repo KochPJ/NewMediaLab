@@ -71,12 +71,12 @@ public class TestWriting extends AppCompatActivity {
         TextView expName = (TextView) findViewById(R.id.textView13);
         expName.setText(exp.getName());
         TextView expName2 = (TextView) findViewById(R.id.textView14);
-        expName2.setText(exp.getTask_msg());
+        expName2.setText(exp.getTask_msg_wrt());
 
     }
 
     public void clearSketch(View view) {
-        //TODO: (low priority) fix reset not working untill drawing something else
+        //TODO: (low priority) fix reset not working until drawing something else
         path2.reset();
     }
 
@@ -88,7 +88,7 @@ public class TestWriting extends AppCompatActivity {
         if(exp.finishedShowingStimuli()){
             // Save changes to experiment
             exp.createFile();
-            Toast.makeText(TestWriting.this, "Finished test, saved results",
+            Toast.makeText(TestWriting.this, "Finished test, saved results \n"+exp.getFinal_msg_mct(),
                     Toast.LENGTH_LONG).show();
             // Return to MyExperiments
             Intent intent = new Intent(this, MyExperiments.class);

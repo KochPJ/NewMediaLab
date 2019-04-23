@@ -28,6 +28,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".NewStimuliAddArticialStimuli"></activity>
         <activity
+            android:name=".ExperimentSettingsMultipleChoice"
+            android:label="ExperimentSettingsMultipleChoice"/>
+        <activity
             android:name=".ParticipantSelection"
             android:label="@string/title_activity_participant_selection"
             android:theme="@style/AppTheme.NoActionBar"></activity>
@@ -61,14 +64,6 @@
             android:label="@string/title_activity_writing_experiment"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ExperimentType"
-            android:label="@string/title_activity_new_experiment_setup"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".StartExperimentMain"
-            android:label="@string/title_activity_start_experiment_main"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".Results"
             android:label="@string/title_activity_results"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -82,7 +77,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".playVideo" />
         <activity android:name=".ExperimentFunction" />
-        <activity android:name=".ExperimentSettings" />
+        <activity android:name=".ExperimentSettingsWriting" />
         <activity
             android:name=".MyExperiments"
             android:label="@string/app_name"

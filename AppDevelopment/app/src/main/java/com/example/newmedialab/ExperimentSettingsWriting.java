@@ -5,11 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ExperimentSettings extends AppCompatActivity {
+public class ExperimentSettingsWriting extends AppCompatActivity {
 
     public Experiment exp = new Experiment("");
     public boolean editing = false;
@@ -17,7 +16,7 @@ public class ExperimentSettings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_experiment_settings);
+        setContentView(R.layout.activity_experiment_settings_writing);
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
         editing = getIntent().getExtras().getBoolean("editing");
@@ -42,22 +41,22 @@ public class ExperimentSettings extends AppCompatActivity {
         } else {
             exp.setRandom("false");
         }
-        // create and save experiment!
-        exp.createFile();
-
-        Toast.makeText(this, "Saved Experiment to " +  exp.getFile_name(),
-                Toast.LENGTH_LONG).show();
 
         //If editing return to my experiments
         if (editing){
-            Intent intent = new Intent(this, MyExperiments.class);
+            Intent intent = new Intent(this, MultipleChoiceExperiment.class);
+            intent = intent.putExtra("experiment", exp);
+            intent = intent.putExtra("editing", editing);
             startActivity(intent);
         } else {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, MultipleChoiceExperiment.class);
+            intent = intent.putExtra("experiment", exp);
+            intent = intent.putExtra("editing", editing);
             startActivity(intent);
         }
-        //Reset boolean for backnavigation
-        editing = false;
+    }
+
+    public void previewSymbols(View view){
 
     }
 

@@ -49,12 +49,6 @@ public class MyExperiments extends AppCompatActivity {
                     intent = intent.putExtra("editing", true);
                     startActivity(intent);
                     break;
-                case R.id.edit_stimuli: // Go to stimuli view with edit param
-                    Intent intent2 = new Intent(this, ExperimentSettings.class);
-                    intent2 = intent2.putExtra("experiment", exp);
-                    intent2 = intent2.putExtra("editing", true);
-                    startActivity(intent2);
-                    break;
                 case R.id.results: // Go to results view
                     // TODO: add export experimental setup
                     Intent intent3 = new Intent(this, Results.class);
@@ -91,7 +85,7 @@ public class MyExperiments extends AppCompatActivity {
                     startActivity(intent6);
                     break;
                 case R.id.edit_experiment: // Go to edit experiment view
-                    Intent intent7 = new Intent(this, ExperimentType.class);
+                    Intent intent7 = new Intent(this, WritingExperiment.class);
                     intent7 = intent7.putExtra("experiment", exp);
                     intent7 = intent7.putExtra("editing", true);
                     startActivity(intent7);
@@ -141,7 +135,7 @@ public class MyExperiments extends AppCompatActivity {
         /// Read experiment files
         File dir = new File(Environment.getExternalStorageDirectory(), "KineTest/Experiments");
         File[] directoryListing = dir.listFiles();
-
+        //TODO: Save messages, Qnum
         if (directoryListing != null) {
             int i = 0;
             this.names = new String[directoryListing.length];

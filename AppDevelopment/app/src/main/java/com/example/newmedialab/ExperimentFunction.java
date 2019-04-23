@@ -119,19 +119,12 @@ public class ExperimentFunction extends AppCompatActivity implements AdapterView
             Log.d("name = ", name);
             Log.d("repeats = ", repeats);
 
-            //If editing return to my experiments
-            if (editing){
-                //Save results
-                exp.createFile();
-                Toast.makeText(this, "Saved Experiment to " +  exp.getFile_name(),
-                        Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(this, MyExperiments.class);
-                startActivity(intent);
-            } else {
-                Intent intent = new Intent(this, ExperimentSettings.class);
-                intent = intent.putExtra("experiment", exp);
-                startActivity(intent);
-            }
+            //Save results
+            exp.createFile();
+            Toast.makeText(this, "Saved Experiment to " +  exp.getFile_name(),
+                    Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, MyExperiments.class);
+            startActivity(intent);
             // need to reset bool to false because else people can press back in the next view and then use any function which was not tested yet.
             function_build = false;
             editing = false;

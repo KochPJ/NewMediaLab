@@ -46,7 +46,7 @@ public class TestMultipleChoice extends AppCompatActivity {
         TextView expName = (TextView) findViewById(R.id.textView11);
         expName.setText(exp.getName());
         TextView expName2 = (TextView) findViewById(R.id.textView12);
-        expName2.setText(exp.getTask_msg());
+        expName2.setText(exp.getTask_msg_mct());
 
         // Find imageviews
         im1 = findViewById(R.id.imageView);
@@ -99,7 +99,7 @@ public class TestMultipleChoice extends AppCompatActivity {
         if(exp.finishedShowingStimuli()){
             // Save changes to experiment
             exp.createFile();
-            Toast.makeText(TestMultipleChoice.this, "Finished test, saved results",
+            Toast.makeText(TestMultipleChoice.this, "Finished test, saved results \n"+exp.getFinal_msg_mct(),
                     Toast.LENGTH_LONG).show();
             // Return to MyExperiments
             Intent intent = new Intent(this, MyExperiments.class);

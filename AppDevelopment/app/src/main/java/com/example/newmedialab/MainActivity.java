@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createNewExperiment(View view) {
-        Intent activity = new Intent(MainActivity.this, ExperimentType.class);
+        Intent activity = new Intent(MainActivity.this, WritingExperiment.class);
         activity = activity.putExtra("editing", false);
         startActivity(activity);
     }
