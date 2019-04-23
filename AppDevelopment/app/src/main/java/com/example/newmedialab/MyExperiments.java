@@ -30,70 +30,75 @@ public class MyExperiments extends AppCompatActivity {
     }
 
     public void navigation(View view) {
-        Spinner spinner = (Spinner) findViewById(R.id.experiment_names_spinner);
-        int pos = spinner.getSelectedItemPosition();
-        Experiment exp = experiment_list[pos];
-        String FILE_NAME = exp.getFile_name();
-        File folder = Environment.getExternalStorageDirectory();
-        String file_dir = folder.getPath() + "/KineTest/Experiments/"+FILE_NAME;
-        Log.d("FileName", file_dir);
-        File myFile = new File(file_dir);
-        switch (view.getId()) {
-            case R.id.edit_function: // Go to function view with edit param
-                Intent intent = new Intent(this, ExperimentFunction.class);
-                intent = intent.putExtra("experiment", exp);
-                intent = intent.putExtra("editing", true);
-                startActivity(intent);
-                break;
-            case R.id.edit_stimuli: // Go to stimuli view with edit param
-                Intent intent2 = new Intent(this, ExperimentSettings.class);
-                intent2 = intent2.putExtra("experiment", exp);
-                intent2 = intent2.putExtra("editing", true);
-                startActivity(intent2);
-                break;
-            case R.id.results: // Go to results view
-                // TODO: add export experimental setup
-                Intent intent3 = new Intent(this, Results.class);
-                intent3 = intent3.putExtra("experiment", exp);
-                startActivity(intent3);
-                break;
-            case R.id.start_experiment: // Go to start experiment view
-                //Intent intent4 = new Intent(this, StartExperimentMain.class);
-                //intent4 = intent4.putExtra("experiment", exp);
-                //startActivity(intent4);
-                startMyExperiment(exp);
-                break;
-            case R.id.delete_experiment: // Delete selected experiment
-                // TODO: check if no experiments in spinner (currently crashes)
-                if(myFile.exists()) {
-                    myFile.delete();
-                    Toast.makeText(this, "Deleted Experiment " +  FILE_NAME,
-                        Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(this,  FILE_NAME + " does not exist",
-                        Toast.LENGTH_LONG).show();
-                }
-                Intent startShapes = new Intent(MyExperiments.this, MyExperiments.class);
-                startActivity(startShapes);
-                break;
-            case R.id.add_stimuli: // Go to add stimuli view
-                Intent intent5 = new Intent(this, AddStimuli.class);
-                intent5 = intent5.putExtra("experiment", exp);
-                startActivity(intent5);
-                break;
-            case R.id.view_stimuli: // Go to view stimuli view
-                Intent intent6 = new Intent(this, ViewStimuli.class);
-                intent6 = intent6.putExtra("experiment", exp);
-                startActivity(intent6);
-                break;
-            case R.id.edit_experiment: // Go to edit experiment view
-                Intent intent7 = new Intent(this, ExperimentType.class);
-                intent7 = intent7.putExtra("experiment", exp);
-                intent7 = intent7.putExtra("editing", true);
-                startActivity(intent7);
-                break;
-             default:
-                throw new RuntimeException("Unknown button ID");
+        if(experiment_list == null || experiment_list.length == 0){
+            Toast.makeText(MyExperiments.this, "You have not created or selected an experiment from the list",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            Spinner spinner = (Spinner) findViewById(R.id.experiment_names_spinner);
+            int pos = spinner.getSelectedItemPosition();
+            Experiment exp = experiment_list[pos];
+            String FILE_NAME = exp.getFile_name();
+            File folder = Environment.getExternalStorageDirectory();
+            String file_dir = folder.getPath() + "/KineTest/Experiments/"+FILE_NAME;
+            Log.d("FileName", file_dir);
+            File myFile = new File(file_dir);
+            switch (view.getId()) {
+                case R.id.edit_function: // Go to function view with edit param
+                    Intent intent = new Intent(this, ExperimentFunction.class);
+                    intent = intent.putExtra("experiment", exp);
+                    intent = intent.putExtra("editing", true);
+                    startActivity(intent);
+                    break;
+                case R.id.edit_stimuli: // Go to stimuli view with edit param
+                    Intent intent2 = new Intent(this, ExperimentSettings.class);
+                    intent2 = intent2.putExtra("experiment", exp);
+                    intent2 = intent2.putExtra("editing", true);
+                    startActivity(intent2);
+                    break;
+                case R.id.results: // Go to results view
+                    // TODO: add export experimental setup
+                    Intent intent3 = new Intent(this, Results.class);
+                    intent3 = intent3.putExtra("experiment", exp);
+                    startActivity(intent3);
+                    break;
+                case R.id.start_experiment: // Go to start experiment view
+                    //Intent intent4 = new Intent(this, StartExperimentMain.class);
+                    //intent4 = intent4.putExtra("experiment", exp);
+                    //startActivity(intent4);
+                    startMyExperiment(exp);
+                    break;
+                case R.id.delete_experiment: // Delete selected experiment
+                    // TODO: check if no experiments in spinner (currently crashes)
+                    if(myFile.exists()) {
+                        myFile.delete();
+                        Toast.makeText(this, "Deleted Experiment " +  FILE_NAME,
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(this,  FILE_NAME + " does not exist",
+                                Toast.LENGTH_LONG).show();
+                    }
+                    Intent startShapes = new Intent(MyExperiments.this, MyExperiments.class);
+                    startActivity(startShapes);
+                    break;
+                case R.id.add_stimuli: // Go to add stimuli view
+                    Intent intent5 = new Intent(this, AddStimuli.class);
+                    intent5 = intent5.putExtra("experiment", exp);
+                    startActivity(intent5);
+                    break;
+                case R.id.view_stimuli: // Go to view stimuli view
+                    Intent intent6 = new Intent(this, ViewStimuli.class);
+                    intent6 = intent6.putExtra("experiment", exp);
+                    startActivity(intent6);
+                    break;
+                case R.id.edit_experiment: // Go to edit experiment view
+                    Intent intent7 = new Intent(this, ExperimentType.class);
+                    intent7 = intent7.putExtra("experiment", exp);
+                    intent7 = intent7.putExtra("editing", true);
+                    startActivity(intent7);
+                    break;
+                default:
+                    throw new RuntimeException("Unknown button ID");
+            }
         }
     }
 
