@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class TestWriting extends AppCompatActivity {
 
     public Experiment exp = new Experiment("");
+    public String stimuli;
     RelativeLayout relativeLayout;
     Paint paint;
     View view;
@@ -53,14 +54,18 @@ public class TestWriting extends AppCompatActivity {
 
         //Set progressbar with correct value
         ProgressBar pb = findViewById(R.id.progressBar2);
-        int maxSymbols = 0;
-        for (char ch : exp.getSymbols().toCharArray()){
-            if(ch != ',' && ch != ' '){
-                maxSymbols++;
+        if(Boolean.parseBoolean(exp.getProgressbar())){
+            int maxSymbols = 0;
+            for (char ch : exp.getSymbols().toCharArray()){
+                if(ch != ',' && ch != ' '){
+                    maxSymbols++;
+                }
             }
+            pb.setMax(maxSymbols+1);
+            pb.setProgress(maxSymbols - exp.getRemainingSymbols().size());
+        } else {
+            pb.setAlpha(0);
         }
-        pb.setMax(maxSymbols);
-        pb.setProgress(maxSymbols - exp.getRemainingSymbols().size());
 
         //Set messages
         TextView expName = (TextView) findViewById(R.id.textView13);

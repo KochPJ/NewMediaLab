@@ -105,7 +105,6 @@ public class MyExperiments extends AppCompatActivity {
     public void startMyExperiment(Experiment exp) {
         final Experiment exp_final = exp;
         AlertDialog.Builder dialog = new AlertDialog.Builder(MyExperiments.this);
-        dialog.setCancelable(false);
         dialog.setTitle("Start Experiment");
         dialog.setMessage("Select Test Phase");
         dialog.setNegativeButton("Pre Test", new DialogInterface.OnClickListener() {

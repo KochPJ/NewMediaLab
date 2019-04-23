@@ -158,6 +158,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="73dp"
         android:layout_marginTop="134dp"
-        android:text="Number of options besides the correct one:" />
+        android:text="Number of options besides the correct one (Max. 6):" />
 
 </RelativeLayout>

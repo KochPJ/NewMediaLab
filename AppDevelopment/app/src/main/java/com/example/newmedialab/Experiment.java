@@ -18,10 +18,10 @@ public class Experiment implements Serializable{
     String symbols = "0,1,2,3,4,5,6,7,8,9,10";
     String function = "2x";
     String file_name = "";
-    String progressbar = "false";
+    String progressbar = "true";
     String experiment_type = "unknown";
     String task_msg, final_msg = "";
-    String qnum = "";
+    String qnum = "4";
     String random = "true";
     ArrayList<String> IDs = new ArrayList<String>();
     ArrayList<String> remainingSymbols = new ArrayList<String>();
