@@ -176,6 +176,7 @@ public class NewStimuli extends AppCompatActivity implements NewStimuliAddLangua
                 //String filepath = urip.getUriRealPath(getApplicationContext(), fileUri);
                 //userSelectedVideoDirectoryList.add(filepath);
                 this.lastAdd = 1;
+                Toast.makeText(this, "Video loaded", Toast.LENGTH_SHORT).show();
             }
         }
     }

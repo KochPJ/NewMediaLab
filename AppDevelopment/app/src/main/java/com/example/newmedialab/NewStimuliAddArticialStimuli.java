@@ -31,6 +31,7 @@ public class NewStimuliAddArticialStimuli extends AppCompatActivity {
     String language;
     String type;
     List<Double> vel_pro = new ArrayList<Double>();
+    Boolean artificialStimuli_acquired = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,60 +47,65 @@ public class NewStimuliAddArticialStimuli extends AppCompatActivity {
     }
 
     public void save(View view){
-        //save original video
-        String copy_to_dir = Environment.getExternalStorageDirectory()+ "/KineTest/Resources/Languages/"+language+"/"+type+"/videos_kinematic";
-        try {
-            InputStream inputStream = getContentResolver().openInputStream(Uri.fromFile(new File(
-                    Environment.getExternalStorageDirectory()+"/KineTest/Resources/temp/temp_loaded_video/"+video_name+".mp4")));
-            videoloaded.copyVideoTo(inputStream, copy_to_dir, video_name+".mp4");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        if(artificialStimuli_acquired) {
+            Toast.makeText(this, "saving...", Toast.LENGTH_SHORT).show();
+            //save original video
+            String copy_to_dir = Environment.getExternalStorageDirectory() + "/KineTest/Resources/Languages/" + language + "/" + type + "/videos_kinematic";
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(Uri.fromFile(new File(
+                        Environment.getExternalStorageDirectory() + "/KineTest/Resources/temp/temp_loaded_video/" + video_name + ".mp4")));
+                videoloaded.copyVideoTo(inputStream, copy_to_dir, video_name + ".mp4");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        //save artificial video
-        copy_to_dir = Environment.getExternalStorageDirectory()+ "/KineTest/Resources/Languages/"+language+"/"+type+"/videos_artificial";
-        try {
-            InputStream inputStream = getContentResolver().openInputStream(this.userSelectedVideoUriList.get(this.userSelectedVideoUriList.size() - 1));
-            videoloaded.copyVideoTo(inputStream, copy_to_dir, video_name+".mp4");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            //save artificial video
+            copy_to_dir = Environment.getExternalStorageDirectory() + "/KineTest/Resources/Languages/" + language + "/" + type + "/videos_artificial";
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(this.userSelectedVideoUriList.get(this.userSelectedVideoUriList.size() - 1));
+                videoloaded.copyVideoTo(inputStream, copy_to_dir, video_name + ".mp4");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        //save video Images
-        File myDir = new File(Environment.getExternalStorageDirectory() + "/KineTest/Resources/temp/temp_images");
-        if (myDir.isDirectory()) {
-            String[] children = myDir.list();
-            for (int i = 0; i < children.length; i++) {
-                copy_to_dir = Environment.getExternalStorageDirectory()+ "/KineTest/Resources/Languages/"+language+"/"+type+"/video_images/"+video_name;
-                try {
-                    InputStream inputStream = getContentResolver().openInputStream(Uri.fromFile(new File(
-                            Environment.getExternalStorageDirectory()+"/KineTest/Resources/temp/temp_images/"+children[i])));
-                    videoloaded.copyVideoTo(inputStream, copy_to_dir, children[i]);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            //save video Images
+            File myDir = new File(Environment.getExternalStorageDirectory() + "/KineTest/Resources/temp/temp_images");
+            if (myDir.isDirectory()) {
+                String[] children = myDir.list();
+                for (int i = 0; i < children.length; i++) {
+                    copy_to_dir = Environment.getExternalStorageDirectory() + "/KineTest/Resources/Languages/" + language + "/" + type + "/video_images/" + video_name;
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(Uri.fromFile(new File(
+                                Environment.getExternalStorageDirectory() + "/KineTest/Resources/temp/temp_images/" + children[i])));
+                        videoloaded.copyVideoTo(inputStream, copy_to_dir, children[i]);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+
+            //save velocity profile
+            videoloaded.setVeloctiyProfile(vel_pro);
+            videoloaded.saveVelocityProfile("KineTest/Resources/Languages/" + language + "/" + type + "/velocityprofiles");
+
+
+            //clear temp folder
+            videoloaded.clearTempFolders();
+
+            //make a toast
+            Toast.makeText(this, "New Stimuli saved", Toast.LENGTH_SHORT).show();
+            //return to main view
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }else{
+            Toast.makeText(this, "video not loaded yet", Toast.LENGTH_SHORT).show();
         }
-
-        //save velocity profile
-        videoloaded.setVeloctiyProfile(vel_pro);
-        videoloaded.saveVelocityProfile("KineTest/Resources/Languages/"+language+"/"+type+"/velocityprofiles");
-
-
-        //clear temp folder
-        videoloaded.clearTempFolders();
-
-        //make a toast
-        Toast.makeText(this, "New Stimuli saved", Toast.LENGTH_SHORT).show();
-        //return to main view
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
 
     }
 
@@ -127,13 +133,14 @@ public class NewStimuliAddArticialStimuli extends AppCompatActivity {
             if(resultCode==RESULT_OK)
             {
                 if(userSelectedVideoUriList == null) {userSelectedVideoUriList = new ArrayList<Uri>(); }
-
                 Uri fileUri = data.getData();
                 userSelectedVideoUriList.add(fileUri);
                 Log.d("NewStimuli: ", "video uri: "+fileUri.toString());
                 //String filepath = urip.getUriRealPath(getApplicationContext(), fileUri);
                 //userSelectedVideoDirectoryList.add(filepath);
                 this.lastAdd = 1;
+                Toast.makeText(this, "Video loaded", Toast.LENGTH_SHORT).show();
+                artificialStimuli_acquired = true;
             }
         }
     }

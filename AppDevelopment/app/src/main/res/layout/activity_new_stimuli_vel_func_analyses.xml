@@ -19,6 +19,17 @@ android:background="@drawable/background"
         android:onClick="getVelocityProfile"
         android:text="Analyse Stimuli" />
 
+
+    <Spinner
+        android:id="@+id/newStimuli_vel_func_importVelPro_spinner"
+        android:layout_width="214dp"
+        android:layout_height="34dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="57dp"
+        android:layout_marginBottom="108dp"
+        android:textSize="20dp" />
+
     <Button
         android:id="@+id/newStimuli_loadImages"
         android:layout_width="93dp"
@@ -82,11 +93,11 @@ android:background="@drawable/background"
         android:layout_height="37dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="198dp"
+        android:layout_marginStart="298dp"
+        android:layout_marginTop="267dp"
         android:background="@drawable/mybutton"
         android:onClick="LoadVelFuncFromFolder"
-        android:text="Load From Folder" />
+        android:text="Import vel pro" />
 
     <VideoView
         android:id="@+id/NewStimuli_videoViewNewStimuli"

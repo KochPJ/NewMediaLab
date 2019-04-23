@@ -158,7 +158,7 @@ public class AddStimuli extends AppCompatActivity {
 
     public void convertStimuli(View view){
 
-        List<Double> vel_pro = videoloaded.loadVelocityProfile();
+        List<Double> vel_pro = videoloaded.loadVelocityProfile("");
         VelocityFunction velfunc = new VelocityFunction("1-log(x)");
         videoloaded.convertVideo("KineTest/CurrentVideoImages", "KineTest/CurrentConvertedVideoImages", "KineTest/CurrentConvertedVideo", vel_pro, velfunc,"linear", 1);
     }

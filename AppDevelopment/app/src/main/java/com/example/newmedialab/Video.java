@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.graphics.Path;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Environment;
@@ -36,6 +37,10 @@ public class Video implements Serializable {
     double duration;
     double fps;
     int n_frames;
+    int get_images_progress = 0;
+    int get_velPro_progress = 0;
+    boolean video_created;
+    Boolean got_video_images = false;
     String videoPath;
     Context context;
     List<Integer> xCord = new ArrayList<Integer>();
@@ -51,6 +56,10 @@ public class Video implements Serializable {
     public void setVideoPath(String path){
         videoPath = path;
         getVideoData();
+    }
+
+    public void setVideo_created(Boolean status){
+        video_created = status;
     }
 
     public void setVeloctiyProfile(List<Double> veloctiy_profile){
@@ -89,6 +98,8 @@ public class Video implements Serializable {
         Bitmap b;
         List<Bitmap> video = new ArrayList<Bitmap>();
         for (int i=0;i<n_frames;i++){
+            //set the progress for the progress dialog
+            get_images_progress = i+1;
             //Add zero padding to filename
             String n = Integer.toString(i);
             char[] c = n.toCharArray();
@@ -111,6 +122,7 @@ public class Video implements Serializable {
             FileOutputStream fileOutputStream = new FileOutputStream(Environment.getExternalStorageDirectory()+"/"+save_to_folder+"/"+number+".png");
             b.compress(Bitmap.CompressFormat.PNG, 1, fileOutputStream);
         }
+        got_video_images = true;
     }
 
     public Uri createVideo(String imagePath, String videoSavePath){
@@ -160,6 +172,7 @@ public class Video implements Serializable {
                 @Override
                 public void onFinish() {
                     Toast.makeText(context, "video got created", Toast.LENGTH_LONG).show();
+                    video_created = true;
                 }
             });
         } catch (FFmpegCommandAlreadyRunningException e) {
@@ -217,6 +230,8 @@ public class Video implements Serializable {
         if (picturesDir.isDirectory()){
             String[] picturePaths = picturesDir.list();
             for(int i = 0; i < picturePaths.length; i++){
+                //set progress for progress dialog
+                get_velPro_progress = i+1;
                 Log.d("Video", "BlobDetection i = "+Integer.toString(i));
                 imageCodecs = new Imgcodecs();
                 img = imageCodecs.imread(root+picturePaths[i]);
@@ -273,43 +288,30 @@ public class Video implements Serializable {
         }
     }
 
-    public List<Double> loadVelocityProfile(){
-        String savePath = Environment.getExternalStorageDirectory()+"/KineTest/VelocityProfiles/";
-        File loadFrom = new File(savePath);
-
+    public List<Double> loadVelocityProfile(String Path){
+        String loadingPath = Environment.getExternalStorageDirectory()+"/"+Path;
+        File file = new File(loadingPath);
         veloctiyProfile = new ArrayList<Double>();
-        File[] directoryListing = loadFrom.listFiles();
+        // Do something with child
+        Scanner sc = null;
+        try {
+            Log.d("Video", "loadVelPro: child path = "+file.getPath());
+            Log.d("Video", "loadVelPro: child name = "+file.getName());
+            sc = new Scanner(file);
+            int c = 0;
+            Experiment exp = new Experiment("");
 
-        if (directoryListing != null) {
-            int i = 0;
-
-            for (File child : directoryListing) {
-                // Do something with child
-                Scanner sc = null;
-                try {
-                    Log.d("Video", "loadVelPro: child path = "+child.getPath());
-                    Log.d("Video", "loadVelPro: child name = "+child.getName());
-                    sc = new Scanner(child);
-                    int c = 0;
-                    Experiment exp = new Experiment("");
-
-                    while(sc.hasNextLine()){
-                        String line = (sc.nextLine());
-                        Log.d("Video", "loadVelPro: line i, value = "+c+ ", "+line);
-                        veloctiyProfile.add( Double.valueOf(line));
-                        c++;
-                    }
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                i++;
+            while(sc.hasNextLine()){
+                String line = (sc.nextLine());
+                Log.d("Video", "loadVelPro: line i, value = "+c+ ", "+line);
+                veloctiyProfile.add( Double.valueOf(line));
+                c++;
             }
 
-        }else{
-            Log.d("Video", "loadVelocityProfile: no velocity profile to load");
-            Toast.makeText(context, "No saved velocity profile", Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
+
         return veloctiyProfile;
     }
 
