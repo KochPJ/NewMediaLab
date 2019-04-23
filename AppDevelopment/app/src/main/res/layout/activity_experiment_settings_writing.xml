@@ -30,7 +30,7 @@
         android:layout_marginLeft="131dp"
         android:layout_marginBottom="481dp"
         android:onClick="previewSymbols"
-        android:text="Preview Symbols" />
+        android:text="Add Symbols" />
 
     <EditText
         android:id="@+id/te_experiment_repeats"
@@ -101,7 +101,7 @@
         android:layout_marginTop="81dp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="Select Shown Symbols"
+        android:text="Shown Symbols"
         android:textColor="#000000"
         android:textSize="20dp"
         android:textStyle="bold" />

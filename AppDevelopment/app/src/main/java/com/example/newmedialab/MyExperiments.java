@@ -43,12 +43,6 @@ public class MyExperiments extends AppCompatActivity {
             Log.d("FileName", file_dir);
             File myFile = new File(file_dir);
             switch (view.getId()) {
-                case R.id.edit_function: // Go to function view with edit param
-                    Intent intent = new Intent(this, ExperimentFunction.class);
-                    intent = intent.putExtra("experiment", exp);
-                    intent = intent.putExtra("editing", true);
-                    startActivity(intent);
-                    break;
                 case R.id.results: // Go to results view
                     // TODO: add export experimental setup
                     Intent intent3 = new Intent(this, Results.class);
@@ -84,11 +78,16 @@ public class MyExperiments extends AppCompatActivity {
                     intent6 = intent6.putExtra("experiment", exp);
                     startActivity(intent6);
                     break;
-                case R.id.edit_experiment: // Go to edit experiment view
-                    Intent intent7 = new Intent(this, WritingExperiment.class);
+                case R.id.edit_experiment: // Go to MC experiment view
+                    Intent intent7 = new Intent(this, MultipleChoiceExperiment.class);
                     intent7 = intent7.putExtra("experiment", exp);
-                    intent7 = intent7.putExtra("editing", true);
                     startActivity(intent7);
+                    break;
+                case R.id.edit_experiment2: // Go to writing experiment view
+                    Intent intent8 = new Intent(this, WritingExperiment.class);
+                    intent8 = intent8.putExtra("experiment", exp);
+                    intent8 = intent8.putExtra("editing", true);
+                    startActivity(intent8);
                     break;
                 default:
                     throw new RuntimeException("Unknown button ID");
@@ -135,7 +134,6 @@ public class MyExperiments extends AppCompatActivity {
         /// Read experiment files
         File dir = new File(Environment.getExternalStorageDirectory(), "KineTest/Experiments");
         File[] directoryListing = dir.listFiles();
-        //TODO: Save messages, Qnum
         if (directoryListing != null) {
             int i = 0;
             this.names = new String[directoryListing.length];
@@ -153,31 +151,36 @@ public class MyExperiments extends AppCompatActivity {
                             this.names[i] = line;
                             exp = new Experiment(this.names[i]);
                         }else if(c == 1) {
-                            exp.setExperimentType(line);
-                        }else if(c == 2) {
                             exp.setProgressbar(line);
-                        }else if(c == 3) {
+                        }else if(c == 2) {
                             exp.setMaxRepeats(line);
-                        }else if (c == 4){
+                        }else if (c == 3){
                             exp.setAutoRepeats(line);
-                        }else if(c == 5){
+                        }else if(c == 4){
                             exp.setSymbols(line);
+                        }else if(c == 5){
+                            exp.setQnum(line);
                         }else if(c == 6){
-                            exp.setFunction(line);
-                        } else if(c == 7){
-                            exp.setSpeedModifier(line);
-                        } else if(c == 8){
+                            exp.setFalseSymbols(line);
+                        }else if(c == 7){
                             exp.setRandom(line);
-                        }  else if(c == 9){
+                        }else if(c == 8){
+                            exp.setTask_msg_wrt(line);
+                        }else if(c == 9){
+                            exp.setFinal_msg_wrt(line);
+                        }else if(c == 10){
+                            exp.setTask_msg_mct(line);
+                        }else if(c == 11){
+                            exp.setFinal_msg_mct(line);
+                        }else if(c == 12){
                             String[] strParts = line.split(";");
-                            for(String str : strParts){
+                            for (String str : strParts) {
                                 exp.addID(str);
                             }
                         }
                         this.experiment_list[i] = exp;
                         c++;
                     }
-
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -195,16 +198,13 @@ public class MyExperiments extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                     Experiment exp = experiment_list[position];
                     String name = exp.getName();
-                    String type = exp.getExperimentType();
                     String pb = exp.getProgressbar();
                     String max_repeats = exp.getMaxRepeats();
                     String auto_repeats = exp.getAutoRepeats();
-                    String symbols = exp.getSymbols();
-                    String function = exp.getFunction();
-                    String speed_modifier = exp.getSpeed_modifier();
                     String random = exp.getRandom();
+                    String qnum = exp.getQnum();
                     TextView textView = (TextView) findViewById(R.id.textView_myExperiment);
-                    textView.setText("Name: "+name +"\n"+"Experiment type: "+type +"\n"+"Progressbar: "+pb +"\n"+"Allowed Repeats: "+max_repeats+"\n"+"Automatic Repeats: "+auto_repeats+"\n"+"Symbols: "+symbols+"\n"+"Function: "+function+"\n"+"Playback speed: "+speed_modifier+"%"+"\n"+"Random Stimuli Presentation: "+random); //set text for text view
+                    textView.setText("Name: "+name+"\n"+"Progressbar: "+pb +"\n"+"Allowed Repeats: "+max_repeats+"\n"+"Automatic Repeats: "+auto_repeats+"\n"+"Random Stimuli Presentation: "+random+"\n"+"Number of multiple choice options: "+qnum); //set text for text view
                 }
                 public void onNothingSelected(AdapterView<?> parentView) {
                     // your code here

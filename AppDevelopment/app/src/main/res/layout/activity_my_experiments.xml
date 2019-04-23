@@ -6,6 +6,20 @@
     tools:context=".MyExperiments"
     android:background="@drawable/background">
 
+    <Button
+        android:id="@+id/edit_experiment2"
+        android:layout_width="123dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="159dp"
+        android:background="@drawable/mybutton"
+        android:onClick="navigation"
+        android:text="Edit Pre Test" />
+
     <TextView
     android:id="@+id/textView_spinner_title"
     android:layout_width="300dp"
@@ -58,20 +72,6 @@
         android:gravity="center|top"/>
 
     <Button
-        android:id="@+id/edit_function"
-        android:layout_width="129dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="34dp"
-        android:layout_marginRight="34dp"
-        android:layout_marginBottom="91dp"
-        android:background="@drawable/mybutton"
-        android:onClick="navigation"
-        android:text="Edit Function" />
-
-    <Button
         android:id="@+id/start_experiment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,12 +92,12 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
-        android:layout_marginBottom="167dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginRight="39dp"
+        android:layout_marginBottom="92dp"
         android:background="@drawable/mybutton"
         android:onClick="navigation"
-        android:text="Edit Experiment" />
+        android:text="Edit Post Test" />
 
     <Button
         android:id="@+id/view_stimuli"
@@ -106,9 +106,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="221dp"
-        android:layout_marginRight="221dp"
-        android:layout_marginBottom="302dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="293dp"
         android:background="@drawable/mybutton"
         android:onClick="navigation"
         android:text="View Existing Stimuli" />
@@ -120,9 +120,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="222dp"
-        android:layout_marginRight="222dp"
-        android:layout_marginBottom="246dp"
+        android:layout_marginEnd="219dp"
+        android:layout_marginRight="219dp"
+        android:layout_marginBottom="293dp"
         android:background="@drawable/mybutton"
         android:onClick="addNewStimuli"
         android:text="Add New Stimuli" />
