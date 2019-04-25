@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -15,6 +17,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -81,10 +86,37 @@ public class TestWriting extends AppCompatActivity {
     }
 
     public void showNextStimuli(View view){
-        //TODO: Save image to correct folder based on subject ID and stimuli ID
         String currentSymbol = exp.getCurrentSymbol();
         int id_num = exp.getCurrentID();
         String full_id = exp.getID(id_num);
+
+        //Create folder for subject if doesn't exist
+        String path = "/KineTest/Experiments/"+ exp.name +"/"+ full_id;
+        File folder = new File(Environment.getExternalStorageDirectory() + path);
+        Log.d("TW.showNextStimuli", Environment.getExternalStorageDirectory() + path);
+        boolean success = true;
+        if (!folder.exists()) {
+            success = folder.mkdirs();
+            Log.d("TW.showNextStimuli", "created folder");
+        }
+        if (success) {
+            // Save drawing to device
+            FileOutputStream fos = null;
+            try {
+                View view2 = findViewById(R.id.relativelayout1);
+                fos = new FileOutputStream((Environment.getExternalStorageDirectory() + path +"/"+ currentSymbol +".jpg"));
+                Bitmap  bitmap = Bitmap.createBitmap( view2.getWidth(), view2.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+                view2.draw(canvas);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            //Do something on fail
+        }
+
+        // Check if this was the last stimuli
         if(exp.finishedShowingStimuli()){
             // Save changes to experiment
             exp.createFile();
