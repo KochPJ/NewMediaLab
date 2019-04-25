@@ -110,7 +110,7 @@ public class TestMultipleChoice extends AppCompatActivity {
         String full_id = exp.getID(id_num);
 
         // Create folder for subject if doesn't exist
-        String path = "/KineTest/Experiments/" + exp.name + "/" + full_id +"/post_test/"+ exp.name +".txt";
+        String path = "/KineTest/Experiments/" + exp.name + "/" + full_id +"/post_test/"+ exp.name +"_results.txt";
 
         // Open the file
         try {

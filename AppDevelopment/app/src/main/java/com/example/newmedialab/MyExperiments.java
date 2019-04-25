@@ -125,7 +125,7 @@ public class MyExperiments extends AppCompatActivity {
                     //First create the folder if it doesn't exist
                     String path = "/KineTest/Experiments/" + exp_final.name + "/" + full_id +"/post_test";
                     File root = new File(Environment.getExternalStorageDirectory() + path);
-                    String FILE_NAME = (exp_final.name+ ".txt");
+                    String FILE_NAME = (exp_final.name+ "_results.txt");
                     if (!root.exists()) root.mkdirs();
 
                     //Then create the file and write header
