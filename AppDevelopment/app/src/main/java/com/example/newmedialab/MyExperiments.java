@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import androidx.appcompat.app.AlertDialog;
@@ -98,8 +100,8 @@ public class MyExperiments extends AppCompatActivity {
     public void startMyExperiment(Experiment exp) {
         final Experiment exp_final = exp;
         AlertDialog.Builder dialog = new AlertDialog.Builder(MyExperiments.this);
-        dialog.setTitle("Start Experiment");
-        dialog.setMessage("Select Test Phase");
+        dialog.setTitle("Start Experiment:");
+        dialog.setMessage("Please Select the Test Phase");
         dialog.setNegativeButton("Pre Test", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
@@ -115,6 +117,30 @@ public class MyExperiments extends AppCompatActivity {
                     Toast.makeText(MyExperiments.this, "Please run a pre test first",
                             Toast.LENGTH_LONG).show();
                 } else {
+                    // Create post experiment text file for the answers
+                    String currentSymbol = exp_final.getCurrentSymbol();
+                    int id_num = exp_final.getCurrentID();
+                    String full_id = exp_final.getID(id_num);
+
+                    //First create the folder if it doesn't exist
+                    String path = "/KineTest/Experiments/" + exp_final.name + "/" + full_id +"/post_test";
+                    File root = new File(Environment.getExternalStorageDirectory() + path);
+                    String FILE_NAME = (exp_final.name+ ".txt");
+                    if (!root.exists()) root.mkdirs();
+
+                    //Then create the file and write header
+                    File gpxfile = new File(root, FILE_NAME);
+                    FileWriter writer = null;
+                    try {
+                        writer = new FileWriter(gpxfile);
+                        writer.append("Experiment: "+ exp_final.name +"\n").append("Correct Answer \t Chosen Answer \t Options \n");
+                        writer.flush();
+                        writer.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    //Start post test
                     Intent intent4b = new Intent(MyExperiments.this, ParticipantSelection.class);
                     intent4b = intent4b.putExtra("experiment", exp_final);
                     startActivity(intent4b);

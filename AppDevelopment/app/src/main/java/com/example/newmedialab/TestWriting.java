@@ -91,9 +91,8 @@ public class TestWriting extends AppCompatActivity {
         String full_id = exp.getID(id_num);
 
         //Create folder for subject if doesn't exist
-        String path = "/KineTest/Experiments/"+ exp.name +"/"+ full_id;
+        String path = "/KineTest/Experiments/"+ exp.name +"/"+ full_id +"/pre_test";
         File folder = new File(Environment.getExternalStorageDirectory() + path);
-        Log.d("TW.showNextStimuli", Environment.getExternalStorageDirectory() + path);
         boolean success = true;
         if (!folder.exists()) {
             success = folder.mkdirs();
@@ -108,7 +107,7 @@ public class TestWriting extends AppCompatActivity {
                 Bitmap  bitmap = Bitmap.createBitmap( view2.getWidth(), view2.getHeight(), Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(bitmap);
                 view2.draw(canvas);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
