@@ -26,7 +26,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewStimuliAddArticialStimuli"></activity>
+        <activity
+            android:name=".NewStimuliAddArticialStimuli"
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".ExperimentSettingsMultipleChoice"
             android:label="ExperimentSettingsMultipleChoice"/>
@@ -50,10 +52,13 @@
             android:name=".ParticipantInfo"
             android:label="@string/title_activity_participant_info"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".NewStimuliVelFuncAnalyses" />
+        <activity
+            android:name=".NewStimuliVelFuncAnalyses"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".NewStimuli"
             android:label="@string/title_activity_new_stimuli"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MultipleChoiceExperiment"
@@ -75,9 +80,12 @@
             android:name=".AddStimuli"
             android:label="@string/title_activity_add_stimuli"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".playVideo" />
-        <activity android:name=".ExperimentFunction" />
-        <activity android:name=".ExperimentSettingsWriting" />
+        <activity
+            android:name=".playVideo" />
+        <activity
+            android:name=".ExperimentFunction" />
+        <activity
+            android:name=".ExperimentSettingsWriting" />
         <activity
             android:name=".MyExperiments"
             android:label="@string/app_name"
@@ -88,6 +96,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="landscape"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

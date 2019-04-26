@@ -1,139 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewStimuli"
     android:background="@drawable/background"
-    >
+    android:padding="5pt"
+    tools:context=".NewStimuli">
 
 
     <Spinner
         android:id="@+id/newStimuli_language_spinner"
-        android:layout_width="214dp"
-        android:layout_height="34dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="128dp"
-        android:layout_marginBottom="60dp"
-        android:textSize="20dp" />
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignBottom="@+id/newStimuli_language_text_view"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="-3dp"
+        android:layout_toEndOf="@+id/newStimuli_type_text_view"
+        android:textSize="20dp"></Spinner>
 
     <Spinner
         android:id="@+id/newStimuli_type_spinner"
-        android:layout_width="214dp"
-        android:layout_height="34dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="133dp"
-        android:layout_marginBottom="21dp"
-        android:textSize="20dp" />
+        android:layout_width="200dp
+"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/newStimuli_type_text_view"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/newStimuli_type_text_view"
+        android:textSize="20dp"></Spinner>
 
     <Button
         android:id="@+id/playStimuli2"
-        android:layout_width="84dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="85dp"
-        android:layout_marginBottom="57dp"
-        android:layout_toEndOf="@+id/vv_new_stimuli"
+        android:layout_alignBottom="@+id/newStimuli_language_spinner"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/newStimuli_language_spinner"
         android:background="@drawable/mybutton"
         android:onClick="addLanguage"
         android:text="Add Language" />
 
     <Button
         android:id="@+id/NewStimuli_AddLanguage"
-        android:layout_width="142dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="283dp"
-        android:layout_marginTop="118dp"
+        android:layout_below="@+id/vv_new_stimuli"
+        android:layout_marginStart="-296dp"
+        android:layout_marginTop="30dp"
         android:layout_toEndOf="@+id/vv_new_stimuli"
         android:background="@drawable/mybutton"
         android:onClick="playVideo"
-        android:text="Play Loaded Video" />
+        android:text="Play Video" />
 
     <Button
         android:id="@+id/film_video_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="396dp"
-        android:layout_marginTop="46dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="78dp"
+        android:layout_toEndOf="@+id/vv_new_stimuli"
+        android:background="@drawable/mybutton"
         android:onClick="filmVideo"
-        android:text="Film New Video" />
+        android:text="Record Video" />
 
     <Button
         android:id="@+id/load_video_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_width="96dp"
+        android:layout_height="66dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="301dp"
-        android:layout_marginTop="127dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="186dp"
+        android:layout_marginEnd="309dp"
+        android:layout_toEndOf="@+id/vv_new_stimuli"
+        android:background="@drawable/mybutton"
         android:onClick="loadVideo"
-        android:text="Load Video From Device" />
+        android:text="Load Video" />
 
     <TextView
         android:id="@+id/newStimuli_type_text_view"
-        android:layout_width="51dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="47dp"
+        android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
-        android:text="Type" />
+        android:text="Type"></TextView>
 
     <TextView
         android:id="@+id/newStimuli_language_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/newStimuli_type_text_view"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginBottom="70dp"
-        android:text="Language" />
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="40dp"
+        android:text="Language"></TextView>
 
     <TextView
         android:id="@+id/newStimuli_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/newStimuli_language_text_view"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="274dp"
-        android:text="Name" />
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="40dp"
+        android:text="Name"></TextView>
 
     <EditText
         android:id="@+id/et_video_name"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="125dp"
-        android:layout_marginBottom="103dp"
-        android:ems="10"
+        android:layout_alignBottom="@+id/newStimuli_name_text_view"
+
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/newStimuli_type_text_view"
         android:inputType="textPersonName"
-        android:text="video_1" />
+        android:text="video_1"></EditText>
 
     <Button
         android:id="@+id/next_analyze_button"
-        android:layout_width="113dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/mybutton"
         android:onClick="FinishAdding"
-        android:text="Next" />
+        android:text="Next"
+        tools:layout_editor_absoluteX="819dp"
+        tools:layout_editor_absoluteY="489dp" />
 
     <VideoView
         android:id="@+id/vv_new_stimuli"
-        android:layout_width="225dp"
-        android:layout_height="131dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="56dp" />
+        android:layout_width="510dp"
+        android:layout_height="296dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
+
 
 </RelativeLayout>
