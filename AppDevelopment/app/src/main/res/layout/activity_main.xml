@@ -4,60 +4,52 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="5pt"
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/create_exp_button"
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="0pt"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/mybutton"
         android:onClick="createNewExperiment"
         android:text="Create New Experiment"
-        android:textSize="20dp"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="562dp" />
+        android:textSize="9pt" />
 
     <Button
         android:id="@+id/my_exp_button"
         android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="358dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/load_videos_button"
+        android:layout_marginBottom="5pt"
         android:background="@drawable/mybutton"
         android:onClick="openMyExperiments"
         android:text="My Experiments"
-        android:textSize="20dp"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="562dp" />
+        android:layout_centerHorizontal="true"
+        android:textSize="9pt" />
 
     <Button
         android:id="@+id/load_videos_button"
         android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="201dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/create_exp_button"
+        android:layout_marginBottom="5pt"
         android:background="@drawable/mybutton"
+        android:layout_centerHorizontal="true"
         android:onClick="loadNewVideos"
         android:text="Load New Videos"
-        android:textSize="20dp"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="562dp" />
+        android:textSize="9pt" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="200dp"
-        android:layout_height="120dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
+        android:layout_centerHorizontal="true"
         android:text="KineTest"
         android:textColor="#FFA500"
         android:textSize="48dp"
