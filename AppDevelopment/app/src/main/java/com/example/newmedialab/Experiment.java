@@ -178,4 +178,22 @@ public class Experiment implements Serializable{
         return currentSymbol;
     }
 
+    public ArrayList<String> getFalseSymbol(int numberOf) {
+        // Create arraylist
+        ArrayList<String> fss = new ArrayList<String>();
+        for (char ch : falseSymbols.toCharArray()){
+            if(ch != ',' && ch != ' '){
+                fss.add(String.valueOf(ch));
+            }
+        }
+
+        //Shuffle stimuli
+        Collections.shuffle(fss);
+        ArrayList<String> fss2 = new ArrayList<String>();
+        for(int i=0; i<numberOf; i++){
+            fss2.add(fss.get(i));
+        }
+        return fss2;
+    }
+
 }

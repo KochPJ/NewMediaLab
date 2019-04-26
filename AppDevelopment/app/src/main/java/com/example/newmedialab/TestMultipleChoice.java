@@ -2,16 +2,23 @@ package com.example.newmedialab;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,7 +28,7 @@ public class TestMultipleChoice extends AppCompatActivity {
     public String stimuli;
     public ImageView im1, im2, im3, im4, im5, im6;
     public TextView tv1, tv2, tv3, tv4, tv5, tv6;
-
+    public ArrayList<String> falseSymbols;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +76,15 @@ public class TestMultipleChoice extends AppCompatActivity {
         tv5 = findViewById(R.id.textView19);
         tv6 = findViewById(R.id.textView20);
 
-        //Remove the required number of imageViews and textViews
+        //TODO: set the correct images using "stimuli" and by randomly selecting some false flags
+        List<String> spinnerArray =  new ArrayList<String>();
+        // randomly sample from false stimuli
+        falseSymbols = exp.getFalseSymbol(Integer.parseInt(exp.qnum)-1);
+        // add true stimuli and shuffle
+        falseSymbols.add(exp.getCurrentSymbol());
+        Collections.shuffle(falseSymbols);
+
+        // Load thumbnails & remove the required number of imageViews and textViews
         if(Integer.parseInt(exp.getQnum()) <= 2){
             im3.setAlpha(0);
             im4.setAlpha(0);
@@ -96,27 +111,37 @@ public class TestMultipleChoice extends AppCompatActivity {
             tv6.setAlpha(0);
         }
 
-        //TODO: set the correct images using "stimuli" and by randomly selecting some false flags
+        // Fill spinner
+        for(int j=0; j<Integer.parseInt(exp.qnum); j++){
+            spinnerArray.add(Integer.toString(j+1));
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, spinnerArray);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner sItems = (Spinner) findViewById(R.id.spinner2);
+        sItems.setAdapter(adapter);
     }
 
     public void nextQuestion(View view) {
         // Get answer
-        //Spinner spinner = (Spinner) findViewById(R.id.experiment_names_spinner);
-        //int pos = spinner.getSelectedItemPosition();
-
-        //TODO: save answers to a text file
+        Spinner spinner = (Spinner) findViewById(R.id.spinner2);
         String currentSymbol = exp.getCurrentSymbol();
         int id_num = exp.getCurrentID();
         String full_id = exp.getID(id_num);
 
-        // Create folder for subject if doesn't exist
+        // Path to file
         String path = "/KineTest/Experiments/" + exp.name + "/" + full_id +"/post_test/"+ exp.name +"_results.txt";
+        File fullpath = new File(Environment.getExternalStorageDirectory() + path);
 
         // Open the file
         try {
-            FileOutputStream fOut = openFileOutput(path,  MODE_APPEND);
+            FileOutputStream fOut = new FileOutputStream(fullpath, true);
             OutputStreamWriter osw = new OutputStreamWriter(fOut);
-            osw.write(currentSymbol+" \t Chosen Answer \t Options \n");
+            osw.write(Boolean.toString(spinner.getSelectedItem()==currentSymbol) +" \t "+ spinner.getSelectedItem() + "\t");
+            for(int j=0; j<Integer.parseInt(exp.qnum); j++){
+                osw.write(falseSymbols.get(j) + ",");
+            }
+            osw.write("\n");
             osw.flush();
             osw.close();
         } catch (FileNotFoundException e) {

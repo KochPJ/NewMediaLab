@@ -119,7 +119,7 @@ public class TestWriting extends AppCompatActivity {
         if(exp.finishedShowingStimuli()){
             // Save changes to experiment
             exp.createFile();
-            Toast.makeText(TestWriting.this, "Finished test, saved results \n"+exp.getFinal_msg_mct(),
+            Toast.makeText(TestWriting.this, "Finished test, saved results \n"+exp.getFinal_msg_wrt(),
                     Toast.LENGTH_LONG).show();
             // Return to MyExperiments
             Intent intent = new Intent(this, MyExperiments.class);
