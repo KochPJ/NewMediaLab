@@ -8,6 +8,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class TestMultipleChoice extends AppCompatActivity {
@@ -95,11 +100,36 @@ public class TestMultipleChoice extends AppCompatActivity {
     }
 
     public void nextQuestion(View view) {
+        // Get answer
+        //Spinner spinner = (Spinner) findViewById(R.id.experiment_names_spinner);
+        //int pos = spinner.getSelectedItemPosition();
+
         //TODO: save answers to a text file
-        if(exp.finishedShowingStimuli()){
+        String currentSymbol = exp.getCurrentSymbol();
+        int id_num = exp.getCurrentID();
+        String full_id = exp.getID(id_num);
+
+        // Create folder for subject if doesn't exist
+        String path = "/KineTest/Experiments/" + exp.name + "/" + full_id +"/post_test/"+ exp.name +"_results.txt";
+
+        // Open the file
+        try {
+            FileOutputStream fOut = openFileOutput(path,  MODE_APPEND);
+            OutputStreamWriter osw = new OutputStreamWriter(fOut);
+            osw.write(currentSymbol+" \t Chosen Answer \t Options \n");
+            osw.flush();
+            osw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Check if this was the last stimuli
+        if (exp.finishedShowingStimuli()) {
             // Save changes to experiment
             exp.createFile();
-            Toast.makeText(TestMultipleChoice.this, "Finished test, saved results \n"+exp.getFinal_msg_mct(),
+            Toast.makeText(TestMultipleChoice.this, "Finished test, saved results \n" + exp.getFinal_msg_mct(),
                     Toast.LENGTH_LONG).show();
             // Return to MyExperiments
             Intent intent = new Intent(this, MyExperiments.class);
@@ -111,6 +141,5 @@ public class TestMultipleChoice extends AppCompatActivity {
             intent2 = intent2.putExtra("experiment", exp);
             startActivity(intent2);
         }
-
     }
 }

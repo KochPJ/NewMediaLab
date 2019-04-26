@@ -40,27 +40,14 @@ public class WritingExperiment extends AppCompatActivity {
         String exp_task_msg = exp_task_EditText.getText().toString();
         String exp_final_msg = exp_final_EditText.getText().toString();
 
-        if (editing) {
-            //Set values
-            exp.setName(exp_name);
-            exp.setProgressbar(String.valueOf(progress));
-            exp.setExperimentType("writing");
-            exp.setMessagesWRT(exp_task_msg, exp_final_msg);
-
-            Intent intent = new Intent(this, ExperimentSettingsWriting.class);
-            intent = intent.putExtra("experiment", exp);
-            intent = intent.putExtra("editing", editing);
-            startActivity(intent);
-        } else {
-            exp = new Experiment(exp_name);
-            exp.setProgressbar(String.valueOf(progress));
-            exp.setExperimentType("writing");
-            exp.setMessagesWRT(exp_task_msg, exp_final_msg);
-            Intent intent = new Intent(this, ExperimentSettingsWriting.class);
-            intent = intent.putExtra("experiment", exp);
-            intent = intent.putExtra("editing", editing);
-            startActivity(intent);
-        }
+        exp = new Experiment(exp_name);
+        exp.setProgressbar(String.valueOf(progress));
+        exp.setTask_msg_wrt(exp_task_msg);
+        exp.setFinal_msg_wrt(exp_final_msg);
+        Intent intent = new Intent(this, ExperimentSettingsWriting.class);
+        intent = intent.putExtra("experiment", exp);
+        intent = intent.putExtra("editing", editing);
+        startActivity(intent);
     }
 
 }

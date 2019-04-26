@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,14 +45,16 @@ public class ExperimentSettingsWriting extends AppCompatActivity {
 
         //If editing return to my experiments
         if (editing){
-            Intent intent = new Intent(this, MultipleChoiceExperiment.class);
-            intent = intent.putExtra("experiment", exp);
-            intent = intent.putExtra("editing", editing);
+            //Save results
+            exp.createFile();
+            Toast.makeText(this, "Saved Experiment to " + exp.getFile_name(),
+                    Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, MyExperiments.class);
             startActivity(intent);
         } else {
             Intent intent = new Intent(this, MultipleChoiceExperiment.class);
             intent = intent.putExtra("experiment", exp);
-            intent = intent.putExtra("editing", editing);
+            intent = intent.putExtra("editing", false);
             startActivity(intent);
         }
     }
