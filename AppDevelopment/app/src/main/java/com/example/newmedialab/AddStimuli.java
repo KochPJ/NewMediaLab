@@ -7,6 +7,9 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -35,6 +38,16 @@ public class AddStimuli extends AppCompatActivity {
     VideoView videoView2;
     Uri currentVideo = Uri.parse(Environment.getExternalStorageDirectory()+"/KineTest/CurrentVideo/loadedVideo.mp4");
     Video videoloaded = new Video(this, "loadedVideo");
+
+    Spinner languageSpinner;
+    private String[] languages;
+    String language;
+    Spinner typeSpinner;
+    private String[] types;
+    String type;
+    Spinner stimuliSpinner;
+    private String[] stimulies;
+    String stimuli;
 
     public void getVelocityProfile(View view){
 
@@ -226,6 +239,81 @@ public class AddStimuli extends AppCompatActivity {
             mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
         }
 
+        //get the saved languages
+        String languagesDir = Environment.getExternalStorageDirectory()+ "/KineTest/Resources/Languages";
+        File root = new File(languagesDir);
+        if(!root.exists()) root.mkdirs();
+        languages = root.list();
+
+        updateLanguageSpinner();
+
+    }
+
+    private void updateLanguageSpinner() {
+        languageSpinner = (Spinner) findViewById(R.id.addStimuli_language_spinner);
+        ArrayAdapter<String> spinnerArrayAdapterLanguage = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item,
+                        this.languages); //selected item will look like a spinner set from XML
+        spinnerArrayAdapterLanguage.setDropDownViewResource(android.R.layout
+                .simple_spinner_dropdown_item);
+        languageSpinner.setAdapter(spinnerArrayAdapterLanguage);
+        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                language = languages[position];
+                String languagesDir = Environment.getExternalStorageDirectory() + "/KineTest/Resources/Languages/" + language;
+                File root = new File(languagesDir);
+                types = root.list();
+                updateTypeSpinner();
+            }
+
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+    }
+
+    private void updateTypeSpinner() {
+        typeSpinner = (Spinner) findViewById(R.id.addStimuli_type_spinner);
+        ArrayAdapter<String> spinnerArrayAdapterType = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item,
+                        this.types); //selected item will look like a spinner set from XML
+        spinnerArrayAdapterType.setDropDownViewResource(android.R.layout
+                .simple_spinner_dropdown_item);
+        typeSpinner.setAdapter(spinnerArrayAdapterType);
+        typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                type = types[position];
+                String languagesDir = Environment.getExternalStorageDirectory()+ "/KineTest/Resources/Languages/"+language+"/"+type;
+                File root = new File(languagesDir);
+                stimulies = root.list();
+                updateStimuliSpinner();
+            }
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+    }
+
+    private void updateStimuliSpinner() {
+        stimuliSpinner = (Spinner) findViewById(R.id.addStimuli_stimuli_spinner);
+        ArrayAdapter<String> spinnerArrayAdapterStimuli = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item,
+                        this.stimulies); //selected item will look like a spinner set from XML
+        spinnerArrayAdapterStimuli.setDropDownViewResource(android.R.layout
+                .simple_spinner_dropdown_item);
+        stimuliSpinner.setAdapter(spinnerArrayAdapterStimuli);
+        stimuliSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                stimuli = stimulies[position];
+                Log.d("AddStimuli", "updateSpinners: stimuli = "+stimuli);
+            }
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
     }
 
 }
+
+
+

@@ -60,7 +60,8 @@ public class ExperimentSettingsWriting extends AppCompatActivity {
     }
 
     public void previewSymbols(View view){
-
+        Intent intent = new Intent(this, AddStimuli.class);
+        startActivity(intent);
     }
 
 }

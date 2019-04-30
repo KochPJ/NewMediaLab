@@ -22,8 +22,7 @@
 
     <Spinner
         android:id="@+id/newStimuli_type_spinner"
-        android:layout_width="200dp
-"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/newStimuli_type_text_view"
         android:layout_marginStart="40dp"
