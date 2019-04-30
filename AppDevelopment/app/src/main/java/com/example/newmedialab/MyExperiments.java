@@ -183,22 +183,44 @@ public class MyExperiments extends AppCompatActivity {
                         }else if (c == 3){
                             exp.setAutoRepeats(line);
                         }else if(c == 4){
-                            exp.setSymbols(line);
-                        }else if(c == 5){
                             exp.setQnum(line);
-                        }else if(c == 6){
-                            exp.setFalseSymbols(line);
-                        }else if(c == 7){
+                        }else if(c == 5){
                             exp.setRandom(line);
-                        }else if(c == 8){
+                        }else if(c == 6){
                             exp.setTask_msg_wrt(line);
-                        }else if(c == 9){
+                        }else if(c == 7){
                             exp.setFinal_msg_wrt(line);
-                        }else if(c == 10){
+                        }else if(c == 8){
                             exp.setTask_msg_mct(line);
-                        }else if(c == 11){
+                        }else if(c == 9){
                             exp.setFinal_msg_mct(line);
-                        }else if(c == 12){
+                        }else if(c == 10){ //Read paths
+                            String[] strParts = line.split(",");
+                            for (String str : strParts) {
+                                exp.addSymbol(str, "", "", "");
+                            }
+                        }else if(c == 11) {
+                            String[] strParts = line.split(",");
+                            int index = 0;
+                            for (String str : strParts) {
+                                exp.directAddSymbol(str, index, 2);
+                                index += 1;
+                            }
+                        }else if(c == 12) {
+                            String[] strParts = line.split(",");
+                            int index = 0;
+                            for (String str : strParts) {
+                                exp.directAddSymbol(str, index, 3);
+                                index += 1;
+                            }
+                        }else if(c == 13){
+                            String[] strParts = line.split(",");
+                            int index = 0;
+                            for (String str : strParts) {
+                                exp.directAddSymbol(str, index, 4);
+                                index += 1;
+                            }
+                        }else if(c == 14){ //Get ID's
                             String[] strParts = line.split(";");
                             for (String str : strParts) {
                                 exp.addID(str);

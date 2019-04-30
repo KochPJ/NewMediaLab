@@ -15,7 +15,7 @@ public class Experiment implements Serializable{
     String max_repeats = "0";
     String auto_repeats = "1";
     String symbols = "0,1,2";
-    String falseSymbols = "5,6,7,8,9,10,11,12,13";
+    String falseSymbols = "5,6,7,8,9,10,11,12,13"; //Remove later
     String file_name = "";
     String progressbar = "true";
     String task_msg_wrt = "";
@@ -25,7 +25,9 @@ public class Experiment implements Serializable{
     String qnum = "4";
     String random = "true";
     ArrayList<String> IDs = new ArrayList<String>();
-    ArrayList<String> remainingSymbols = new ArrayList<String>();
+    ArrayList<String> remainingSymbols = new ArrayList<String>(); //Remove later
+    ArrayList<String[]> stimuli = new ArrayList<String[]>();
+    ArrayList<String> falseStimuli = new ArrayList<String>();
     String currentSymbol = "unknown";
     int currentID = 0;
     boolean finishedShowStimuli = false;
@@ -48,8 +50,21 @@ public class Experiment implements Serializable{
 
     public void setAutoRepeats(String auto_repeats){ this.auto_repeats = auto_repeats; }
 
+    public void addSymbol(String artificialVideoLink, String kinesteticVideoLink, String lastArtificialImage, String lastKinesteticImageLink){
+        String[] stimArray = {artificialVideoLink, kinesteticVideoLink, lastArtificialImage, lastKinesteticImageLink};
+        this.stimuli.add(stimArray);
+    }
+
+    public void directAddSymbol(String path, int index1, int index2){ //Necessary for myExperiments
+        stimuli.get(index1)[index2] = path;
+    }
+
+    public void addFalseSymbol(String lastImagePath){ falseStimuli.add(lastImagePath); }
+
+    //Remove later
     public void setSymbols(String symbols){ this.symbols = symbols; }
 
+    //Remove later
     public void setFalseSymbols(String false_symbols) { this.falseSymbols = false_symbols;}
 
     public void setTask_msg_wrt(String msg) {this.task_msg_wrt = msg; }
@@ -117,7 +132,6 @@ public class Experiment implements Serializable{
     }
 
     public void createFile(){
-        //TODO: Save ID list in the .txt file
         try
         {
             //TODO:  check if external storage is available (https://developer.android.com/reference/android/os/Environment.html#getExternalStorageState()) if not, save to a different directory or output a warning to the user
@@ -126,19 +140,38 @@ public class Experiment implements Serializable{
             if (!root.exists()) root.mkdirs();
             File gpxfile = new File(root, FILE_NAME);
             FileWriter writer = new FileWriter(gpxfile);
+
+            // Add general experiment parameters
             writer.append(name).append("\n")
                     .append(progressbar).append("\n")
                     .append(max_repeats).append("\n")
                     .append(auto_repeats).append("\n")
-                    .append(symbols).append("\n") //TODO: make string of paths to videos
                     .append(qnum).append("\n")
-                    .append(falseSymbols).append("\n") //TODO: make string of paths to thumbnails
                     .append(random).append("\n")
                     .append(task_msg_wrt).append("\n")
                     .append(final_msg_wrt).append("\n")
                     .append(task_msg_mct).append("\n")
                     .append(final_msg_mct).append("\n");
-            //Add IDs using a dotcomma separated format
+
+            // Add paths for videos and thumbnails. Ugly, but it works
+            for(int i=0; i<this.stimuli.size(); i++){
+                writer.append(stimuli.get(i)[0]).append(',');
+            }
+            writer.append("\n");
+            for(int i=0; i<this.stimuli.size(); i++){
+                writer.append(stimuli.get(i)[1]).append(',');
+            }
+            writer.append("\n");
+            for(int i=0; i<this.stimuli.size(); i++){
+                writer.append(stimuli.get(i)[2]).append(',');
+            }
+            writer.append("\n");
+            for(int i=0; i<this.stimuli.size(); i++){
+                writer.append(stimuli.get(i)[3]).append(',');
+            }
+            writer.append("\n");
+
+            // Finally Add IDs using a dotcomma separated format
             while(IDs.size() > 0){
                 String ID = IDs.get(0);
                 writer.append(ID+";");

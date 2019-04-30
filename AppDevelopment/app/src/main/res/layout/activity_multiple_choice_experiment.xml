@@ -95,7 +95,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="46dp"
         android:layout_marginTop="177dp"
-        android:text="Number of Questions:" />
+        android:text="Number of Options Per Question:" />
 
     <TextView
         android:id="@+id/textView6"
