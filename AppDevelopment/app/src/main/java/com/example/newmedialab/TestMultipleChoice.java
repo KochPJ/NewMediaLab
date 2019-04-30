@@ -83,7 +83,7 @@ public class TestMultipleChoice extends AppCompatActivity {
         // randomly sample from false stimuli
         falseSymbols = exp.getFalseSymbol(Integer.parseInt(exp.qnum)-1);
         // add true stimuli and shuffle
-        falseSymbols.add(exp.getCurrentSymbol());
+        falseSymbols.add(exp.getCurrentSymbol()); //TODO: add image path for current symbol
         Collections.shuffle(falseSymbols);
         for(int j=0; j<falseSymbols.size(); j++){
             File imgFile = new  File(falseSymbols.get(j));
