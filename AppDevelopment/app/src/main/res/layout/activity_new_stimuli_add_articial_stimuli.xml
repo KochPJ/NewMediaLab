@@ -10,6 +10,18 @@ android:background="@drawable/background"
 
 
     <Button
+        android:id="@+id/newStimuli_artificialStimuli_loadImages"
+        android:layout_width="93dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="572dp"
+        android:layout_marginTop="290dp"
+        android:background="@drawable/mybutton"
+        android:onClick="loadVideoImages"
+        android:text="Load Video Images" />
+
+    <Button
         android:id="@+id/film_video_button2"
         android:layout_width="wrap_content"
         android:layout_height="64dp"

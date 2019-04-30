@@ -79,8 +79,8 @@ public class Video implements Serializable {
         Log.d("Video", "getVideoData: number of frames = "+Integer.valueOf(n_frames));
     }
 
-    public void getImages() throws IOException {
-        String save_to_folder = "KineTest/Resources/Temp/temp_images";
+    public void getImages(String saving_path) throws IOException {
+        String save_to_folder = "KineTest/Resources/Temp/"+saving_path;
         //set root file
         File root = new File(Environment.getExternalStorageDirectory(), save_to_folder);
         //create root if does not exist
@@ -115,9 +115,9 @@ public class Video implements Serializable {
             b = m.getFrameAtTime(i*timestep, FFmpegMediaMetadataRetriever.OPTION_CLOSEST);
 
             //rotate them by 180, FFmpegMediaMetadataRetriever somehow reads the images upside down
-            Matrix matrix = new Matrix();
-            matrix.postRotate(180);
-            b =  Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), matrix, true);
+            //Matrix matrix = new Matrix();
+            //matrix.postRotate(180);
+            //b =  Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), matrix, true);
 
             FileOutputStream fileOutputStream = new FileOutputStream(Environment.getExternalStorageDirectory()+"/"+save_to_folder+"/"+number+".png");
             b.compress(Bitmap.CompressFormat.PNG, 1, fileOutputStream);
@@ -501,6 +501,11 @@ public class Video implements Serializable {
             deleteTempFolder(dir);
         }
         dir = "KineTest/Resources/Temp/temp_loaded_video";
+        root = new File(Environment.getExternalStorageDirectory()+"/"+dir);
+        if (root.exists()){
+            deleteTempFolder(dir);
+        }
+        dir = "KineTest/Resources/Temp/temp_artificial_images";
         root = new File(Environment.getExternalStorageDirectory()+"/"+dir);
         if (root.exists()){
             deleteTempFolder(dir);

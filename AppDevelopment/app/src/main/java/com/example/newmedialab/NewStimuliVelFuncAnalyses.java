@@ -134,7 +134,7 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    videoloaded.getImages();
+                    videoloaded.getImages("temp_images");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -234,7 +234,7 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                    progress.setMessage("Create Video");
+                    //progress.setMessage("Create Video");
                     //check if the video was created
                     while(!videoloaded.video_created){
                         try {
