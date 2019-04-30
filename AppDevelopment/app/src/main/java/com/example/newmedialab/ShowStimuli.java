@@ -9,8 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-//TODO: implement progressbar
-
 public class ShowStimuli extends AppCompatActivity {
 
     public Experiment exp = new Experiment("");

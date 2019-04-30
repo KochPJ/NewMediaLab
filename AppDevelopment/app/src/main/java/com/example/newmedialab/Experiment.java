@@ -8,13 +8,15 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Experiment implements Serializable{
 
     String name;
     String max_repeats = "0";
     String auto_repeats = "1";
-    String symbols = "0,1,2"; //Remove later
+    String symbols = "0"; //Remove later
     String file_name = "";
     String progressbar = "true";
     String task_msg_wrt = "";
@@ -59,9 +61,6 @@ public class Experiment implements Serializable{
     }
 
     public void addFalseSymbol(String lastImagePath){ falseStimuli.add(lastImagePath); }
-
-    //Remove later
-    public void setSymbols(String symbols){ this.symbols = symbols; }
 
     public void setTask_msg_wrt(String msg) {this.task_msg_wrt = msg; }
 
@@ -173,11 +172,12 @@ public class Experiment implements Serializable{
             }
             writer.append("\n");
 
-            // Finally Add IDs using a dotcomma separated format
-            while(IDs.size() > 0){
-                String ID = IDs.get(0);
-                writer.append(ID+";");
-                IDs.remove(0);
+            // Finally Add the unique IDs using a dotcomma separated format
+            Set<String> set = new HashSet<>(IDs);
+            IDs.clear();
+            IDs.addAll(set);
+            for(int i=0; i<this.IDs.size(); i++){
+                writer.append(IDs.get(i)).append(';');
             }
             writer.flush();
             writer.close();

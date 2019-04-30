@@ -31,8 +31,8 @@ public class ExperimentSettingsWriting extends AppCompatActivity {
         CheckBox exp_random_CB = (CheckBox) findViewById(R.id.cb_stimuli_random);
         //get experiment symbols
         String exp_symbols = exp_symbols_EditText.getText().toString();
-        //set selected symbols
-        exp.setSymbols(exp_symbols);
+        //TODO: set selected symbols
+        //exp.setSymbols(exp_symbols);
         // set the other variables
         exp.setMaxRepeats(exp_repeats_EditText.getText().toString());
         exp.setAutoRepeats(exp_repeats2_EditText.getText().toString());

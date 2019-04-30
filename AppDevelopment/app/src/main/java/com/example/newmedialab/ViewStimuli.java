@@ -18,4 +18,6 @@ public class ViewStimuli extends AppCompatActivity {
         exp = (Experiment)i.getSerializableExtra("experiment");
     }
 
+    //TODO: finish activity
+
 }
