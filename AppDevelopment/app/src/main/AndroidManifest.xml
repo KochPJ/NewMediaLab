@@ -26,7 +26,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddFalseStimuli"></activity>
         <activity
             android:name=".NewStimuliAddArticialStimuli"
             android:screenOrientation="landscape" />
@@ -82,7 +81,6 @@
             android:label="@string/title_activity_add_stimuli"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".playVideo" />
-        <activity android:name=".ExperimentFunction" />
         <activity android:name=".ExperimentSettingsWriting" />
         <activity
             android:name=".MyExperiments"

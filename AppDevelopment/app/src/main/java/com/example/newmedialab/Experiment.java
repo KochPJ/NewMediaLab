@@ -14,8 +14,7 @@ public class Experiment implements Serializable{
     String name;
     String max_repeats = "0";
     String auto_repeats = "1";
-    String symbols = "0,1,2";
-    String falseSymbols = "5,6,7,8,9,10,11,12,13"; //Remove later
+    String symbols = "0,1,2"; //Remove later
     String file_name = "";
     String progressbar = "true";
     String task_msg_wrt = "";
@@ -25,7 +24,7 @@ public class Experiment implements Serializable{
     String qnum = "4";
     String random = "true";
     ArrayList<String> IDs = new ArrayList<String>();
-    ArrayList<String> remainingSymbols = new ArrayList<String>(); //Remove later
+    ArrayList<String> remainingSymbols = new ArrayList<String>();
     ArrayList<String[]> stimuli = new ArrayList<String[]>();
     ArrayList<String> falseStimuli = new ArrayList<String>();
     String currentSymbol = "unknown";
@@ -63,9 +62,6 @@ public class Experiment implements Serializable{
 
     //Remove later
     public void setSymbols(String symbols){ this.symbols = symbols; }
-
-    //Remove later
-    public void setFalseSymbols(String false_symbols) { this.falseSymbols = false_symbols;}
 
     public void setTask_msg_wrt(String msg) {this.task_msg_wrt = msg; }
 
@@ -173,7 +169,7 @@ public class Experiment implements Serializable{
 
             // Paths for the false stimuli images
             for(int i=0; i<this.falseStimuli.size(); i++){
-                writer.append(falseStimuli.get(i).toString()).append(',');
+                writer.append(falseStimuli.get(i)).append(',');
             }
             writer.append("\n");
 
@@ -218,22 +214,12 @@ public class Experiment implements Serializable{
         return currentSymbol;
     }
 
-
-    //TODO: change to comply with new link format
     public ArrayList<String> getFalseSymbol(int numberOf) {
-        // Create arraylist
-        ArrayList<String> fss = new ArrayList<String>();
-        for (char ch : falseSymbols.toCharArray()){
-            if(ch != ',' && ch != ' '){
-                fss.add(String.valueOf(ch));
-            }
-        }
-
         //Shuffle stimuli
-        Collections.shuffle(fss);
+        Collections.shuffle(falseStimuli);
         ArrayList<String> fss2 = new ArrayList<String>();
         for(int i=0; i<numberOf; i++){
-            fss2.add(fss.get(i));
+            fss2.add(falseStimuli.get(i));
         }
         return fss2;
     }

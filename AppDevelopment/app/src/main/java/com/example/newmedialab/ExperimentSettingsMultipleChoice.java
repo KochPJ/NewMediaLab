@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
 
-    public Experiment exp = new Experiment("");
+    public Experiment exp;
     int PICK_IMAGE_MULTIPLE = 1;
     List<Uri> imageListURI = new ArrayList<Uri>();
 
@@ -26,16 +27,18 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
         setContentView(R.layout.activity_experiment_settings_multiplechoice);
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
-        //TODO: ensure that for the false symbols only those that were not shown are available
     }
 
     public void saveExperiment2(View view) {
         if(imageListURI.size()>=Integer.parseInt(exp.getQnum())-1){
             //set selected symbols
             for(Uri uri : imageListURI){
-                exp.addFalseSymbol(uri.toString());
+                try {
+                    exp.addFalseSymbol(PathUtil.getPath(this,uri));
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
             }
-
             // Save and return to my experiments
             exp.createFile();
             Intent intent = new Intent(this, MyExperiments.class);

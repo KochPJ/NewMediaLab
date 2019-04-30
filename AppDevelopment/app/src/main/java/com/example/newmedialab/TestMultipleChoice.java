@@ -1,6 +1,8 @@
 package com.example.newmedialab;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
@@ -67,6 +69,7 @@ public class TestMultipleChoice extends AppCompatActivity {
         im4 = findViewById(R.id.imageView4);
         im5 = findViewById(R.id.imageView5);
         im6 = findViewById(R.id.imageView6);
+        ImageView[] imageViews = {im1, im2, im3, im4, im5, im6};
 
         // Find textviews
         tv1 = findViewById(R.id.textView15);
@@ -76,13 +79,20 @@ public class TestMultipleChoice extends AppCompatActivity {
         tv5 = findViewById(R.id.textView19);
         tv6 = findViewById(R.id.textView20);
 
-        //TODO: set the correct images using "stimuli" and by randomly selecting some false flags
         List<String> spinnerArray =  new ArrayList<String>();
         // randomly sample from false stimuli
         falseSymbols = exp.getFalseSymbol(Integer.parseInt(exp.qnum)-1);
         // add true stimuli and shuffle
         falseSymbols.add(exp.getCurrentSymbol());
         Collections.shuffle(falseSymbols);
+        for(int j=0; j<falseSymbols.size(); j++){
+            File imgFile = new  File(falseSymbols.get(j));
+            if(imgFile.exists()){
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imageViews[j].setImageBitmap(myBitmap);
+
+            }
+        }
 
         // Load thumbnails & remove the required number of imageViews and textViews
         if(Integer.parseInt(exp.getQnum()) <= 2){
