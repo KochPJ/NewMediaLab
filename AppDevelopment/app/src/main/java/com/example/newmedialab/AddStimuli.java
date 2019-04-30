@@ -195,7 +195,7 @@ public class AddStimuli extends AppCompatActivity {
 
                 videoloaded.setVideoPath(copy_to_dir);
                 try {
-                    videoloaded.getImages();
+                    videoloaded.getImages("temp_images");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -283,7 +283,7 @@ public class AddStimuli extends AppCompatActivity {
         typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 type = types[position];
-                String languagesDir = Environment.getExternalStorageDirectory()+ "/KineTest/Resources/Languages/"+language+"/"+type;
+                String languagesDir = Environment.getExternalStorageDirectory()+ "/KineTest/Resources/Languages/"+language+"/"+type+"/videos_kinematic";
                 File root = new File(languagesDir);
                 stimulies = root.list();
                 updateStimuliSpinner();
