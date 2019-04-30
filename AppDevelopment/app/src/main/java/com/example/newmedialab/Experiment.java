@@ -171,6 +171,12 @@ public class Experiment implements Serializable{
             }
             writer.append("\n");
 
+            // Paths for the false stimuli images
+            for(int i=0; i<this.falseStimuli.size(); i++){
+                writer.append(falseStimuli.get(i).toString()).append(',');
+            }
+            writer.append("\n");
+
             // Finally Add IDs using a dotcomma separated format
             while(IDs.size() > 0){
                 String ID = IDs.get(0);
@@ -187,6 +193,7 @@ public class Experiment implements Serializable{
         }
     }
 
+    //TODO: change to comply with new link format
     public String getNextStimuli() {
         //Initialize
         if(remainingSymbols.isEmpty()){
@@ -211,6 +218,8 @@ public class Experiment implements Serializable{
         return currentSymbol;
     }
 
+
+    //TODO: change to comply with new link format
     public ArrayList<String> getFalseSymbol(int numberOf) {
         // Create arraylist
         ArrayList<String> fss = new ArrayList<String>();

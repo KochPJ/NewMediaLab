@@ -203,24 +203,29 @@ public class MyExperiments extends AppCompatActivity {
                             String[] strParts = line.split(",");
                             int index = 0;
                             for (String str : strParts) {
-                                exp.directAddSymbol(str, index, 2);
+                                exp.directAddSymbol(str, index, 1);
                                 index += 1;
                             }
                         }else if(c == 12) {
                             String[] strParts = line.split(",");
                             int index = 0;
                             for (String str : strParts) {
-                                exp.directAddSymbol(str, index, 3);
+                                exp.directAddSymbol(str, index, 2);
                                 index += 1;
                             }
-                        }else if(c == 13){
+                        }else if(c == 13) {
                             String[] strParts = line.split(",");
                             int index = 0;
                             for (String str : strParts) {
-                                exp.directAddSymbol(str, index, 4);
+                                exp.directAddSymbol(str, index, 3);
                                 index += 1;
                             }
-                        }else if(c == 14){ //Get ID's
+                        }else if(c == 14){
+                            String[] strParts = line.split(",");
+                            for (String str : strParts) {
+                                exp.addFalseSymbol(str);
+                            }
+                        }else if(c == 15){ //Get ID's
                             String[] strParts = line.split(";");
                             for (String str : strParts) {
                                 exp.addID(str);

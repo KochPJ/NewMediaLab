@@ -3,19 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExperimentSettingsMultipleChoice"
     android:background="@drawable/background"
-    >
+    tools:context=".ExperimentSettingsMultipleChoice">
 
 
     <TextView
         android:id="@+id/tv_title_mc4"
-        android:layout_width="239dp"
-        android:layout_height="42dp"
+        android:layout_width="361dp"
+        android:layout_height="51dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="93dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="56dp"
         android:text="Multiple Choice Test Parameters"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -26,49 +25,57 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="145dp"
-        android:layout_marginLeft="145dp"
-        android:layout_marginBottom="411dp"
-        android:onClick="previewFalseSymbols"
-        android:text="Add Symbols" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="150dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="169dp"
+        android:onClick="addFalseSymbols"
+        android:text="Add False Symbols" />
+
+    <Button
+        android:id="@+id/preview_button3"
+        android:layout_width="138dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="344dp"
+        android:layout_marginLeft="344dp"
+        android:layout_marginTop="171dp"
+        android:onClick="clearPaths"
+        android:text="Clear Paths" />
 
     <TextView
         android:id="@+id/tw_experiment_select_symbols_title"
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="133dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="257dp"
+        android:layout_marginEnd="154dp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="Select False Symbols"
+        android:text="False Symbols URI's"
         android:textColor="#000000"
-        android:textSize="20dp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/te_experiment_select_symbols2"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="193dp"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="textPersonName"
-        android:text="1,2,3,4,5,6,7"
-        android:textStyle="italic" />
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/create_exp_button2"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="139dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="82dp"
+        android:layout_marginEnd="234dp"
+        android:layout_marginBottom="145dp"
         android:background="@drawable/mybutton"
         android:onClick="saveExperiment2"
         android:text="Save" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="405dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="324dp" />
 
 </RelativeLayout>
