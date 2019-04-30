@@ -30,7 +30,7 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
     }
 
     public void saveExperiment2(View view) {
-        if(imageListURI.size()>Integer.parseInt(exp.getQnum())-1){
+        if(imageListURI.size()>=Integer.parseInt(exp.getQnum())-1){
             //set selected symbols
             for(Uri uri : imageListURI){
                 exp.addFalseSymbol(uri.toString());
