@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Experiment implements Serializable{
@@ -16,7 +16,6 @@ public class Experiment implements Serializable{
     String name;
     String max_repeats = "0";
     String auto_repeats = "1";
-    String symbols = "0"; //Remove later
     String file_name = "";
     String progressbar = "true";
     String task_msg_wrt = "";
@@ -26,10 +25,11 @@ public class Experiment implements Serializable{
     String qnum = "4";
     String random = "true";
     ArrayList<String> IDs = new ArrayList<String>();
-    ArrayList<String> remainingSymbols = new ArrayList<String>();
+    ArrayList<String[]> remainingStimuli = new ArrayList<String[]>();
     ArrayList<String[]> stimuli = new ArrayList<String[]>();
-    ArrayList<String> falseStimuli = new ArrayList<String>();
-    String currentSymbol = "unknown";
+    ArrayList<String> falseKinematicStimuli = new ArrayList<String>();
+    ArrayList<String> falseArtificialStimuli = new ArrayList<String>();
+    String[] currentSymbol;
     int currentID = 0;
     boolean finishedShowStimuli = false;
 
@@ -60,7 +60,9 @@ public class Experiment implements Serializable{
         stimuli.get(index1)[index2] = path;
     }
 
-    public void addFalseSymbol(String lastImagePath){ falseStimuli.add(lastImagePath); }
+    public void addFalseKinematicSymbol(String lastImagePath){ falseKinematicStimuli.add(lastImagePath); }
+
+    public void addFalseArtificialSymbol(String lastImagePath){ falseArtificialStimuli.add(lastImagePath); }
 
     public void setTask_msg_wrt(String msg) {this.task_msg_wrt = msg; }
 
@@ -80,6 +82,8 @@ public class Experiment implements Serializable{
         return this.name;
     }
 
+    public ArrayList<String[]> getStimuli() { return this.stimuli; }
+
     public String getProgressbar(){
         return this.progressbar;
     }
@@ -90,10 +94,6 @@ public class Experiment implements Serializable{
 
     public String getAutoRepeats(){
         return this.auto_repeats;
-    }
-
-    public String getSymbols(){
-        return this.symbols;
     }
 
     public String getFile_name(){
@@ -114,9 +114,9 @@ public class Experiment implements Serializable{
 
     public ArrayList<String> getIDs() {return IDs; }
 
-    public ArrayList<String> getRemainingSymbols() {return remainingSymbols; }
+    public ArrayList<String[]> getRemainingStimuli() {return remainingStimuli; }
 
-    public String getCurrentSymbol() {return  this.currentSymbol; }
+    public String[] getCurrentSymbol() {return  this.currentSymbol; }
 
     public Boolean finishedShowingStimuli() {return  this.finishedShowStimuli; }
 
@@ -167,13 +167,19 @@ public class Experiment implements Serializable{
             writer.append("\n");
 
             // Paths for the false stimuli images
-            for(int i=0; i<this.falseStimuli.size(); i++){
-                writer.append(falseStimuli.get(i)).append(',');
+            for(int i=0; i<this.falseArtificialStimuli.size(); i++){
+                writer.append(falseArtificialStimuli.get(i)).append(',');
+            }
+            writer.append("\n");
+
+            for(int i=0; i<this.falseKinematicStimuli.size(); i++){
+                writer.append(falseKinematicStimuli.get(i)).append(',');
             }
             writer.append("\n");
 
             // Finally Add the unique IDs using a dotcomma separated format
-            Set<String> set = new HashSet<>(IDs);
+            // Linked set since later we need to know whether the subject is control or not
+            Set<String> set = new LinkedHashSet<>(IDs);
             IDs.clear();
             IDs.addAll(set);
             for(int i=0; i<this.IDs.size(); i++){
@@ -190,38 +196,44 @@ public class Experiment implements Serializable{
     }
 
     //TODO: change to comply with new link format
-    public String getNextStimuli() {
+    public String[] getNextStimuli() {
         //Initialize
-        if(remainingSymbols.isEmpty()){
+        if(remainingStimuli.isEmpty()){
             finishedShowStimuli = false;
-            for (char ch : symbols.toCharArray()){
-                if(ch != ',' && ch != ' '){
-                    remainingSymbols.add(String.valueOf(ch));
-                }
-            }
+            ArrayList<String[]> remainingStimuli = new ArrayList<>(stimuli);
             //Shuffle stimuli if random order selected
             if(Boolean.parseBoolean(random) == true){
-                Collections.shuffle(remainingSymbols);
+                Collections.shuffle(remainingStimuli);
             }
         }
         //Get next stimuli
-        currentSymbol = remainingSymbols.get(0);
+        currentSymbol = remainingStimuli.get(0);
         //Remove from list
-        remainingSymbols.remove(0);
-        if(remainingSymbols.isEmpty()){
+        remainingStimuli.remove(0);
+        if(remainingStimuli.isEmpty()){
             finishedShowStimuli = true;
         }
         return currentSymbol;
     }
 
-    public ArrayList<String> getFalseSymbol(int numberOf) {
-        //Shuffle stimuli
-        Collections.shuffle(falseStimuli);
-        ArrayList<String> fss2 = new ArrayList<String>();
-        for(int i=0; i<numberOf; i++){
-            fss2.add(falseStimuli.get(i));
+    public ArrayList<String> getFalseSymbol(int numberOf, boolean kinematic) {
+        if(kinematic){
+            //Shuffle stimuli
+            Collections.shuffle(falseKinematicStimuli);
+            ArrayList<String> fss2 = new ArrayList<String>();
+            for(int i=0; i<numberOf; i++){
+                fss2.add(falseKinematicStimuli.get(i));
+            }
+            return fss2;
+        } else {
+            //Shuffle stimuli
+            Collections.shuffle(falseArtificialStimuli);
+            ArrayList<String> fss2 = new ArrayList<String>();
+            for(int i=0; i<numberOf; i++){
+                fss2.add(falseArtificialStimuli.get(i));
+            }
+            return fss2;
         }
-        return fss2;
     }
 
 }

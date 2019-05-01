@@ -27,7 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class TestMultipleChoice extends AppCompatActivity {
 
     public Experiment exp = new Experiment("");
-    public String stimuli;
+    public String[] stimuli;
     public ImageView im1, im2, im3, im4, im5, im6;
     public TextView tv1, tv2, tv3, tv4, tv5, tv6;
     public ArrayList<String> falseSymbols;
@@ -44,14 +44,9 @@ public class TestMultipleChoice extends AppCompatActivity {
         //Set progressbar with correct value
         ProgressBar pb = findViewById(R.id.progressBar3);
         if(Boolean.parseBoolean(exp.getProgressbar())){
-            int maxSymbols = 0;
-            for (char ch : exp.getSymbols().toCharArray()){
-                if(ch != ',' && ch != ' '){
-                    maxSymbols++;
-                }
-            }
+            int maxSymbols = exp.getStimuli().size();
             pb.setMax(maxSymbols+1);
-            pb.setProgress(maxSymbols - exp.getRemainingSymbols().size());
+            pb.setProgress(maxSymbols - exp.getRemainingStimuli().size());
         } else {
             pb.setAlpha(0);
         }
@@ -80,10 +75,18 @@ public class TestMultipleChoice extends AppCompatActivity {
         tv6 = findViewById(R.id.textView20);
 
         List<String> spinnerArray =  new ArrayList<String>();
-        // randomly sample from false stimuli
-        falseSymbols = exp.getFalseSymbol(Integer.parseInt(exp.qnum)-1);
-        // add true stimuli and shuffle
-        falseSymbols.add(exp.getCurrentSymbol()); //TODO: add image path for current symbol
+
+        if(exp.getCurrentID()%2 == 0){ // Control group
+            // Add true stimuli
+            falseSymbols.add(exp.getCurrentSymbol()[2]);
+            // Randomly sample from correct group of false stimuli
+            falseSymbols = exp.getFalseSymbol(Integer.parseInt(exp.qnum)-1, false);
+        } else { // Experimental group
+            // Add true stimuli
+            falseSymbols.add(exp.getCurrentSymbol()[3]);
+            // Randomly sample from correct group of false stimuli
+            falseSymbols = exp.getFalseSymbol(Integer.parseInt(exp.qnum)-1, true);
+        }
         Collections.shuffle(falseSymbols);
         for(int j=0; j<falseSymbols.size(); j++){
             File imgFile = new  File(falseSymbols.get(j));
@@ -135,7 +138,7 @@ public class TestMultipleChoice extends AppCompatActivity {
     public void nextQuestion(View view) {
         // Get answer
         Spinner spinner = (Spinner) findViewById(R.id.spinner2);
-        String currentSymbol = exp.getCurrentSymbol();
+        String[] currentSymbol = exp.getCurrentSymbol();
         int id_num = exp.getCurrentID();
         String full_id = exp.getID(id_num);
 
@@ -147,7 +150,7 @@ public class TestMultipleChoice extends AppCompatActivity {
         try {
             FileOutputStream fOut = new FileOutputStream(fullpath, true);
             OutputStreamWriter osw = new OutputStreamWriter(fOut);
-            osw.write(Boolean.toString(spinner.getSelectedItem()==currentSymbol) +" \t "+ spinner.getSelectedItem() + "\t");
+            osw.write(Boolean.toString(spinner.getSelectedItem().equals(exp.getRemainingStimuli().indexOf(currentSymbol))) +" \t "+ spinner.getSelectedItem() + "\t"); //Test
             for(int j=0; j<Integer.parseInt(exp.qnum); j++){
                 osw.write(falseSymbols.get(j) + ",");
             }

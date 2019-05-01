@@ -109,7 +109,6 @@ public class MyExperiments extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                 } else {
                     // Create post experiment text file for the answers
-                    String currentSymbol = exp_final.getCurrentSymbol();
                     int id_num = exp_final.getCurrentID();
                     String full_id = exp_final.getID(id_num);
 
@@ -211,12 +210,17 @@ public class MyExperiments extends AppCompatActivity {
                                 exp.directAddSymbol(str, index, 3);
                                 index += 1;
                             }
-                        }else if(c == 14){
+                        }else if(c == 14) {
                             String[] strParts = line.split(",");
                             for (String str : strParts) {
-                                exp.addFalseSymbol(str);
+                                exp.addFalseArtificialSymbol(str);
                             }
-                        }else if(c == 15){ //Get ID's
+                        }else if(c == 15){
+                            String[] strParts = line.split(",");
+                            for (String str : strParts) {
+                                exp.addFalseKinematicSymbol(str);
+                            }
+                        }else if(c == 16){ //Get ID's
                             String[] strParts = line.split(";");
                             for (String str : strParts) {
                                 exp.addID(str);

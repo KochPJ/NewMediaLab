@@ -60,14 +60,9 @@ public class TestWriting extends AppCompatActivity {
         //Set progressbar with correct value
         ProgressBar pb = findViewById(R.id.progressBar2);
         if(Boolean.parseBoolean(exp.getProgressbar())){
-            int maxSymbols = 0;
-            for (char ch : exp.getSymbols().toCharArray()){
-                if(ch != ',' && ch != ' '){
-                    maxSymbols++;
-                }
-            }
+            int maxSymbols = exp.getStimuli().size();
             pb.setMax(maxSymbols+1);
-            pb.setProgress(maxSymbols - exp.getRemainingSymbols().size());
+            pb.setProgress(maxSymbols - exp.getRemainingStimuli().size());
         } else {
             pb.setAlpha(0);
         }
@@ -86,10 +81,14 @@ public class TestWriting extends AppCompatActivity {
     }
 
     public void showNextStimuli(View view){
-        String currentSymbol = exp.getCurrentSymbol();
         int id_num = exp.getCurrentID();
         String full_id = exp.getID(id_num);
-
+        String currentSymbol = "";
+        if(id_num%2 == 0){
+            currentSymbol = exp.getCurrentSymbol()[0];
+        } else {
+            currentSymbol = exp.getCurrentSymbol()[1];
+        }
         //Create folder for subject if doesn't exist
         String path = "/KineTest/Experiments/"+ exp.name +"/"+ full_id +"/pre_test";
         File folder = new File(Environment.getExternalStorageDirectory() + path);
