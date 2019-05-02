@@ -7,15 +7,34 @@
     android:background="@drawable/background"
     >
 
+    <TextView
+        android:id="@+id/addStimuli_vel_pro_type_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/expSettings_symboles_spinner"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toStartOf="@+id/expSettings_symboles_spinner"
+        android:text="Symboles added to\nthe experiment " />
+
+    <Spinner
+        android:id="@+id/expSettings_symboles_spinner"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tw_experiment_select_symbols_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:layout_toEndOf="@+id/addStimuli_language_text_view"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/tv_title_mc3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tw_experiment_select_symbols_title"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_marginStart="95dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="-83dp"
         android:text="Writing Test Parameters"
         android:textSize="20sp" />
 
@@ -23,12 +42,11 @@
         android:id="@+id/preview_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="131dp"
-        android:layout_marginLeft="131dp"
-        android:layout_marginBottom="481dp"
+        android:layout_alignBottom="@+id/addStimuli_vel_pro_type_text_view"
+        android:background="@drawable/mybutton"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toStartOf="@+id/addStimuli_vel_pro_type_text_view"
         android:onClick="previewSymbols"
         android:text="Add Symbols" />
 
@@ -112,7 +130,7 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="200dp"
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"

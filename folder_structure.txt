@@ -14,7 +14,7 @@ Kinetest
 					- velocityprofiles
 					- videos_artificial
 					
-					- videos_artificial_lastImage
+					- videos_original_lastImage
 						-videoname.png
 
 					- videos_artificial_lastImage
@@ -38,22 +38,22 @@ Kinetest
 				-video_analysed
 			
 	
-	-experiments
+	-experiments	
 		-exp_files
-		-videos_transformed
-			video_name_velfunction_type_....mp4
 
-		-results
-			-exp_name_1
+		-exp_name_1
+			-videos_transformed
+				video_name_velfunction_type_....mp4
+			-subjects			
 				-subject_1
+					-results
 				...
 				-subject_n
-			...	
+		...		
+		-exp_name_n
+	
 
-			-exp_name_n
-			
-
-	-export_results
+-export_results
 
 	
 

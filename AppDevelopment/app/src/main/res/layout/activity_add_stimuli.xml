@@ -8,6 +8,34 @@
     android:padding="5pt"
     >
 
+    <EditText
+        android:id="@+id/addStimuli_saving_name_text_edit"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_above="@+id/addStimuli_save_stimuli_spinner"
+        android:layout_alignStart="@+id/addStimuli_save_stimuli_spinner"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="40dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:textStyle="italic" />
+
+    <EditText
+        android:id="@+id/addStimuli_vel_pro_function_text_edit"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:hint="sin(x)+1"
+
+        android:layout_alignBottom="@+id/addStimuli_vel_pro_function_text_view"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/addStimuli_language_text_view"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:textStyle="italic" />
+
     <TextView
         android:id="@+id/addStimuli_stimuli_text_view"
         android:layout_width="wrap_content"
@@ -16,7 +44,70 @@
         android:layout_alignStart="@+id/addStimuli_type_text_view"
         android:layout_marginStart="0dp"
         android:layout_marginTop="40dp"
-        android:text="Select Stimuli"></TextView>
+        android:text="Select Stimuli"/>
+
+
+    <TextView
+        android:id="@+id/addStimuli_select_stimuli_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/videoViewNewStimuli"
+        android:layout_alignStart="@+id/videoViewNewStimuli"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="40dp"
+        android:text="Select Stimuli \nto play" />
+
+    <TextView
+        android:id="@+id/addStimuli_save_stimuli_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/videoViewNewStimuli"
+        android:layout_alignBottom="@+id/addStimuli_save_stimuli_spinner"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toStartOf="@+id/addStimuli_save_stimuli_spinner"
+        android:text="Select Stimuli\nto be saved" />
+
+    <TextView
+        android:id="@+id/addStimuli_saveing_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/addStimuli_save_stimuli_text_view"
+        android:layout_alignBottom="@+id/addStimuli_saving_name_text_edit"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
+        android:text="Saving Name" />
+
+    <TextView
+        android:id="@+id/addStimuli_vel_pro_type_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/videoViewNewStimuli"
+        android:layout_alignStart="@+id/addStimuli_stimuli_text_view"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="40dp"
+        android:text="Select Velocity \n Profile Type" />
+
+    <TextView
+        android:id="@+id/addStimuli_vel_pro_function_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addStimuli_vel_pro_type_text_view"
+        android:layout_alignStart="@+id/addStimuli_type_text_view"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="34dp"
+        android:text="If the selected \n type is Function\n define function\n here "/>
+
+    <TextView
+        android:id="@+id/addStimuli_import_vel_pro_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addStimuli_stimuli_text_view"
+        android:layout_alignStart="@+id/addStimuli_type_text_view"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="227dp"
+        android:text="Select Velocity \n Profile to be \n Imported" />
 
     <TextView
         android:id="@+id/addStimuli_language_text_view"
@@ -26,7 +117,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="Select Language"></TextView>
+        android:text="Select Language"/>
 
     <TextView
         android:id="@+id/addStimuli_type_text_view"
@@ -36,160 +127,184 @@
         android:layout_alignStart="@+id/addStimuli_language_text_view"
         android:layout_marginStart="0dp"
         android:layout_marginTop="40dp"
-        android:text="Select Type"></TextView>
+        android:text="Select Type"/>
 
     <Spinner
         android:id="@+id/addStimuli_language_spinner"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/addStimuli_language_text_view"
         android:layout_marginStart="40dp"
         android:layout_marginBottom="0dp"
         android:layout_toEndOf="@+id/addStimuli_language_text_view"
-        android:textSize="20dp"></Spinner>
+        android:textSize="20dp"/>
 
 
     <Spinner
         android:id="@+id/addStimuli_type_spinner"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/addStimuli_type_text_view"
         android:layout_marginStart="40dp"
         android:layout_marginBottom="0dp"
         android:layout_toEndOf="@+id/addStimuli_language_text_view"
-        android:textSize="20dp"></Spinner>
+        android:textSize="20dp"/>
+
+    <Spinner
+        android:id="@+id/addStimuli_vel_pro_type_spinner"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/addStimuli_vel_pro_type_text_view"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/addStimuli_language_text_view"
+        android:textSize="20dp"/>
 
     <Spinner
         android:id="@+id/addStimuli_stimuli_spinner"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/addStimuli_stimuli_text_view"
         android:layout_marginStart="40dp"
         android:layout_marginBottom="0dp"
         android:layout_toEndOf="@+id/addStimuli_language_text_view"
-        android:textSize="20dp"></Spinner>
+        android:textSize="20dp"/>
 
-    <Button
-        android:id="@+id/getVelocityProfile"
-        android:layout_width="89dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/mybutton"
-        android:onClick="getVelocityProfile"
-        android:text="Analyse Stimuli" />
 
-    <Button
-        android:id="@+id/getVelocityProfile2"
-        android:layout_width="89dp"
+    <Spinner
+        android:id="@+id/addStimuli_save_stimuli_spinner"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="277dp"
-        android:layout_marginBottom="19dp"
-        android:background="@drawable/mybutton"
-        android:onClick="getVelocityProfileConverted"
-        android:text="Analyse Converted" />
+        android:layout_alignBottom="@+id/Add_stimuli_Save"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toStartOf="@+id/Add_stimuli_Save"
+        android:textSize="20dp" />
+
+    <Spinner
+        android:id="@+id/addStimuli_play_stimuli_spinner"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/addStimuli_select_stimuli_text_view"
+        android:layout_marginStart="21dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/addStimuli_select_stimuli_text_view"
+        android:textSize="20dp" />
+
+    <Spinner
+        android:id="@+id/addStimuli_import_vel_pro_spinner"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/addStimuli_import_vel_pro_text_view"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/addStimuli_language_text_view"
+        android:textSize="20dp" />
 
     <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph_view_new_stimuli"
-        android:layout_width="230dp"
-        android:layout_height="110dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="255dp" />
+        android:id="@+id/addStimuli_graph_view"
+        android:layout_width="483dp"
+        android:layout_height="175dp"
+        android:layout_below="@+id/addStimuli_play_stimuli_spinner"
+        android:layout_alignStart="@+id/videoViewNewStimuli"
+        android:layout_alignEnd="@+id/videoViewNewStimuli"
+        android:layout_alignBottom="@+id/AddStimuli_import_vel_pro"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp" />
 
     <Button
-        android:id="@+id/loadStimuli"
-        android:layout_width="70dp"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="166dp"
-        android:layout_marginBottom="13dp"
-        android:background="@drawable/mybutton"
-        android:onClick="loadStimuli"
-        android:text="Load Stimuli" />
-
-    <Button
-        android:id="@+id/convertStimuli"
-        android:layout_width="102dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="156dp"
-        android:layout_marginBottom="19dp"
+        android:id="@+id/Add_stimuli_convertStimuli"
+        android:layout_width="81dp"
+        android:layout_height="38dp"
+        android:layout_below="@+id/addStimuli_import_vel_pro_spinner"
+        android:layout_alignStart="@+id/addStimuli_import_vel_pro_spinner"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="38dp"
         android:background="@drawable/mybutton"
         android:onClick="convertStimuli"
         android:text="Convert Stimuli" />
 
     <Button
-        android:id="@+id/playConvertedVideo"
-        android:layout_width="99dp"
+        android:id="@+id/AddStimuli_build_function"
+        android:layout_width="81dp"
+        android:layout_height="38dp"
+        android:layout_alignBottom="@+id/addStimuli_vel_pro_function_text_edit"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/addStimuli_vel_pro_function_text_edit"
+        android:background="@drawable/mybutton"
+        android:onClick="build_function"
+        android:text="Build" />
+
+    <Button
+        android:id="@+id/AddStimuli_reset"
+        android:layout_width="81dp"
+        android:layout_height="38dp"
+        android:layout_alignBottom="@+id/addStimuli_stimuli_spinner"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/addStimuli_stimuli_spinner"
+        android:background="@drawable/mybutton"
+        android:onClick="reset"
+        android:text="reset" />
+
+    <Button
+        android:id="@+id/Add_stimuli_Save"
+        android:layout_width="102dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="168dp"
-        android:layout_marginBottom="82dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
         android:background="@drawable/mybutton"
-        android:onClick="playConverted"
-        android:text="Play Converted" />
+        android:onClick="save"
+        android:text="Save" />
 
     <Button
-        android:id="@+id/playAnalysed"
-        android:layout_width="76dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="57dp"
-        android:layout_marginBottom="80dp"
-        android:background="@drawable/mybutton"
-        android:onClick="playAnalysed"
-        android:text="Play Analysed" />
-
-    <Button
-        android:id="@+id/playStimuli"
-        android:layout_width="76dp"
+        android:id="@+id/Add_stimuli_cancel"
+        android:layout_width="102dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="42dp"
-        android:layout_marginBottom="91dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/mybutton"
+        android:onClick="cancel"
+        android:text="Cancel" />
+
+    <Button
+        android:id="@+id/AddStimuli_import_vel_pro"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/addStimuli_import_vel_pro_spinner"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/addStimuli_import_vel_pro_spinner"
+        android:background="@drawable/mybutton"
+        android:onClick="importVelocityProfile"
+        android:text="Import" />
+
+    <Button
+        android:id="@+id/addStimuli_playStimuli"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/addStimuli_play_stimuli_spinner"
+        android:layout_marginStart="21dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/addStimuli_play_stimuli_spinner"
         android:background="@drawable/mybutton"
         android:onClick="playStimuli"
-        android:text="Play Stimuli" />
-
-    <Button
-        android:id="@+id/captureVideoButton"
-        android:layout_width="87dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="41dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/mybutton"
-        android:onClick="captureVideo"
-        android:text="Capture Video" />
+        android:text="Play" />
 
     <VideoView
         android:id="@+id/videoViewNewStimuli"
-        android:layout_width="145dp"
-        android:layout_height="81dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="404dp"
-        android:layout_marginTop="277dp" />
-
-    <VideoView
-        android:id="@+id/videoViewAnalysedStimuli"
-        android:layout_width="179dp"
-        android:layout_height="89dp"
+        android:layout_width="410dp"
+        android:layout_height="189dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="305dp"
-        android:layout_marginEnd="72dp" />
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp" />
 
 </RelativeLayout>

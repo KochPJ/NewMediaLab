@@ -2,17 +2,29 @@ package com.example.newmedialab;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+import java.util.ArrayList;
+
 public class ExperimentSettingsWriting extends AppCompatActivity {
 
-    public Experiment exp = new Experiment("");
+    public Experiment exp;
     public boolean editing = false;
+    String convertedVideoSavingPath;
+
+    Spinner symbolesSpinner;
+    private String [] symboles;
+    String symbol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +33,44 @@ public class ExperimentSettingsWriting extends AppCompatActivity {
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
         editing = getIntent().getExtras().getBoolean("editing");
+
+
+
+        convertedVideoSavingPath = Environment.getExternalStorageDirectory() + "/KineTest/Experiments/"+exp.name+"/videos_transformed";
+        File folder = new File(convertedVideoSavingPath);
+        if(!folder.exists()) folder.mkdirs();
+
+        updateSpinner();
+
+
+    }
+
+    private void updateSpinner(){
+        symboles = new String[exp.stimuli.size()];
+        ArrayList<String[]> stimuli = exp.stimuli;
+        for(int i = 0; i < exp.stimuli.size(); i++){
+            String[] stim = exp.stimuli.get(i);
+            symboles[i] = stim[1];
+        }
+
+
+        symbolesSpinner = (Spinner) findViewById(R.id.expSettings_symboles_spinner);
+        ArrayAdapter<String> spinnerArrayAdapterSymbol = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item,
+                        this.symboles); //selected item will look like a spinner set from XML
+        spinnerArrayAdapterSymbol.setDropDownViewResource(android.R.layout
+                .simple_spinner_dropdown_item);
+        symbolesSpinner.setAdapter(spinnerArrayAdapterSymbol);
+        symbolesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                symbol = symboles[position];
+            }
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+
+
     }
 
     public void saveExperiment(View view) {
@@ -61,6 +111,8 @@ public class ExperimentSettingsWriting extends AppCompatActivity {
 
     public void previewSymbols(View view){
         Intent intent = new Intent(this, AddStimuli.class);
+        intent = intent.putExtra("experiment", exp);
+        intent = intent.putExtra("editing", editing);
         startActivity(intent);
     }
 

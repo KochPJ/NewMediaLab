@@ -28,8 +28,7 @@ android:background="@drawable/background"
         android:layout_below="@+id/NewStimuli_graph_view_new_stimuli"
         android:layout_alignParentStart="true"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="150dp
-"
+        android:layout_marginTop="150dp"
         android:textSize="20dp" />
 
     <Button

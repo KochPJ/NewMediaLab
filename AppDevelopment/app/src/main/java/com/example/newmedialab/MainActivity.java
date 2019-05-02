@@ -79,19 +79,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createDirectory(){
-
-        File folder = new File(Environment.getExternalStorageDirectory() +
-                File.separator + "./KineTest/Experiments");
-        boolean success = true;
-        if (!folder.exists()) {
-            success = folder.mkdirs();
-        }
-        if (success) {
-            // Do nothing
-        } else {
-            // Create directory
-            new File("./KineTest/Experiments").mkdirs();
-        }
+        File folder = new File(Environment.getExternalStorageDirectory() + "/KineTest/Experiments/Experiment_files");
+        if(!folder.exists()) folder.mkdirs();
 
     }
 
