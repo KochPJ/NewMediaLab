@@ -52,13 +52,9 @@ public class MyExperiments extends AppCompatActivity {
                     startActivity(intent3);
                     break;
                 case R.id.start_experiment: // Go to start experiment view
-                    //Intent intent4 = new Intent(this, StartExperimentMain.class);
-                    //intent4 = intent4.putExtra("experiment", exp);
-                    //startActivity(intent4);
                     startMyExperiment(exp);
                     break;
                 case R.id.delete_experiment: // Delete selected experiment
-                    // TODO: check if no experiments in spinner (currently crashes)
                     if(myFile.exists()) {
                         myFile.delete();
                         Toast.makeText(this, "Deleted Experiment " +  FILE_NAME,
@@ -69,11 +65,6 @@ public class MyExperiments extends AppCompatActivity {
                     }
                     Intent startShapes = new Intent(MyExperiments.this, MyExperiments.class);
                     startActivity(startShapes);
-                    break;
-                case R.id.add_stimuli: // Go to add stimuli view
-                    Intent intent5 = new Intent(this, AddStimuli.class);
-                    intent5 = intent5.putExtra("experiment", exp);
-                    startActivity(intent5);
                     break;
                 case R.id.view_stimuli: // Go to view stimuli view
                     Intent intent6 = new Intent(this, ViewStimuli.class);
@@ -118,7 +109,6 @@ public class MyExperiments extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                 } else {
                     // Create post experiment text file for the answers
-                    String currentSymbol = exp_final.getCurrentSymbol();
                     int id_num = exp_final.getCurrentID();
                     String full_id = exp_final.getID(id_num);
 
@@ -220,12 +210,17 @@ public class MyExperiments extends AppCompatActivity {
                                 exp.directAddSymbol(str, index, 3);
                                 index += 1;
                             }
-                        }else if(c == 14){
+                        }else if(c == 14) {
                             String[] strParts = line.split(",");
                             for (String str : strParts) {
-                                exp.addFalseSymbol(str);
+                                exp.addFalseArtificialSymbol(str);
                             }
-                        }else if(c == 15){ //Get ID's
+                        }else if(c == 15){
+                            String[] strParts = line.split(",");
+                            for (String str : strParts) {
+                                exp.addFalseKinematicSymbol(str);
+                            }
+                        }else if(c == 16){ //Get ID's
                             String[] strParts = line.split(";");
                             for (String str : strParts) {
                                 exp.addID(str);

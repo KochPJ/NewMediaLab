@@ -106,26 +106,12 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="18dp"
-        android:layout_marginRight="18dp"
-        android:layout_marginBottom="293dp"
+        android:layout_marginEnd="229dp"
+        android:layout_marginRight="229dp"
+        android:layout_marginBottom="203dp"
         android:background="@drawable/mybutton"
         android:onClick="navigation"
         android:text="View Existing Stimuli" />
-
-    <Button
-        android:id="@+id/add_stimuli"
-        android:layout_width="171dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="219dp"
-        android:layout_marginRight="219dp"
-        android:layout_marginBottom="293dp"
-        android:background="@drawable/mybutton"
-        android:onClick="addNewStimuli"
-        android:text="Add New Stimuli" />
 
     <Button
         android:id="@+id/results"
