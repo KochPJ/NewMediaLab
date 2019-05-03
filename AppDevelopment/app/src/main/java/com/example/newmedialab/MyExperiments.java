@@ -148,7 +148,7 @@ public class MyExperiments extends AppCompatActivity {
         setContentView(R.layout.activity_my_experiments);
 
         /// Read experiment files
-        File dir = new File(Environment.getExternalStorageDirectory(), "KineTest/Experiments");
+        File dir = new File(Environment.getExternalStorageDirectory(), "KineTest/Experiments/Experiment_files/");
         File[] directoryListing = dir.listFiles();
         if (directoryListing != null) {
             int i = 0;

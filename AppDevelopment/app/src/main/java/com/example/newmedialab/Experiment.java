@@ -130,7 +130,7 @@ public class Experiment implements Serializable{
         try
         {
             //TODO:  check if external storage is available (https://developer.android.com/reference/android/os/Environment.html#getExternalStorageState()) if not, save to a different directory or output a warning to the user
-            File root = new File(Environment.getExternalStorageDirectory(), "KineTest/Experiments");
+            File root = new File(Environment.getExternalStorageDirectory(), "KineTest/Experiments/Experiment_files/");
             String FILE_NAME = (this.name+ ".txt");
             if (!root.exists()) root.mkdirs();
             File gpxfile = new File(root, FILE_NAME);
