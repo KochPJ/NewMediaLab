@@ -58,7 +58,6 @@ public class ShowStimuli extends AppCompatActivity {
         //MediaController m = new MediaController(this);
         //vv.setMediaController(m);
         if(this.remaining_repeats > 0){
-            //TODO: load correct video based on current stimuli path and whether or not this subject is part of the control group
             for(int i = 0; auto_repeats > i; i++){
                 //play video for the correct amount of user specified loops
                 if(!vv.isPlaying()){

@@ -23,6 +23,7 @@ public class ParticipantInfo extends AppCompatActivity {
        EditText etID = (EditText) findViewById(R.id.et_participantID);
        String id = etID.getText().toString();
        exp.addID(id);
+       exp.setCurrentID(exp.getIDs().size());
        Intent intent = new Intent(this, ShowStimuli.class);
        intent = intent.putExtra("experiment", exp);
        startActivity(intent);
