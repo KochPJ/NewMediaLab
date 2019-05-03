@@ -91,6 +91,7 @@ public class TestWriting extends AppCompatActivity {
             String[] strParts = exp.getCurrentSymbol()[1].split("/");
             currentSymbol = strParts[strParts.length - 1];
         }
+        Log.d("testCurrentsymbol", currentSymbol);
         //Create folder for subject if doesn't exist
         String path = "/KineTest/Experiments/"+ exp.name +"/"+ full_id +"/pre_test";
         File folder = new File(Environment.getExternalStorageDirectory() + path);
