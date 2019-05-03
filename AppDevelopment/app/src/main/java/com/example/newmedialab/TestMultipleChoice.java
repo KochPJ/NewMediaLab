@@ -150,7 +150,14 @@ public class TestMultipleChoice extends AppCompatActivity {
         try {
             FileOutputStream fOut = new FileOutputStream(fullpath, true);
             OutputStreamWriter osw = new OutputStreamWriter(fOut);
-            osw.write(Boolean.toString(spinner.getSelectedItem().equals(exp.getRemainingStimuli().indexOf(currentSymbol))) +" \t "+ spinner.getSelectedItem() + "\t"); //Test
+            if(exp.getCurrentID()%2 == 0) { // Control group
+                osw.write(Boolean.toString(spinner.getSelectedItemPosition() == falseSymbols.indexOf(Environment.getExternalStorageDirectory()+"/"+exp.getCurrentSymbol()[2]))
+                        +" \t "+ spinner.getSelectedItem() + "\t");
+            } else {
+                osw.write(Boolean.toString(spinner.getSelectedItemPosition() == falseSymbols.indexOf(Environment.getExternalStorageDirectory()+"/"+exp.getCurrentSymbol()[3]))
+                        +" \t "+ spinner.getSelectedItem() + "\t");
+            }
+
             for(int j=0; j<Integer.parseInt(exp.qnum); j++){
                 osw.write(falseSymbols.get(j) + ",");
             }
