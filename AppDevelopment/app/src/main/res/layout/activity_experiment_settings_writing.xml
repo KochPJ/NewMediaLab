@@ -71,7 +71,7 @@
         android:layout_toEndOf="@+id/ExpSettings_deleteSymbol_text_view"
         android:background="@drawable/mybutton"
         android:onClick="deleteSymbol"
-        android:text="Delete Symbols" />
+        android:text="Delete Stimuli" />
 
 
     <EditText
