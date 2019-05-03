@@ -30,7 +30,7 @@ public class TestMultipleChoice extends AppCompatActivity {
     public String[] stimuli;
     public ImageView im1, im2, im3, im4, im5, im6;
     public TextView tv1, tv2, tv3, tv4, tv5, tv6;
-    public ArrayList<String> falseSymbols;
+    public ArrayList<String> falseSymbols = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,15 +77,15 @@ public class TestMultipleChoice extends AppCompatActivity {
         List<String> spinnerArray =  new ArrayList<String>();
 
         if(exp.getCurrentID()%2 == 0){ // Control group
-            // Add true stimuli
-            falseSymbols.add(exp.getCurrentSymbol()[2]);
             // Randomly sample from correct group of false stimuli
             falseSymbols = exp.getFalseSymbol(Integer.parseInt(exp.qnum)-1, false);
-        } else { // Experimental group
             // Add true stimuli
-            falseSymbols.add(exp.getCurrentSymbol()[3]);
+            falseSymbols.add(Environment.getExternalStorageDirectory()+"/"+exp.getCurrentSymbol()[2]);
+        } else { // Experimental group
             // Randomly sample from correct group of false stimuli
             falseSymbols = exp.getFalseSymbol(Integer.parseInt(exp.qnum)-1, true);
+            // Add true stimuli
+            falseSymbols.add(Environment.getExternalStorageDirectory()+"/"+exp.getCurrentSymbol()[3]);
         }
         Collections.shuffle(falseSymbols);
         for(int j=0; j<falseSymbols.size(); j++){

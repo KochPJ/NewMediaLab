@@ -3,6 +3,7 @@ package com.example.newmedialab;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -64,13 +65,13 @@ public class ShowStimuli extends AppCompatActivity {
                     if(exp.getCurrentID()%2 == 0){
                         //Subject is part of the control group and gets the artificial stimuli
                         String path = stimuli[0];
-                        Uri u = Uri.parse(path);
+                        Uri u = Uri.parse(Environment.getExternalStorageDirectory()+"/"+path);
                         vv.setVideoURI(u);
                         vv.start();
                     } else {
                         //Subject is part of the experimental group and gets the kinestetic stimuli
                         String path = stimuli[1];
-                        Uri u = Uri.parse(path);
+                        Uri u = Uri.parse(Environment.getExternalStorageDirectory()+"/"+path);
                         vv.setVideoURI(u);
                         vv.start();
                     }
