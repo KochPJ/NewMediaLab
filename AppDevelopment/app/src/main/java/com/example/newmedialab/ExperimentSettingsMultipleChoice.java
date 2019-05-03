@@ -97,7 +97,8 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
 
 
     public void cancel(View view){
-
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
 
