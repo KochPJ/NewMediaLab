@@ -83,12 +83,15 @@ public class TestWriting extends AppCompatActivity {
     public void showNextStimuli(View view){
         int id_num = exp.getCurrentID();
         String full_id = exp.getID(id_num);
-        String currentSymbol = "";
+        String currentSymbol;
         if(id_num%2 == 0){
-            currentSymbol = exp.getCurrentSymbol()[0];
+            String[] strParts = exp.getCurrentSymbol()[0].split("/");
+            currentSymbol = strParts[strParts.length - 1];
         } else {
-            currentSymbol = exp.getCurrentSymbol()[1];
+            String[] strParts = exp.getCurrentSymbol()[1].split("/");
+            currentSymbol = strParts[strParts.length - 1];
         }
+        Log.d("testCurrentsymbol", currentSymbol);
         //Create folder for subject if doesn't exist
         String path = "/KineTest/Experiments/"+ exp.name +"/"+ full_id +"/pre_test";
         File folder = new File(Environment.getExternalStorageDirectory() + path);
