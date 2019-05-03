@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,8 +59,8 @@ public class ShowStimuli extends AppCompatActivity {
             for(int i = 0; auto_repeats > i; i++){
                 //play video for the correct amount of user specified loops
                 VideoView vv = findViewById(R.id.videoView2);
-                MediaController m = new MediaController(this);
-                vv.setMediaController(m);
+                //MediaController m = new MediaController(this);
+                //vv.setMediaController(m);
                 if(exp.getCurrentID()%2 == 0){
                     //Subject is part of the control group and gets the artificial stimuli
                     String path = stimuli[0];

@@ -195,10 +195,9 @@ public class Experiment implements Serializable{
         }
     }
 
-    //TODO: change to comply with new link format
     public String[] getNextStimuli() {
         //Initialize
-        if(remainingStimuli.isEmpty()){
+        if(finishedShowStimuli){
             finishedShowStimuli = false;
             ArrayList<String[]> remainingStimuli = new ArrayList<>(stimuli);
             //Shuffle stimuli if random order selected
