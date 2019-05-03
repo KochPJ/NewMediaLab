@@ -9,6 +9,16 @@
     tools:context=".NewStimuli">
 
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="576dp"
+        android:layout_marginTop="301dp"
+        android:text="Please add the kinematic stimuli" />
+
     <Spinner
         android:id="@+id/newStimuli_language_spinner"
         android:layout_width="200dp"
