@@ -1,6 +1,9 @@
 package com.example.newmedialab;
 
 import android.os.Environment;
+import android.util.Log;
+
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -41,6 +44,39 @@ public class Experiment implements Serializable{
     public void setName(String name){
         this.name = name;
         this.file_name = (this.name+ ".txt");
+    }
+
+    public void deleteExperiment(){
+        Log.d("exp", "path = "+Environment.getExternalStorageDirectory()+"/KineTest/Experiments/"+name);
+        File dir = new File(Environment.getExternalStorageDirectory()+"/KineTest/Experiments/"+name);
+        if (dir.isDirectory())
+        {
+            Log.d("exp", "deleting exp");
+            try {
+                FileUtils.deleteDirectory(dir);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        dir = new File(Environment.getExternalStorageDirectory()+"/KineTest/Experiments/Experiment_files/");
+        Log.d("exp", "path ="+Environment.getExternalStorageDirectory()+"/KineTest/Experiments/Experiment_files");
+        if (dir.isDirectory())
+        {
+
+            Log.d("exp", "deleting exp file");
+            dir.delete();
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++)
+            {
+
+                Log.d("exp", "checking file name = "+children[i]);
+                if(children[i].equals(name+".txt")){
+                    Log.d("exp", "deleting exp file = "+children[i]);
+                    new File(dir, children[i]).delete();
+                }
+            }
+        }
     }
 
     public void setProgressbar(String progressbar){this.progressbar = progressbar; }
