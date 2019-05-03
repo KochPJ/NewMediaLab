@@ -199,7 +199,10 @@ public class Experiment implements Serializable{
         //Initialize
         if(finishedShowStimuli){
             finishedShowStimuli = false;
-            ArrayList<String[]> remainingStimuli = new ArrayList<>(stimuli);
+            //Deep copy
+            for(int i=0; i<stimuli.size(); i++){
+                remainingStimuli.add(stimuli.get(i).clone());
+            }
             //Shuffle stimuli if random order selected
             if(Boolean.parseBoolean(random) == true){
                 Collections.shuffle(remainingStimuli);
@@ -221,7 +224,7 @@ public class Experiment implements Serializable{
             Collections.shuffle(falseKinematicStimuli);
             ArrayList<String> fss2 = new ArrayList<String>();
             for(int i=0; i<numberOf; i++){
-                fss2.add(falseKinematicStimuli.get(i));
+                fss2.add(Environment.getExternalStorageDirectory()+falseKinematicStimuli.get(i));
             }
             return fss2;
         } else {
@@ -229,7 +232,7 @@ public class Experiment implements Serializable{
             Collections.shuffle(falseArtificialStimuli);
             ArrayList<String> fss2 = new ArrayList<String>();
             for(int i=0; i<numberOf; i++){
-                fss2.add(falseArtificialStimuli.get(i));
+                fss2.add(Environment.getExternalStorageDirectory()+falseArtificialStimuli.get(i));
             }
             return fss2;
         }
