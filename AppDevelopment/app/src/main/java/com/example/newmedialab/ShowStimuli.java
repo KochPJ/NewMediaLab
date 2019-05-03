@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,26 +53,27 @@ public class ShowStimuli extends AppCompatActivity {
     }
 
     public void replayStimuli(View view) {
-
+        VideoView vv = findViewById(R.id.videoView2);
+        //MediaController m = new MediaController(this);
+        //vv.setMediaController(m);
         if(this.remaining_repeats > 0){
             //TODO: load correct video based on current stimuli path and whether or not this subject is part of the control group
             for(int i = 0; auto_repeats > i; i++){
                 //play video for the correct amount of user specified loops
-                VideoView vv = findViewById(R.id.videoView2);
-                MediaController m = new MediaController(this);
-                vv.setMediaController(m);
-                if(exp.getCurrentID()%2 == 0){
-                    //Subject is part of the control group and gets the artificial stimuli
-                    String path = stimuli[0];
-                    Uri u = Uri.parse(path);
-                    vv.setVideoURI(u);
-                    vv.start();
-                } else {
-                    //Subject is part of the experimental group and gets the kinestetic stimuli
-                    String path = stimuli[1];
-                    Uri u = Uri.parse(path);
-                    vv.setVideoURI(u);
-                    vv.start();
+                if(!vv.isPlaying()){
+                    if(exp.getCurrentID()%2 == 0){
+                        //Subject is part of the control group and gets the artificial stimuli
+                        String path = stimuli[0];
+                        Uri u = Uri.parse(path);
+                        vv.setVideoURI(u);
+                        vv.start();
+                    } else {
+                        //Subject is part of the experimental group and gets the kinestetic stimuli
+                        String path = stimuli[1];
+                        Uri u = Uri.parse(path);
+                        vv.setVideoURI(u);
+                        vv.start();
+                    }
                 }
             }
             remaining_repeats -= 1;

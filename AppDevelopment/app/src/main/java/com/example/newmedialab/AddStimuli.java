@@ -6,14 +6,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.jjoe64.graphview.GraphView;
@@ -92,6 +90,7 @@ public class AddStimuli extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //TODO: make sure the user adds at least 1 video before continuing
         super.onCreate(savedInstanceState);
 
         Intent i = getIntent();

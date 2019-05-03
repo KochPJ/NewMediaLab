@@ -11,10 +11,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.io.File;
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ExperimentSettingsWriting extends AppCompatActivity {
 
@@ -88,7 +88,7 @@ public class ExperimentSettingsWriting extends AppCompatActivity {
         EditText exp_repeats_EditText = (EditText) findViewById(R.id.te_experiment_repeats);
         EditText exp_repeats2_EditText = (EditText) findViewById(R.id.te_experiment_repeats2);
         CheckBox exp_random_CB = (CheckBox) findViewById(R.id.cb_stimuli_random);
-        //exp.setSymbols(exp_symbols);
+
         // set the other variables
         exp.setMaxRepeats(exp_repeats_EditText.getText().toString());
         exp.setAutoRepeats(exp_repeats2_EditText.getText().toString());

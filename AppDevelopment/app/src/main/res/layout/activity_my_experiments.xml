@@ -111,7 +111,7 @@
         android:layout_marginBottom="203dp"
         android:background="@drawable/mybutton"
         android:onClick="navigation"
-        android:text="View Existing Stimuli" />
+        android:text="View Stimuli" />
 
     <Button
         android:id="@+id/results"
