@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -139,25 +140,45 @@ public class TestMultipleChoice extends AppCompatActivity {
         // Get answer
         Spinner spinner = (Spinner) findViewById(R.id.spinner2);
         String[] currentSymbol = exp.getCurrentSymbol();
+
+        // Create post experiment text file for the answers
         int id_num = exp.getCurrentID();
         String full_id = exp.getID(id_num);
 
+        //First create the folder if it doesn't exist
+        String subdir = "/KineTest/Experiments/" + exp.name + "/" + full_id +"/post_test";
+        File root = new File(Environment.getExternalStorageDirectory() + subdir);
+        String FILE_NAME = (exp.name +"_"+full_id+"_results.txt");
+        if (!root.exists()){
+            root.mkdirs();
+            //Then create the file and write header
+            File gpxfile = new File(root, FILE_NAME);
+            FileWriter writer = null;
+            try {
+                writer = new FileWriter(gpxfile);
+                writer.append("Experiment: "+ exp.name +"\n").append("Correct Answer \t Chosen Position \t Correct Position \t Options \n");
+                writer.flush();
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         // Path to file
-        String path = "/KineTest/Experiments/" + exp.name + "/" + full_id +"/post_test/"+ exp.name +"_results.txt";
+        String path = "/KineTest/Experiments/" + exp.name + "/" + full_id +"/post_test/"+ exp.name +"_"+full_id+"_results.txt";
         File fullpath = new File(Environment.getExternalStorageDirectory() + path);
 
-        // Open the file
+        //Append answers to file once it exists
         try {
             FileOutputStream fOut = new FileOutputStream(fullpath, true);
             OutputStreamWriter osw = new OutputStreamWriter(fOut);
             if(exp.getCurrentID()%2 == 0) { // Control group
                 osw.write(Boolean.toString(spinner.getSelectedItemPosition() == falseSymbols.indexOf(Environment.getExternalStorageDirectory()+"/"+exp.getCurrentSymbol()[2]))
-                        +" \t "+ spinner.getSelectedItem() + "\t");
+                        +" \t "+ spinner.getSelectedItemPosition() + "\t" + falseSymbols.indexOf(Environment.getExternalStorageDirectory()+"/"+exp.getCurrentSymbol()[2]) + "\t");
             } else {
                 osw.write(Boolean.toString(spinner.getSelectedItemPosition() == falseSymbols.indexOf(Environment.getExternalStorageDirectory()+"/"+exp.getCurrentSymbol()[3]))
-                        +" \t "+ spinner.getSelectedItem() + "\t");
+                        +" \t "+ spinner.getSelectedItemPosition() + "\t"+ falseSymbols.indexOf(Environment.getExternalStorageDirectory()+"/"+exp.getCurrentSymbol()[3]) + "\t");
             }
-
             for(int j=0; j<Integer.parseInt(exp.qnum); j++){
                 osw.write(falseSymbols.get(j) + ",");
             }
