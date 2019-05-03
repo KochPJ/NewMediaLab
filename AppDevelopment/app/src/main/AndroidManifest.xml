@@ -80,8 +80,11 @@
             android:name=".AddStimuli"
             android:label="@string/title_activity_add_stimuli"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".playVideo" />
-        <activity android:name=".ExperimentSettingsWriting" />
+        <activity
+            android:name=".playVideo" />
+        <activity
+            android:name=".ExperimentSettingsWriting"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".MyExperiments"
             android:label="@string/app_name"

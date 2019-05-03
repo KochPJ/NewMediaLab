@@ -131,30 +131,35 @@ public class ColorBlobDetector {
                 }
         }
 
-
-        List<Double> distances = new ArrayList<Double>();
-        for(int i = 0; i < xpos.size(); i++){
-            distances.add(Math.sqrt(Math.pow(x_old-xpos.get(i),2) + Math.pow(y_old-ypos.get(i),2)));
-        }
-        int index = 0;
-         double smallestDist = distances.get(0);
-        for(int i = 0; i < distances.size(); i++){
-            if(distances.get(i)<smallestDist){
-                smallestDist = distances.get(i);
-                index = i;
+        if (xpos.size()>0) {
+            List<Double> distances = new ArrayList<Double>();
+            for (int i = 0; i < xpos.size(); i++) {
+                distances.add(Math.sqrt(Math.pow(x_old - xpos.get(i), 2) + Math.pow(y_old - ypos.get(i), 2)));
             }
+            int index = 0;
+            double smallestDist = distances.get(0);
+            for (int i = 0; i < distances.size(); i++) {
+                if (distances.get(i) < smallestDist) {
+                    smallestDist = distances.get(i);
+                    index = i;
+                }
+            }
+            x = xpos.get(index);
+            y = ypos.get(index);
+            Rect rect = rects.get(index);
+            pt1 = new Point(rect.x, rect.y);
+            pt2 = new Point(rect.x+rect.width, rect.y+rect.height);
+            Scalar s = new Scalar(0,0,255);
+            Imgproc.rectangle(mDrawRect, pt1, pt2, s, 5);
+        }else{
+            x = x_old;
+            y = y_old;
         }
-        x = xpos.get(index);
-        y = ypos.get(index);
 
         x_old = x;
         y_old = y;
 
-       Rect rect = rects.get(index);
-        pt1 = new Point(rect.x, rect.y);
-        pt2 = new Point(rect.x+rect.width, rect.y+rect.height);
-        Scalar s = new Scalar(0,0,255);
-        Imgproc.rectangle(mDrawRect, pt1, pt2, s, 5);
+
 
 
     }

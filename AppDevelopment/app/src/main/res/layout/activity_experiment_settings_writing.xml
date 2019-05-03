@@ -5,17 +5,29 @@
     android:layout_height="match_parent"
     tools:context=".ExperimentSettingsWriting"
     android:background="@drawable/background"
+    android:padding="5pt"
     >
 
     <TextView
-        android:id="@+id/addStimuli_vel_pro_type_text_view"
+        android:id="@+id/ExpSettings_addSymbol_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/expSettings_symboles_spinner"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="0dp"
         android:layout_toStartOf="@+id/expSettings_symboles_spinner"
-        android:text="Symboles added to\nthe experiment " />
+        android:text="Stimuli added to\nthe experiment " />
+
+
+    <TextView
+        android:id="@+id/ExpSettings_deleteSymbol_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/expSettings_symboles_spinner"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/expSettings_symboles_spinner"
+        android:text="Delete Selected\n Stimuli " />
 
     <Spinner
         android:id="@+id/expSettings_symboles_spinner"
@@ -23,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tw_experiment_select_symbols_title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="40dp"
         android:layout_toEndOf="@+id/addStimuli_language_text_view"
         android:textSize="20dp" />
 
@@ -31,32 +43,44 @@
         android:id="@+id/tv_title_mc3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tw_experiment_select_symbols_title"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="95dp"
-        android:layout_marginTop="-83dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
         android:text="Writing Test Parameters"
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/preview_button"
+        android:id="@+id/ExpSettings_addSymbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/addStimuli_vel_pro_type_text_view"
-        android:background="@drawable/mybutton"
+        android:layout_alignBottom="@+id/ExpSettings_addSymbol_text_view"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="0dp"
-        android:layout_toStartOf="@+id/addStimuli_vel_pro_type_text_view"
+        android:layout_toStartOf="@+id/ExpSettings_addSymbol_text_view"
+        android:background="@drawable/mybutton"
         android:onClick="previewSymbols"
-        android:text="Add Symbols" />
+        android:text="Add Stimuli" />
+
+    <Button
+        android:id="@+id/ExpSettings_deleteSymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ExpSettings_deleteSymbol_text_view"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/ExpSettings_deleteSymbol_text_view"
+        android:background="@drawable/mybutton"
+        android:onClick="deleteSymbol"
+        android:text="Delete Symbols" />
+
 
     <EditText
         android:id="@+id/te_experiment_repeats"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/tw_experiment_repeats_title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="331dp"
+        android:layout_marginTop="40dp"
         android:digits="0123456789."
         android:ems="10"
         android:gravity="center"
@@ -68,11 +92,10 @@
         android:id="@+id/te_experiment_repeats2"
         android:layout_width="200dp"
         android:layout_height="50dp"
+        android:layout_below="@+id/tw_experiment_repeats_title2"
         android:layout_alignStart="@+id/te_experiment_repeats"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="466dp"
+        android:layout_marginTop="40dp"
         android:digits="0123456789."
         android:ems="10"
         android:gravity="center"
@@ -84,9 +107,9 @@
         android:id="@+id/tw_experiment_repeats_title"
         android:layout_width="321dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/expSettings_symboles_spinner"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="275dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:text="Number of Allowed Repeats of Video"
@@ -96,16 +119,15 @@
 
     <TextView
         android:id="@+id/tw_experiment_repeats_title2"
-        android:layout_width="392dp"
-        android:layout_height="36dp"
-        android:layout_alignStart="@+id/tw_experiment_select_symbols_title"
-        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cb_stimuli_random"
+        android:layout_alignEnd="@+id/cb_stimuli_random"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="-46dp"
-        android:layout_marginTop="404dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="Number of Automatic Loops in a Single Playthrough"
+        android:text="Number of Automatic Loops \nin a Single Playthrough"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -114,50 +136,47 @@
         android:id="@+id/tw_experiment_select_symbols_title"
         android:layout_width="300dp"
         android:layout_height="30dp"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/tv_title_mc3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="81dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="Shown Symbols"
+        android:text="Shown Stimulies"
         android:textColor="#000000"
         android:textSize="20dp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/te_experiment_select_symbols"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="textPersonName"
-        android:text="1,2,3,4,5,6,7"
-        android:textStyle="italic" />
-
     <Button
         android:id="@+id/create_exp_button"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
         android:background="@drawable/mybutton"
         android:onClick="saveExperiment"
-        android:text="Save" />
+        android:text="Next" />
+
+    <Button
+        android:id="@+id/expSettings_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/mybutton"
+        android:onClick="cancel"
+        android:text="Cancel" />
 
     <CheckBox
         android:id="@+id/cb_stimuli_random"
-        android:layout_width="237dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="84dp"
-        android:layout_marginEnd="90dp"
-        android:layout_marginBottom="149dp"
+        android:layout_below="@+id/te_experiment_repeats"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
         android:text="Random presentation of stimuli" />
 
 </RelativeLayout>

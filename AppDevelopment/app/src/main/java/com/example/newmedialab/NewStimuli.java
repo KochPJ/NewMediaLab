@@ -121,6 +121,7 @@ public class NewStimuli extends AppCompatActivity implements NewStimuliAddLangua
 
         if (lastAdd != -1) {
             Video videoloaded = new Video(this, video_name);
+            videoloaded.clearTempFolders();
             String copy_to_dir = Environment.getExternalStorageDirectory()+ "/KineTest/Resources/temp/temp_loaded_video";
             try {
                 InputStream inputStream = getContentResolver().openInputStream(this.userSelectedVideoUriList.get(this.userSelectedVideoUriList.size() - 1));

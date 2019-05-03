@@ -161,8 +161,10 @@ public class AddStimuli extends AppCompatActivity {
             }
             savingStimuliPath = "KineTest/Experiments/"+exp.name+"/videos_transformed/"+saving_name+".mp4";
         }
-
+        //addding new symbol to exp file
         exp.addSymbol(savingArtificialStimuliPath, savingStimuliPath, savingArtificialStimuliPathLastImage, savingStimuliPathLastImage);
+        //clear the temp data in the temp folders
+        videoloaded.clearTempFolders();
 
         Intent intent = new Intent(this, ExperimentSettingsWriting.class);
         intent = intent.putExtra("experiment", exp);
