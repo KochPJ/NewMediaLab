@@ -113,18 +113,6 @@
         android:text="Thanks for participating!" />
 
     <Button
-        android:id="@+id/writingEXP_cancel_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="0dp"
-        android:background="@drawable/mybutton"
-        android:onClick="cancel"
-        android:text="Cancel" />
-
-    <Button
         android:id="@+id/writingEXP_next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

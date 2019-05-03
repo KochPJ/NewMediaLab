@@ -25,6 +25,7 @@ public class ExperimentSettingsWriting extends AppCompatActivity {
     Spinner symbolesSpinner;
     private String [] symboles;
     String symbol;
+    int symbol_position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class ExperimentSettingsWriting extends AppCompatActivity {
         symbolesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 symbol = symboles[position];
+                symbol_position = position;
             }
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
@@ -76,11 +78,14 @@ public class ExperimentSettingsWriting extends AppCompatActivity {
     }
 
     public void cancel(View view){
+        exp.deleteExperiment();
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
     public void deleteSymbol(View view){
+        exp.stimuli.remove(symbol_position);
+        updateSpinner();
 
     }
 

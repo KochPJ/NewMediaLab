@@ -28,10 +28,6 @@ public class WritingExperiment extends AppCompatActivity {
         }
     }
 
-    public void cancel(View view){
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-    }
 
     public void continueToSettings(View view) {
         CheckBox cb = (CheckBox)findViewById(R.id.progress_bar);

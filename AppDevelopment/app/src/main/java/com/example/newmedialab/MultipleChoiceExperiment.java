@@ -20,7 +20,7 @@ public class MultipleChoiceExperiment extends AppCompatActivity {
     }
 
     public void cancel(View view){
-
+        exp.deleteExperiment();
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
