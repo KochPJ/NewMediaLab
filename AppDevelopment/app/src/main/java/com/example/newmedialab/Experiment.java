@@ -199,7 +199,7 @@ public class Experiment implements Serializable{
         //Initialize
         if(finishedShowStimuli){
             finishedShowStimuli = false;
-            ArrayList<String[]> remainingStimuli = new ArrayList<>(stimuli);
+            remainingStimuli =  new ArrayList<String[]>(stimuli);
             //Shuffle stimuli if random order selected
             if(Boolean.parseBoolean(random) == true){
                 Collections.shuffle(remainingStimuli);
