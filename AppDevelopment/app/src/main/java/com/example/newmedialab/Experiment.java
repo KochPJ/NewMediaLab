@@ -31,7 +31,7 @@ public class Experiment implements Serializable{
     ArrayList<String> falseArtificialStimuli = new ArrayList<String>();
     String[] currentSymbol;
     int currentID = 0;
-    boolean finishedShowStimuli = false;
+    boolean finishedShowStimuli = true;
 
     public Experiment(String name){
         this.name = name;
