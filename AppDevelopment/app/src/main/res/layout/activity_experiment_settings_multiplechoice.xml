@@ -1,71 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".ExperimentSettingsMultipleChoice">
+    tools:context=".ExperimentSettingsMultipleChoice"
+    android:padding="5pt">
 
+
+    <Spinner
+        android:id="@+id/ExpSettingMultiCho_kine_spinner"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ExpSettingMultiCho_imviewkine"
+        android:layout_alignStart="@+id/ExpSettingMultiCho_imviewkine"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp" />
+
+
+    <Spinner
+        android:id="@+id/ExpSettingMultiCho_art_spinner"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ExpSettingMultiCho_imviewart"
+        android:layout_alignEnd="@+id/ExpSettingMultiCho_imviewart"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="0dp"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/tv_title_mc4"
         android:layout_width="361dp"
         android:layout_height="51dp"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="0dp"
+        android:layout_centerHorizontal="true"
         android:text="Multiple Choice Test Parameters"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/preview_button2"
-        android:layout_width="335dp"
+        android:id="@+id/ExpSettingMultiCho_add_kine"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="126dp"
-        android:layout_marginLeft="126dp"
-        android:layout_marginTop="163dp"
+        android:layout_below="@+id/ExpSettingMultiCho_kine_spinner"
+        android:layout_alignStart="@+id/ExpSettingMultiCho_kine_spinner"
+
+        android:layout_marginStart="20dp"
+
+        android:layout_marginTop="20dp"
+        android:background="@drawable/mybutton"
         android:onClick="addFalseSymbolsKinestetic"
-        android:text="Add Symbols for Kinestetic Stimuli" />
+        android:text="Add" />
+
 
     <Button
-        android:id="@+id/preview_button4"
-        android:layout_width="337dp"
+        android:id="@+id/ExpSettingMultiCho_delete_kine"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="126dp"
-        android:layout_marginLeft="126dp"
-        android:layout_marginTop="224dp"
+        android:layout_below="@+id/ExpSettingMultiCho_kine_spinner"
+        android:layout_alignEnd="@+id/ExpSettingMultiCho_imviewkine"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/mybutton"
+        android:onClick="deleteFalseSymbolsKinestetic"
+        android:text="Delete" />
+
+    <Button
+        android:id="@+id/ExpSettingMultiCho_delete_art"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ExpSettingMultiCho_art_spinner"
+        android:layout_alignEnd="@+id/ExpSettingMultiCho_art_spinner"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/mybutton"
+        android:onClick="deleteFalseSymbolsArtificial"
+        android:text="Delete" />
+
+    <Button
+        android:id="@+id/ExpSettingMultiCho_add_art"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ExpSettingMultiCho_art_spinner"
+
+        android:layout_alignStart="@+id/ExpSettingMultiCho_imviewart"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/mybutton"
         android:onClick="addFalseSymbolsArtificial"
-        android:text="Add Symbols for Artificial Stimuli" />
-
-    <Button
-        android:id="@+id/preview_button3"
-        android:layout_width="138dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="106dp"
-        android:layout_marginLeft="106dp"
-        android:layout_marginTop="753dp"
-        android:onClick="clearPaths"
-        android:text="Clear Paths" />
+        android:text="Add" />
 
     <TextView
         android:id="@+id/tw_experiment_select_symbols_title"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="317dp"
-        android:layout_marginEnd="380dp"
+        android:layout_below="@+id/tv_title_mc4"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="-100dp"
+        android:layout_toStartOf="@+id/tv_title_mc4"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:text="Kinestetic Symbols URI's"
@@ -74,12 +109,12 @@
 
     <TextView
         android:id="@+id/tw_experiment_select_symbols_title2"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="313dp"
-        android:layout_marginEnd="79dp"
+        android:layout_below="@+id/tv_title_mc4"
+        android:layout_marginStart="-100dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/tv_title_mc4"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:text="Artificial Symbols URI's"
@@ -87,30 +122,47 @@
         android:textSize="14sp" />
 
     <Button
-        android:id="@+id/create_exp_button2"
+        android:id="@+id/ExpSettingMultiCho_save"
         android:layout_width="139dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="127dp"
-        android:layout_marginBottom="164dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
         android:background="@drawable/mybutton"
         android:onClick="saveExperiment2"
         android:text="Save" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="296dp"
-        android:layout_height="376dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="353dp" />
+    <Button
+        android:id="@+id/ExpSettingMultiCho_cancel"
+        android:layout_width="139dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/mybutton"
+        android:onClick="cancel"
+        android:text="Cancel" />
 
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="296dp"
-        android:layout_height="376dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="353dp"
-        android:layout_toEndOf="@+id/textView2" />
+    <ImageView
+        android:id="@+id/ExpSettingMultiCho_imviewkine"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/tw_experiment_select_symbols_title"
+        android:layout_alignStart="@+id/tv_title_mc4"
+        android:layout_marginStart="-150dp"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@android:drawable/btn_dialog" />
+
+    <ImageView
+        android:id="@+id/ExpSettingMultiCho_imviewart"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/tw_experiment_select_symbols_title2"
+        android:layout_alignEnd="@+id/tv_title_mc4"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="-150dp"
+        app:srcCompat="@android:drawable/btn_dialog" />
 
 </RelativeLayout>

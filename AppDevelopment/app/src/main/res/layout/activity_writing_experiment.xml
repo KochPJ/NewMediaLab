@@ -4,53 +4,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".WritingExperiment">
+    tools:context=".WritingExperiment"
+    android:padding="5pt">
 
 
     <CheckBox
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="132dp"
-        android:layout_marginRight="116dp"
-        android:layout_marginBottom="486dp"
+        android:layout_below="@+id/tv_title_mc2"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:checked="true"
         android:text="Display Progress Bar" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="186dp"
-        android:layout_height="43dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="116dp"
-        android:layout_marginTop="472dp"
-        android:layout_marginEnd="109dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/task_description_message"
+        android:layout_marginTop="20dp"
+
+        android:layout_centerHorizontal="true"
         android:text="End of Experiment Message" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="146dp"
-        android:layout_marginTop="334dp"
+        android:layout_below="@+id/progress_bar"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
         android:text="Set Task Description" />
 
     <TextView
         android:id="@+id/tv_title_mc2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="277dp"
-        android:layout_marginEnd="86dp"
+        android:layout_below="@+id/te_experiment_name"
+        android:layout_marginTop="40dp"
         android:text="Writing Test Parameters"
+
+        android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -59,10 +55,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="108dp"
+        android:layout_marginTop="0dp"
         android:text="General Parameters"
+        android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -70,13 +65,12 @@
         android:id="@+id/tw_experiment_name_title2"
         android:layout_width="300dp"
         android:layout_height="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="46dp"
+        android:layout_below="@+id/tv_title_mc5"
+        android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:text="Experiment Name:"
+        android:layout_centerHorizontal="true"
         android:textColor="#000000"
         android:textSize="14sp" />
 
@@ -84,10 +78,9 @@
         android:id="@+id/te_experiment_name"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="109dp"
-        android:layout_marginBottom="552dp"
+        android:layout_below="@+id/tw_experiment_name_title2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"
@@ -96,42 +89,50 @@
 
     <EditText
         android:id="@+id/task_description_message"
-        android:layout_width="361dp"
+        android:layout_width="650dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="314dp"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:ems="10"
         android:inputType="text"
         android:text="Write the character from the video in the grey field" />
 
     <EditText
         android:id="@+id/participation_message"
-        android:layout_width="361dp"
+        android:layout_width="650dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="536dp"
-        android:layout_marginEnd="17dp"
-        android:layout_marginRight="17dp"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="20dp"
         android:ems="10"
+        android:gravity="center"
         android:inputType="text"
         android:text="Thanks for participating!" />
 
     <Button
-        android:id="@+id/save_button"
+        android:id="@+id/writingEXP_cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/mybutton"
+        android:onClick="cancel"
+        android:text="Cancel" />
+
+    <Button
+        android:id="@+id/writingEXP_next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="612dp"
-        android:layout_marginEnd="158dp"
-        android:layout_marginRight="158dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
         android:onClick="continueToSettings"
-        android:text="Save" />
+        android:background="@drawable/mybutton"
+        android:text="Next" />
 </RelativeLayout>

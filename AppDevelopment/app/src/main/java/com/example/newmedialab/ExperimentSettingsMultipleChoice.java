@@ -6,6 +6,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +26,14 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
     int PICK_IMAGE_MULTIPLE_KIN = 2;
     List<Uri> imageListURI_art = new ArrayList<Uri>();
     List<Uri> imageListURI_kin = new ArrayList<Uri>();
+    ImageView kineImageView;
+    ImageView artImageView;
+    Spinner kineImageSpinner;
+    String[] kineImages;
+    int kineImagePos;
+    Spinner artImageSpinner;
+    String[] artImages;
+    int artImagePos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +41,65 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
         setContentView(R.layout.activity_experiment_settings_multiplechoice);
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
+        kineImageView = (ImageView) findViewById(R.id.ExpSettingMultiCho_imviewkine);
+        artImageView = (ImageView) findViewById(R.id.ExpSettingMultiCho_imviewart);
+        updateSpinners();
     }
+
+    public void updateSpinners(){
+
+        kineImages = new String[imageListURI_kin.size()];
+        for(int i = 0; i < imageListURI_kin.size(); i++){
+            kineImages[i] = imageListURI_kin.get(i).toString();
+        }
+        kineImageSpinner = (Spinner) findViewById(R.id.ExpSettingMultiCho_kine_spinner);
+        ArrayAdapter<String> spinnerArrayAdapterKineImages = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item,
+                       this.kineImages); //selected item will look like a spinner set from XML
+        spinnerArrayAdapterKineImages.setDropDownViewResource(android.R.layout
+                .simple_spinner_dropdown_item);
+        kineImageSpinner.setAdapter(spinnerArrayAdapterKineImages);
+        kineImageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                kineImageView.setImageURI(imageListURI_kin.get(position));
+                kineImagePos = position;
+            }
+            public void onNothingSelected(AdapterView<?> parentView) {
+                kineImageView.setImageURI(Uri.parse("@android:drawable/btn_dialog"));
+                Log.d("test", "here");
+            }
+        });
+
+        artImages = new String[imageListURI_art.size()];
+        for(int i = 0; i < imageListURI_art.size(); i++){
+            artImages[i] = imageListURI_art.get(i).toString();
+        }
+        artImageSpinner = (Spinner) findViewById(R.id.ExpSettingMultiCho_art_spinner);
+        ArrayAdapter<String> spinnerArrayAdapterartImages = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item,
+                        this.artImages); //selected item will look like a spinner set from XML
+        spinnerArrayAdapterartImages.setDropDownViewResource(android.R.layout
+                .simple_spinner_dropdown_item);
+        artImageSpinner.setAdapter(spinnerArrayAdapterartImages);
+        artImageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                artImageView.setImageURI(imageListURI_art.get(position));
+                artImagePos = position;
+            }
+            public void onNothingSelected(AdapterView<?> parentView) {
+                Log.d("test", "here");
+                kineImageView.setImageURI(Uri.parse("@android:drawable/btn_dialog"));
+            }
+        });
+
+    }
+
+
+
+    public void cancel(View view){
+
+    }
+
 
     public void saveExperiment2(View view) {
         if(imageListURI_art.size()>=Integer.parseInt(exp.getQnum())-1
@@ -59,6 +129,17 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         }
     }
+
+    public void deleteFalseSymbolsKinestetic(View view){
+        imageListURI_kin.remove(kineImagePos);
+        updateSpinners();
+    }
+
+    public void deleteFalseSymbolsArtificial(View view){
+        imageListURI_art.remove(artImagePos);
+        updateSpinners();
+    }
+
 
     public void addFalseSymbolsKinestetic(View view){
         Toast.makeText(this, "Please select the images for the experimental group that you want to be used in the multiple choice experiment",
@@ -123,29 +204,9 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
         }
 
         // Update textviews
-        TextView falsePaths = findViewById(R.id.textView2);
-        TextView falsePaths2 = findViewById(R.id.textView24);
-        String paths = "";
-        String paths2 = "";
-        for(Uri uri : imageListURI_art){
-            paths +=  uri.getPath()+"\n";
-        }
-        for(Uri uri : imageListURI_kin){
-            paths2 +=  uri.getPath()+"\n";
-        }
-        falsePaths.setText(paths);
-        falsePaths2.setText(paths2);
+        updateSpinners();
 
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    public void clearPaths(View view) {
-        imageListURI_art = new ArrayList<Uri>();
-        imageListURI_kin = new ArrayList<Uri>();
-        TextView falsePaths = findViewById(R.id.textView2);
-        falsePaths.setText("");
-        TextView falsePaths2 = findViewById(R.id.textView24);
-        falsePaths2.setText("");
     }
 
 }
