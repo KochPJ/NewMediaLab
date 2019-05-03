@@ -19,6 +19,12 @@ public class MultipleChoiceExperiment extends AppCompatActivity {
         exp = (Experiment)i.getSerializableExtra("experiment");
     }
 
+    public void cancel(View view){
+
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
     public void continueToSettings2(View view) {
         //pointer to the text edits
         EditText exp_task_EditText = (EditText) findViewById(R.id.task_description_message2);
