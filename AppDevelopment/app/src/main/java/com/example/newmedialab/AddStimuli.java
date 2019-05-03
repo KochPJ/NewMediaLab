@@ -84,8 +84,11 @@ public class AddStimuli extends AppCompatActivity {
     String savingArtificialStimuliPathLastImage;
 
     int current_n_frames = 0;
+    double speed = 1;
 
     Context context;
+
+
 
 
     @Override
@@ -421,10 +424,13 @@ public class AddStimuli extends AppCompatActivity {
                 List<Double> vel_pro_stimuli = video.loadVelocityProfile(currentVelProPath);
                 EditText exp_function_EditText = (EditText) findViewById(R.id.addStimuli_vel_pro_function_text_edit);
                 VelocityFunction vel_function = new VelocityFunction(exp_function_EditText.getText().toString());
+                EditText exp_speed_EditText = (EditText) findViewById(R.id.addStimuli_vel_pro_speed_text_edit);
+                speed = Double.valueOf(exp_speed_EditText.getText().toString());
+
                 video.convertVideo(currentVideoImagesPath,
                         "KineTest/Resources/temp/temp_images",
                         "KineTest/Resources/temp/temp_loaded_video",
-                        vel_pro_stimuli, vel_function,velProType, 1);
+                        vel_pro_stimuli, vel_function,velProType, speed);
                 while (!video.video_created){
                     try {
                         //small 500ms sleep, so we dont need to update to much. takes time to convert

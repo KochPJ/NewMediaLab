@@ -335,6 +335,7 @@ public class Video implements Serializable {
         double totalVel = 0;
         double velStep = 0;
         int n_steps = velProfile.size();
+        int n_steps_speed = (int)(n_steps/speed);
         Log.d("Video", "convertVideo: n_steps = " +n_steps);
 
         //get the constant total distance
@@ -360,12 +361,12 @@ public class Video implements Serializable {
         }else if(functionType == "linear"){
 
             //get constant speed
-            velStep = totalVel/(n_steps);
+            velStep = totalVel/(n_steps_speed);
             Log.d("Video", "convertVideo: velStep = " +velStep);
 
 
 
-            for(int i = 0; i<n_steps+1;i++){
+            for(int i = 0; i<n_steps_speed+1;i++){
                 velPosition.add(velStep*i);
             }
 
@@ -376,9 +377,9 @@ public class Video implements Serializable {
         }else if(functionType == "function"){
 
             //get the velocities of the function and get the constant total distance of the function
-            double[] xd = new double[n_steps];
+            double[] xd = new double[n_steps_speed];
             double totalVel_function = 0.0;
-            for(int i = 0; i<n_steps;i++){
+            for(int i = 0; i<n_steps_speed;i++){
                 xd[i] = velocityFunction.compute_xd(i);
                 totalVel_function += xd[i];
                 Log.d("Video", "convertVideo: xd i, value = " +Integer.toString(i)+ ", "+ Double.toString(xd[i]));
@@ -392,7 +393,7 @@ public class Video implements Serializable {
             List<Double> cumulative_function = new ArrayList<Double>();
             cumulative_function.add(0, 0.0);
             //Log.d("Video", "cumulative_function i, value = "+ Integer.toString(0)+ ", "+ Double.toString(cumulative_function.get(0)));
-            for(int i = 0; i<n_steps;i++){
+            for(int i = 0; i<n_steps_speed;i++){
                 //get the cumulative_function and normalize to fit the profile
                 cumulative_function.add( ( (xd[i]+cumulative_function.get(i)))) ;
                 //Log.d("Video", "cumulative_function i, value = "+ Integer.toString(i+1)+ ", "+ Double.toString(cumulative_function.get(i+1)));
