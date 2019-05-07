@@ -101,14 +101,14 @@
 
     <Button
         android:id="@+id/view_stimuli"
-        android:layout_width="173dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="229dp"
-        android:layout_marginRight="229dp"
-        android:layout_marginBottom="203dp"
+        android:layout_marginEnd="781dp"
+        android:layout_marginRight="781dp"
+        android:layout_marginBottom="157dp"
         android:background="@drawable/mybutton"
         android:onClick="navigation"
         android:text="View Stimuli" />
