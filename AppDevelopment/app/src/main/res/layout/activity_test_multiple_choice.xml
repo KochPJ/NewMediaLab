@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".TestMultipleChoice"
     android:background="@drawable/background"
+    android:padding="5pt"
     >
 
     <ImageView
@@ -70,34 +71,31 @@
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="156dp"
-        android:layout_height="41dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="382dp"
-        android:layout_marginTop="17dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:text="[Experiment Name]"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="201dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="403dp"
+        android:layout_below="@+id/textView11"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:text="[Experiment Message]" />
 
     <ProgressBar
         android:id="@+id/progressBar3"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="500dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="101dp"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:id="@+id/button2"
@@ -105,19 +103,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="79dp"
-        android:layout_marginBottom="51dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/mybutton"
         android:onClick="nextQuestion"
         android:text="Continue" />
 
     <Spinner
         android:id="@+id/spinner2"
-        android:layout_width="277dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="303dp"
-        android:layout_marginBottom="65dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp" />
 
     <TextView
         android:id="@+id/textView15"
@@ -153,10 +151,10 @@
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="309dp"
-        android:layout_marginTop="514dp"
+        android:layout_alignBottom="@+id/spinner2"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toStartOf="@+id/spinner2"
         android:text="Answer:" />
 
     <TextView

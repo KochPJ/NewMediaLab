@@ -5,16 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".ParticipantSelection"
     android:background="@drawable/background"
+    android:padding="5pt"
     >
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="246dp"
-        android:layout_marginEnd="0dp"
+        android:layout_width="500dp"
+        android:layout_height="75dp"
+        android:layout_below="@+id/textView7"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
         android:clickable="true"
         android:spinnerMode="dropdown" />
 
@@ -22,9 +22,10 @@
         android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/spinner"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="402dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/mybutton"
         android:onClick="startMultipleChoiceTest"
         android:text="Select" />
 
@@ -32,10 +33,9 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/spinner"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="412dp"
-        android:layout_marginBottom="164dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
         android:text="Select Subject ID:"
         android:textSize="18sp" />
 </RelativeLayout>
