@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.jjoe64.graphview.GraphView;
@@ -63,12 +64,9 @@ public class AddStimuli extends AppCompatActivity {
     private String [] importVelPros;
     String importVelPro;
 
-    Spinner saveSpinner;
-    private String [] saveStimulies = {"Original", "Converted"};
-    String saveStimuli;
 
     Spinner playStimuiSpinner;
-    private String [] playStimulies = {"Original", "Artificial", "Converted"};
+    private String [] playStimulies = {"Original", "Converted"};
     String playStimuli;
 
     String currentStimuliPath;
@@ -85,6 +83,8 @@ public class AddStimuli extends AppCompatActivity {
 
     int current_n_frames = 0;
     double speed = 1;
+
+    Boolean videoConverted = false;
 
     Context context;
 
@@ -141,18 +141,17 @@ public class AddStimuli extends AppCompatActivity {
 
     public void save(View view){
 
-        EditText saving_name_EditText = (EditText) findViewById(R.id.addStimuli_saving_name_text_edit);
-        String saving_name = saving_name_EditText.getText().toString();
+        if(videoConverted) {
+            EditText saving_name_EditText = (EditText) findViewById(R.id.addStimuli_saving_name_text_edit);
+            String saving_name = saving_name_EditText.getText().toString();
 
-        String kine_video_path = "";
-        String art_video_path = currentArtificialStimuliPath;
-        if(saveStimuli.equals(saveStimulies[0])){
-            kine_video_path = currentStimuliPath;
-        }else if(saveStimuli.equals(saveStimulies[1])){
-            String Path = Environment.getExternalStorageDirectory()+ "/KineTest/Resources/temp/temp_loaded_video/converted.mp4";
+            String kine_video_path = "";
+            String art_video_path = currentArtificialStimuliPath;
+
+            String Path = Environment.getExternalStorageDirectory() + "/KineTest/Resources/temp/temp_loaded_video/converted.mp4";
 
             //saving converted video the given experiment dir
-            String copy_to_dir = Environment.getExternalStorageDirectory() + "/KineTest/Experiments/"+exp.name+"/videos_transformed/";
+            String copy_to_dir = Environment.getExternalStorageDirectory() + "/KineTest/Experiments/" + exp.name + "/videos_transformed/";
             try {
                 InputStream inputStream = getContentResolver().openInputStream(Uri.fromFile(new File(Path)));
                 videoloaded.copyVideoTo(inputStream, copy_to_dir, saving_name + ".mp4");
@@ -161,17 +160,21 @@ public class AddStimuli extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            savingStimuliPath = "KineTest/Experiments/"+exp.name+"/videos_transformed/"+saving_name+".mp4";
-        }
-        //addding new symbol to exp file
-        exp.addSymbol(savingArtificialStimuliPath, savingStimuliPath, savingArtificialStimuliPathLastImage, savingStimuliPathLastImage);
-        //clear the temp data in the temp folders
-        videoloaded.clearTempFolders();
+            String savingConvertedStimuliPath = "KineTest/Experiments/" + exp.name + "/videos_transformed/" + saving_name + ".mp4";
 
-        Intent intent = new Intent(this, ExperimentSettingsWriting.class);
-        intent = intent.putExtra("experiment", exp);
-        intent = intent.putExtra("editing", editing);
-        startActivity(intent);
+            //addding new symbol to exp file
+            exp.addSymbol(savingConvertedStimuliPath, savingStimuliPath, savingArtificialStimuliPathLastImage, savingStimuliPathLastImage);
+
+            //clear the temp data in the temp folders
+            videoloaded.clearTempFolders();
+
+            Intent intent = new Intent(this, ExperimentSettingsWriting.class);
+            intent = intent.putExtra("experiment", exp);
+            intent = intent.putExtra("editing", editing);
+            startActivity(intent);
+        }else{
+            Toast.makeText(this, "Video not converted yet", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void cancel(View view){
@@ -251,22 +254,6 @@ public class AddStimuli extends AppCompatActivity {
             }
         });
 
-        saveSpinner = (Spinner) findViewById(R.id.addStimuli_save_stimuli_spinner);
-        ArrayAdapter<String> spinnerArrayAdapterSaveStimuli = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_item,
-                        this.saveStimulies); //selected item will look like a spinner set from XML
-        spinnerArrayAdapterSaveStimuli.setDropDownViewResource(android.R.layout
-                .simple_spinner_dropdown_item);
-        saveSpinner.setAdapter(spinnerArrayAdapterSaveStimuli);
-        saveSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                saveStimuli = saveStimulies[position];
-            }
-
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-        });
 
     }
 
@@ -344,8 +331,8 @@ public class AddStimuli extends AppCompatActivity {
                 }
 
 
-                savingStimuliPathLastImage = "KineTest/Resources/Languages/"+language+"/"+type+"/videos_original_lastImage/"+stimuliName+".png";
-                savingArtificialStimuliPathLastImage = "KineTest/Resources/Languages/"+language+"/"+type+"/videos_artificial_lastImage/"+stimuliName+".png";
+                savingStimuliPathLastImage = "KineTest/Resources/Languages/"+language+"/"+type+"/testImages/"+stimuliName+".png";
+                savingArtificialStimuliPathLastImage = "KineTest/Resources/Languages/"+language+"/"+type+"/testImages/"+stimuliName+".png";
 
                 currentVelProPath = "KineTest/Resources/Languages/"+language+"/"+type+"/velocityprofiles/"+stimuliName+".txt";
 
@@ -377,9 +364,6 @@ public class AddStimuli extends AppCompatActivity {
         if(playStimuli.equals(playStimulies[0])){
             Path = currentStimuliPath;
         }else if(playStimuli.equals(playStimulies[1])){
-            Path = currentArtificialStimuliPath;
-
-        }else if(playStimuli.equals(playStimulies[2])){
             Path = Environment.getExternalStorageDirectory()+ "/KineTest/Resources/temp/temp_loaded_video/converted.mp4";
         }
 
@@ -414,6 +398,8 @@ public class AddStimuli extends AppCompatActivity {
 
 
     public void convertStimuli(View view){
+
+        Log.d("test", "path = "+currentVideoImagesPath);
 
         videoloaded.clearTempFolders();
 
@@ -471,6 +457,7 @@ public class AddStimuli extends AppCompatActivity {
                     }
                 }
                 progress.cancel(); //end progress dialog
+                videoConverted = true;
             }
         };
         t.start();

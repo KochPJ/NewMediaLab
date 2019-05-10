@@ -78,8 +78,8 @@
 
     <Button
         android:id="@+id/load_video_button"
-        android:layout_width="96dp"
-        android:layout_height="66dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="47dp"

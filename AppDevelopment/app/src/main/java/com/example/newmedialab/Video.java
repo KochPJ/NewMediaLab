@@ -338,6 +338,8 @@ public class Video implements Serializable {
         int n_steps_speed = (int)(n_steps/speed);
         Log.d("Video", "convertVideo: n_steps = " +n_steps);
 
+        Log.d("Video", "convertVideo: n_steps_speed = " +n_steps_speed);
+
         //get the constant total distance
         for(int i = 0; i<n_steps;i++){
             totalVel+= velProfile.get(i);

@@ -3,6 +3,7 @@ package com.example.newmedialab;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -23,7 +25,9 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +36,7 @@ import static java.lang.Thread.sleep;
 
 public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
 
+    int PICK_IMAGE = 1;
     VideoView videoView;
     String video_path;
     String language;
@@ -47,6 +52,8 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
     Spinner ImportVelProSpinner;
     String[] ImportVelProList;
     String ImportVelPro;
+    Uri selectedTestImage;
+    ImageView TestImageView;
 
     Handler h = new Handler() {
         public void handleMessage(Message msg){
@@ -77,6 +84,7 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
         videoloaded.setVideoPath(video_path);
         videoView = (VideoView)findViewById(R.id.NewStimuli_videoViewNewStimuli);
         context = this;
+        TestImageView = (ImageView) findViewById(R.id.NewStimuli_testImage_imageView);
 
         File myDir = new File(Environment.getExternalStorageDirectory() + "/KineTest/ImportVelocityProfile");
         if(!myDir.exists()) myDir.mkdirs();
@@ -102,16 +110,91 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
 
     }
 
+    public void SelectTestImage(View view){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"), PICK_IMAGE);
+    }
+
+
 
     public void next(View view){
-        if(velocityProfile_acquired) {
+        if(velocityProfile_acquired && videoloaded.got_video_images) {
+            Toast.makeText(this, "saving...", Toast.LENGTH_SHORT).show();
+            //save original video
+            String copy_to_dir = Environment.getExternalStorageDirectory() + "/KineTest/Resources/Languages/" + language + "/" + type + "/videos_kinematic";
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(Uri.fromFile(new File(
+                        Environment.getExternalStorageDirectory() + "/KineTest/Resources/temp/temp_loaded_video/" + video_name + ".mp4")));
+                videoloaded.copyVideoTo(inputStream, copy_to_dir, video_name + ".mp4");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            //save video Images
+            File myDir = new File(Environment.getExternalStorageDirectory() + "/KineTest/Resources/temp/temp_images");
+            if (myDir.isDirectory()) {
+                String[] children = myDir.list();
+                copy_to_dir = Environment.getExternalStorageDirectory() + "/KineTest/Resources/Languages/"
+                        + language + "/" + type + "/video_images/" + video_name;
+                for (int i = 0; i < children.length; i++) {
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(Uri.fromFile(new File(
+                                Environment.getExternalStorageDirectory() + "/KineTest/Resources/temp/temp_images/" + children[i])));
+                        videoloaded.copyVideoTo(inputStream, copy_to_dir, children[i]);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            //save test image
+            copy_to_dir = Environment.getExternalStorageDirectory() + "/KineTest/Resources/Languages/"
+                    + language + "/" + type + "/testImages";
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(selectedTestImage);
+                videoloaded.copyVideoTo(inputStream, copy_to_dir, video_name+".png");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+            //save velocity profile
+            videoloaded.videoName = video_name;
+            videoloaded.setVeloctiyProfile(vel_pro);
+            videoloaded.saveVelocityProfile("KineTest/Resources/Languages/" + language + "/" + type + "/velocityprofiles");
+
+
+            //clear temp folder
+            videoloaded.clearTempFolders();
+
+            //make a toast
+            Toast.makeText(this, "New Stimuli saved", Toast.LENGTH_SHORT).show();
+            //return to main view
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+
+
+            /*
             Intent i = new Intent(this, NewStimuliAddArticialStimuli.class);
             i = i.putExtra("videoName", video_name);
             i = i.putExtra("velocityProfile", (Serializable) vel_pro);
             i = i.putExtra("type", type);
             i = i.putExtra("language", language);
-            startActivity(i);
+            startActivity(i);*/
+
         }else{
+
             Toast.makeText(this, "Velocity Profile not acquired yet", Toast.LENGTH_SHORT).show();
         }
     }
@@ -284,4 +367,27 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        try {
+            // When an Image is picked
+            if ((requestCode == PICK_IMAGE)
+                    && resultCode == RESULT_OK
+                    && null != data) {
+                // Get the Image
+                if(data.getData()!=null){
+                    selectedTestImage = data.getData();
+                    TestImageView.setImageURI(selectedTestImage);
+
+
+                }
+            } else {
+                Toast.makeText(this, "You haven't picked an image",
+                        Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Something went wrong: "+e, Toast.LENGTH_LONG)
+                    .show();
+        }
+    }
 }
