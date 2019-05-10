@@ -9,24 +9,14 @@
     tools:context=".NewStimuli">
 
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="576dp"
-        android:layout_marginTop="301dp"
-        android:text="Please add the kinematic stimuli" />
-
     <Spinner
         android:id="@+id/newStimuli_language_spinner"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
 
         android:layout_alignBottom="@+id/newStimuli_language_text_view"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="-3dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="0dp"
         android:layout_toEndOf="@+id/newStimuli_type_text_view"
         android:textSize="20dp"></Spinner>
 
@@ -35,7 +25,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/newStimuli_type_text_view"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="60dp"
         android:layout_marginBottom="0dp"
         android:layout_toEndOf="@+id/newStimuli_type_text_view"
         android:textSize="20dp"></Spinner>
@@ -68,27 +58,25 @@
         android:id="@+id/film_video_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="78dp"
-        android:layout_toEndOf="@+id/vv_new_stimuli"
+        android:layout_alignTop="@+id/textView31"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/textView31"
         android:background="@drawable/mybutton"
         android:onClick="filmVideo"
-        android:text="Record Video" />
+        android:text="Record" />
 
     <Button
         android:id="@+id/load_video_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="186dp"
-        android:layout_marginEnd="309dp"
-        android:layout_toEndOf="@+id/vv_new_stimuli"
+        android:layout_alignBottom="@+id/textView31"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/textView31"
         android:background="@drawable/mybutton"
         android:onClick="loadVideo"
-        android:text="Load Video" />
+        android:text="Load" />
 
     <TextView
         android:id="@+id/newStimuli_type_text_view"
@@ -98,6 +86,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
+        android:textSize="18sp"
         android:text="Type"></TextView>
 
     <TextView
@@ -108,6 +97,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="40dp"
+        android:textSize="18sp"
         android:text="Language"></TextView>
 
     <TextView
@@ -118,6 +108,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="40dp"
+        android:textSize="18sp"
         android:text="Name"></TextView>
 
     <EditText
@@ -126,7 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/newStimuli_name_text_view"
 
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="60dp"
         android:layout_marginBottom="0dp"
         android:layout_toEndOf="@+id/newStimuli_type_text_view"
         android:inputType="textPersonName"
@@ -158,6 +149,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" />
 
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/vv_new_stimuli"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/vv_new_stimuli"
+        android:text="Record a \nnew video\n \nor\n\n Load an \nexisting video"
+        android:textSize="25sp" />
 
 
 </RelativeLayout>

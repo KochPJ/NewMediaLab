@@ -42,7 +42,7 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
         kineImageView = (ImageView) findViewById(R.id.ExpSettingMultiCho_imviewkine);
-        artImageView = (ImageView) findViewById(R.id.ExpSettingMultiCho_imviewart);
+        //artImageView = (ImageView) findViewById(R.id.ExpSettingMultiCho_imviewart);
         updateSpinners();
     }
 
@@ -70,6 +70,7 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
             }
         });
 
+        /*
         artImages = new String[imageListURI_art.size()];
         for(int i = 0; i < imageListURI_art.size(); i++){
             artImages[i] = imageListURI_art.get(i).toString();
@@ -90,7 +91,7 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
                 Log.d("test", "here");
                 kineImageView.setImageURI(Uri.parse("@android:drawable/btn_dialog"));
             }
-        });
+        });*/
 
     }
 
@@ -104,16 +105,18 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
 
 
     public void saveExperiment2(View view) {
-        if(imageListURI_art.size()>=Integer.parseInt(exp.getQnum())-1
-            && imageListURI_kin.size()>=Integer.parseInt(exp.getQnum())-1){
+        //imageListURI_art.size()>=Integer.parseInt(exp.getQnum())-1
+        //            &&
+        if(imageListURI_kin.size()>=Integer.parseInt(exp.getQnum())-1){
             //set selected symbols
+            /*
             for(Uri uri : imageListURI_art){
                 try {
                     exp.addFalseArtificialSymbol(PathUtil.getPath(this,uri));
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
                 }
-            }
+            }*/
             for(Uri uri : imageListURI_kin){
                 try {
                     exp.addFalseKinematicSymbol(PathUtil.getPath(this,uri));
