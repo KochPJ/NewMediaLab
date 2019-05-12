@@ -19,22 +19,37 @@
         android:layout_marginBottom="838dp" />
 
     <Spinner
-        android:id="@+id/spinner4"
-        android:layout_width="256dp"
+        android:id="@+id/spinner_notseen"
+        android:layout_width="197dp"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView8"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="354dp" />
+        android:layout_marginStart="286dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginBottom="277dp" />
 
     <Spinner
-        android:id="@+id/spinner5"
-        android:layout_width="256dp"
+        android:id="@+id/spinner_video"
+        android:layout_width="197dp"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/videoView3"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="324dp"
-        android:layout_marginBottom="354dp" />
+        android:layout_marginStart="635dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginBottom="269dp" />
+
+    <Spinner
+        android:id="@+id/spinner_seen"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView7"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginBottom="275dp" />
 
     <TextView
         android:id="@+id/textView22"
@@ -52,8 +67,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="545dp"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="75dp"
         android:text="Stimuli Seen by Subject" />
 
     <TextView
@@ -62,8 +77,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="364dp"
-        android:layout_marginTop="547dp"
+        android:layout_marginStart="296dp"
+        android:layout_marginTop="75dp"
         android:text="Stimuli Not Seen by Subject" />
 
     <TextView
@@ -72,8 +87,8 @@
         android:layout_height="35dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="251dp"
-        android:layout_marginTop="499dp"
+        android:layout_marginStart="212dp"
+        android:layout_marginTop="23dp"
         android:text="Post Test"
         android:textSize="18sp" />
 
@@ -83,37 +98,55 @@
         android:layout_height="35dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="251dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="682dp"
+        android:layout_marginTop="27dp"
         android:text="Pre Test"
         android:textSize="18sp" />
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="217dp"
-        android:layout_height="224dp"
+        android:layout_width="186dp"
+        android:layout_height="243dp"
+        android:layout_above="@+id/textView23"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="47dp"
-        android:layout_marginBottom="92dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginBottom="-280dp"
         app:srcCompat="@drawable/background" />
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="217dp"
-        android:layout_height="224dp"
+        android:layout_width="174dp"
+        android:layout_height="242dp"
+        android:layout_above="@+id/textView25"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="348dp"
-        android:layout_marginBottom="92dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="299dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginBottom="-277dp"
         app:srcCompat="@drawable/background" />
 
     <VideoView
         android:id="@+id/videoView3"
-        android:layout_width="398dp"
-        android:layout_height="228dp"
+        android:layout_width="230dp"
+        android:layout_height="199dp"
+        android:layout_above="@+id/textView27"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="102dp"
-        android:layout_marginTop="160dp" />
+        android:layout_marginStart="614dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginBottom="-260dp" />
+
+    <Button
+        android:id="@+id/play_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/spinner_video"
+        android:layout_alignEnd="@+id/textView27"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="94dp"
+        android:layout_marginBottom="151dp"
+        android:onClick="playStimuli"
+        android:text="Play" />
 </RelativeLayout>

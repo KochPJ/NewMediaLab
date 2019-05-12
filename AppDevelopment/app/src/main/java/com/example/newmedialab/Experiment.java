@@ -1,7 +1,6 @@
 package com.example.newmedialab;
 
 import android.os.Environment;
-import android.util.Log;
 
 import org.apache.commons.io.FileUtils;
 
@@ -150,6 +149,13 @@ public class Experiment implements Serializable{
     public Boolean finishedShowingStimuli() {return  this.finishedShowStimuli; }
 
     public String getID(int num){return this.IDs.get(num); }
+
+    public ArrayList<String> getAllFalseStimuli(){
+        ArrayList<String> falseStimuli = new ArrayList<String>();
+        falseStimuli.addAll(falseArtificialStimuli);
+        falseStimuli.addAll(falseKinematicStimuli);
+        return falseStimuli;
+    }
 
     public int getCurrentID(){
         return this.currentID;
