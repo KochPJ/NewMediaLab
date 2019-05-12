@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChosenExperiment"
+    android:background="@drawable/background">
+
+    <TextView
+        android:id="@+id/textView_myExperiment2"
+        android:layout_width="400dp"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="287dp"
+        android:layout_marginTop="82dp"
+        android:layout_marginEnd="275dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center|top"
+        android:text="Empty experiment"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/textView_myExperiment_title2"
+        android:layout_width="399dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="288dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="275dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="Experiment Parameters:"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/start_experiment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="49dp"
+        android:layout_marginRight="49dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/mybutton"
+        android:onClick="navigation"
+        android:text="Start Experiment" />
+
+    <Button
+        android:id="@+id/delete_experiment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/mybutton"
+        android:onClick="navigation"
+        android:text="Delete Experiment" />
+
+    <Button
+        android:id="@+id/view_stimuli"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="230dp"
+        android:layout_marginRight="230dp"
+        android:layout_marginBottom="43dp"
+        android:background="@drawable/mybutton"
+        android:onClick="navigation"
+        android:text="View Stimuli" />
+
+    <Button
+        android:id="@+id/results"
+        android:layout_width="139dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="224dp"
+        android:layout_marginLeft="224dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/mybutton"
+        android:onClick="navigation"
+        android:text="Export Results" />
+
+    <RadioGroup
+        android:id="@+id/RadioGroup"
+        android:layout_width="355dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="282dp"
+        android:layout_marginBottom="189dp">
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Multiple Choice Experiment" />
+
+        <RadioButton
+            android:id="@+id/radioButton5"
+            android:layout_width="449dp"
+            android:layout_height="85dp"
+            android:layout_weight="1"
+            android:text="Writing Experiment" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="354dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="281dp"
+        android:layout_marginBottom="244dp"
+        android:text="Experiment Type" />
+
+</RelativeLayout>

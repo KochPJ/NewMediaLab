@@ -112,4 +112,16 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
+    <CheckBox
+        android:id="@+id/noneCheckBox"
+        android:layout_width="322dp"
+        android:layout_height="51dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="313dp"
+        android:layout_marginBottom="167dp"
+        android:checked="true"
+        android:text='"None of the Above"-option'
+        android:textSize="14sp" />
+
 </RelativeLayout>

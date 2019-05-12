@@ -29,11 +29,11 @@ public class Experiment implements Serializable{
     ArrayList<String> IDs = new ArrayList<String>();
     ArrayList<String[]> remainingStimuli = new ArrayList<String[]>();
     ArrayList<String[]> stimuli = new ArrayList<String[]>();
-    ArrayList<String> falseKinematicStimuli = new ArrayList<String>();
-    ArrayList<String> falseArtificialStimuli = new ArrayList<String>();
+    ArrayList<String> falseStimuli = new ArrayList<String>();
     String[] currentSymbol;
     int currentID = 0;
     boolean finishedShowStimuli = true;
+    boolean noneOption = true;
 
     public Experiment(String name){
         this.name = name;
@@ -88,9 +88,7 @@ public class Experiment implements Serializable{
         stimuli.get(index1)[index2] = path;
     }
 
-    public void addFalseKinematicSymbol(String lastImagePath){ falseKinematicStimuli.add(lastImagePath); }
-
-    public void addFalseArtificialSymbol(String lastImagePath){ falseArtificialStimuli.add(lastImagePath); }
+    public void addFalseSymbol(String lastImagePath){ falseStimuli.add(lastImagePath); }
 
     public void setTask_msg_wrt(String msg) {this.task_msg_wrt = msg; }
 
@@ -105,6 +103,8 @@ public class Experiment implements Serializable{
     public void addID(String id) {this.IDs.add(id); }
 
     public void setCurrentID(int id_num) {this.currentID = id_num; }
+
+    public void setNoneOption(Boolean noneOption) { this.noneOption = noneOption; }
 
     public String getName(){
         return this.name;
@@ -150,16 +150,13 @@ public class Experiment implements Serializable{
 
     public String getID(int num){return this.IDs.get(num); }
 
-    public ArrayList<String> getAllFalseStimuli(){
-        ArrayList<String> falseStimuli = new ArrayList<String>();
-        falseStimuli.addAll(falseArtificialStimuli);
-        falseStimuli.addAll(falseKinematicStimuli);
-        return falseStimuli;
-    }
+    public ArrayList<String> getFalseStimuli(){ return falseStimuli; }
 
     public int getCurrentID(){
         return this.currentID;
     }
+
+    public boolean getNoneOption(){ return noneOption; }
 
     public void createFile(){
         try
@@ -181,7 +178,8 @@ public class Experiment implements Serializable{
                     .append(task_msg_wrt).append("\n")
                     .append(final_msg_wrt).append("\n")
                     .append(task_msg_mct).append("\n")
-                    .append(final_msg_mct).append("\n");
+                    .append(final_msg_mct).append("\n")
+                    .append(Boolean.toString(noneOption)).append("\n");
 
             // Add paths for videos and thumbnails. Ugly, but it works
             for(int i=0; i<this.stimuli.size(); i++){
@@ -201,14 +199,8 @@ public class Experiment implements Serializable{
             }
             writer.append("\n");
 
-            // Paths for the false stimuli images
-            for(int i=0; i<this.falseArtificialStimuli.size(); i++){
-                writer.append(falseArtificialStimuli.get(i)).append(',');
-            }
-            writer.append("\n");
-
-            for(int i=0; i<this.falseKinematicStimuli.size(); i++){
-                writer.append(falseKinematicStimuli.get(i)).append(',');
+            for(int i = 0; i<this.falseStimuli.size(); i++){
+                writer.append(falseStimuli.get(i)).append(',');
             }
             writer.append("\n");
 
@@ -253,24 +245,13 @@ public class Experiment implements Serializable{
         return currentSymbol;
     }
 
-    public ArrayList<String> getFalseSymbol(int numberOf, boolean kinematic) {
-        if(kinematic){
-            //Shuffle stimuli
-            Collections.shuffle(falseKinematicStimuli);
-            ArrayList<String> fss2 = new ArrayList<String>();
-            for(int i=0; i<numberOf; i++){
-                fss2.add(falseKinematicStimuli.get(i));
-            }
-            return fss2;
-        } else {
-            //Shuffle stimuli
-            Collections.shuffle(falseArtificialStimuli);
-            ArrayList<String> fss2 = new ArrayList<String>();
-            for(int i=0; i<numberOf; i++){
-                fss2.add(falseArtificialStimuli.get(i));
-            }
-            return fss2;
+    public ArrayList<String> getFalseSymbol(int numberOf) {
+        //Shuffle stimuli
+        Collections.shuffle(falseStimuli);
+        ArrayList<String> fss2 = new ArrayList<String>();
+        for(int i=0; i<numberOf; i++){
+            fss2.add(falseStimuli.get(i));
         }
+        return fss2;
     }
-
 }

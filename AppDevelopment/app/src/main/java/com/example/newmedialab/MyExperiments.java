@@ -1,6 +1,5 @@
 package com.example.newmedialab;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,107 +15,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MyExperiments extends AppCompatActivity {
 
     private String[] names;
     private Experiment[] experiment_list;
-
-    public void addNewStimuli(View view) {
-        Intent startShapes = new Intent(MyExperiments.this, AddStimuli.class);
-        startActivity(startShapes);
-    }
-
-    public void navigation(View view) {
-        if(experiment_list == null || experiment_list.length == 0){
-            Toast.makeText(MyExperiments.this, "You have not created or selected an experiment from the list",
-                    Toast.LENGTH_LONG).show();
-        } else {
-            Spinner spinner = (Spinner) findViewById(R.id.experiment_names_spinner);
-            int pos = spinner.getSelectedItemPosition();
-            Experiment exp = experiment_list[pos];
-            String FILE_NAME = exp.getFile_name();
-            File folder = Environment.getExternalStorageDirectory();
-            String file_dir = folder.getPath() + "/KineTest/Experiments/"+FILE_NAME;
-            Log.d("FileName", file_dir);
-            File myFile = new File(file_dir);
-            switch (view.getId()) {
-                case R.id.results: // Go to results view
-                    // TODO: add export experimental setup
-                    Intent intent3 = new Intent(this, Results.class);
-                    intent3 = intent3.putExtra("experiment", exp);
-                    startActivity(intent3);
-                    break;
-                case R.id.start_experiment: // Go to start experiment view
-                    startMyExperiment(exp);
-                    break;
-                case R.id.delete_experiment: // Delete selected experiment
-                    if(myFile.exists()) {
-                        myFile.delete();
-                        Toast.makeText(this, "Deleted Experiment " +  FILE_NAME,
-                                Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(this,  FILE_NAME + " does not exist",
-                                Toast.LENGTH_LONG).show();
-                    }
-                    Intent startShapes = new Intent(MyExperiments.this, MyExperiments.class);
-                    startActivity(startShapes);
-                    break;
-                case R.id.view_stimuli: // Go to view stimuli view
-                    Intent intent6 = new Intent(this, ViewStimuli.class);
-                    intent6 = intent6.putExtra("experiment", exp);
-                    startActivity(intent6);
-                    break;
-                case R.id.edit_experiment: // Go to MC experiment view
-                    Intent intent7 = new Intent(this, MultipleChoiceExperiment.class);
-                    intent7 = intent7.putExtra("experiment", exp);
-                    startActivity(intent7);
-                    break;
-                case R.id.edit_experiment2: // Go to writing experiment view
-                    Intent intent8 = new Intent(this, WritingExperiment.class);
-                    intent8 = intent8.putExtra("experiment", exp);
-                    intent8 = intent8.putExtra("editing", true);
-                    startActivity(intent8);
-                    break;
-                default:
-                    throw new RuntimeException("Unknown button ID");
-            }
-        }
-    }
-
-    public void startMyExperiment(Experiment exp) {
-        final Experiment exp_final = exp;
-        AlertDialog.Builder dialog = new AlertDialog.Builder(MyExperiments.this);
-        dialog.setTitle("Start Experiment:");
-        dialog.setMessage("Please Select the Test Phase");
-        dialog.setNegativeButton("Pre Test", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                Intent intent4a = new Intent(MyExperiments.this, ParticipantInfo.class);
-                intent4a = intent4a.putExtra("experiment", exp_final);
-                startActivity(intent4a);
-            }
-        })
-        .setPositiveButton("Post Test", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if(exp_final.getIDs() == null || exp_final.getIDs().size() == 0){
-                    Toast.makeText(MyExperiments.this, "Please run a pre test first",
-                            Toast.LENGTH_LONG).show();
-                } else {
-                    //Start post test
-                    Intent intent4b = new Intent(MyExperiments.this, ParticipantSelection.class);
-                    intent4b = intent4b.putExtra("experiment", exp_final);
-                    startActivity(intent4b);
-                }
-            }
-        });
-
-        final AlertDialog alert = dialog.create();
-        alert.show();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,66 +41,63 @@ public class MyExperiments extends AppCompatActivity {
                     sc = new Scanner(child);
                     int c = 0;
                     Experiment exp = new Experiment("");
-                    while(sc.hasNextLine()){
+                    while (sc.hasNextLine()) {
                         String line = (sc.nextLine());
-                        if(c == 0){
+                        if (c == 0) {
                             this.names[i] = line;
                             exp = new Experiment(this.names[i]);
-                        }else if(c == 1) {
+                        } else if (c == 1) {
                             exp.setProgressbar(line);
-                        }else if(c == 2) {
+                        } else if (c == 2) {
                             exp.setMaxRepeats(line);
-                        }else if (c == 3){
+                        } else if (c == 3) {
                             exp.setAutoRepeats(line);
-                        }else if(c == 4){
+                        } else if (c == 4) {
                             exp.setQnum(line);
-                        }else if(c == 5){
+                        } else if (c == 5) {
                             exp.setRandom(line);
-                        }else if(c == 6){
+                        } else if (c == 6) {
                             exp.setTask_msg_wrt(line);
-                        }else if(c == 7){
+                        } else if (c == 7) {
                             exp.setFinal_msg_wrt(line);
-                        }else if(c == 8){
+                        } else if (c == 8) {
                             exp.setTask_msg_mct(line);
-                        }else if(c == 9){
+                        } else if (c == 9) {
                             exp.setFinal_msg_mct(line);
-                        }else if(c == 10){ //Read paths
+                        } else if (c == 10){
+                            exp.setNoneOption(Boolean.parseBoolean(line));
+                        } else if (c == 11) { //Read paths
                             String[] strParts = line.split(",");
                             for (String str : strParts) {
                                 exp.addSymbol(str, "", "", "");
                             }
-                        }else if(c == 11) {
+                        } else if (c == 12) {
                             String[] strParts = line.split(",");
                             int index = 0;
                             for (String str : strParts) {
                                 exp.directAddSymbol(str, index, 1);
                                 index += 1;
                             }
-                        }else if(c == 12) {
+                        } else if (c == 13) {
                             String[] strParts = line.split(",");
                             int index = 0;
                             for (String str : strParts) {
                                 exp.directAddSymbol(str, index, 2);
                                 index += 1;
                             }
-                        }else if(c == 13) {
+                        } else if (c == 14) {
                             String[] strParts = line.split(",");
                             int index = 0;
                             for (String str : strParts) {
                                 exp.directAddSymbol(str, index, 3);
                                 index += 1;
                             }
-                        }else if(c == 14) {
+                        } else if (c == 15) {
                             String[] strParts = line.split(",");
                             for (String str : strParts) {
-                                exp.addFalseArtificialSymbol(str);
+                                exp.addFalseSymbol(str);
                             }
-                        }else if(c == 15){
-                            String[] strParts = line.split(",");
-                            for (String str : strParts) {
-                                exp.addFalseKinematicSymbol(str);
-                            }
-                        }else if(c == 16){ //Get ID's
+                        } else if (c == 16) { //Get ID's
                             String[] strParts = line.split(";");
                             for (String str : strParts) {
                                 exp.addID(str);
@@ -227,9 +128,21 @@ public class MyExperiments extends AppCompatActivity {
                     String auto_repeats = exp.getAutoRepeats();
                     String random = exp.getRandom();
                     String qnum = exp.getQnum();
+                    String noneOption = Boolean.toString(exp.getNoneOption());
                     TextView textView = (TextView) findViewById(R.id.textView_myExperiment);
-                    textView.setText("Name: "+name+"\n"+"Progressbar: "+pb +"\n"+"Allowed Repeats: "+max_repeats+"\n"+"Automatic Repeats: "+auto_repeats+"\n"+"Random Stimuli Presentation: "+random+"\n"+"Number of multiple choice options: "+qnum); //set text for text view
+                    String text = "Name: " + name + "\n"
+                            + "Number of Stimuli: " + exp.getStimuli().size()+ "\n"
+                            + "Number of False Stimuli: " + exp.getFalseStimuli().size()+ "\n"
+                            + "Allowed Repeats of Video: " + max_repeats + "\n"
+                            + "Automatic Repeats of Video: " + auto_repeats + "\n"
+                            + "Progressbar: " + pb + "\n"
+                            + "Random Stimuli Presentation: " + random + "\n"
+                            + "Number of Multiple Choice Options: " + qnum + "\n"
+                            + "None of the Above Option: " + noneOption + "\n"
+                            + "Number of Subjects: " + exp.getIDs().size();
+                    textView.setText(text); //set text for text view
                 }
+
                 public void onNothingSelected(AdapterView<?> parentView) {
                     // your code here
                 }
@@ -244,4 +157,21 @@ public class MyExperiments extends AppCompatActivity {
         }
     }
 
+    public void selectExperiment(View view) {
+        if (experiment_list == null || experiment_list.length == 0) {
+            Toast.makeText(MyExperiments.this, "You have not created or selected an experiment from the list",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            Spinner spinner = (Spinner) findViewById(R.id.experiment_names_spinner);
+            int pos = spinner.getSelectedItemPosition();
+            Experiment exp = experiment_list[pos];
+            String FILE_NAME = exp.getFile_name();
+            File folder = Environment.getExternalStorageDirectory();
+            String file_dir = folder.getPath() + "/KineTest/Experiments/Experiment_files/" + FILE_NAME;
+            Log.d("FileName", file_dir);
+            Intent intent = new Intent(this, ChosenExperiment.class);
+            intent = intent.putExtra("experiment", exp);
+            startActivity(intent);
+        }
+    }
 }

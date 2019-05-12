@@ -177,6 +177,7 @@
         android:layout_below="@+id/te_experiment_repeats"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
+        android:checked="true"
         android:text="Random presentation of stimuli" />
 
 </RelativeLayout>

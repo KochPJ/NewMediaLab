@@ -19,6 +19,7 @@ public class ShowStimuli extends AppCompatActivity {
     private int auto_repeats = 1;
     TextView repeats;
     public String[] stimuli;
+    public Boolean writing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class ShowStimuli extends AppCompatActivity {
         setContentView(R.layout.activity_show_stimuli);
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
+        writing = (Boolean) i.getSerializableExtra("writing");
 
         TextView expName = (TextView) findViewById(R.id.tv_exp_name);
         expName.setText(exp.getName());
@@ -86,8 +88,21 @@ public class ShowStimuli extends AppCompatActivity {
     }
 
     public void nextStimuli(View view) {
-        Intent intent = new Intent(this, TestWriting.class);
-        intent = intent.putExtra("experiment", exp);
-        startActivity(intent);
+        if(writing){
+            Intent intent = new Intent(this, TestWriting.class);
+            intent = intent.putExtra("experiment", exp);
+            startActivity(intent);
+        } else {
+            if(exp.getRemainingStimuli().size() == 0){
+                Intent intent = new Intent(this, TestMultipleChoice.class);
+                intent = intent.putExtra("experiment", exp);
+                intent = intent.putExtra("pretest", true);
+                startActivity(intent);
+            } else{
+                Intent intent = new Intent(this, ShowStimuli.class);
+                intent = intent.putExtra("experiment", exp);
+                startActivity(intent);
+            }
+        }
     }
 }

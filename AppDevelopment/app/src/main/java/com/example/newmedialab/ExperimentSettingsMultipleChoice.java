@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.URISyntaxException;
@@ -27,12 +26,9 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
     List<Uri> imageListURI_art = new ArrayList<Uri>();
     List<Uri> imageListURI_kin = new ArrayList<Uri>();
     ImageView kineImageView;
-    ImageView artImageView;
     Spinner kineImageSpinner;
     String[] kineImages;
     int kineImagePos;
-    Spinner artImageSpinner;
-    String[] artImages;
     int artImagePos;
 
     @Override
@@ -42,7 +38,6 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
         kineImageView = (ImageView) findViewById(R.id.ExpSettingMultiCho_imviewkine);
-        //artImageView = (ImageView) findViewById(R.id.ExpSettingMultiCho_imviewart);
         updateSpinners();
     }
 
@@ -69,30 +64,6 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
                 Log.d("test", "here");
             }
         });
-
-        /*
-        artImages = new String[imageListURI_art.size()];
-        for(int i = 0; i < imageListURI_art.size(); i++){
-            artImages[i] = imageListURI_art.get(i).toString();
-        }
-        artImageSpinner = (Spinner) findViewById(R.id.ExpSettingMultiCho_art_spinner);
-        ArrayAdapter<String> spinnerArrayAdapterartImages = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_item,
-                        this.artImages); //selected item will look like a spinner set from XML
-        spinnerArrayAdapterartImages.setDropDownViewResource(android.R.layout
-                .simple_spinner_dropdown_item);
-        artImageSpinner.setAdapter(spinnerArrayAdapterartImages);
-        artImageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                artImageView.setImageURI(imageListURI_art.get(position));
-                artImagePos = position;
-            }
-            public void onNothingSelected(AdapterView<?> parentView) {
-                Log.d("test", "here");
-                kineImageView.setImageURI(Uri.parse("@android:drawable/btn_dialog"));
-            }
-        });*/
-
     }
 
 
@@ -105,21 +76,11 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
 
 
     public void saveExperiment2(View view) {
-        //imageListURI_art.size()>=Integer.parseInt(exp.getQnum())-1
-        //            &&
         if(imageListURI_kin.size()>=Integer.parseInt(exp.getQnum())-1){
             //set selected symbols
-            /*
-            for(Uri uri : imageListURI_art){
-                try {
-                    exp.addFalseArtificialSymbol(PathUtil.getPath(this,uri));
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
-                }
-            }*/
             for(Uri uri : imageListURI_kin){
                 try {
-                    exp.addFalseKinematicSymbol(PathUtil.getPath(this,uri));
+                    exp.addFalseSymbol(PathUtil.getPath(this,uri));
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
                 }
@@ -130,7 +91,7 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
             intent = intent.putExtra("experiment", exp);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "You haven't selected enough images you need at least: "+Integer.toString(Integer.parseInt(exp.getQnum())-1)+" for both conditions.",
+            Toast.makeText(this, "You haven't selected enough images you need at least: "+Integer.toString(Integer.parseInt(exp.getQnum())-1)+" images.",
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -154,16 +115,6 @@ public class ExperimentSettingsMultipleChoice extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,"Select Picture"), PICK_IMAGE_MULTIPLE_KIN);
-    }
-
-    public void addFalseSymbolsArtificial(View view){
-        Toast.makeText(this, "Please select the images for the control group that you want to be used in the multiple choice experiment",
-                Toast.LENGTH_LONG).show();
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select Picture"), PICK_IMAGE_MULTIPLE_ART);
     }
 
     @Override

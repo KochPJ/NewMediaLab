@@ -6,38 +6,24 @@
     tools:context=".MyExperiments"
     android:background="@drawable/background">
 
-    <Button
-        android:id="@+id/edit_experiment2"
-        android:layout_width="123dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="159dp"
-        android:background="@drawable/mybutton"
-        android:onClick="navigation"
-        android:text="Edit Pre Test" />
-
     <TextView
-    android:id="@+id/textView_spinner_title"
-    android:layout_width="300dp"
-    android:layout_height="30dp"
-    android:layout_alignParentTop="true"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="10dp"
-    android:fontFamily="sans-serif-medium"
-    android:text="Select Experiment:"
-    android:textColor="#000000"
-    android:textSize="20dp"
-    android:textStyle="bold"
-    android:gravity="center"/>
+        android:id="@+id/textView_spinner_title"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="Created Experiments:"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <Spinner
         android:id="@+id/experiment_names_spinner"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="299dp"
+        android:layout_height="54dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
@@ -45,100 +31,50 @@
 
     <TextView
         android:id="@+id/textView_myExperiment_title"
-        android:layout_width="300dp"
-        android:layout_height="30dp"
+        android:layout_width="399dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="282dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginEnd="281dp"
         android:fontFamily="sans-serif-medium"
+        android:gravity="center"
         android:text="Experiment Parameters:"
         android:textColor="#000000"
         android:textSize="20dp"
-        android:textStyle="bold"
-        android:gravity="center"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView_myExperiment"
         android:layout_width="400dp"
         android:layout_height="200dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="160dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="271dp"
+        android:layout_marginEnd="278dp"
         android:fontFamily="sans-serif-medium"
+        android:gravity="center|top"
         android:text="Empty experiment"
         android:textColor="#000000"
         android:textSize="15dp"
-        android:textStyle="italic"
-        android:gravity="center|top"/>
+        android:textStyle="italic" />
 
     <Button
-        android:id="@+id/start_experiment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="34dp"
-        android:layout_marginRight="34dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/mybutton"
-        android:onClick="navigation"
-        android:text="Start Experiment" />
-
-    <Button
-        android:id="@+id/edit_experiment"
-        android:layout_width="126dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="39dp"
-        android:layout_marginRight="39dp"
-        android:layout_marginBottom="92dp"
-        android:background="@drawable/mybutton"
-        android:onClick="navigation"
-        android:text="Edit Post Test" />
-
-    <Button
-        android:id="@+id/view_stimuli"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="781dp"
-        android:layout_marginRight="781dp"
-        android:layout_marginBottom="157dp"
-        android:background="@drawable/mybutton"
-        android:onClick="navigation"
-        android:text="View Stimuli" />
-
-    <Button
-        android:id="@+id/results"
-        android:layout_width="139dp"
+        android:id="@+id/button3"
+        android:layout_width="218dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginBottom="91dp"
-        android:background="@drawable/mybutton"
-        android:onClick="navigation"
-        android:text="Export Results" />
-
-    <Button
-        android:id="@+id/delete_experiment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="42dp"
-        android:layout_marginLeft="42dp"
-        android:layout_marginBottom="18dp"
-        android:background="@drawable/mybutton"
-        android:onClick="navigation"
-        android:text="Delete Experiment" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="375dp"
+        android:layout_marginTop="121dp"
+        android:layout_marginEnd="369dp"
+        android:text="Select Experiment"
+        android:textSize="18sp"
+        android:onClick="selectExperiment"/>
 
 </RelativeLayout>

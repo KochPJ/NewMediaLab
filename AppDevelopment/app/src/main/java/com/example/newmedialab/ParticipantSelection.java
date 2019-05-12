@@ -46,6 +46,7 @@ public class ParticipantSelection extends AppCompatActivity {
 
         Intent intent = new Intent(this, TestMultipleChoice.class);
         intent = intent.putExtra("experiment", exp);
+        intent = intent.putExtra("pretest", false);
         startActivity(intent);
     }
 

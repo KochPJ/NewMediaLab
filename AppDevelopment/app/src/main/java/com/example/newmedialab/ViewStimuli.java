@@ -39,7 +39,7 @@ public class ViewStimuli extends AppCompatActivity {
 
         ArrayList<String> videos = new ArrayList<String>();
         ArrayList<String> seenImages = new ArrayList<String>();
-        ArrayList<String> notseenImages = exp.getAllFalseStimuli();
+        ArrayList<String> notseenImages = exp.getFalseStimuli();
         for (String[] row : exp.getStimuli()) {
             videos.add(row[0]);
             videos.add(row[1]);

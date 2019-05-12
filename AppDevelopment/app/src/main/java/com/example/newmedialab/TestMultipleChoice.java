@@ -32,6 +32,7 @@ public class TestMultipleChoice extends AppCompatActivity {
     public ImageView im1, im2, im3, im4, im5, im6;
     public TextView tv1, tv2, tv3, tv4, tv5, tv6;
     public ArrayList<String> falseSymbols = new ArrayList<String>();
+    public boolean pretest = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,8 @@ public class TestMultipleChoice extends AppCompatActivity {
         setContentView(R.layout.activity_test_multiple_choice);
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
+        pretest = (boolean) i.getSerializableExtra("pretest");
+
         //Get the stimuli
         stimuli = exp.getNextStimuli();
 
@@ -76,26 +79,28 @@ public class TestMultipleChoice extends AppCompatActivity {
         tv6 = findViewById(R.id.textView20);
 
         List<String> spinnerArray =  new ArrayList<String>();
+        // Randomly sample from correct group of false stimuli
+        falseSymbols = exp.getFalseSymbol(Integer.parseInt(exp.qnum)-1);
 
         if(exp.getCurrentID()%2 == 0){ // Control group
-            // Randomly sample from correct group of false stimuli
-            falseSymbols = exp.getFalseSymbol(Integer.parseInt(exp.qnum)-1, false);
             // Add true stimuli
             falseSymbols.add(Environment.getExternalStorageDirectory()+"/"+exp.getCurrentSymbol()[2]);
         } else { // Experimental group
-            // Randomly sample from correct group of false stimuli
-            falseSymbols = exp.getFalseSymbol(Integer.parseInt(exp.qnum)-1, true);
             // Add true stimuli
             falseSymbols.add(Environment.getExternalStorageDirectory()+"/"+exp.getCurrentSymbol()[3]);
         }
+
         Collections.shuffle(falseSymbols);
         for(int j=0; j<falseSymbols.size(); j++){
             File imgFile = new  File(falseSymbols.get(j));
             if(imgFile.exists()){
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 imageViews[j].setImageBitmap(myBitmap);
-
             }
+        }
+
+        if(exp.getNoneOption()){
+            falseSymbols.add("None of the above");
         }
 
         // Load thumbnails & remove the required number of imageViews and textViews
@@ -146,7 +151,12 @@ public class TestMultipleChoice extends AppCompatActivity {
         String full_id = exp.getID(id_num);
 
         //First create the folder if it doesn't exist
-        String subdir = "/KineTest/Experiments/" + exp.name + "/" + full_id +"/post_test";
+        String subdir = "";
+        if(pretest){
+            subdir = "/KineTest/Experiments/" + exp.name + "/" + full_id +"/multiple_choice_test/pre_test";
+        } else {
+            subdir = "/KineTest/Experiments/" + exp.name + "/" + full_id +"/multiple_choice_test/post_test";
+        }
         File root = new File(Environment.getExternalStorageDirectory() + subdir);
         String FILE_NAME = (exp.name +"_"+full_id+"_results.txt");
         if (!root.exists()){
@@ -165,7 +175,12 @@ public class TestMultipleChoice extends AppCompatActivity {
         }
 
         // Path to file
-        String path = "/KineTest/Experiments/" + exp.name + "/" + full_id +"/post_test/"+ exp.name +"_"+full_id+"_results.txt";
+        String path = "";
+        if(pretest){
+            path = "/KineTest/Experiments/" + exp.name + "/" + full_id +"/multiple_choice_test/pre_test/"+ exp.name +"_"+full_id+"_results.txt";
+        } else {
+            path = "/KineTest/Experiments/" + exp.name + "/" + full_id +"/multiple_choice_test/post_test/"+ exp.name +"_"+full_id+"_results.txt";
+        }
         File fullpath = new File(Environment.getExternalStorageDirectory() + path);
 
         //Append answers to file once it exists
@@ -205,6 +220,7 @@ public class TestMultipleChoice extends AppCompatActivity {
             // Show next stimuli
             Intent intent2 = new Intent(this, TestMultipleChoice.class);
             intent2 = intent2.putExtra("experiment", exp);
+            intent2 = intent2.putExtra("pretest", pretest);
             startActivity(intent2);
         }
     }

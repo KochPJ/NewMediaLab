@@ -93,7 +93,7 @@ public class TestWriting extends AppCompatActivity {
         }
         Log.d("testCurrentsymbol", currentSymbol);
         //Create folder for subject if doesn't exist
-        String path = "/KineTest/Experiments/"+ exp.name +"/"+ full_id +"/pre_test";
+        String path = "/KineTest/Experiments/"+ exp.name +"/"+ full_id +"/writing_test";
         File folder = new File(Environment.getExternalStorageDirectory() + path);
         boolean success = true;
         if (!folder.exists()) {
@@ -131,6 +131,7 @@ public class TestWriting extends AppCompatActivity {
             // Show next stimuli
             Intent intent2 = new Intent(this, ShowStimuli.class);
             intent2 = intent2.putExtra("experiment", exp);
+            intent2 = intent2.putExtra("writing", true);
             startActivity(intent2);
         }
     }
