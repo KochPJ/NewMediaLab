@@ -35,15 +35,11 @@ public class ExperimentSettingsWriting extends AppCompatActivity {
         exp = (Experiment)i.getSerializableExtra("experiment");
         editing = getIntent().getExtras().getBoolean("editing");
 
-
-
         convertedVideoSavingPath = Environment.getExternalStorageDirectory() + "/KineTest/Experiments/"+exp.name+"/videos_transformed";
         File folder = new File(convertedVideoSavingPath);
         if(!folder.exists()) folder.mkdirs();
 
         updateSpinner();
-
-
     }
 
 
@@ -91,34 +87,39 @@ public class ExperimentSettingsWriting extends AppCompatActivity {
     }
 
     public void saveExperiment(View view) {
-        //pointer to selected symbols
-        EditText exp_repeats_EditText = (EditText) findViewById(R.id.te_experiment_repeats);
-        EditText exp_repeats2_EditText = (EditText) findViewById(R.id.te_experiment_repeats2);
-        CheckBox exp_random_CB = (CheckBox) findViewById(R.id.cb_stimuli_random);
+        if(exp.stimuli.size()>0){
+            //pointer to selected symbols
+            EditText exp_repeats_EditText = (EditText) findViewById(R.id.te_experiment_repeats);
+            EditText exp_repeats2_EditText = (EditText) findViewById(R.id.te_experiment_repeats2);
+            CheckBox exp_random_CB = (CheckBox) findViewById(R.id.cb_stimuli_random);
 
-        // set the other variables
-        exp.setMaxRepeats(exp_repeats_EditText.getText().toString());
-        exp.setAutoRepeats(exp_repeats2_EditText.getText().toString());
-        // set random?
-        if(exp_random_CB.isChecked()){
-            exp.setRandom("true");
+            // set the other variables
+            exp.setMaxRepeats(exp_repeats_EditText.getText().toString());
+            exp.setAutoRepeats(exp_repeats2_EditText.getText().toString());
+            // set random?
+            if(exp_random_CB.isChecked()){
+                exp.setRandom("true");
+            } else {
+                exp.setRandom("false");
+            }
+
+            //If editing return to my experiments
+            if (editing){
+                //Save results
+                exp.createFile();
+                Toast.makeText(this, "Saved Experiment to " + exp.getFile_name(),
+                        Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this, MyExperiments.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(this, MultipleChoiceExperiment.class);
+                intent = intent.putExtra("experiment", exp);
+                intent = intent.putExtra("editing", false);
+                startActivity(intent);
+            }
         } else {
-            exp.setRandom("false");
-        }
-
-        //If editing return to my experiments
-        if (editing){
-            //Save results
-            exp.createFile();
-            Toast.makeText(this, "Saved Experiment to " + exp.getFile_name(),
+            Toast.makeText(this, "Please add some stimuli to the experiment.",
                     Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, MyExperiments.class);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(this, MultipleChoiceExperiment.class);
-            intent = intent.putExtra("experiment", exp);
-            intent = intent.putExtra("editing", false);
-            startActivity(intent);
         }
     }
 

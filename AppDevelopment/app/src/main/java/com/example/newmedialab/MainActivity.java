@@ -22,12 +22,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(activity);
     }
 
-    public void createNewExperiment(View view) {
-        Intent activity = new Intent(MainActivity.this, WritingExperiment.class);
-        activity = activity.putExtra("editing", false);
-        startActivity(activity);
-    }
-
     public void openTestActivity(View view) {
         Intent activity = new Intent(MainActivity.this, playVideo.class);
         startActivity(activity);

@@ -174,4 +174,10 @@ public class MyExperiments extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    public void createNewExperiment(View view) {
+        Intent activity = new Intent(MyExperiments.this, WritingExperiment.class);
+        activity = activity.putExtra("editing", false);
+        startActivity(activity);
+    }
 }

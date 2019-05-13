@@ -32,8 +32,8 @@ public class ViewStimuli extends AppCompatActivity {
         Intent i = getIntent();
         exp = (Experiment)i.getSerializableExtra("experiment");
 
-        seen = findViewById(R.id.imageView7);
-        notseen = findViewById(R.id.imageView8);
+        seen = findViewById(R.id.imageView8);
+        notseen = findViewById(R.id.imageView7);
         vv = findViewById(R.id.videoView3);
         play_button = findViewById(R.id.play_button);
 
@@ -77,7 +77,7 @@ public class ViewStimuli extends AppCompatActivity {
         notseenspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 Uri nsi = Uri.parse((String) notseenspin.getSelectedItem());
-                seen.setImageURI(nsi);
+                notseen.setImageURI(nsi);
             }
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here

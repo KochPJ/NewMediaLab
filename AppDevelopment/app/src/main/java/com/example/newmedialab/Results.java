@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.apache.commons.io.FileUtils;
 
@@ -52,6 +53,8 @@ public class Results extends AppCompatActivity {
             } else {
                 FileUtils.copyDirectory(root, export_root);
             }
+            Toast mToastToShow = Toast.makeText(this, "Exported results to: "+export_root.toString(), Toast.LENGTH_LONG);
+            mToastToShow.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

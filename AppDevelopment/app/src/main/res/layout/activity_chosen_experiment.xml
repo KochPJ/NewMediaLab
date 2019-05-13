@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/textView_myExperiment2"
-        android:layout_width="400dp"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="280dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -20,7 +20,7 @@
         android:gravity="center|top"
         android:text="Empty experiment"
         android:textColor="#000000"
-        android:textSize="15dp"
+        android:textSize="18sp"
         android:textStyle="italic" />
 
     <TextView
@@ -42,27 +42,23 @@
 
     <Button
         android:id="@+id/start_experiment"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="49dp"
-        android:layout_marginRight="49dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="36dp"
         android:background="@drawable/mybutton"
         android:onClick="navigation"
         android:text="Start Experiment" />
 
     <Button
         android:id="@+id/delete_experiment"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
         android:layout_marginBottom="36dp"
         android:background="@drawable/mybutton"
         android:onClick="navigation"
@@ -70,27 +66,23 @@
 
     <Button
         android:id="@+id/view_stimuli"
-        android:layout_width="140dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="230dp"
-        android:layout_marginRight="230dp"
-        android:layout_marginBottom="43dp"
+        android:layout_marginEnd="300dp"
+        android:layout_marginBottom="36dp"
         android:background="@drawable/mybutton"
         android:onClick="navigation"
         android:text="View Stimuli" />
 
     <Button
         android:id="@+id/results"
-        android:layout_width="139dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="224dp"
-        android:layout_marginLeft="224dp"
+        android:layout_marginStart="300dp"
         android:layout_marginBottom="36dp"
         android:background="@drawable/mybutton"
         android:onClick="navigation"
@@ -98,12 +90,12 @@
 
     <RadioGroup
         android:id="@+id/RadioGroup"
-        android:layout_width="355dp"
-        android:layout_height="48dp"
+        android:layout_width="236dp"
+        android:layout_height="53dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="282dp"
-        android:layout_marginBottom="189dp">
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="121dp">
 
         <RadioButton
             android:id="@+id/radioButton4"
@@ -123,12 +115,12 @@
 
     <TextView
         android:id="@+id/textView28"
-        android:layout_width="354dp"
+        android:layout_width="218dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="281dp"
-        android:layout_marginBottom="244dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="186dp"
         android:text="Experiment Type" />
 
 </RelativeLayout>

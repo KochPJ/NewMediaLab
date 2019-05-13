@@ -9,18 +9,6 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/create_exp_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0pt"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/mybutton"
-        android:onClick="createNewExperiment"
-        android:text="Create New Experiment"
-        android:textSize="9pt" />
-
-    <Button
         android:id="@+id/my_exp_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,23 +24,22 @@
         android:id="@+id/load_videos_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/create_exp_button"
-        android:layout_marginBottom="5pt"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
         android:background="@drawable/mybutton"
-        android:layout_centerHorizontal="true"
         android:onClick="loadNewVideos"
-        android:text="Load New Videos"
+        android:text="Load New Stimuli"
         android:textSize="9pt" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
         android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif-medium"
         android:text="KineTest"
         android:textColor="#FFA500"
-        android:textSize="48dp"
+        android:textSize="56dp"
         android:textStyle="bold|italic" />
 
 

@@ -11,62 +11,62 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="168dp"
-        android:layout_height="145dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="150dp"
         app:srcCompat="@drawable/background" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="168dp"
-        android:layout_height="145dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="590dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginStart="275dp"
+        android:layout_marginTop="150dp"
         app:srcCompat="@drawable/background" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="168dp"
-        android:layout_height="145dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="383dp"
-        android:layout_marginTop="106dp"
+        android:layout_marginStart="525dp"
+        android:layout_marginTop="150dp"
         app:srcCompat="@drawable/background" />
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="168dp"
-        android:layout_height="145dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="165dp"
-        android:layout_marginTop="308dp"
+        android:layout_marginStart="725dp"
+        android:layout_marginTop="150dp"
         app:srcCompat="@drawable/background" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="168dp"
-        android:layout_height="145dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="383dp"
-        android:layout_marginTop="306dp"
+        android:layout_marginStart="275dp"
+        android:layout_marginTop="350dp"
         app:srcCompat="@drawable/background" />
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="168dp"
-        android:layout_height="145dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="603dp"
-        android:layout_marginTop="307dp"
+        android:layout_marginStart="525dp"
+        android:layout_marginTop="350dp"
         app:srcCompat="@drawable/background" />
 
     <TextView
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="19dp"
         android:text="[Experiment Name]"
         android:textSize="18sp" />
 
@@ -113,9 +113,8 @@
         android:id="@+id/spinner2"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="325dp"/>
 
     <TextView
         android:id="@+id/textView15"
@@ -123,8 +122,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="218dp"
-        android:layout_marginTop="270dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="310dp"
         android:text="Symbol 1" />
 
     <TextView
@@ -133,8 +132,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="653dp"
-        android:layout_marginTop="270dp"
+        android:layout_marginStart="575dp"
+        android:layout_marginTop="310dp"
         android:text="Symbol 3" />
 
     <TextView
@@ -143,19 +142,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="437dp"
-        android:layout_marginTop="467dp"
+        android:layout_marginStart="325dp"
+        android:layout_marginTop="510dp"
         android:text="Symbol 5" />
 
     <TextView
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/spinner2"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="0dp"
-        android:layout_toStartOf="@+id/spinner2"
-        android:text="Answer:" />
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="100dp"
+        android:text="Answer:"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView20"
@@ -163,8 +162,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="653dp"
-        android:layout_marginTop="468dp"
+        android:layout_marginStart="575dp"
+        android:layout_marginTop="510dp"
         android:text="Symbol 6" />
 
     <TextView
@@ -173,8 +172,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="221dp"
-        android:layout_marginTop="467dp"
+        android:layout_marginStart="769dp"
+        android:layout_marginTop="310dp"
         android:text="Symbol 4" />
 
     <TextView
@@ -183,8 +182,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="437dp"
-        android:layout_marginTop="267dp"
+        android:layout_marginStart="325dp"
+        android:layout_marginTop="310dp"
         android:text="Symbol 2" />
 
 </RelativeLayout>

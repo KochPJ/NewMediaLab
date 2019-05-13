@@ -134,6 +134,11 @@ public class TestMultipleChoice extends AppCompatActivity {
         for(int j=0; j<Integer.parseInt(exp.qnum); j++){
             spinnerArray.add(Integer.toString(j+1));
         }
+        // Add none option
+        if(exp.getNoneOption()){
+            spinnerArray.add("None of the above");
+        }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, spinnerArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
