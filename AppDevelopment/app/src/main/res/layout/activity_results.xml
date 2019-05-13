@@ -18,7 +18,7 @@
         android:layout_marginBottom="386dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="filename.csv" />
+        android:text="experiment" />
 
     <Button
         android:id="@+id/button"
@@ -30,5 +30,16 @@
         android:layout_marginTop="395dp"
         android:layout_marginEnd="422dp"
         android:layout_marginBottom="-267dp"
-        android:text="Export Results" />
+        android:text="Export Results"
+        android:onClick="exportResults"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="453dp"
+        android:layout_marginBottom="70dp"
+        android:text="Export name" />
 </RelativeLayout>
