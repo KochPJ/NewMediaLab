@@ -335,7 +335,7 @@ public class Video implements Serializable {
         double totalVel = 0;
         double velStep = 0;
         int n_steps = velProfile.size();
-        int n_steps_speed = (int)(n_steps/speed);
+        int n_steps_speed = (int)( ((duration/1000)*25)/speed);
         Log.d("Video", "convertVideo: n_steps = " +n_steps);
 
         Log.d("Video", "convertVideo: n_steps_speed = " +n_steps_speed);

@@ -208,6 +208,30 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
     public void LoadVelFuncFromFolder(View view){
 
         vel_pro = videoloaded.loadVelocityProfile("KineTest/ImportVelocityProfile/"+ImportVelPro);
+
+        GraphView graph = (GraphView) findViewById(R.id.NewStimuli_graph_view_new_stimuli);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>();
+
+        double xd_max = 0.0;
+        for (int i = 0; i < vel_pro.size(); i++) {
+            if (vel_pro.get(i) > xd_max) {
+                xd_max = vel_pro.get(i);
+            }
+            series.appendData(new DataPoint(i, vel_pro.get(i)), true, vel_pro.size());
+        }
+
+        Log.d("getVelocityProfile", "Max vel = " + Double.toString(xd_max));
+        graph.removeAllSeries();
+        graph.addSeries(series);
+        graph.getViewport().setMinX(0);
+        graph.getViewport().setMaxX(vel_pro.size());
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setMaxY(xd_max);
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setXAxisBoundsManual(true);
+
+
+
         velocityProfile_acquired = true;
     }
 
