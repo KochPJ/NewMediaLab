@@ -49,7 +49,7 @@ public class ExperimentSettingsWriting extends AppCompatActivity {
         ArrayList<String[]> stimuli = exp.stimuli;
         for(int i = 0; i < exp.stimuli.size(); i++){
             String[] stim = exp.stimuli.get(i);
-            symboles[i] = stim[1];
+            symboles[i] = stim[0];
         }
 
 

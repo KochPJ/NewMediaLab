@@ -407,6 +407,8 @@ public class AddStimuli extends AppCompatActivity {
             public void run() {
                 Video video = new Video(context, "converted");
                 video.setVideo_created(false);
+                video.setVideoPath(currentStimuliPath);
+                video.getVideoData();
                 List<Double> vel_pro_stimuli = video.loadVelocityProfile(currentVelProPath);
                 EditText exp_function_EditText = (EditText) findViewById(R.id.addStimuli_vel_pro_function_text_edit);
                 VelocityFunction vel_function = new VelocityFunction(exp_function_EditText.getText().toString());
