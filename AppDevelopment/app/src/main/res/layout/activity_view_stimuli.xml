@@ -9,57 +9,29 @@
     >
 
 
-    <Spinner
-        android:id="@+id/spinner3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="110dp"
+        android:layout_height="45dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="838dp" />
-
-    <Spinner
-        android:id="@+id/spinner_notseen"
-        android:layout_width="197dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageView8"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="328dp"
-        android:layout_marginTop="251dp"
-        android:layout_marginBottom="216dp" />
-
-    <Spinner
-        android:id="@+id/spinner_video"
-        android:layout_width="215dp"
-        android:layout_height="33dp"
-        android:layout_alignTop="@+id/videoView3"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="652dp"
-        android:layout_marginTop="246dp"
-        android:layout_marginBottom="214dp" />
-
-    <Spinner
-        android:id="@+id/spinner_seen"
-        android:layout_width="195dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageView7"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="253dp"
-        android:layout_marginBottom="212dp" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="20dp"
+        android:text="Post Test"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/spinner3"
+        android:id="@+id/textView27"
+        android:layout_width="110dp"
+        android:layout_height="45dp"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="281dp"
-        android:layout_marginBottom="14dp"
-        android:text="Videos" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="750dp"
+        android:layout_marginTop="20dp"
+        android:text="Pre Test"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView23"
@@ -67,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="77dp"
+        android:layout_marginStart="75dp"
         android:layout_marginTop="75dp"
         android:text="Stimuli Seen by Subject" />
 
@@ -77,55 +49,73 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="296dp"
+        android:layout_marginStart="360dp"
         android:layout_marginTop="75dp"
         android:text="Stimuli Not Seen by Subject" />
 
     <TextView
-        android:id="@+id/textView26"
-        android:layout_width="101dp"
-        android:layout_height="35dp"
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="212dp"
-        android:layout_marginTop="23dp"
-        android:text="Post Test"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="101dp"
-        android:layout_height="35dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="682dp"
-        android:layout_marginTop="27dp"
-        android:text="Pre Test"
-        android:textSize="18sp" />
+        android:layout_marginStart="700dp"
+        android:layout_marginTop="75dp"
+        android:text="Videos Shown in the Experiment" />
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="262dp"
-        android:layout_height="296dp"
+        android:layout_width="275dp"
+        android:layout_height="275dp"
         android:layout_above="@+id/textView23"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="110dp"
         android:layout_marginBottom="-333dp"
         app:srcCompat="@drawable/background" />
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="262dp"
-        android:layout_height="296dp"
+        android:layout_width="275dp"
+        android:layout_height="275dp"
         android:layout_above="@+id/textView25"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="299dp"
+        android:layout_marginStart="315dp"
         android:layout_marginTop="110dp"
         android:layout_marginBottom="-333dp"
         app:srcCompat="@drawable/background" />
+
+    <Spinner
+        android:id="@+id/spinner_seen"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView7"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="253dp"
+        android:layout_marginBottom="212dp" />
+
+    <Spinner
+        android:id="@+id/spinner_notseen"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView8"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="350dp"
+        android:layout_marginTop="251dp"
+        android:layout_marginBottom="216dp" />
+
+    <Spinner
+        android:id="@+id/spinner_video"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/videoView3"
+        android:layout_marginStart="700dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginBottom="129dp" />
 
     <VideoView
         android:id="@+id/videoView3"
@@ -134,18 +124,18 @@
         android:layout_above="@+id/textView27"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="614dp"
+        android:layout_marginStart="650dp"
         android:layout_marginTop="108dp"
         android:layout_marginBottom="-337dp" />
 
     <Button
         android:id="@+id/play_button"
-        android:layout_width="72dp"
-        android:layout_height="39dp"
-        android:layout_alignEnd="@+id/textView27"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-12dp"
-        android:layout_marginBottom="127dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="750dp"
+        android:layout_marginTop="450dp"
+        android:background="@drawable/mybutton"
         android:onClick="playStimuli"
         android:text="Play" />
+
 </RelativeLayout>

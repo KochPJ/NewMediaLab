@@ -12,10 +12,7 @@
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="382dp"
-        android:layout_marginBottom="386dp"
+        android:layout_marginTop="200dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:layout_centerHorizontal="true"
@@ -25,22 +22,17 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="422dp"
-        android:layout_marginBottom="162dp"
-        android:onClick="exportResults"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/mybutton"
+        android:onClick="exportResults"
         android:text="Export Results" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editText"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="453dp"
-        android:layout_marginBottom="70dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
         android:text="Export name" />
 </RelativeLayout>
