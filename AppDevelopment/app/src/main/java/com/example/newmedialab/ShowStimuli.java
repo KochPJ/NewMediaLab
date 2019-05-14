@@ -101,6 +101,7 @@ public class ShowStimuli extends AppCompatActivity {
             } else{
                 Intent intent = new Intent(this, ShowStimuli.class);
                 intent = intent.putExtra("experiment", exp);
+                intent = intent.putExtra("writing", false);
                 startActivity(intent);
             }
         }
