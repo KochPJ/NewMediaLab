@@ -22,9 +22,10 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
-        android:onClick="exportResults"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/mybutton"
+        android:onClick="exportResults"
         android:text="Export Results" />
 
     <TextView

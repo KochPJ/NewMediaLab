@@ -134,6 +134,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="750dp"
         android:layout_marginTop="450dp"
+        android:background="@drawable/mybutton"
         android:onClick="playStimuli"
         android:text="Play" />
 
