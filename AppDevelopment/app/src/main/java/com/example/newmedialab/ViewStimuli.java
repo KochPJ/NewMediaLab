@@ -1,8 +1,11 @@
 package com.example.newmedialab;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -57,8 +60,14 @@ public class ViewStimuli extends AppCompatActivity {
 
         seenspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                Uri ssi = Uri.parse((String) seenspin.getSelectedItem());
-                seen.setImageURI(ssi);
+                String imgpth = Environment.getExternalStorageDirectory()+"/"+((String) seenspin.getSelectedItem());
+                if (imgpth.endsWith(".jpg")){
+                    Uri ssi = Uri.parse((String) seenspin.getSelectedItem());
+                    seen.setImageURI(ssi);
+                } else {
+                    Bitmap bm = BitmapFactory.decodeFile(imgpth);
+                    seen.setImageBitmap(bm);
+                }
             }
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
