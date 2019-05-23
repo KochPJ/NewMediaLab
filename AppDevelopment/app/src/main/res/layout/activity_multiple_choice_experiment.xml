@@ -99,7 +99,7 @@
         android:layout_below="@+id/tv_title_mc"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Number of options besides the correct one (Min. 2, Max. 6):" />
+        android:text="Number of options per question (Min. 2, Max. 6):" />
 
     <TextView
         android:id="@+id/tv_title_mc"
@@ -114,12 +114,10 @@
 
     <CheckBox
         android:id="@+id/noneCheckBox"
-        android:layout_width="322dp"
-        android:layout_height="51dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="313dp"
-        android:layout_marginBottom="167dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
         android:checked="true"
         android:text='"None of the Above"-option'
         android:textSize="14sp" />

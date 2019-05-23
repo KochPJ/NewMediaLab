@@ -41,7 +41,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="75dp"
         android:layout_marginTop="75dp"
-        android:text="Stimuli Seen by Subject" />
+        android:text="Stimuli Seen by Subjects" />
 
     <TextView
         android:id="@+id/textView25"
@@ -51,7 +51,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="360dp"
         android:layout_marginTop="75dp"
-        android:text="Stimuli Not Seen by Subject" />
+        android:text="Stimuli Not Seen by Subjects" />
 
     <TextView
         android:id="@+id/textView22"

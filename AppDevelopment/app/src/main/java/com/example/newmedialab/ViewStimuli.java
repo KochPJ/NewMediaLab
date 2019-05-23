@@ -70,7 +70,7 @@ public class ViewStimuli extends AppCompatActivity {
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, notseenImages);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        adapter2.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         notseenspin = findViewById(R.id.spinner_notseen);
         notseenspin.setAdapter(adapter2);
 
