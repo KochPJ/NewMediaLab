@@ -46,7 +46,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="0dp"
-        android:text="Writing Test Parameters"
+        android:text="Stimuli Parameters"
         android:textSize="20sp" />
 
     <Button
