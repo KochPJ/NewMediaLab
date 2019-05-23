@@ -104,7 +104,7 @@ public class ViewStimuli extends AppCompatActivity {
 
         videospinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                sv = Uri.parse((String) videospinner.getSelectedItem());
+                sv = Uri.parse(Environment.getExternalStorageDirectory()+"/"+((String) videospinner.getSelectedItem()));
             }
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
