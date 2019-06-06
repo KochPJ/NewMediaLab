@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ShowStimuli extends AppCompatActivity {
 
     public Experiment exp = new Experiment("");
-    private int remaining_repeats = 1;
+    private int remaining_repeats, starting_repeats = 1;
     private int auto_repeats = 1;
     TextView repeats;
     public String[] stimuli;
@@ -32,6 +32,7 @@ public class ShowStimuli extends AppCompatActivity {
         TextView expName = (TextView) findViewById(R.id.tv_exp_name);
         expName.setText(exp.getName());
 
+        starting_repeats = Integer.parseInt(exp.getMaxRepeats());
         remaining_repeats = Integer.parseInt(exp.getMaxRepeats());
         auto_repeats = Integer.parseInt(exp.getAutoRepeats());
 
@@ -52,6 +53,23 @@ public class ShowStimuli extends AppCompatActivity {
         } else {
             pb.setAlpha(0);
         }
+        //Move vv to 1st frame
+        VideoView vv = (VideoView) findViewById( R.id.videoView2 );
+        if(!vv.isPlaying()){
+            if(exp.getCurrentID()%2 == 0){
+                //Subject is part of the control group and gets the artificial stimuli
+                String path = stimuli[0];
+                Uri u = Uri.parse(Environment.getExternalStorageDirectory()+"/"+path);
+                vv.setVideoURI(u);
+                vv.seekTo( 1 );
+            } else {
+                //Subject is part of the experimental group and gets the kinestetic stimuli
+                String path = stimuli[1];
+                Uri u = Uri.parse(Environment.getExternalStorageDirectory()+"/"+path);
+                vv.setVideoURI(u);
+                vv.seekTo( 1 );
+            }
+        }
 
     }
 
@@ -59,50 +77,98 @@ public class ShowStimuli extends AppCompatActivity {
         VideoView vv = findViewById(R.id.videoView2);
         //MediaController m = new MediaController(this);
         //vv.setMediaController(m);
-        if(this.remaining_repeats > 0){
-            for(int i = 0; auto_repeats > i; i++){
-                //play video for the correct amount of user specified loops
-                if(!vv.isPlaying()){
-                    if(exp.getCurrentID()%2 == 0){
-                        //Subject is part of the control group and gets the artificial stimuli
-                        String path = stimuli[0];
-                        Uri u = Uri.parse(Environment.getExternalStorageDirectory()+"/"+path);
-                        vv.setVideoURI(u);
-                        vv.start();
-                    } else {
-                        //Subject is part of the experimental group and gets the kinestetic stimuli
-                        String path = stimuli[1];
-                        Uri u = Uri.parse(Environment.getExternalStorageDirectory()+"/"+path);
-                        vv.setVideoURI(u);
-                        vv.start();
-                    }
+        if(!vv.isPlaying()){
+            if(this.remaining_repeats > 0){
+                //for(int i = 0; auto_repeats > i; i++){
+                    //play video for the correct amount of user specified loops
+                if (exp.getCurrentID() % 2 == 0) {
+                    //Subject is part of the control group and gets the artificial stimuli
+                    String path = stimuli[0];
+                    Uri u = Uri.parse(Environment.getExternalStorageDirectory() + "/" + path);
+                    vv.setVideoURI(u);
+                    vv.start();
+                    // TODO: Fix autorepeats or remove option
+//                    final VideoView vvf = vv;
+//                    vvf.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//                        @Override
+//                        public void onPrepared(MediaPlayer mp) {
+//                            vvf.start();
+//                        }
+//                    });
+//                    for(int i=1; i < Integer.parseInt(exp.getAutoRepeats()); i++){
+//                        Handler handler = new Handler();
+//                        handler.postDelayed(new Runnable() {
+//                            public void run() {
+//                                vvf.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//                                    @Override
+//                                    public void onPrepared(MediaPlayer mp) {
+//                                        vvf.start();
+//                                    }
+//                                });
+//                            }
+//                        }, 10000);
+//                    }
+                } else {
+                    //Subject is part of the experimental group and gets the kinestetic stimuli
+                    String path = stimuli[1];
+                    Uri u = Uri.parse(Environment.getExternalStorageDirectory() + "/" + path);
+                    vv.setVideoURI(u);
+                    vv.start();
+//                    final VideoView vvf = vv;
+//                    vvf.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//                        @Override
+//                        public void onPrepared(MediaPlayer mp) {
+//                            vvf.start();
+//                        }
+//                    });
+//                    for(int i=1; i < Integer.parseInt(exp.getAutoRepeats()); i++){
+//                        Handler handler = new Handler();
+//                        handler.postDelayed(new Runnable() {
+//                            public void run() {
+//                                vvf.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//                                    @Override
+//                                    public void onPrepared(MediaPlayer mp) {
+//                                        vvf.start();
+//                                    }
+//                                });
+//                            }
+//                        }, 10000);
+//                    }
                 }
+                remaining_repeats -= 1;
+                repeats.setText("Remaining Replays: "+remaining_repeats);
+            } else {
+                Toast mToastToShow = Toast.makeText(this, "No Replays Remaining", Toast.LENGTH_LONG);
+                mToastToShow.show();
             }
-            remaining_repeats -= 1;
-            repeats.setText("Remaining Replays: "+remaining_repeats);
         } else {
-            Toast mToastToShow = Toast.makeText(this, "No Replays Remaining", Toast.LENGTH_LONG);
+            Toast mToastToShow = Toast.makeText(this, "Currently Playing Video", Toast.LENGTH_SHORT);
             mToastToShow.show();
         }
 
     }
 
     public void nextStimuli(View view) {
-        if(writing){
-            Intent intent = new Intent(this, TestWriting.class);
-            intent = intent.putExtra("experiment", exp);
-            startActivity(intent);
+        if(this.remaining_repeats == this.starting_repeats){
+            Toast mToastToShow = Toast.makeText(this, "Please play the video once before continuing", Toast.LENGTH_LONG);
+            mToastToShow.show();
         } else {
-            if(exp.getRemainingStimuli().size() == 0){
-                Intent intent = new Intent(this, TestMultipleChoice.class);
+            if(writing){
+                Intent intent = new Intent(this, TestWriting.class);
                 intent = intent.putExtra("experiment", exp);
-                intent = intent.putExtra("pretest", true);
                 startActivity(intent);
-            } else{
-                Intent intent = new Intent(this, ShowStimuli.class);
-                intent = intent.putExtra("experiment", exp);
-                intent = intent.putExtra("writing", false);
-                startActivity(intent);
+            } else {
+                if(exp.getRemainingStimuli().size() == 0){
+                    Intent intent = new Intent(this, TestMultipleChoice.class);
+                    intent = intent.putExtra("experiment", exp);
+                    intent = intent.putExtra("pretest", true);
+                    startActivity(intent);
+                } else{
+                    Intent intent = new Intent(this, ShowStimuli.class);
+                    intent = intent.putExtra("experiment", exp);
+                    intent = intent.putExtra("writing", false);
+                    startActivity(intent);
+                }
             }
         }
     }

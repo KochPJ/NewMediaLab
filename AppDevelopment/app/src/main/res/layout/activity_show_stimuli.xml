@@ -14,7 +14,8 @@
         android:layout_height="351dp"
         android:layout_below="@+id/tv_exp_message"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="25dp"
+        android:onClick="replayStimuli"/>
 
     <Button
         android:id="@+id/bt_replayStimuli"
