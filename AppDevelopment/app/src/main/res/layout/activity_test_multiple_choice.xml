@@ -15,7 +15,7 @@
         android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="75dp"
+        android:layout_marginStart="225dp"
         android:layout_marginTop="150dp"
         app:srcCompat="@drawable/background" />
 
@@ -25,7 +25,7 @@
         android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="275dp"
+        android:layout_marginStart="425dp"
         android:layout_marginTop="150dp"
         app:srcCompat="@drawable/background" />
 
@@ -35,7 +35,7 @@
         android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="525dp"
+        android:layout_marginStart="675dp"
         android:layout_marginTop="150dp"
         app:srcCompat="@drawable/background" />
 
@@ -45,7 +45,7 @@
         android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="725dp"
+        android:layout_marginStart="875dp"
         android:layout_marginTop="150dp"
         app:srcCompat="@drawable/background" />
 
@@ -55,7 +55,7 @@
         android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="275dp"
+        android:layout_marginStart="425dp"
         android:layout_marginTop="350dp"
         app:srcCompat="@drawable/background" />
 
@@ -65,7 +65,7 @@
         android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="525dp"
+        android:layout_marginStart="675dp"
         android:layout_marginTop="350dp"
         app:srcCompat="@drawable/background" />
 
@@ -77,7 +77,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
         android:text="[Experiment Name]"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textView12"
@@ -86,7 +86,8 @@
         android:layout_below="@+id/textView11"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="[Experiment Message]" />
+        android:text="[Experiment Message]"
+        android:textSize="18sp" />
 
     <ProgressBar
         android:id="@+id/progressBar3"
@@ -109,20 +110,13 @@
         android:onClick="nextQuestion"
         android:text="Continue" />
 
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginStart="325dp"/>
-
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="125dp"
+        android:layout_marginStart="275dp"
         android:layout_marginTop="310dp"
         android:text="Symbol 1" />
 
@@ -132,7 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="575dp"
+        android:layout_marginStart="725dp"
         android:layout_marginTop="310dp"
         android:text="Symbol 3" />
 
@@ -142,19 +136,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="325dp"
+        android:layout_marginStart="475dp"
         android:layout_marginTop="510dp"
         android:text="Symbol 5" />
-
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="250dp"
-        android:layout_marginTop="100dp"
-        android:text="Answer:"
-        android:textSize="18sp"
-        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView20"
@@ -162,7 +146,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="575dp"
+        android:layout_marginStart="725dp"
         android:layout_marginTop="510dp"
         android:text="Symbol 6" />
 
@@ -172,7 +156,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="769dp"
+        android:layout_marginStart="919dp"
         android:layout_marginTop="310dp"
         android:text="Symbol 4" />
 
@@ -182,8 +166,29 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="325dp"
+        android:layout_marginStart="475dp"
         android:layout_marginTop="310dp"
         android:text="Symbol 2" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="200dp"
+        android:layout_marginBottom="175dp"
+        android:text="Answer:"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="125dp" />
 
 </RelativeLayout>

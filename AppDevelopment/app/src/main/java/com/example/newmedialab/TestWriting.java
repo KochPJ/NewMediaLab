@@ -76,8 +76,20 @@ public class TestWriting extends AppCompatActivity {
     }
 
     public void clearSketch(View view) {
-        //TODO: (low priority) fix reset not working until drawing something else
-        path2.reset();
+        relativeLayout = (RelativeLayout) findViewById(R.id.relativelayout1);
+        view = new SketchSheetView(TestWriting.this);
+        paint = new Paint();
+        path2 = new Path();
+        relativeLayout.addView(view, new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT));
+
+        paint.setDither(true);
+        paint.setColor(Color.parseColor("#000000"));
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        paint.setStrokeWidth(5);
     }
 
     public void showNextStimuli(View view){

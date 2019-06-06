@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -24,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 public class TestMultipleChoice extends AppCompatActivity {
 
@@ -33,6 +35,7 @@ public class TestMultipleChoice extends AppCompatActivity {
     public TextView tv1, tv2, tv3, tv4, tv5, tv6;
     public ArrayList<String> falseSymbols = new ArrayList<String>();
     public boolean pretest = false;
+    public int prevTint = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +66,67 @@ public class TestMultipleChoice extends AppCompatActivity {
 
         // Find imageviews
         im1 = findViewById(R.id.imageView);
+        im1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Spinner sItems = (Spinner) findViewById(R.id.spinner2);
+                setTint(prevTint,0);
+                prevTint = 0;
+                sItems.setSelection(0);
+            }
+        });
         im2 = findViewById(R.id.imageView2);
+        im2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Spinner sItems = (Spinner) findViewById(R.id.spinner2);
+                setTint(prevTint, 1);
+                prevTint = 1;
+                sItems.setSelection(1);
+            }
+        });
         im3 = findViewById(R.id.imageView3);
+        if(Integer.parseInt(exp.getQnum()) >= 3){
+            im3.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Spinner sItems = (Spinner) findViewById(R.id.spinner2);
+                    setTint(prevTint, 2);
+                    prevTint = 2;
+                    sItems.setSelection(2);
+                }
+            });
+        }
         im4 = findViewById(R.id.imageView4);
+        if(Integer.parseInt(exp.getQnum()) >= 4) {
+            im4.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Spinner sItems = (Spinner) findViewById(R.id.spinner2);
+                    setTint(prevTint, 3);
+                    prevTint = 3;
+                    sItems.setSelection(3);
+                }
+            });
+        }
         im5 = findViewById(R.id.imageView5);
+        if(Integer.parseInt(exp.getQnum()) >= 5) {
+            im5.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Spinner sItems = (Spinner) findViewById(R.id.spinner2);
+                    setTint(prevTint, 4);
+                    prevTint = 4;
+                    sItems.setSelection(4);
+                }
+            });
+        }
         im6 = findViewById(R.id.imageView6);
+        if(Integer.parseInt(exp.getQnum()) == 6) {
+            im6.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Spinner sItems = (Spinner) findViewById(R.id.spinner2);
+                    setTint(prevTint, 5);
+                    prevTint = 5;
+                    sItems.setSelection(5);
+                }
+            });
+        }
         ImageView[] imageViews = {im1, im2, im3, im4, im5, im6};
 
         // Find textviews
@@ -132,7 +191,7 @@ public class TestMultipleChoice extends AppCompatActivity {
 
         // Fill spinner
         for(int j=0; j<Integer.parseInt(exp.qnum); j++){
-            spinnerArray.add(Integer.toString(j+1));
+            spinnerArray.add("Symbol "+Integer.toString(j+1));
         }
         // Add none option
         if(exp.getNoneOption()){
@@ -144,6 +203,27 @@ public class TestMultipleChoice extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems = (Spinner) findViewById(R.id.spinner2);
         sItems.setAdapter(adapter);
+        sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                setTint(prevTint,position);
+                prevTint = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) { }
+        });
+
+        //Start spinner with none-of-the-above if that option was selected
+        if(exp.getNoneOption()){
+            sItems.setSelection(spinnerArray.size()-1);
+        }
+    }
+
+    public void setTint(int prevTint, int newTint){
+        ImageView[] images = new ImageView[]{im1, im2, im3, im4, im5, im6};
+        if(prevTint < 6){ images[prevTint].clearColorFilter(); }
+        if(newTint < 6){ images[newTint].setColorFilter(ContextCompat.getColor(TestMultipleChoice.this, R.color.colorPrimary), android.graphics.PorterDuff.Mode.MULTIPLY); }
     }
 
     public void nextQuestion(View view) {

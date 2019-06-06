@@ -14,7 +14,7 @@
         android:layout_height="351dp"
         android:layout_below="@+id/tv_exp_message"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="25dp" />
 
     <Button
         android:id="@+id/bt_replayStimuli"
@@ -44,19 +44,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:text="[Experiment Name]"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_exp_message"
-        android:layout_width="348dp"
-        android:layout_height="43dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tv_exp_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Watch the video and try to memorize the symbol" />
+        android:text="Watch the video and try to memorize the symbol"
+        android:textSize="18sp" />
 
     <ProgressBar
         android:id="@+id/progressBar"
