@@ -45,6 +45,8 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
     String video_name_analysed;
     Boolean ProgressDone;
     Boolean velocityProfile_acquired = false;
+    Boolean testImage_acquired = false;
+
     Video videoloaded;
     Context context;
     List<Double> vel_pro = new ArrayList<Double>();
@@ -54,6 +56,7 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
     String ImportVelPro;
     Uri selectedTestImage;
     ImageView TestImageView;
+
 
     Handler h = new Handler() {
         public void handleMessage(Message msg){
@@ -121,8 +124,7 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
 
 
     public void next(View view){
-        if(velocityProfile_acquired && videoloaded.got_video_images) {
-            Toast.makeText(this, "saving...", Toast.LENGTH_SHORT).show();
+        if(velocityProfile_acquired && videoloaded.got_video_images && testImage_acquired) {
             //save original video
             String copy_to_dir = Environment.getExternalStorageDirectory() + "/KineTest/Resources/Languages/" + language + "/" + type + "/videos_kinematic";
             try {
@@ -195,7 +197,7 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
 
         }else{
 
-            Toast.makeText(this, "Velocity Profile not acquired yet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Velocity Profile, Test Image, or Video Images not acquired yet", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -402,6 +404,7 @@ public class NewStimuliVelFuncAnalyses extends AppCompatActivity {
                 if(data.getData()!=null){
                     selectedTestImage = data.getData();
                     TestImageView.setImageURI(selectedTestImage);
+                    testImage_acquired = true;
 
 
                 }
