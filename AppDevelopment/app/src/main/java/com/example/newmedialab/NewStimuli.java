@@ -42,7 +42,7 @@ public class NewStimuli extends AppCompatActivity implements NewStimuliAddLangua
     private String[] languages;
     String language;
     Spinner typeSpinner;
-    private String[] types = {"Word", "Letter"};
+    private String[] types = {"Letter", "Word"};
     String type;
 
     @Override

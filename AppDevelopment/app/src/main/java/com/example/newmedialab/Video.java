@@ -95,6 +95,7 @@ public class Video implements Serializable {
 
         //get the timestep between images in microseconds
         int timestep = (int)(1000000.0*(1.0/fps));
+        int n_fails = 0;
         Bitmap b;
         List<Bitmap> video = new ArrayList<Bitmap>();
         for (int i=0;i<n_frames;i++){
@@ -112,6 +113,7 @@ public class Video implements Serializable {
             }
 
             Log.i("i",String.valueOf(i));
+
             b = m.getFrameAtTime(i*timestep, FFmpegMediaMetadataRetriever.OPTION_CLOSEST);
 
             //rotate them by 180, FFmpegMediaMetadataRetriever somehow reads the images upside down
@@ -119,9 +121,18 @@ public class Video implements Serializable {
             //matrix.postRotate(180);
             //b =  Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), matrix, true);
 
-            FileOutputStream fileOutputStream = new FileOutputStream(Environment.getExternalStorageDirectory()+"/"+save_to_folder+"/"+number+".png");
-            b.compress(Bitmap.CompressFormat.PNG, 1, fileOutputStream);
+
+            if (b == null){
+                Log.i("b","null");
+                n_fails += 1;
+            }else{
+                FileOutputStream fileOutputStream = new FileOutputStream(Environment.getExternalStorageDirectory()+"/"+save_to_folder+"/"+number+".png");
+                b.compress(Bitmap.CompressFormat.PNG, 1, fileOutputStream);
+            }
         }
+        n_frames = n_frames - n_fails;
+        Log.i("video","n_fails = "+n_fails);
+        Log.i("video","set n_frames = "+n_frames);
         got_video_images = true;
     }
 
@@ -248,7 +259,11 @@ public class Video implements Serializable {
 
                 //get analysed image and write to savePath
                 Mat mask = blobDet.mDrawRect;
+                Mat dialtedMask = blobDet.mDilatedMask;
+                Mat hsvMask = blobDet.mHsvMat;
                 imageCodecs.imwrite(savePath+picturePaths[i], mask);
+                imageCodecs.imwrite(savePath+"dilated_"+picturePaths[i], dialtedMask);
+                imageCodecs.imwrite(savePath+"hsv_"+picturePaths[i], hsvMask);
             }
             createVideo(saveTo, "KineTest/Resources/Temp/temp_loaded_video");
 

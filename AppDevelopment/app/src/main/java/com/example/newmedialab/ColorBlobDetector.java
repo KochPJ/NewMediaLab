@@ -19,8 +19,8 @@ import org.opencv.imgproc.Moments;
 
 public class ColorBlobDetector {
     // Lower and Upper bounds for range checking in HSV color space
-    private Scalar mLowerBound = new Scalar(20,50,50);
-    private Scalar mUpperBound = new Scalar(60,255,255);
+    private Scalar mLowerBound = new Scalar(25,0,40);
+    private Scalar mUpperBound = new Scalar(120,255,255);
 
     // Minimum contour area in percent for contours filtering
     private static double mMinContourArea = 0.1;
