@@ -71,7 +71,7 @@ public class ChosenExperiment extends AppCompatActivity {
                 break;
             case R.id.delete_experiment: // Delete selected experiment
                 if (myFile.exists()) {
-                    deleteMyExperiment(myFile);
+                    deleteMyExperiment();
                 } else {
                     Toast.makeText(this, FILE_NAME + " does not exist",
                             Toast.LENGTH_LONG).show();
@@ -98,8 +98,7 @@ public class ChosenExperiment extends AppCompatActivity {
         }
     }
 
-    public void deleteMyExperiment (File myFile){
-        final File final_myFile = myFile;
+    public void deleteMyExperiment (){
         AlertDialog.Builder dialog = new AlertDialog.Builder(ChosenExperiment.this);
         dialog.setTitle("Delete");
         dialog.setMessage("Are you sure you want to delete this experiment?");
@@ -111,7 +110,7 @@ public class ChosenExperiment extends AppCompatActivity {
         }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                final_myFile.delete();
+                exp.deleteExperiment();
                 Intent intent5 = new Intent(ChosenExperiment.this, MyExperiments.class);
                 startActivity(intent5);
             }
