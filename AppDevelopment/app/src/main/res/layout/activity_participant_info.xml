@@ -34,10 +34,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_participantID"
-        android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
         android:background="@drawable/mybutton"
         android:onClick="addID"
-        android:text="Start" />
+        android:text="Start"
+        android:textSize="18sp" />
+
+    <CheckBox
+        android:id="@+id/control"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_participantID"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:checked="true"
+        android:text="Is part of control group"
+        android:textSize="18sp" />
 
 </RelativeLayout>

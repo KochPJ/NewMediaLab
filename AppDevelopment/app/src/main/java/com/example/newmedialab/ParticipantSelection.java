@@ -42,7 +42,13 @@ public class ParticipantSelection extends AppCompatActivity {
 
     public void startMultipleChoiceTest(View view){
         int pos = spinner.getSelectedItemPosition();
-        exp.setCurrentID(pos);
+        int trueIdx = 0;
+        for(int i=0; i<exp.getTrueIDs().size(); i++){
+            if(exp.getTrueIDs().get(i).equals(exp.getIDs().get(pos))){
+                trueIdx = i;
+            }
+        }
+        exp.setCurrentID(trueIdx);
 
         Intent intent = new Intent(this, TestMultipleChoice.class);
         intent = intent.putExtra("experiment", exp);

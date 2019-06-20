@@ -140,7 +140,17 @@ public class Experiment implements Serializable{
 
     public String getQnum() {return this.qnum; }
 
-    public ArrayList<String> getIDs() {return IDs; }
+    public ArrayList<String> getIDs() {
+        ArrayList<String> IDsCopy = new ArrayList<String>();
+        for(String id:IDs){
+            if(!id.equals("NaS")) {
+                IDsCopy.add(id);
+            }
+        }
+        return IDsCopy;
+    }
+
+    public ArrayList<String> getTrueIDs() { return this.IDs; }
 
     public ArrayList<String[]> getRemainingStimuli() {return remainingStimuli; }
 
