@@ -1,6 +1,7 @@
 package com.example.newmedialab;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -73,6 +74,28 @@ public class ShowStimuli extends AppCompatActivity {
 
     }
 
+    public void autoReplayStimuli(final int auto_repeats, final VideoView vv) {
+        final VideoView fvv = vv;
+        if(auto_repeats>0){
+            fvv.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer arg0) {
+                    // restart on completion
+                    fvv.start();
+                    autoReplayStimuli(auto_repeats-1, vv);
+                }
+            });
+        } else {
+            fvv.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer arg0) {
+                    // restart on completion
+                    fvv.stopPlayback();
+                }
+            });
+        }
+    }
+
     public void replayStimuli(View view) {
         VideoView vv = findViewById(R.id.videoView2);
         //MediaController m = new MediaController(this);
@@ -87,54 +110,14 @@ public class ShowStimuli extends AppCompatActivity {
                     Uri u = Uri.parse(Environment.getExternalStorageDirectory() + "/" + path);
                     vv.setVideoURI(u);
                     vv.start();
-                    // TODO: Fix autorepeats or remove option
-//                    final VideoView vvf = vv;
-//                    vvf.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//                        @Override
-//                        public void onPrepared(MediaPlayer mp) {
-//                            vvf.start();
-//                        }
-//                    });
-//                    for(int i=1; i < Integer.parseInt(exp.getAutoRepeats()); i++){
-//                        Handler handler = new Handler();
-//                        handler.postDelayed(new Runnable() {
-//                            public void run() {
-//                                vvf.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//                                    @Override
-//                                    public void onPrepared(MediaPlayer mp) {
-//                                        vvf.start();
-//                                    }
-//                                });
-//                            }
-//                        }, 10000);
-//                    }
                 } else {
                     //Subject is part of the experimental group and gets the kinestetic stimuli
                     String path = stimuli[1];
                     Uri u = Uri.parse(Environment.getExternalStorageDirectory() + "/" + path);
                     vv.setVideoURI(u);
                     vv.start();
-//                    final VideoView vvf = vv;
-//                    vvf.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//                        @Override
-//                        public void onPrepared(MediaPlayer mp) {
-//                            vvf.start();
-//                        }
-//                    });
-//                    for(int i=1; i < Integer.parseInt(exp.getAutoRepeats()); i++){
-//                        Handler handler = new Handler();
-//                        handler.postDelayed(new Runnable() {
-//                            public void run() {
-//                                vvf.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//                                    @Override
-//                                    public void onPrepared(MediaPlayer mp) {
-//                                        vvf.start();
-//                                    }
-//                                });
-//                            }
-//                        }, 10000);
-//                    }
                 }
+                autoReplayStimuli(this.auto_repeats-1, vv);
                 remaining_repeats -= 1;
                 repeats.setText("Remaining Replays: "+remaining_repeats);
             } else {
@@ -145,7 +128,6 @@ public class ShowStimuli extends AppCompatActivity {
             Toast mToastToShow = Toast.makeText(this, "Currently Playing Video", Toast.LENGTH_SHORT);
             mToastToShow.show();
         }
-
     }
 
     public void nextStimuli(View view) {
