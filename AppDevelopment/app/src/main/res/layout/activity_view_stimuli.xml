@@ -27,7 +27,7 @@
         android:layout_height="45dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="800dp"
+        android:layout_marginStart="900dp"
         android:layout_marginTop="20dp"
         android:text="Pre Test"
         android:textSize="18sp"
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="750dp"
+        android:layout_marginStart="850dp"
         android:layout_marginTop="75dp"
         android:text="Videos Shown in the Experiment" />
 
@@ -115,8 +115,8 @@
         android:layout_alignTop="@+id/videoView3"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="750dp"
-        android:layout_marginTop="251dp"
+        android:layout_marginStart="850dp"
+        android:layout_marginTop="225dp"
         android:layout_marginBottom="216dp" />
 
     <VideoView
@@ -126,7 +126,7 @@
         android:layout_above="@+id/textView27"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="700dp"
+        android:layout_marginStart="800dp"
         android:layout_marginTop="108dp"
         android:layout_marginBottom="-337dp" />
 
@@ -134,7 +134,7 @@
         android:id="@+id/play_button"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginStart="800dp"
+        android:layout_marginStart="900dp"
         android:layout_marginTop="500dp"
         android:background="@drawable/mybutton"
         android:onClick="playStimuli"

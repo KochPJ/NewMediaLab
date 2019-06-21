@@ -1,6 +1,7 @@
 package com.example.newmedialab;
 
 import android.os.Environment;
+import android.util.Log;
 
 import org.apache.commons.io.FileUtils;
 
@@ -43,6 +44,32 @@ public class Experiment implements Serializable{
     public void setName(String name){
         this.name = name;
         this.file_name = (this.name+ ".txt");
+    }
+
+    public void deleteSubjects(){
+        this.IDs = new ArrayList<String>();
+        this.setCurrentID(0);
+        //delete folders
+        File dir = new File(Environment.getExternalStorageDirectory()+"/KineTest/Experiments/"+name);
+        if (dir.isDirectory())
+        {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++)
+            {
+                File child = new File(Environment.getExternalStorageDirectory()+"/KineTest/Experiments/"+name+"/"+children[i]);
+                Log.d("child", "deleteSubjects: "+children[i]);
+                if((child.isDirectory() && (!child.toString().contains("videos_transformed")))){
+                    try {
+                        Log.d("child2", "deleteSubjects: "+child.toString());
+                        Log.d("child3", "deleteSubjects: "+child.getAbsolutePath());
+                        FileUtils.deleteDirectory(child);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        this.createFile();
     }
 
     public void deleteExperiment(){

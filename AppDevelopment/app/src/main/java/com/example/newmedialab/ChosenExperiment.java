@@ -77,22 +77,19 @@ public class ChosenExperiment extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                 }
                 break;
+            case R.id.delete_subjects: // Delete subjects
+                if (exp.getIDs().size()>0) {
+                    deleteSubjects();
+                } else {
+                    Toast.makeText(this, "Currently no subject data to delete",
+                            Toast.LENGTH_LONG).show();
+                }
+                break;
             case R.id.view_stimuli: // Go to view stimuli view
                 Intent intent2 = new Intent(this, ViewStimuli.class);
                 intent2 = intent2.putExtra("experiment", exp);
                 startActivity(intent2);
                 break;
-            //case R.id.edit_experiment: // Go to MC experiment view
-            //    Intent intent7 = new Intent(this, MultipleChoiceExperiment.class);
-            //    intent7 = intent7.putExtra("experiment", exp);
-            //    startActivity(intent7);
-            //    break;
-            //case R.id.edit_experiment2: // Go to writing experiment view
-            //    Intent intent8 = new Intent(this, WritingExperiment.class);
-            //    intent8 = intent8.putExtra("experiment", exp);
-            //    intent8 = intent8.putExtra("editing", true);
-            //    startActivity(intent8);
-            //    break;
             default:
                 throw new RuntimeException("Unknown button ID");
         }
@@ -111,6 +108,28 @@ public class ChosenExperiment extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 exp.deleteExperiment();
+                Intent intent5 = new Intent(ChosenExperiment.this, MyExperiments.class);
+                startActivity(intent5);
+            }
+        });
+
+        final AlertDialog alert = dialog.create();
+        alert.show();
+    }
+
+    public void deleteSubjects (){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(ChosenExperiment.this);
+        dialog.setTitle("Delete");
+        dialog.setMessage("Are you sure you want to delete the subject data associated with this experiment?");
+        dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                Toast.makeText(ChosenExperiment.this, "Experiment not removed", Toast.LENGTH_SHORT).show();
+            }
+        }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                exp.deleteSubjects();
                 Intent intent5 = new Intent(ChosenExperiment.this, MyExperiments.class);
                 startActivity(intent5);
             }

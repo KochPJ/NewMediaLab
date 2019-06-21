@@ -3,28 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShowStimuli"
     android:background="@drawable/background"
     android:padding="5pt"
-    >
+    tools:context=".ShowStimuli">
 
-    <VideoView
-        android:id="@+id/videoView2"
-        android:layout_width="554dp"
-        android:layout_height="351dp"
-        android:layout_below="@+id/tv_exp_message"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:onClick="replayStimuli"/>
+        android:layout_marginTop="110dp">
+
+        <VideoView
+            android:id="@+id/videoView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:onClick="replayStimuli" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/bt_replayStimuli"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/videoView2"
-        android:layout_marginTop="9dp"
-        android:background="@drawable/mybutton"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="575dp"
+        android:background="@drawable/mybutton"
         android:onClick="replayStimuli"
         android:text="(Re)play" />
 
@@ -34,9 +39,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/mybutton"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
         android:onClick="nextStimuli"
         android:text="Continue" />
 
@@ -63,12 +68,11 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="500dp"
+        android:layout_width="600dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/videoView2"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp" />
+        android:layout_below="@+id/tv_remaining_repeats"
+        android:layout_marginTop="25dp" />
 
     <TextView
         android:id="@+id/tv_remaining_repeats"
@@ -76,6 +80,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/bt_replayStimuli"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:text="[Remaining Repeats]" />
 </RelativeLayout>

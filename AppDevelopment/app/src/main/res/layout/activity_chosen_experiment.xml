@@ -65,12 +65,25 @@
         android:text="Delete Experiment" />
 
     <Button
+        android:id="@+id/delete_subjects"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="225dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/mybutton"
+        android:onClick="navigation"
+        android:text="Delete Subject Data"
+        android:textSize="12sp" />
+
+    <Button
         android:id="@+id/view_stimuli"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="300dp"
+        android:layout_marginEnd="225dp"
         android:layout_marginBottom="36dp"
         android:background="@drawable/mybutton"
         android:onClick="navigation"
@@ -82,7 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="300dp"
+        android:layout_marginStart="400dp"
         android:layout_marginBottom="36dp"
         android:background="@drawable/mybutton"
         android:onClick="navigation"

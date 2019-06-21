@@ -34,6 +34,7 @@ public class TestMultipleChoice extends AppCompatActivity {
     public ImageView im1, im2, im3, im4, im5, im6;
     public TextView tv1, tv2, tv3, tv4, tv5, tv6;
     public ArrayList<String> falseSymbols = new ArrayList<String>();
+    public ImageView[] imageViews;
     public boolean pretest = false;
     public int prevTint = 0;
 
@@ -127,7 +128,7 @@ public class TestMultipleChoice extends AppCompatActivity {
                 }
             });
         }
-        ImageView[] imageViews = {im1, im2, im3, im4, im5, im6};
+        this.imageViews = new ImageView[]{im1, im2, im3, im4, im5, im6};
 
         // Find textviews
         tv1 = findViewById(R.id.textView15);
@@ -153,6 +154,12 @@ public class TestMultipleChoice extends AppCompatActivity {
         for(int j=0; j<falseSymbols.size(); j++){
             File imgFile = new  File(falseSymbols.get(j));
             if(imgFile.exists()){
+                final BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+
+                // Calculate inSampleSize
+                options.inSampleSize = calculateInSampleSize(options, 100, 100);
+
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 imageViews[j].setImageBitmap(myBitmap);
             }
@@ -219,6 +226,30 @@ public class TestMultipleChoice extends AppCompatActivity {
             sItems.setSelection(spinnerArray.size()-1);
         }
     }
+
+    public static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) >= reqHeight
+                    && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
 
     public void setTint(int prevTint, int newTint){
         ImageView[] images = new ImageView[]{im1, im2, im3, im4, im5, im6};
@@ -297,11 +328,19 @@ public class TestMultipleChoice extends AppCompatActivity {
             exp.createFile();
             Toast.makeText(TestMultipleChoice.this, "Finished test, saved results \n" + exp.getFinal_msg_mct(),
                     Toast.LENGTH_LONG).show();
+            // Force resetting of bitmaps to prevent OOM error
+            for(ImageView im : this.imageViews){
+                im.setImageBitmap(null);
+            }
             // Return to MyExperiments
             Intent intent = new Intent(this, MyExperiments.class);
             intent = intent.putExtra("experiment", exp);
             startActivity(intent);
         } else {
+            // Force resetting of bitmaps to prevent OOM error
+            for(ImageView im : this.imageViews){
+                im.setImageBitmap(null);
+            }
             // Show next stimuli
             Intent intent2 = new Intent(this, TestMultipleChoice.class);
             intent2 = intent2.putExtra("experiment", exp);
